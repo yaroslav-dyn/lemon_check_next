@@ -6,7 +6,7 @@ import AppHeader from '../components/Header.static';
 
 import React from 'react';
 
-export default function LemonCheckApp() {
+export default function Home() {
 
 
   //NOTE: HTML 
@@ -21,10 +21,10 @@ export default function LemonCheckApp() {
 
       <AppHeader />
 
-      <div className="">
-        <main className="">
+      <div >
+        <main >
 
-          <h1 className="main__heading">LemonCheck</h1>
+          <h1 className="main__heading" data-centered-text>LemonCheck</h1>
 
         </main>
       </div>

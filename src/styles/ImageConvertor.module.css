@@ -4,15 +4,22 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  margin: 0 auto;
 
 }
 
 .convertorImgPreview {
+  flex-basis: 33.3333333333%;
+}
+.convertorImgPreview img {
   max-width: 40vw;
   height: auto;
   display: inline-block;
 }
 
+.convertorControlBlock {
+  flex-basis: 33.3333333333%;
+}
 
 .uploadButton {
     display: inline-block;
@@ -36,5 +43,11 @@
 .uploadButton:hover {
   box-shadow: 0 4px 0 #f2e302;
 }
+
+.codeArea {
+  padding: 1rem 1.4rem;
+  flex-basis: 33.3333333333%;
+}
+
 
 

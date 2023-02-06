@@ -24,13 +24,30 @@ const ImageConvertor = () => {
         <h1 className="main__heading" data-centered-text> Convert image to base64 </h1>
         <div data-centered-text>
           <input id="imageInput" className={styles.imageInput} type="file" ref={imageInputRef} onChange={handleImageChange} />
-          <label className={styles.uploadButton} for="imageInput">UPLOAD IMAGE</label>
+          <label className={styles.uploadButton} htmlFor="imageInput">UPLOAD IMAGE</label>
         </div>
           <section className={styles.resultBlock}>
           {imageBase64 &&
             <React.Fragment>
-              <img className={styles.convertorImgPreview} src={imageBase64} alt="chosen" />
-              <textarea value={imageBase64} name="base_code" id="base_code" cols="30" rows="10" />
+
+              <a href={imageBase64} download="svg-image.svg" className={styles.convertorImgPreview}>
+                <img src={imageBase64} alt="chosen" />
+              </a>
+
+              <div className={styles.convertorControlBlock} data-centered-text>
+                <button className={styles.uploadButton}>Download CSV</button>
+                <br />
+                <button className={styles.uploadButton}>Copy code</button>  
+              </div>
+
+
+              <textarea 
+              className={styles.codeArea} 
+              value={imageBase64} 
+              name="base_code" 
+              id="base_code" cols="30" rows="10" 
+              readOnly
+              />
             </React.Fragment>
           }
         </section>
