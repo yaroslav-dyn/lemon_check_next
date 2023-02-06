@@ -1,0 +1,40 @@
+
+
+.resultBlock {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+}
+
+.convertorImgPreview {
+  max-width: 40vw;
+  height: auto;
+  display: inline-block;
+}
+
+
+.uploadButton {
+    display: inline-block;
+    border: none;
+    padding: 12px 18px;
+    margin-bottom: 30px;
+    border-radius: 6px;
+    background-color: limegreen;
+    color: #fff;
+    text-shadow: 0 0 1px #f8f8f8;
+    font-size: 1.8rem;
+    border-bottom: 1px solid limegreen;
+    outline: none;
+
+}
+
+.imageInput {
+  display: none;
+}
+
+.uploadButton:hover {
+  box-shadow: 0 4px 0 #f2e302;
+}
+
+
