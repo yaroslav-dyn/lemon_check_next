@@ -13,7 +13,7 @@ export default function LemonCheckApp() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>LemonCheck</title>
         <meta name="description" content="LemonCheck" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
