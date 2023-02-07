@@ -19,7 +19,7 @@ export default function appHeader() {
 
         <div className="main__nav__links">
           <a href="/password-generator">Password generator</a>
-          <a href="/image-convertor">SVG convertor</a>
+          <a href="/image-convertor">Image convertor</a>
         </div>
      </nav>
     </header>

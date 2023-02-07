@@ -1,15 +1,14 @@
-import { Main } from 'next/document';
 import Head from 'next/head'
 import AppHeader from '../../components/Header.static';
-
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { copyToClipboardMethod } from '@/services/base.services'
 
 const  PasswordGenerator = () =>  {
 
   const [passwordLength, setPasswordLength] = useState(12);
   const [hasSpecialCharacters, setSpecialCharacters] = useState(true);
   const [password, setPassword] = useState('');
+  const areaElement = useRef();
 
   useEffect(() => {
     generateCode();
@@ -45,11 +44,7 @@ const  PasswordGenerator = () =>  {
   }
 
   const copyToClipBoard = () => {
-    // TODO: ref element
-    let passwordContent = document.getElementById('passwordContent');
-    passwordContent.select();
-    passwordContent.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(passwordContent.value);
+    copyToClipboardMethod(areaElement);
     //alert('Copy to clipboard')
   }
 
@@ -79,6 +74,7 @@ const  PasswordGenerator = () =>  {
               name="password-content"
               className="generator__content--area"
               id="passwordContent"
+              ref={areaElement}
               onClick={copyToClipBoard}>
             </textarea>
           </section>

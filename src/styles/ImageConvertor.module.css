@@ -22,18 +22,7 @@
 }
 
 .uploadButton {
-    display: inline-block;
-    border: none;
-    padding: 12px 18px;
-    margin-bottom: 30px;
-    border-radius: 6px;
-    background-color: limegreen;
-    color: #fff;
-    text-shadow: 0 0 1px #f8f8f8;
-    font-size: 1.8rem;
-    border-bottom: 1px solid limegreen;
-    outline: none;
-
+  margin-bottom: 30px;
 }
 
 .imageInput {
@@ -44,9 +33,12 @@
   box-shadow: 0 4px 0 #f2e302;
 }
 
+.generatedCodeBlock {
+  flex-basis: 33.3333333333%;
+}
+
 .codeArea {
   padding: 1rem 1.4rem;
-  flex-basis: 33.3333333333%;
 }
 
 
