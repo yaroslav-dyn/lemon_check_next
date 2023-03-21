@@ -40,6 +40,7 @@ const ImageConvertor = () => {
   return (
     <>
       <AppHeader />
+      
       <main className='main_content converter_content'>
         <h1 className="main__heading" data-centered-text> Convert image to base64 </h1>
         <div data-centered-text>
@@ -50,7 +51,7 @@ const ImageConvertor = () => {
           {imageBase64 &&
             <React.Fragment>
 
-              <a href={imageBase64}
+              <a 
                 download={`base64-image-${Date.now()}.png`}
                 className={styles.convertorImgPreview}>
                 <img src={imageBase64} alt="chosen" />
@@ -59,45 +60,47 @@ const ImageConvertor = () => {
               <div
                 className={styles.convertorControlBlock}
                 data-centered-text>
+
+
+                <div className='flex__grid justify-center'>
+                  <div className={styles.codeTypeBoxes}>
+                    <input
+                      className={styles.codeTypeBoxesCheckbox}
+                      type="radio"
+                      id="dataType"
+                      name="base64CodeType"
+                      value="data"
+                      checked={selectedConvertedType === 'data'}
+                      onChange={onChangeDataType} />
+                    <label htmlFor="dataType">Like data</label>
+                  </div>
+
+                  <div>
+                    <input
+                      className={styles.codeTypeBoxesCheckbox}
+                      type="radio"
+                      id="imageType"
+                      name="base64CodeType"
+                      value="image"
+                      checked={selectedConvertedType === 'image'}
+                      onChange={onChangeDataType} />
+                    <label htmlFor="imageType">Like image</label>
+                  </div>
+                </div>
+                <br />
                 <button
                   className={styles.uploadButton + ' action__btn'}
                   onClick={copyToClipboard}
                 >
-                  Download CSV
-                </button>
-                <br />
-                <button
-                  className={styles.uploadButton + ' action__btn'}>
                   Copy code
                 </button>
+              <div>
+
+              </div>
+
               </div>
 
               <div className={styles.generatedCodeBlock}>
-
-                <div>
-                  <input
-                    type="radio"
-                    id="dataType"
-                    name="base64CodeType"
-                    value="data"
-                    checked={selectedConvertedType === 'data'}
-                    onChange={onChangeDataType} />
-                  <label htmlFor="dataType">Like data</label>
-                </div>
-
-                <div>
-                  <input
-                    type="radio"
-                    id="imageType"
-                    name="base64CodeType"
-                    value="image"
-                    checked={selectedConvertedType === 'image'}
-                    onChange={onChangeDataType} />
-                  <label htmlFor="imageType">Like image</label>
-                </div>
-
-                <br />
-
                 <textarea
                   className={styles.codeArea}
                   value={imageBase64ForCopy}

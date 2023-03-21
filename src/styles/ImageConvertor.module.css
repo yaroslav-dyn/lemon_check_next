@@ -13,6 +13,7 @@
 }
 .convertorImgPreview img {
   max-width: 40vw;
+  width: 100%;
   height: auto;
   display: inline-block;
 }
@@ -37,9 +38,33 @@
   flex-basis: 33.3333333333%;
 }
 
-.codeArea {
-  padding: 1rem 1.4rem;
+.codeTypeBoxes {
+  margin-right: 1rem;
+}
+
+.codeTypeBoxesCheckbox {
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 
+.codeArea {
+  padding: 1rem 1.4rem;
+  width: 100%;
+  border: 2px solid lightgreen;
+  min-height: 300px;
+}
 
+.codeArea:focus {
+  outline: 2px #f2e302;
+}
+
+
+@media (max-width: 997px) {
+  .resultBlock {
+    flex-direction: column;
+    align-items: center;
+  }
+ 
+}

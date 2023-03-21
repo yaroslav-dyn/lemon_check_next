@@ -2,7 +2,7 @@
   --header-height: 80px;
 }
 
-* {
+*:not(p) {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -22,6 +22,10 @@ body {
   overflow-x: hidden;
 }
 
+.main_page {
+    background-color: #bad7b7;
+}
+
 .generator__page {
   background: #bad7b7 url(/assets/img/back_3.PNG) no-repeat;
   background-attachment: fixed;
@@ -33,6 +37,10 @@ body {
 }
 
 .converter_content {
+  background-color: #bad7b7;
+}
+
+.qrcode__content {
   background-color: #bad7b7;
 }
 
@@ -52,11 +60,6 @@ body {
   align-items: center;
 }
 
-.top__header {
-  min-height: 80px;
-  background-color: lightgreen;
-  border-bottom: 1px solid limegreen
-}
 
 .company_logo {
   display: flex;
@@ -145,6 +148,11 @@ body {
 
 /* SECTION Header */
 .top__header {
+  position: sticky;
+  top: 0;
+  min-height: 80px;
+  background-color: lightgreen;
+  border-bottom: 1px solid limegreen;
   padding-left: 3rem;
   padding-right: 3rem;
 }
@@ -198,6 +206,7 @@ body {
   justify-content: center;
 }
 
+/* NOTE text-align attributes */
 [data-left-text] {
   text-align: left;
 }
@@ -231,3 +240,18 @@ body {
     color-scheme: dark;
   }
 } */
+
+.password__label__normal {
+  color: yellow;
+  text-shadow: 0px 1px #444;
+}
+
+.password__label__short {
+    color: red;
+    text-shadow: 0px 1px #444;
+}
+
+.password__label__strong {
+  color: greenyellow;
+  text-shadow: 0px 1px #444;
+}

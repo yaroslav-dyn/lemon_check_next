@@ -48,11 +48,19 @@ const  PasswordGenerator = () =>  {
     //alert('Copy to clipboard')
   }
 
+  const getLabelColor = () => {
+    let labelClass =  passwordLength > 7 ? 
+     'password__label__normal' :
+     'password__label__short'
+    passwordLength > 12 && (labelClass = 'password__label__strong');
+     return labelClass;
+  } 
+
   //NOTE: HTML 
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>LemonCheck</title>
         <meta name="author" content="LemonCheck LTD"></meta>
         <meta name="description" content="LemonCheck, Strong password generator" />
         <meta name="keywords" content="Strong password generator, Strong password, online generate password" />
@@ -64,7 +72,7 @@ const  PasswordGenerator = () =>  {
       <AppHeader />
 
       <div className="generator__page">
-        <main className="generator__content">
+        <main className="main_content generator__content">
 
           <h1 className="main__heading">Generate strong password</h1>
 
@@ -86,7 +94,8 @@ const  PasswordGenerator = () =>  {
               onSubmit={generateFromForm}
             >
               <div className='flex__grid justify-center'>
-                <label htmlFor="passwordLength">Length: </label>
+               
+                <label className={getLabelColor()} htmlFor="passwordLength">Length: </label>
 
                 <div className='flex__grid --column justify-center align-center'>
 
