@@ -28,7 +28,7 @@ export default function Home() {
 
 
           <article className="main_content">
-            <p>   Are you tired of using the same password for all your online accounts? If so, then it's time to start using a secure password generator. A secure password generator is an online service that can help you create strong, unique passwords for each account <a href="/password-generator">here</a>.</p>
+            <p>   Are you tired of using the same password for all your online accounts? If so, then it's time to start using a secure password generator. A secure password generator is an online service that can help you create strong, unique passwords for each account <a href="/password-generator">hereq</a>.</p>
 
             <p>      Using a secure password generator is essential in today’s digital world as hackers are constantly trying to gain access to our personal information and accounts. With this tool, users can easily generate random strings of characters which make it much harder for anyone attempting unauthorized access into their accounts or data.</p>
 
