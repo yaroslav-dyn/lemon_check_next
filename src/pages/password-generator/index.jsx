@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import AppHeader from '../../components/Header.static';
 import React, { useState, useEffect, useRef } from 'react';
 import { copyToClipboardMethod } from '@/services/base.services'
 
@@ -69,8 +68,6 @@ const  PasswordGenerator = () =>  {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppHeader />
-
       <div className="generator__page">
         <main className="main_content generator__content">
 
@@ -100,6 +97,7 @@ const  PasswordGenerator = () =>  {
                 <div className='flex__grid --column justify-center align-center'>
 
                   <input
+                    className='bace_input'
                     id="passwordLengthRange"
                     type="range"
                     defaultValue={passwordLength}
@@ -109,6 +107,7 @@ const  PasswordGenerator = () =>  {
                   <br />
 
                   <input
+                    className='bace_input'
                     id="passwordLength"
                     defaultValue={passwordLength}
                     type="text"

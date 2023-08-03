@@ -1,5 +1,11 @@
 :root {
   --header-height: 80px;
+  --old-bg: #bad7b7;
+  --default-page-bg: #f3faf2;
+
+  --theme-primary-accent: #E94E3D;
+  --theme-primary-background: #000;
+  --them-primarry-text: #fff;
 }
 
 *:not(p) {
@@ -23,11 +29,11 @@ body {
 }
 
 .main_page {
-    background-color: #bad7b7;
+  background-color: var(--default-page-bg);
 }
 
 .generator__page {
-  background: #bad7b7 url(/assets/img/back_3.PNG) no-repeat;
+  background: var(--default-page-bg) url(/assets/img/back_3.PNG) no-repeat;
   background-attachment: fixed;
   background-position: 51% 91%;
   background-size: auto;
@@ -37,11 +43,11 @@ body {
 }
 
 .converter_content {
-  background-color: #bad7b7;
+  background-color: var(--default-page-bg);
 }
 
 .qrcode__content {
-  background-color: #bad7b7;
+  background-color: var(--default-page-bg);
 }
 
 /* .about__page {
@@ -49,6 +55,12 @@ body {
   background-repeat: no-repeat;
   background-size: 100%;
 } */
+
+.bace_input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+}
 
 .base_img {
   width: 100%;
@@ -79,10 +91,10 @@ body {
 }
 
 .main__heading {
-  color: #444;
+  color: #000;
   margin: 0;
   padding: 30px 0 60px 0;
-  text-shadow: 0 0 1px limegreen;
+  /* text-shadow: 0 0 1px limegreen; */
 }
 
 .brand__logo {
@@ -247,11 +259,50 @@ body {
 }
 
 .password__label__short {
-    color: red;
-    text-shadow: 0px 1px #444;
+  color: red;
+  text-shadow: 0px 1px #444;
 }
 
 .password__label__strong {
   color: greenyellow;
   text-shadow: 0px 1px #444;
+}
+
+/* PRIMARY THEME */
+.primary__theme .main_content {
+  background: var(--theme-primary-background);
+  color: var(--them-primarry-text)
+}
+
+.primary__theme .top__header {
+  background-color: var(--theme-primary-background);
+  color: var(--them-primarry-text);
+  border-bottom: 2px solid var(--theme-primary-accent);
+}
+
+.primary__theme .generator__content--btn, .action__btnthem {
+  background-color: var(--theme-primary-accent);
+  color: var(--them-primarry-text);
+  border: none;
+} 
+
+.primary__theme .generator__content--btn:hover {
+  border: none;
+  box-shadow: inset 2px 2px 2px rgba(0,0,0,0.25);
+}
+
+.primary__theme .generator__content--btn:disabled {
+  opacity: 0.7;
+}
+
+.primary__theme .main__nav__links a {
+  color: var(--them-primarry-text);
+  opacity: 0.7;
+  line-height: 2;
+  display: inline-block;
+}
+
+.primary__theme .main__nav__links a:hover {
+    opacity: 0.95;
+   box-shadow: 0 2px 0 var(--theme-primary-accent), 0 -2px 0 var(--theme-primary-accent);
 }

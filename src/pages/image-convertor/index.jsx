@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import AppHeader from '../../components/Header.static';
-import styles from '../../styles/ImageConvertor.module.css'
-import { copyToClipboardMethod } from '@/services/base.services'
+import styles from '../../styles/ImageConvertor.module.css';
+import { copyToClipboardMethod } from '@/services/base.services';
+import Link from 'next/link';
 
 const ImageConvertor = () => {
 
@@ -38,9 +38,7 @@ const ImageConvertor = () => {
 
   // NOTE: HTML!
   return (
-    <>
-      <AppHeader />
-      
+    <>      
       <main className='main_content converter_content'>
         <h1 className="main__heading" data-centered-text> Convert image to base64 </h1>
         <div data-centered-text>
@@ -51,11 +49,11 @@ const ImageConvertor = () => {
           {imageBase64 &&
             <React.Fragment>
 
-              <a 
+              <Link
                 download={`base64-image-${Date.now()}.png`}
                 className={styles.convertorImgPreview}>
                 <img src={imageBase64} alt="chosen" />
-              </a>
+              </Link>
 
               <div
                 className={styles.convertorControlBlock}

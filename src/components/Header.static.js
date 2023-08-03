@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function appHeader() {
 
@@ -11,19 +12,20 @@ export default function appHeader() {
 
      <nav className='main__nav'>
         <div className="logo_block">
-          <a
+          <Link
             className="company_logo"
             href="/"
           >
             <Image className="base_img" src={newLogo} alt="lemonCheck" width="64" height="64" />
-            <h2 className="brand__logo"><span>Lemon</span>Check</h2>
-          </a>
+            {/* <h2 className="brand__logo"><span>Lemon</span>Check</h2> */}
+          </Link>
         </div>
 
         <div className="main__nav__links">
-          <a href="/password-generator">Password generator</a>
-          <a href="/image-convertor">Image convertor</a>
-          <a href="/qr-generator">QR generator</a>
+          <Link href="/password-generator">Password generator</Link>
+          <Link href="/allias-generator">Allias generator</Link>
+          <Link href="/image-convertor">Image convertor</Link>
+          <Link href="/qr-generator">QR generator</Link>
         </div>
      </nav>
     </header>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head'
-import AppHeader from '../../components/Header.static';
 import QRCodeCanvas from 'qrcode.react';
 
 
@@ -42,8 +41,6 @@ const QrCodeGenerator = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <AppHeader />
 
       <div className="qr__page">
         <main className="main_content qrcode__content">
