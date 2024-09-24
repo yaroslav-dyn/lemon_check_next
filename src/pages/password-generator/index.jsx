@@ -55,6 +55,11 @@ const  PasswordGenerator = () =>  {
      return labelClass;
   } 
 
+
+  useEffect(() => {
+     setPasswordLength(passwordLength);
+  }, [passwordLength]);
+
   //NOTE: HTML 
   return (
     <>
@@ -100,7 +105,7 @@ const  PasswordGenerator = () =>  {
                     className='bace_input'
                     id="passwordLengthRange"
                     type="range"
-                    defaultValue={passwordLength}
+                    value={passwordLength}
                     onChange={getPasswordLength}
                   />
 
@@ -109,7 +114,7 @@ const  PasswordGenerator = () =>  {
                   <input
                     className='bace_input'
                     id="passwordLength"
-                    defaultValue={passwordLength}
+                    value={passwordLength}
                     type="text"
                     onChange={getPasswordLength}
                   />
@@ -130,7 +135,7 @@ const  PasswordGenerator = () =>  {
             </form>
           </section>
           <br />
-          <div>
+          <div className='en_generate_controls'>
             <button
               id="btn"
               className="generator__content--btn"

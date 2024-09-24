@@ -38,7 +38,7 @@ const ImageConvertor = () => {
 
   // NOTE: HTML!
   return (
-    <>      
+    <>
       <main className='main_content converter_content'>
         <h1 className="main__heading" data-centered-text> Convert image to base64 </h1>
         <div data-centered-text>
@@ -47,13 +47,12 @@ const ImageConvertor = () => {
         </div>
         <section className={styles.resultBlock}>
           {imageBase64 &&
-            <React.Fragment>
-
-              <Link
+            <>
+              <a
                 download={`base64-image-${Date.now()}.png`}
                 className={styles.convertorImgPreview}>
                 <img src={imageBase64} alt="chosen" />
-              </Link>
+              </a>
 
               <div
                 className={styles.convertorControlBlock}
@@ -86,15 +85,9 @@ const ImageConvertor = () => {
                   </div>
                 </div>
                 <br />
-                <button
-                  className={styles.uploadButton + ' action__btn'}
-                  onClick={copyToClipboard}
-                >
-                  Copy code
-                </button>
-              <div>
+                <div>
 
-              </div>
+                </div>
 
               </div>
 
@@ -108,16 +101,23 @@ const ImageConvertor = () => {
                   readOnly
                   onClick={copyToClipboard}
                 />
+                <div>
+                  <br />
+                  <button
+                    className={styles.uploadButton + ' action__btn w100'}
+                    onClick={copyToClipboard}
+                  >
+                    Copy code
+                  </button>
+                </div>
               </div>
-
-            </React.Fragment>
+            </>
           }
         </section>
       </main>
-
     </>
   )
 }//
 
-export default ImageConvertor;  
+export default ImageConvertor;
 

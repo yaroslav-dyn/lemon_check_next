@@ -1,5 +1,6 @@
 import AppHeader from '@/components/Header.static'
 import '@/styles/globals.css'
+import "@/styles/bottom_bar.css";
 
 export default function App({ Component, pageProps }) {
   return (
