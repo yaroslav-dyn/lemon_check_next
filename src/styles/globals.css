@@ -86,7 +86,7 @@ a {
 
 
 .generator__page {
-  background: var(--default-page-bg) url(/assets/img/back_3.PNG) no-repeat;
+  background: var(--default-page-bg);
   background-attachment: fixed;
   background-position: 51% 91%;
   background-size: auto;
@@ -211,12 +211,13 @@ a {
 /*NOTE: textArea */
 .generator__content--area {
   font-family: monospace;
-  font-size: 2rem;
-  min-width: 30%;
+  font-size: 1.2rem;
+  display: block;
+  min-width: 100%;
   border: 1px solid #eee;
   color: #444;
   border: none;
-  padding: 0.6rem 1rem;
+  padding: 1.2rem 1.4rem;
   border-radius: 6px;
   outline: none;
   resize: none;
@@ -258,6 +259,7 @@ a {
 .main_content {
   padding: 0 3rem;
   min-height: calc(100vh - var(--header-height));
+  padding-bottom: 124px;
 }
 
 

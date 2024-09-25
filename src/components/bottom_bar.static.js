@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
+
 
 const BottomBarlinks = [
   {
@@ -31,6 +33,8 @@ const BottomBarlinks = [
 
 export default function appHeader() {
 
+    const pathname = usePathname();
+
   useEffect(() => {
     const list = document.querySelectorAll(".nav__item");
     list.forEach((item) => {
@@ -40,6 +44,14 @@ export default function appHeader() {
       });
     });
   }, []);
+
+  useEffect(() => {
+    if(pathname === '/') {
+      document
+        .querySelectorAll(".nav__item")
+        .forEach((it) => it.classList.remove("active"));
+    }
+  }, [pathname]);
 
   return (
     <nav className="bottom_bar">

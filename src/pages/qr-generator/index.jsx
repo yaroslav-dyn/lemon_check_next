@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head'
 import QRCodeCanvas from 'qrcode.react';
+import device from "current-device";
 
 
 
@@ -12,7 +13,7 @@ const QrCodeGenerator = () => {
 
   //const refCanvas = useRef(null);
 
-
+  const isMobile = device.mobile();
 
   const setQrString = (str) => {
     setQrCodeString(str.target.value);
@@ -76,7 +77,7 @@ const QrCodeGenerator = () => {
                 id="refCanvas"
                 marginSize="1"
                 value={qrContent}
-                size="180"
+                size={isMobile ? '80' : '120'}
                 bgColor="#f2e302"
               />
             }
