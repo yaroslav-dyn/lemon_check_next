@@ -66,89 +66,96 @@ const  PasswordGenerator = () =>  {
       <Head>
         <title>LemonCheck</title>
         <meta name="author" content="LemonCheck LTD"></meta>
-        <meta name="description" content="LemonCheck, Strong password generator" />
-        <meta name="keywords" content="Strong password generator, Strong password, online generate password" />
+        <meta
+          name="description"
+          content="LemonCheck, Strong password generator"
+        />
+        <meta
+          name="keywords"
+          content="Strong password generator, Strong password, online generate password"
+        />
         <meta name="title" content="Strong password generator" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="generator__page">
+      <div className="generator__page ">
         <main className="main_content generator__content">
-
           <h1 className="main__heading">Generate strong password</h1>
 
-          <section className="generator__content--actions">
-            <textarea
-              defaultValue={password}
-              name="password-content"
-              className="generator__content--area"
-              id="passwordContent"
-              ref={areaElement}
-              onClick={copyToClipBoard}>
-            </textarea>
-          </section>
+          <div className="container__limit">
+            <section className="generator__content--actions">
+              <textarea
+                defaultValue={password}
+                name="password-content"
+                className="generator__content--area"
+                id="passwordContent"
+                ref={areaElement}
+                onClick={copyToClipBoard}
+              ></textarea>
+            </section>
+            <div className="">
+              <section className="generator__content__settings">
+                <form
+                  name="generatorForm"
+                  id="generatorFormId"
+                  onSubmit={generateFromForm}
+                >
+                  <div className="flex__grid justify-center">
+                    <label className={getLabelColor()} htmlFor="passwordLength">
+                      Length:{" "}
+                    </label>
 
-          <section className="generator__content__settings">
-            <form
-              name="generatorForm"
-              id="generatorFormId"
-              onSubmit={generateFromForm}
-            >
-              <div className='flex__grid justify-center'>
-               
-                <label className={getLabelColor()} htmlFor="passwordLength">Length: </label>
+                    <div className="flex__grid --column justify-center align-center">
+                      <input
+                        className="bace_input"
+                        id="passwordLengthRange"
+                        type="range"
+                        value={passwordLength}
+                        onChange={getPasswordLength}
+                      />
 
-                <div className='flex__grid --column justify-center align-center'>
+                      <br />
 
-                  <input
-                    className='bace_input'
-                    id="passwordLengthRange"
-                    type="range"
-                    value={passwordLength}
-                    onChange={getPasswordLength}
-                  />
-
+                      <input
+                        className="bace_input"
+                        id="passwordLength"
+                        value={passwordLength}
+                        type="text"
+                        onChange={getPasswordLength}
+                      />
+                    </div>
+                  </div>
                   <br />
-
-                  <input
-                    className='bace_input'
-                    id="passwordLength"
-                    value={passwordLength}
-                    type="text"
-                    onChange={getPasswordLength}
-                  />
-
-                </div>
-
-              </div>
+                  <div>
+                    <label htmlFor="specialCharacters">
+                      Use special characters:{" "}
+                    </label>
+                    <input
+                      id="specialCharacters"
+                      type="checkbox"
+                      checked={hasSpecialCharacters}
+                      onChange={setSpecialCharactersBox}
+                    />
+                  </div>
+                </form>
+              </section>
               <br />
-              <div>
-                <label htmlFor="specialCharacters">Use special characters: </label>
-                <input
-                  id="specialCharacters"
-                  type="checkbox"
-                  checked={hasSpecialCharacters}
-                  onChange={setSpecialCharactersBox}
-                />
+              <div className="en_generate_controls">
+                <button
+                  id="btn"
+                  className="generator__content--btn"
+                  onClick={generateCode}
+                >
+                  Generate password
+                </button>
               </div>
-            </form>
-          </section>
-          <br />
-          <div className='en_generate_controls'>
-            <button
-              id="btn"
-              className="generator__content--btn"
-              onClick={generateCode}
-            >
-              Generate password
-            </button>
+            </div>
           </div>
         </main>
       </div>
-
     </>
-  )
+  );
 }
 
 

@@ -23,37 +23,36 @@ const AliasGenerator = () => {
 
   return (
     <>
-
       <div className="generator__page">
         <main className="main_content generator__content">
-
           <h1 className="main__heading">Generate Allias</h1>
 
+          <div className="container__limit">
+            <section className="generator__content--actions">
+              <textarea
+                defaultValue={allias}
+                name="password-content"
+                className="generator__content--area"
+                id="passwordContent"
+                ref={areaElement}
+                onClick={copyToClipBoard}
+              ></textarea>
+            </section>
 
-          <section className="generator__content--actions">
-            <textarea
-              defaultValue={allias}
-              name="password-content"
-              className="generator__content--area"
-              id="passwordContent"
-              ref={areaElement}
-              onClick={copyToClipBoard}>
-            </textarea>
-          </section>
-
-          <div>
-            <button
-              id="btn"
-              className="generator__content--btn"
-              onClick={generateAllias}
-            >
-              Generate allias
-            </button>
+            <div>
+              <button
+                id="btn"
+                className="generator__content--btn"
+                onClick={generateAllias}
+              >
+                Generate allias
+              </button>
+            </div>
           </div>
         </main>
       </div>
     </>
-  )
+  );
 }
 
 export default AliasGenerator;

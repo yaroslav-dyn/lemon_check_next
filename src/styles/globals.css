@@ -48,6 +48,12 @@ body {
   margin-right: auto;
 }
 
+@media (max-width: 767px) {
+  .container__limit {
+    max-width: unset;
+  }
+}
+
 .main_page {
   background-color: var(--default-page-bg);
 }
@@ -213,7 +219,7 @@ a {
   font-family: monospace;
   font-size: 1.2rem;
   display: block;
-  min-width: 100%;
+  max-width: unset;
   border: 1px solid #eee;
   color: #444;
   border: none;
@@ -222,6 +228,13 @@ a {
   outline: none;
   resize: none;
 }
+
+@media (max-width: 767px) {
+  .generator__content--area {
+    min-width: 100%;
+  }
+} 
+
 
 /* SECTION Header */
 .top__header {
