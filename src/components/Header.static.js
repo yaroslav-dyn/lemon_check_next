@@ -27,6 +27,7 @@ export default function appHeader() {
 
         <div className="main__nav__links show__desktop">
           <Link href="/password-generator">Password generator</Link>
+          <Link href="/crypto-password">Encode Password</Link>
           <Link href="/allias-generator">Allias generator</Link>
           <Link href="/image-convertor">Image convertor</Link>
           <Link href="/qr-generator">QR generator</Link>

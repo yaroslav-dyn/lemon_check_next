@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import styles from '../../styles/ImageConvertor.module.css';
+import styles from '@/styles/ImageConvertor.module.css';
 import { copyToClipboardMethod } from '@/services/base.services';
 import Link from 'next/link';
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState} from 'react';
 import Head from 'next/head'
 import QRCodeCanvas from 'qrcode.react';
 import device from "current-device";
