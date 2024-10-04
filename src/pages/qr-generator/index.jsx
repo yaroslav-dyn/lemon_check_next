@@ -1,8 +1,7 @@
 import React, { useState} from 'react';
 import Head from 'next/head'
 import QRCodeCanvas from 'qrcode.react';
-import device from "current-device";
-
+import { isMobile } from "react-device-detect";
 
 
 const QrCodeGenerator = () => {
@@ -12,8 +11,6 @@ const QrCodeGenerator = () => {
   const [withLabel, setwithLabel] = useState(null);
 
   //const refCanvas = useRef(null);
-
-  const isMobile = device.mobile();
 
   const setQrString = (str) => {
     setQrCodeString(str.target.value);

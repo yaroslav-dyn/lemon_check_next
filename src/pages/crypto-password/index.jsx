@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { copyToClipboardMethod } from "@/services/base.services";
 import styles from "@/styles/CryptoPassword.module.css";
 import aes from "crypto-js/aes";
-import device from "current-device";
+import { isMobile } from "react-device-detect";
 
 const CryptoPassword = () => {
   const areaElement = useRef();
@@ -17,9 +17,13 @@ const CryptoPassword = () => {
   const outTextInput = useRef(null);
   const outTextCrypted = useRef(null);
 
+
+  const mobileDevice = isMobile;
+
   const copyToClipBoard = () => {
     copyToClipboardMethod(outTextCrypted);
   };
+
 
   const onInputField = (e, field) => {
     const mutatedModel = { alias: "",sourceText: "", secret: "", cryptedText: "" };
@@ -36,7 +40,7 @@ const CryptoPassword = () => {
         (outTextCrypted.current.value = aes
           .encrypt(e.target.valuet, mutatedModel.secret)
           .toString());
-    } else if (field === "cryptedText" && actionState === "decrypt") {
+    } else if (field === "cryptedText" && actionState === "decrypt" && mutatedModel.roughCrypto) {
       outTextInput &&
         (outTextInput.current.value = aes
           .decrypt(mutatedModel.roughCrypto, mutatedModel.secret)
@@ -51,11 +55,35 @@ const CryptoPassword = () => {
     setInstructionStatus((currentState = !currentState));
   };
 
+
   return (
     <>
       <div className="generator__page">
         <main className="main_content generator__content">
-          <h1 className="main__heading">Protect your password</h1>
+          <div className="main__heading">
+            <h1 className="h1_heading">Protect your password</h1>
+            <div
+              className={`instruction__block container__limit ${
+                mobileDevice ? "" : "fit-content"
+              } ${styles.instructionContainer}`}
+            >
+              <h2
+                data-left-text
+                className={`${styles.instructionHeading} ${
+                  instr ? styles.instrOpen : ""
+                } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
+                onClick={() => triggerInstruction()}
+              >
+                <span className={styles.instructionInfoIcon}>?</span>
+                <span>How to Encrypt Your Password:</span>
+              </h2>
+              {instr && (
+                <div className={styles.instructionModalContainer}>
+                  <InstructionModal />
+                </div>
+              )}
+            </div>
+          </div>
 
           <div className={styles.instructionActionControls}>
             <div>
@@ -66,7 +94,6 @@ const CryptoPassword = () => {
                 value="encrypt"
                 checked={actionState === "encrypt"}
                 onChange={(e) => {
-                  console.log("1", e.target.value);
                   setActionState(e.target.value);
                 }}
               />
@@ -86,22 +113,8 @@ const CryptoPassword = () => {
           </div>
 
           <div
-            className={`instruction__block container__limit ${styles.instructionContainer}`}
+            className={`container__limit ${mobileDevice ? "" : "fit-content"}`}
           >
-            <h2
-              data-left-text
-              className={`${styles.instructionHeading} ${
-                instr ? styles.instrOpen : ""
-              } ${device.desktop() ? "cursor-pointer-screen" : ""}`}
-              onClick={() => triggerInstruction()}
-            >
-              <span className={styles.instructionInfoIcon}>?</span>
-              <span>How to Encrypt Your Password:</span>
-            </h2>
-            {instr && <InstructionModal />}
-          </div>
-
-          <div className="container__limit">
             <section className="generator__content--actions no-x-paddings gap-x-6">
               <textarea
                 name="password-alias"

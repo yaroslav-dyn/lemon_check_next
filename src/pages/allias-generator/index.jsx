@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { copyToClipboardMethod } from '@/services/base.services'
-
+import { isMobile } from "react-device-detect";
 
 const AliasGenerator = () => {
   const areaElement = useRef();
@@ -27,7 +27,9 @@ const AliasGenerator = () => {
         <main className="main_content generator__content">
           <h1 className="main__heading">Generate Allias</h1>
 
-          <div className="container__limit">
+          <div
+            className={`container__limit ${isMobile ? '' : 'fit-content'}`}
+          >
             <section className="generator__content--actions">
               <textarea
                 defaultValue={allias}

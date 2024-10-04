@@ -5,10 +5,10 @@ import "@/styles/bottom_bar.css";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <div div className='primary__theme'>
+      <div className='primary__theme'>
         <AppHeader />
         <Component {...pageProps} />
       </div>
     </>
-  )
+  );
 }

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import React, { useState, useEffect, useRef } from 'react';
 import { copyToClipboardMethod } from '@/services/base.services'
+import { isMobile } from "react-device-detect";
 
 const  PasswordGenerator = () =>  {
 
@@ -8,6 +9,8 @@ const  PasswordGenerator = () =>  {
   const [hasSpecialCharacters, setSpecialCharacters] = useState(true);
   const [password, setPassword] = useState('');
   const areaElement = useRef();
+
+  const mobileDevice = isMobile;
 
   useEffect(() => {
     generateCode();
@@ -79,11 +82,12 @@ const  PasswordGenerator = () =>  {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="generator__page ">
+      <div className="generator__page">
         <main className="main_content generator__content">
-          <h1 className="main__heading">Generate strong password</h1>
-
-          <div className="container__limit">
+          <div className="main__heading">
+            <h1 className="h1_heading">Generate strong password</h1>
+          </div>
+          <div className={`container__limit ${mobileDevice ? "" : "fit-content"}`}>
             <section className="generator__content--actions">
               <textarea
                 defaultValue={password}

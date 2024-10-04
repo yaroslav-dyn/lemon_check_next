@@ -18,20 +18,22 @@ export default function Home() {
 
       <div className="main_page">
         <main className="container__limit">
-          <h1 className="main__heading --color-primary" data-centered-text>
-            LemonCheck
-          </h1>
+          <div className="main__heading">
+            <h1 className="h1_heading --color-primary" data-centered-text>
+              LemonCheck
+            </h1>
+          </div>
 
           <article className="main_content">
-            <p className="content-text">
+            <div className="content-text">
               Are you tired of using the same password for all your online
               accounts? If so, then it&apos;s time to start using a secure
               password generator. A secure password generator is an online
               service that can help you create strong, unique passwords for each
               account <Link href="/password-generator">here</Link>.
-            </p>
+            </div>
 
-            <p className="content-text">
+            <div className="content-text">
               {" "}
               Using a secure password generator is essential in today&apos;s
               digital world as hackers are constantly trying to gain access to
@@ -39,7 +41,7 @@ export default function Home() {
               easily generate random strings of characters which make it much
               harder for anyone attempting unauthorized access into their
               accounts or data.
-            </p>
+            </div>
           </article>
         </main>
       </div>
