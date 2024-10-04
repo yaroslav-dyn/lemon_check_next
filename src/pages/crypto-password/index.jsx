@@ -21,7 +21,9 @@ const CryptoPassword = () => {
   const mobileDevice = isMobile;
 
   const copyToClipBoard = () => {
-    copyToClipboardMethod(outTextCrypted);
+    copyToClipboardMethod(
+      actionState === "encrypt" ? outTextCrypted : outTextInput
+    );
   };
 
 
@@ -64,7 +66,7 @@ const CryptoPassword = () => {
             <h1 className="h1_heading">Protect your password</h1>
             <div
               className={`instruction__block container__limit ${
-                mobileDevice ? "" : "fit-content"
+                mobileDevice ? "w-100" : "fit-content"
               } ${styles.instructionContainer}`}
             >
               <h2
@@ -113,17 +115,11 @@ const CryptoPassword = () => {
           </div>
 
           <div
-            className={`container__limit ${mobileDevice ? "" : "fit-content"}`}
+            className={`container__limit ${
+              mobileDevice ? "w-100" : "fit-content"
+            }`}
           >
             <section className="generator__content--actions no-x-paddings gap-x-6">
-              <textarea
-                name="password-alias"
-                className={`generator__content--area order-0`}
-                id="passworAlias"
-                onInput={(e) => onInputField(e, "alias")}
-                placeholder="Alias"
-              ></textarea>
-
               <textarea
                 name="password-text"
                 ref={outTextInput}
@@ -159,14 +155,29 @@ const CryptoPassword = () => {
                 readOnly={actionState !== "decrypt"}
               />
             </section>
+            {/* 
+            <textarea
+              name="password-alias"
+              className={`generator__content--area order-0`}
+              id="passworAlias"
+              onInput={(e) => onInputField(e, "alias")}
+              placeholder="Alias"
+            ></textarea> */}
 
-            <div>
+            <div className={`flex__grig --column  `}>
               <button
                 id="btn"
                 className="generator__content--btn"
                 onClick={() => copyToClipBoard()}
               >
                 Copy
+              </button>
+              <button
+                id="btn"
+                className="generator__content--btn"
+                onClick={() => copyToClipBoard()}
+              >
+                Save
               </button>
             </div>
           </div>
@@ -181,22 +192,22 @@ const InstructionModal = () => (
   <div className={styles.instructionWindow} data-left-text>
     <ul className={styles.instrustionList}>
       <li>
-        1. Enter Your Password: Fill in the "Password" field with your desired
-        password. This can be any combination of characters.
+        1. Enter Your Password: Fill in the &apos;Password&apos; field with your
+        desired password. This can be any combination of characters.
       </li>
       <li>
-        2. Provide a Secret Phrase: Enter a unique secret phrase in the "Secret
-        Phrase" field. This phrase will be used to securely encrypt your
-        password.
+        2. Provide a Secret Phrase: Enter a unique secret phrase in the
+        &apos;Secret Phrase&apos; field. This phrase will be used to securely
+        encrypt your password.
       </li>
       <li>
         3. View Encrypted Output: Once both fields are filled, the encrypted
         version of your password will be automatically generated and shown in
-        the "Encrypted Output" field.
+        the &apos;Encrypted Output&apos; field.
       </li>
     </ul>
     <strong className={styles.instrustionListTips}>
-      Tip: Make sure to remember your secret phrase, as you'll need it to
+      Tip: Make sure to remember your secret phrase, as you&apos;ll need it to
       decrypt your password later!
     </strong>
   </div>

@@ -40,7 +40,7 @@ export const BottomBarlinks = [
 ];
 
 
-export default function appHeader() {
+export default function AppHeader() {
 
   const logoSrc = "/assets/img/logos/lemon_check__logo@2x.png";
   const newLogo = "/assets/img/logos/lc_dally_logo@3x.png";
@@ -69,43 +69,44 @@ export default function appHeader() {
 
   return (
     <header className="top__header">
-      <div className="main__nav">
-        <div className="logo_block">
-          <Link className="company_logo" href="/">
-            <Image
-              className="base_img"
-              src={newLogo}
-              alt="lemonCheck"
-              width="64"
-              height="64"
-            />
-            {/* <h2 className="brand__logo"><span>Lemon</span>Check</h2> */}
-          </Link>
-        </div>
+      <nav>
+        <div className="main__nav">
+          <div className="logo_block">
+            <Link className="company_logo" href="/">
+              <Image
+                className="base_img"
+                src={newLogo}
+                alt="lemonCheck"
+                width="64"
+                height="64"
+              />
+              {/* <h2 className="brand__logo"><span>Lemon</span>Check</h2> */}
+            </Link>
+          </div>
 
-        <div className="show__desktop">
-          <div className="main__nav__links">
-            {BottomBarlinks &&
-              BottomBarlinks.map((navLink) => (
-                <div
-                  className={`nav__item ${isMobile ? "mobile" : "desktop"} ${
-                    navLink.isActive ? "active" : ""
-                  }`}
-                  data-url={navLink.url}
-                  onClick={() => onClikNavItem(navLink.alias)}
-                >
-                  <Link href={navLink.url} key={navLink.url}>
-                    {navLink.title}
-                  </Link>
-                </div>
-              ))}
+          <div className="show__desktop">
+            <div className="main__nav__links">
+              {BottomBarlinks &&
+                BottomBarlinks.map((navLink) => (
+                  <div
+                    className={`nav__item ${isMobile ? "mobile" : "desktop"} ${
+                      navLink.isActive ? "active" : ""
+                    }`}
+                    key={navLink.url}
+                    data-url={navLink.url}
+                    onClick={() => onClikNavItem(navLink.alias)}
+                  >
+                    <Link href={navLink.url}>{navLink.title}</Link>
+                  </div>
+                ))}
+            </div>
+          </div>
+
+          <div className="show__mobile">
+            <BottomBar />
           </div>
         </div>
-
-        <div className="show__mobile">
-          <BottomBar />
-        </div>
-      </div>
+      </nav>
     </header>
   );
 

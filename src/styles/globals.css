@@ -475,6 +475,11 @@ a {
   max-width: fit-content;
 }
 
+.w-100 {
+  width: 100%;
+  max-width: 100%;
+}
+
 .h1_heading {
   font-size: 3.8rem;
 }

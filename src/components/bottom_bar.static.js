@@ -3,14 +3,13 @@ import React, { useEffect } from "react";
 import { BottomBarlinks } from "@/components/Header.static";
 
 
-export default function appHeader() {
+export default function BottomBar() {
 
   const onClikNavItem = (alias) => {
     BottomBarlinks.forEach((itm) =>
       itm.alias === alias ? (itm.isActive = true) : (itm.isActive = false)
     );
   };
-
 
 
   return (
