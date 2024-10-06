@@ -147,6 +147,7 @@ a {
   padding: 10px 24px;
   padding-right: 0px;
   text-decoration: none;
+  max-width: 80px;
 }
 
 .company_logo>img {
