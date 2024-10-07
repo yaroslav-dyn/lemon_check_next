@@ -33,7 +33,10 @@ const QrCodeGenerator = () => {
       <Head>
         <title>LemonCheck</title>
         <meta name="author" content="LemonCheck LTD"></meta>
-        <meta name="description" content="LemonCheck, Strong password generator" />
+        <meta
+          name="description"
+          content="LemonCheck, Strong password generator"
+        />
         <meta name="keywords" content="Generate QR code" />
         <meta name="title" content="Generate QR code, QRcfrom input" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,18 +45,26 @@ const QrCodeGenerator = () => {
 
       <div className="qr__page">
         <main className="main_content qrcode__content">
-
-          <h1 className="main__heading" data-centered-text>Generate QR code</h1>
+          <div className="main__heading">
+            <h1 className="h1_heading" data-centered-text>
+              Generate QR code
+            </h1>
+          </div>
 
           <br />
 
-          <div className='qrcode__content__actions generator__content--actions' data-centered-text>
+          <div
+            className="qrcode__content__actions generator__content--actions"
+            data-centered-text
+          >
             <form
               name="generatorQrForm"
               id="generatorQrForm"
               onSubmit={generateQrCode}
             >
-              <label htmlFor="qrStringInput">Type your text in the field bellow:</label>
+              <label htmlFor="qrStringInput">
+                Type your text in the field bellow:
+              </label>
               <div>
                 <br />
                 <textarea
@@ -62,29 +73,27 @@ const QrCodeGenerator = () => {
                   type="text"
                   value={qrCodeString}
                   onInput={setQrString}
-                  onBlur={generateQrCode}>
-                </textarea>
+                  onBlur={generateQrCode}
+                ></textarea>
               </div>
             </form>
 
             <br />
 
-            {qrContent &&
+            {qrContent && (
               <QRCodeCanvas
                 id="refCanvas"
                 marginSize="1"
                 value={qrContent}
-                size={isMobile ? '80' : '120'}
+                size={isMobile ? "80" : "120"}
                 bgColor="#f2e302"
               />
-            }
-            {withLabel &&
-              <i>qrContent</i>
-            }
+            )}
+            {withLabel && <i>qrContent</i>}
 
             <br />
             <div>
-              {qrContent &&
+              {qrContent && (
                 <button
                   id="btn"
                   className="generator__content--btn"
@@ -92,13 +101,11 @@ const QrCodeGenerator = () => {
                 >
                   Save QR
                 </button>
-              }
+              )}
             </div>
-
           </div>
         </main>
       </div>
-
     </>
   );
 }

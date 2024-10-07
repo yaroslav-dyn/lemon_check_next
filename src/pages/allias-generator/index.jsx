@@ -25,11 +25,11 @@ const AliasGenerator = () => {
     <>
       <div className="generator__page">
         <main className="main_content generator__content">
-          <h1 className="main__heading">Generate Allias</h1>
+          <div className="main__heading">
+            <h1 className="h1_heading">Generate Allias</h1>
+          </div>
 
-          <div
-            className={`container__limit ${isMobile ? '' : 'fit-content'}`}
-          >
+          <div className={`container__limit ${isMobile ? "" : "fit-content"}`}>
             <section className="generator__content--actions">
               <textarea
                 defaultValue={allias}

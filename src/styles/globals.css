@@ -148,6 +148,7 @@ a {
   padding-right: 0px;
   text-decoration: none;
   max-width: 80px;
+  transition: all 0.2s ease-in;
 }
 
 .company_logo>img {
@@ -161,6 +162,7 @@ a {
 @media (max-width: 767px) {
   .company_logo {
     padding-left: 0;
+    max-width: 64px;
   }
 }
 
@@ -276,7 +278,16 @@ a {
   border-bottom: 1px solid limegreen;
   padding-left: 3rem;
   padding-right: 3rem;
+  transition: all 0.2s ease-in;
 }
+.top__header.scrolled {
+  min-height: 60px;
+}
+
+.top__header.scrolled .company_logo {
+  max-width: 46px;
+}
+
 
 
 /* SECTION: Navigation */
@@ -306,7 +317,7 @@ a {
 
 @media (max-width: 767px) {
   .main_content {
-    padding: 0 1.4rem;
+    padding: 0 1.4rem 12rem 1.4rem;
   }
 
 }

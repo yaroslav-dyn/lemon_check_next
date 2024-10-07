@@ -2,6 +2,7 @@ import Head from 'next/head'
 import React, { useState, useEffect, useRef } from 'react';
 import { copyToClipboardMethod } from '@/services/base.services'
 import { isMobile } from "react-device-detect";
+import useDeviceType from '@/services/useDeviceType';
 
 const  PasswordGenerator = () =>  {
 
@@ -10,7 +11,7 @@ const  PasswordGenerator = () =>  {
   const [password, setPassword] = useState('');
   const areaElement = useRef();
 
-  const mobileDevice = isMobile;
+  const mobileDevice = useDeviceType();
 
   useEffect(() => {
     generateCode();

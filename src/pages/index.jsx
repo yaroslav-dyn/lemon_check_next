@@ -32,9 +32,8 @@ export default function Home() {
               service that can help you create strong, unique passwords for each
               account <Link href="/password-generator">here</Link>.
             </div>
-
+            <br />
             <div className="content-text">
-              {" "}
               Using a secure password generator is essential in today&apos;s
               digital world as hackers are constantly trying to gain access to
               our personal information and accounts. With this tool, users can

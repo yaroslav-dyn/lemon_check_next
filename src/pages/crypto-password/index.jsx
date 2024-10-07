@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { copyToClipboardMethod } from "@/services/base.services";
 import styles from "@/styles/CryptoPassword.module.css";
 import aes from "crypto-js/aes";
-import { isMobile } from "react-device-detect";
+import useDeviceType from "@/services/useDeviceType";
+
 
 const CryptoPassword = () => {
   const areaElement = useRef();
@@ -17,8 +18,7 @@ const CryptoPassword = () => {
   const outTextInput = useRef(null);
   const outTextCrypted = useRef(null);
 
-
-  const mobileDevice = isMobile;
+    const mobileDevice = useDeviceType();
 
   const copyToClipBoard = () => {
     copyToClipboardMethod(
@@ -151,7 +151,7 @@ const CryptoPassword = () => {
                 id="outText"
                 type="text"
                 onInput={(e) => onInputField(e, "cryptedText")}
-                placeholder="crypted password"
+                placeholder="Crypted password"
                 readOnly={actionState !== "decrypt"}
               />
             </section>

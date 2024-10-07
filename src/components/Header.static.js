@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import Image from 'next/image'
-import Link from 'next/link'
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import BottomBar from "@/components/bottom_bar.static";
 import { usePathname } from "next/navigation";
-import { isMobile } from 'react-device-detect';
-
+import useDeviceType from "@/services/useDeviceType";
+import useScrollPosition from "@/services/useScrollPosition";
 
 export const BottomBarlinks = [
   {
@@ -39,36 +39,48 @@ export const BottomBarlinks = [
   },
 ];
 
-
 export default function AppHeader() {
-
-  const logoSrc = "/assets/img/logos/lemon_check__logo@2x.png";
   const newLogo = "/assets/img/logos/lc_dally_logo@3x.png";
 
-    const pathname = usePathname();
+  const isMobile = useDeviceType();
+  const pathname = usePathname();
+  const scrollPosition = useScrollPosition();
+  const topHeaderElement = useRef(null);
 
-      const onClikNavItem = (alias) => {
-        BottomBarlinks.forEach((itm) =>
-          itm.alias === alias ? (itm.isActive = true) : (itm.isActive = false)
-        );
-      };
+  const onClikNavItem = (alias) => {
+    BottomBarlinks.forEach((itm) =>
+      itm.alias === alias ? (itm.isActive = true) : (itm.isActive = false)
+    );
+  };
 
-    useEffect(() => {
-      document.querySelectorAll(".nav__item").forEach((it) => {
-        if (pathname === "/") {
-          it.classList.remove("active");
-        }
-        if (it.dataset.url === pathname) {
-          it.classList.add("active");
-        } else {
-          it.classList.remove("active");
-        }
-      });
-    }, [pathname]);
+  useEffect(() => {
+    document.querySelectorAll(".nav__item").forEach((it) => {
+      // if (pathname === "/") {
+      //   it.classList.remove("active");
+      // }
+      if (it.dataset.url === pathname) {
+        it.classList.add("active");
+      } else {
+        it.classList.remove("active");
+      }
+    });
+  }, [pathname]);
 
+  useEffect(() => {
+    console.log("scrollPosition", scrollPosition);
+
+    if(!topHeaderElement || !topHeaderElement.current)
+      return;
+    
+    if (isMobile && scrollPosition > 74) {
+      topHeaderElement.current.classList.add("scrolled");
+    } else {
+      topHeaderElement.current.classList.remove("scrolled");
+    }
+  }, [scrollPosition]);
 
   return (
-    <header className="top__header">
+    <header ref={topHeaderElement} className="top__header">
       <nav>
         <div className="main__nav">
           <div className="logo_block">
@@ -84,7 +96,7 @@ export default function AppHeader() {
             </Link>
           </div>
 
-          <div className="show__desktop">
+          {!isMobile ? (
             <div className="main__nav__links">
               {BottomBarlinks &&
                 BottomBarlinks.map((navLink) => (
@@ -100,14 +112,11 @@ export default function AppHeader() {
                   </div>
                 ))}
             </div>
-          </div>
-
-          <div className="show__mobile">
+          ) : (
             <BottomBar />
-          </div>
+          )}
         </div>
       </nav>
     </header>
   );
-
-}//
+} //

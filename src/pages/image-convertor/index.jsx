@@ -39,27 +39,40 @@ const ImageConvertor = () => {
   // NOTE: HTML!
   return (
     <>
-      <main className='main_content converter_content'>
-        <h1 className="main__heading" data-centered-text> Convert image to base64 </h1>
+      <main className="main_content converter_content">
+        <div className="main__heading">
+          <h1 className="h1_heading" data-centered-text>
+            Convert image to base64
+          </h1>
+        </div>
+
         <div data-centered-text>
-          <input id="imageInput" className={styles.imageInput} type="file" ref={imageInputRef} onChange={handleImageChange} />
-          <label className={styles.uploadButton + ' action__btn'} htmlFor="imageInput">UPLOAD IMAGE</label>
+          <input
+            id="imageInput"
+            className={styles.imageInput}
+            type="file"
+            ref={imageInputRef}
+            onChange={handleImageChange}
+          />
+          <label
+            className={styles.uploadButton + " action__btn"}
+            htmlFor="imageInput"
+          >
+            UPLOAD IMAGE
+          </label>
         </div>
         <section className={styles.resultBlock}>
-          {imageBase64 &&
+          {imageBase64 && (
             <>
               <a
                 download={`base64-image-${Date.now()}.png`}
-                className={styles.convertorImgPreview}>
+                className={styles.convertorImgPreview}
+              >
                 <img src={imageBase64} alt="chosen" />
               </a>
 
-              <div
-                className={styles.convertorControlBlock}
-                data-centered-text>
-
-
-                <div className='flex__grid justify-center'>
+              <div className={styles.convertorControlBlock} data-centered-text>
+                <div className="flex__grid justify-center">
                   <div className={styles.codeTypeBoxes}>
                     <input
                       className={styles.codeTypeBoxesCheckbox}
@@ -67,8 +80,9 @@ const ImageConvertor = () => {
                       id="dataType"
                       name="base64CodeType"
                       value="data"
-                      checked={selectedConvertedType === 'data'}
-                      onChange={onChangeDataType} />
+                      checked={selectedConvertedType === "data"}
+                      onChange={onChangeDataType}
+                    />
                     <label htmlFor="dataType">Like data</label>
                   </div>
 
@@ -79,16 +93,14 @@ const ImageConvertor = () => {
                       id="imageType"
                       name="base64CodeType"
                       value="image"
-                      checked={selectedConvertedType === 'image'}
-                      onChange={onChangeDataType} />
+                      checked={selectedConvertedType === "image"}
+                      onChange={onChangeDataType}
+                    />
                     <label htmlFor="imageType">Like image</label>
                   </div>
                 </div>
                 <br />
-                <div>
-
-                </div>
-
+                <div></div>
               </div>
 
               <div className={styles.generatedCodeBlock}>
@@ -97,14 +109,16 @@ const ImageConvertor = () => {
                   value={imageBase64ForCopy}
                   ref={areaElement}
                   name="base_code"
-                  id="base_code" cols="30" rows="10"
+                  id="base_code"
+                  cols="30"
+                  rows="10"
                   readOnly
                   onClick={copyToClipboard}
                 />
                 <div>
                   <br />
                   <button
-                    className={styles.uploadButton + ' action__btn w100'}
+                    className={styles.uploadButton + " action__btn w100"}
                     onClick={copyToClipboard}
                   >
                     Copy code
@@ -112,11 +126,11 @@ const ImageConvertor = () => {
                 </div>
               </div>
             </>
-          }
+          )}
         </section>
       </main>
     </>
-  )
+  );
 }//
 
 export default ImageConvertor;
