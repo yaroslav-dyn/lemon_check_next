@@ -67,7 +67,6 @@ export default function AppHeader() {
   }, [pathname]);
 
   useEffect(() => {
-    console.log("scrollPosition", scrollPosition);
 
     if(!topHeaderElement || !topHeaderElement.current)
       return;

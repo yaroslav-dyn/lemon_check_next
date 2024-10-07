@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { copyToClipboardMethod } from "@/services/base.services";
+import {
+  copyToClipboardMethod,
+  jsonToCsv,
+  downloadFile
+} from "@/services/base.services";
 import styles from "@/styles/CryptoPassword.module.css";
 import aes from "crypto-js/aes";
 import useDeviceType from "@/services/useDeviceType";
@@ -12,6 +16,7 @@ const CryptoPassword = () => {
     secret: "",
     cryptedText: "",
     roughCrypto: {},
+    alias: ''
   });
   const [actionState, setActionState] = useState("encrypt"); // encrypt | decrypt
   const [instr, setInstructionStatus] = useState(false);
@@ -28,7 +33,7 @@ const CryptoPassword = () => {
 
 
   const onInputField = (e, field) => {
-    const mutatedModel = { alias: "",sourceText: "", secret: "", cryptedText: "" };
+    const mutatedModel = {...modelObject};
     mutatedModel[field] = e.target.value;
     if (
       field === "sourceText" ||
@@ -57,7 +62,18 @@ const CryptoPassword = () => {
     setInstructionStatus((currentState = !currentState));
   };
 
+  const saveToFile = () => {
+    const dataToFile = {...modelObject};
+    delete dataToFile.roughCrypto ;
+    delete dataToFile.secret ;
 
+    const iterableData = [dataToFile];
+    const fileContent = jsonToCsv(iterableData);
+    fileContent &&
+      downloadFile(fileContent, dataToFile.alias + ".csv", "text/csv");
+  }
+ 
+  
   return (
     <>
       <div className="generator__page">
@@ -129,6 +145,7 @@ const CryptoPassword = () => {
                 id="inText"
                 type="text"
                 onInput={(e) => onInputField(e, "sourceText")}
+                onChange={(e) => onInputField(e, "sourceText")}
                 placeholder="You password"
                 readOnly={actionState !== "encrypt"}
               />
@@ -151,20 +168,23 @@ const CryptoPassword = () => {
                 id="outText"
                 type="text"
                 onInput={(e) => onInputField(e, "cryptedText")}
+                onChange={(e) => onInputField(e, "cryptedText")}
                 placeholder="Crypted password"
                 readOnly={actionState !== "decrypt"}
               />
             </section>
-            {/* 
-            <textarea
-              name="password-alias"
-              className={`generator__content--area order-0`}
-              id="passworAlias"
-              onInput={(e) => onInputField(e, "alias")}
-              placeholder="Alias"
-            ></textarea> */}
+            {
+              <textarea
+                name="password-alias"
+                className={`generator__content--area order-0`}
+                id="passworAlias"
+                onInput={(e) => onInputField(e, "alias")}
+                onChange={(e) => onInputField(e, "alias")}
+                placeholder="Alias"
+              ></textarea>
+            }
 
-            <div className={`flex__grig --column  `}>
+            <div className={`flex__grig --small-gap`}>
               <button
                 id="btn"
                 className="generator__content--btn"
@@ -172,13 +192,13 @@ const CryptoPassword = () => {
               >
                 Copy
               </button>
-              {/* <button
+              <button
                 id="btn"
                 className="generator__content--btn"
-                onClick={() => copyToClipBoard()}
+                onClick={() => saveToFile()}
               >
                 Save
-              </button> */}
+              </button>
             </div>
           </div>
         </main>
@@ -207,7 +227,7 @@ const InstructionModal = () => (
       </li>
     </ul>
     <strong className={styles.instrustionListTips}>
-      Tip: Make sure to remember your secret phrase, as you&apos;ll need it to
+      Tip: Make sure to remember your secret phrase and crypted password, as you'll need it to
       decrypt your password later!
     </strong>
   </div>
