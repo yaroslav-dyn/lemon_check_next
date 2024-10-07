@@ -115,6 +115,25 @@ export default function AppHeader() {
           ) : (
             <BottomBar />
           )}
+          <div className="flex__grid --small-gap">
+            <Link
+              href="/about"
+              className={`instruction_info_icon  ${
+                pathname === "/about" ? "active" : ""
+              }`}
+            >
+              <span>?</span>
+            </Link>
+
+            <Link
+              href="/faq"
+              className={`instruction_info_icon ${
+                pathname === "/faq" ? "active" : ""
+              }`}
+            >
+              <span>F</span>
+            </Link>
+          </div>
         </div>
       </nav>
     </header>

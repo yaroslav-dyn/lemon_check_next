@@ -172,13 +172,13 @@ const CryptoPassword = () => {
               >
                 Copy
               </button>
-              <button
+              {/* <button
                 id="btn"
                 className="generator__content--btn"
                 onClick={() => copyToClipBoard()}
               >
                 Save
-              </button>
+              </button> */}
             </div>
           </div>
         </main>
