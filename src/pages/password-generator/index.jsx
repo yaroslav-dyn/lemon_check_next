@@ -150,7 +150,7 @@ const  PasswordGenerator = () =>  {
                 <button
                   id="btn"
                   className="generator__content--btn"
-                  onClick={generateCode}
+                  onClick={()=> generateCode()}
                 >
                   Generate password
                 </button>
