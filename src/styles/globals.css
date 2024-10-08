@@ -233,6 +233,15 @@ a {
   cursor: pointer;
 }
 
+.generator__content--btn.--secondary-btn {
+  background-color: #6a6565;
+} 
+
+
+.generator__content--btn.--small-margin {
+  margin-bottom: 14px !important;
+}
+
 .generator__content--btn:hover {
   box-shadow: 0 4px 0 #f2e302;
 }
@@ -527,16 +536,25 @@ a {
   display: inline-block;
   width: 27px;
   height: 27px;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 50%;
   vertical-align: middle;
   text-align: center;
   padding-top: 2px;
   color: white;
   text-decoration: none;
+  font-weight: 600;
 }
 
 .instruction_info_icon.active, .instruction_info_icon:hover {
   color: var(--color-primary);
   border-color: var(--color-primary);
+}
+
+.mt-1\.4 {
+  margin-top: 1.4rem
+}
+
+.mt-2\.4 {
+  margin-top: 2.4rem
 }

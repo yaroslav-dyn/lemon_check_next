@@ -2,12 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   copyToClipboardMethod,
   jsonToCsv,
-  downloadFile
+  downloadFile,
 } from "@/services/base.services";
 import styles from "@/styles/CryptoPassword.module.css";
 import aes from "crypto-js/aes";
+import CryptoJS from "crypto-js";
 import useDeviceType from "@/services/useDeviceType";
-
+import { isMobile, isIOS} from "react-device-detect";
 
 const CryptoPassword = () => {
   const areaElement = useRef();
@@ -15,15 +16,14 @@ const CryptoPassword = () => {
     sourceText: "",
     secret: "",
     cryptedText: "",
-    roughCrypto: {},
-    alias: ''
+    alias: "",
   });
   const [actionState, setActionState] = useState("encrypt"); // encrypt | decrypt
   const [instr, setInstructionStatus] = useState(false);
   const outTextInput = useRef(null);
   const outTextCrypted = useRef(null);
 
-    const mobileDevice = useDeviceType();
+  const mobileDevice = useDeviceType();
 
   const copyToClipBoard = () => {
     copyToClipboardMethod(
@@ -31,27 +31,31 @@ const CryptoPassword = () => {
     );
   };
 
-
   const onInputField = (e, field) => {
-    const mutatedModel = {...modelObject};
+    const mutatedModel = { ...modelObject };
     mutatedModel[field] = e.target.value;
     if (
-      field === "sourceText" ||
-      (field === "secret" && e.target.value.length > 0)
+      actionState === "encrypt" &&
+      (field === "sourceText" ||
+        (field === "secret" && e.target.value.length > 0))
     ) {
-      Object.assign(mutatedModel, {
-        roughCrypto: aes.encrypt(e.target.value, "secret"),
-        cryptedText: aes.encrypt(e.target.value, "secret").toString(),
-      });
-      outTextCrypted &&
-        (outTextCrypted.current.value = aes
-          .encrypt(e.target.valuet, mutatedModel.secret)
-          .toString());
-    } else if (field === "cryptedText" && actionState === "decrypt" && mutatedModel.roughCrypto) {
+
+        (mutatedModel["cryptedText"] = aes
+          .encrypt(mutatedModel.sourceText, mutatedModel.secret)
+          .toString()),
+          outTextCrypted &&
+            (outTextCrypted.current.value = mutatedModel.cryptedText);
+
+        console.log("cryptedText", mutatedModel);
+
+    } else if (
+      actionState === "decrypt" &&
+      (field === "cryptedText" || field === "secret")
+    ) {
       outTextInput &&
         (outTextInput.current.value = aes
-          .decrypt(mutatedModel.roughCrypto, mutatedModel.secret)
-          .toString());
+          .decrypt(mutatedModel.cryptedText, mutatedModel.secret)
+          .toString(CryptoJS.enc.Utf8));
     }
 
     setModelObject(mutatedModel);
@@ -63,17 +67,13 @@ const CryptoPassword = () => {
   };
 
   const saveToFile = () => {
-    const dataToFile = {...modelObject};
-    delete dataToFile.roughCrypto ;
-    delete dataToFile.secret ;
-
+    const dataToFile = { ...modelObject };
     const iterableData = [dataToFile];
     const fileContent = jsonToCsv(iterableData);
     fileContent &&
       downloadFile(fileContent, dataToFile.alias + ".csv", "text/csv");
-  }
- 
-  
+  };
+
   return (
     <>
       <div className="generator__page">
@@ -92,7 +92,7 @@ const CryptoPassword = () => {
                 } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
                 onClick={() => triggerInstruction()}
               >
-                <span className={styles.instructionInfoIcon}>?</span>
+                <div className={styles.instructionInfoIcon}>?</div>
                 <span>How to Encrypt Your Password:</span>
               </h2>
               {instr && (
@@ -173,7 +173,7 @@ const CryptoPassword = () => {
                 readOnly={actionState !== "decrypt"}
               />
             </section>
-            {
+            {actionState === "encrypt" && (
               <textarea
                 name="password-alias"
                 className={`generator__content--area order-0`}
@@ -181,24 +181,30 @@ const CryptoPassword = () => {
                 onInput={(e) => onInputField(e, "alias")}
                 onChange={(e) => onInputField(e, "alias")}
                 placeholder="Alias"
-              ></textarea>
-            }
+              />
+            )}
 
-            <div className={`flex__grig --small-gap`}>
+            <div
+              className={`flex__grig --small-gap ${
+                isMobile ? "mt-2.4" : "mt-2.4"
+              }`}
+            >
               <button
                 id="btn"
-                className="generator__content--btn"
+                className="generator__content--btn --small-margin --secondary-btn"
                 onClick={() => copyToClipBoard()}
               >
                 Copy
               </button>
-              <button
-                id="btn"
-                className="generator__content--btn"
-                onClick={() => saveToFile()}
-              >
-                Save
-              </button>
+              {actionState === "encrypt" && (
+                <button
+                  id="btn"
+                  className="generator__content--btn"
+                  onClick={() => saveToFile()}
+                >
+                  Save
+                </button>
+              )}
             </div>
           </div>
         </main>
@@ -206,7 +212,6 @@ const CryptoPassword = () => {
     </>
   );
 };
-
 
 const InstructionModal = () => (
   <div className={styles.instructionWindow} data-left-text>
@@ -227,8 +232,8 @@ const InstructionModal = () => (
       </li>
     </ul>
     <strong className={styles.instrustionListTips}>
-      Tip: Make sure to remember your secret phrase and crypted password, as you'll need it to
-      decrypt your password later!
+      Tip: Make sure to remember your secret phrase and crypted password, as
+      you'll need it to decrypt your password later!
     </strong>
   </div>
 );

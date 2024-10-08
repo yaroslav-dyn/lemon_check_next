@@ -88,7 +88,9 @@ const  PasswordGenerator = () =>  {
           <div className="main__heading">
             <h1 className="h1_heading">Generate strong password</h1>
           </div>
-          <div className={`container__limit ${mobileDevice ? "" : "fit-content"}`}>
+          <div
+            className={`container__limit ${mobileDevice ? "" : "fit-content"}`}
+          >
             <section className="generator__content--actions">
               <textarea
                 defaultValue={password}
@@ -149,8 +151,15 @@ const  PasswordGenerator = () =>  {
               <div className="en_generate_controls">
                 <button
                   id="btn"
+                  className="generator__content--btn --small-margin --secondary-btn"
+                  onClick={() => copyToClipBoard()}
+                >
+                  Copy password
+                </button>
+                <button
+                  id="btn"
                   className="generator__content--btn"
-                  onClick={()=> generateCode()}
+                  onClick={() => generateCode()}
                 >
                   Generate password
                 </button>
