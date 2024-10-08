@@ -154,7 +154,7 @@ const  PasswordGenerator = () =>  {
                   className="generator__content--btn --small-margin --secondary-btn"
                   onClick={() => copyToClipBoard()}
                 >
-                  Copy password
+                  Copy
                 </button>
                 <button
                   id="btn"

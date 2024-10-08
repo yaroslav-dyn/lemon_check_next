@@ -8,7 +8,7 @@ import styles from "@/styles/CryptoPassword.module.css";
 import aes from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 import useDeviceType from "@/services/useDeviceType";
-import { isMobile, isIOS} from "react-device-detect";
+import { isMobile, isIOS } from "react-device-detect";
 
 const CryptoPassword = () => {
   const areaElement = useRef();
@@ -20,6 +20,7 @@ const CryptoPassword = () => {
   });
   const [actionState, setActionState] = useState("encrypt"); // encrypt | decrypt
   const [instr, setInstructionStatus] = useState(false);
+  const [instrB, setInstructioBStatus] = useState(false);
   const outTextInput = useRef(null);
   const outTextCrypted = useRef(null);
 
@@ -39,15 +40,13 @@ const CryptoPassword = () => {
       (field === "sourceText" ||
         (field === "secret" && e.target.value.length > 0))
     ) {
+      (mutatedModel["cryptedText"] = aes
+        .encrypt(mutatedModel.sourceText, mutatedModel.secret)
+        .toString()),
+        outTextCrypted &&
+          (outTextCrypted.current.value = mutatedModel.cryptedText);
 
-        (mutatedModel["cryptedText"] = aes
-          .encrypt(mutatedModel.sourceText, mutatedModel.secret)
-          .toString()),
-          outTextCrypted &&
-            (outTextCrypted.current.value = mutatedModel.cryptedText);
-
-        console.log("cryptedText", mutatedModel);
-
+      console.log("cryptedText", mutatedModel);
     } else if (
       actionState === "decrypt" &&
       (field === "cryptedText" || field === "secret")
@@ -61,9 +60,14 @@ const CryptoPassword = () => {
     setModelObject(mutatedModel);
   };
 
-  const triggerInstruction = () => {
+  const triggerInstruction = (type) => {
     let currentState = instr;
-    setInstructionStatus((currentState = !currentState));
+    let currentStateb = instrB;
+    if (type === "A") {
+      setInstructionStatus((currentState = !currentState));
+    } else if (type === "B") {
+      setInstructioBStatus((currentStateb = !currentStateb));
+    }
   };
 
   const saveToFile = () => {
@@ -90,14 +94,30 @@ const CryptoPassword = () => {
                 className={`${styles.instructionHeading} ${
                   instr ? styles.instrOpen : ""
                 } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
-                onClick={() => triggerInstruction()}
+                onClick={() => triggerInstruction("A")}
               >
                 <div className={styles.instructionInfoIcon}>?</div>
                 <span>How to Encrypt Your Password:</span>
               </h2>
               {instr && (
                 <div className={styles.instructionModalContainer}>
-                  <InstructionModal />
+                  <InstructionModal tape="A" />
+                </div>
+              )}
+              <br />
+              <h2
+                data-left-text
+                className={`${styles.instructionHeading} ${
+                  instr ? styles.instrOpen : ""
+                } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
+                onClick={() => triggerInstruction("B")}
+              >
+                <div className={styles.instructionInfoIcon}>?</div>
+                <span>How to Decrypt Your Password:</span>
+              </h2>
+              {instrB && (
+                <div className={styles.instructionModalContainer}>
+                  <InstructionModal tape="B" />
                 </div>
               )}
             </div>
@@ -213,28 +233,51 @@ const CryptoPassword = () => {
   );
 };
 
-const InstructionModal = () => (
+const InstructionModal = ({ tape }) => (
   <div className={styles.instructionWindow} data-left-text>
     <ul className={styles.instrustionList}>
-      <li>
-        1. Enter Your Password: Fill in the &apos;Password&apos; field with your
-        desired password. This can be any combination of characters.
-      </li>
-      <li>
-        2. Provide a Secret Phrase: Enter a unique secret phrase in the
-        &apos;Secret Phrase&apos; field. This phrase will be used to securely
-        encrypt your password.
-      </li>
-      <li>
-        3. View Encrypted Output: Once both fields are filled, the encrypted
-        version of your password will be automatically generated and shown in
-        the &apos;Encrypted Output&apos; field.
-      </li>
+      {tape === "A" ? (
+        <>
+          <li>
+            1. Enter Your Password: Fill in the &apos;Password&apos; field with
+            your desired password. This can be any combination of characters.
+          </li>
+          <li>
+            2. Provide a Secret Phrase: Enter a unique secret phrase in the
+            &apos;Secret Phrase&apos; field. This phrase will be used to
+            securely encrypt your password.
+          </li>
+          <li>
+            3. View Encrypted Output: Once both fields are filled, the encrypted
+            version of your password will be automatically generated and shown
+            in the &apos;Encrypted Output&apos; field.
+          </li>
+          <strong className={styles.instrustionListTips}>
+            Tip: Make sure to remember your secret phrase and crypted password,
+            as you'll need it to decrypt your password later!
+          </strong>
+        </>
+      ) : (
+        <>
+          <li>
+            Enter Encrypted Data: In the "Encrypted Output" field, input the
+            encrypted password you wish to decrypt.
+          </li>
+          <li>
+            Provide the Secret Phrase: Enter the same secret phrase you used
+            during the encryption process into the "Secret Phrase" field.
+          </li>
+          <li>
+            View Decrypted Password: Once both fields are filled, the original
+            password will be automatically decrypted and displayed.
+          </li>
+          <strong className={styles.instrustionListTips}>
+            Note: The secret phrase must match exactly. Otherwise, the password
+            cannot be decrypted.
+          </strong>
+        </>
+      )}
     </ul>
-    <strong className={styles.instrustionListTips}>
-      Tip: Make sure to remember your secret phrase and crypted password, as
-      you'll need it to decrypt your password later!
-    </strong>
   </div>
 );
 

@@ -233,10 +233,6 @@ a {
   cursor: pointer;
 }
 
-.generator__content--btn.--secondary-btn {
-  background-color: #6a6565;
-} 
-
 
 .generator__content--btn.--small-margin {
   margin-bottom: 14px !important;
@@ -462,6 +458,9 @@ a {
   background-color: var(--theme-primary-accent);
   color: var(--theme-primary-text);
   border: none;
+}
+.primary__theme .generator__content--btn.generator__content--btn.--secondary-btn {
+  background-color: #6a6565;
 }
 
 .primary__theme .generator__content--btn:hover,

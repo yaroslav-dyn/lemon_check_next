@@ -30,7 +30,7 @@ const AliasGenerator = () => {
           </div>
 
           <div className={`container__limit ${isMobile ? "" : "fit-content"}`}>
-            <section className="generator__content--actions">
+            <section className="generator__content--actions no-x-paddings">
               <textarea
                 defaultValue={allias}
                 name="password-content"
