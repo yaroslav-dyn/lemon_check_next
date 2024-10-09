@@ -91,7 +91,7 @@ const  PasswordGenerator = () =>  {
           <div
             className={`container__limit ${mobileDevice ? "" : "fit-content"}`}
           >
-            <section className="generator__content--actions">
+            <section className="generator__content--actions no-x-paddings">
               <textarea
                 defaultValue={password}
                 name="password-content"
@@ -108,14 +108,14 @@ const  PasswordGenerator = () =>  {
                   id="generatorFormId"
                   onSubmit={generateFromForm}
                 >
-                  <div className="flex__grid justify-center">
+                  <div className="flex__grid justify-center align-center gap-x-6">
                     <label className={getLabelColor()} htmlFor="passwordLength">
-                      Length:{" "}
+                      LENGTH
                     </label>
 
-                    <div className="flex__grid --column justify-center align-center">
+                    <div className="flex__grid --column justify-center ">
                       <input
-                        className="bace_input"
+                        className="generator__input no-x-paddings"
                         id="passwordLengthRange"
                         type="range"
                         value={passwordLength}

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import Head from "next/head";
 import {
   copyToClipboardMethod,
   jsonToCsv,
@@ -80,47 +81,65 @@ const CryptoPassword = () => {
 
   return (
     <>
+      <Head>
+        <title>LemonCheck</title>
+        <meta name="author" content="LemonCheck"></meta>
+        <meta
+          name="description"
+          content="LemonCheck, Encrypt your password, Crypted password"
+        />
+        <meta
+          name="keywords"
+          content="Encrypt your password, Crypted password"
+        />
+        <meta name="title" content="Encrypt your password" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="generator__page">
         <main className="main_content generator__content">
           <div className="main__heading">
             <h1 className="h1_heading">Protect your password</h1>
-            <div
-              className={`instruction__block container__limit ${
-                mobileDevice ? "w-100" : "fit-content"
-              } ${styles.instructionContainer}`}
+          </div>
+
+          <div
+            className={`instruction__block container__limit ${
+              mobileDevice ? "w-100" : ""
+            } ${styles.instructionContainer}`}
+          >
+            <h2
+              data-left-text
+              className={`${styles.instructionHeading} ${
+                instr ? styles.instrOpen : ""
+              } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
+              onClick={() => triggerInstruction("A")}
             >
-              <h2
-                data-left-text
-                className={`${styles.instructionHeading} ${
-                  instr ? styles.instrOpen : ""
-                } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
-                onClick={() => triggerInstruction("A")}
-              >
-                <div className={styles.instructionInfoIcon}>?</div>
-                <span>How to Encrypt Your Password:</span>
-              </h2>
-              {instr && (
-                <div className={styles.instructionModalContainer}>
-                  <InstructionModal tape="A" />
-                </div>
-              )}
-              <br />
-              <h2
-                data-left-text
-                className={`${styles.instructionHeading} ${
-                  instr ? styles.instrOpen : ""
-                } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
-                onClick={() => triggerInstruction("B")}
-              >
-                <div className={styles.instructionInfoIcon}>?</div>
-                <span>How to Decrypt Your Password:</span>
-              </h2>
-              {instrB && (
-                <div className={styles.instructionModalContainer}>
-                  <InstructionModal tape="B" />
-                </div>
-              )}
-            </div>
+              <div className={styles.instructionInfoIcon}>?</div>
+              <span>How to Encrypt Your Password ?</span>
+            </h2>
+            {instr && (
+              <div className={styles.instructionModalContainer}>
+                <InstructionModal tape="A" />
+              </div>
+            )}
+            <h2
+              data-left-text
+              className={`${styles.instructionHeading} ${
+                instrB ? styles.instrOpen : ""
+              } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
+              onClick={() => triggerInstruction("B")}
+            >
+              <div className={styles.instructionInfoIcon}>?</div>
+              <span>How to Decrypt Your Password ?</span>
+            </h2>
+            {instrB && (
+              <div className={styles.instructionModalContainer}>
+                <InstructionModal tape="B" />
+              </div>
+            )}
           </div>
 
           <div className={styles.instructionActionControls}>
@@ -150,81 +169,79 @@ const CryptoPassword = () => {
             </div>
           </div>
 
-          <div
-            className={`container__limit ${
-              mobileDevice ? "w-100" : "fit-content"
-            }`}
-          >
-            <section className="generator__content--actions no-x-paddings gap-x-6">
-              <textarea
-                name="password-text"
-                ref={outTextInput}
-                className={`${
-                  actionState === "encrypt" ? "order-1" : "order-3"
-                } generator__content--area`}
-                id="inText"
-                type="text"
-                onInput={(e) => onInputField(e, "sourceText")}
-                onChange={(e) => onInputField(e, "sourceText")}
-                placeholder="You password"
-                readOnly={actionState !== "encrypt"}
-              />
+          <div className={`container__limit ${mobileDevice ? "w-100" : ""}`}>
+            <div>
+              <section className="generator__content--actions --column no-x-paddings gap-x-6">
+                <textarea
+                  name="password-text"
+                  ref={outTextInput}
+                  className={`${
+                    actionState === "encrypt" ? "order-1" : "order-3"
+                  } generator__content--area`}
+                  id="inText"
+                  type="text"
+                  onInput={(e) => onInputField(e, "sourceText")}
+                  onChange={(e) => onInputField(e, "sourceText")}
+                  placeholder="You password"
+                  readOnly={actionState !== "encrypt"}
+                />
 
-              <textarea
-                name="password-secret"
-                className="generator__content--area order-2"
-                id="enSecretPassphrase"
-                type="text"
-                onInput={(e) => onInputField(e, "secret")}
-                placeholder="Secret phrase"
-              />
+                <textarea
+                  name="password-secret"
+                  className="generator__content--area order-2"
+                  id="enSecretPassphrase"
+                  type="text"
+                  onInput={(e) => onInputField(e, "secret")}
+                  placeholder="Secret phrase"
+                />
 
-              <textarea
-                name="password-encypt"
-                ref={outTextCrypted}
-                className={`${
-                  actionState === "decrypt" ? "order-1" : "order-3"
-                } generator__content--area`}
-                id="outText"
-                type="text"
-                onInput={(e) => onInputField(e, "cryptedText")}
-                onChange={(e) => onInputField(e, "cryptedText")}
-                placeholder="Crypted password"
-                readOnly={actionState !== "decrypt"}
-              />
-            </section>
-            {actionState === "encrypt" && (
-              <textarea
-                name="password-alias"
-                className={`generator__content--area order-0`}
-                id="passworAlias"
-                onInput={(e) => onInputField(e, "alias")}
-                onChange={(e) => onInputField(e, "alias")}
-                placeholder="Alias"
-              />
-            )}
-
-            <div
-              className={`flex__grig --small-gap ${
-                isMobile ? "mt-2.4" : "mt-2.4"
-              }`}
-            >
-              <button
-                id="btn"
-                className="generator__content--btn --small-margin --secondary-btn"
-                onClick={() => copyToClipBoard()}
-              >
-                Copy
-              </button>
+                <textarea
+                  name="password-encypt"
+                  ref={outTextCrypted}
+                  className={`${
+                    actionState === "decrypt" ? "order-1" : "order-3"
+                  } generator__content--area`}
+                  id="outText"
+                  type="text"
+                  onInput={(e) => onInputField(e, "cryptedText")}
+                  onChange={(e) => onInputField(e, "cryptedText")}
+                  placeholder="Crypted password"
+                  readOnly={actionState !== "decrypt"}
+                />
+              </section>
               {actionState === "encrypt" && (
+                <textarea
+                  name="password-alias"
+                  className={`generator__content--area order-0`}
+                  id="passworAlias"
+                  onInput={(e) => onInputField(e, "alias")}
+                  onChange={(e) => onInputField(e, "alias")}
+                  placeholder="Alias"
+                />
+              )}
+
+              <div
+                className={`flex__grig --small-gap ${
+                  isMobile ? "mt-2.4" : "mt-2.4"
+                }`}
+              >
                 <button
                   id="btn"
-                  className="generator__content--btn"
-                  onClick={() => saveToFile()}
+                  className="generator__content--btn --small-margin --secondary-btn"
+                  onClick={() => copyToClipBoard()}
                 >
-                  Save
+                  Copy
                 </button>
-              )}
+                {actionState === "encrypt" && (
+                  <button
+                    id="btn"
+                    className="generator__content--btn"
+                    onClick={() => saveToFile()}
+                  >
+                    Save
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </main>
@@ -260,14 +277,17 @@ const InstructionModal = ({ tape }) => (
       ) : (
         <>
           <li>
+            1.
             Enter Encrypted Data: In the "Encrypted Output" field, input the
             encrypted password you wish to decrypt.
           </li>
           <li>
+            2.
             Provide the Secret Phrase: Enter the same secret phrase you used
             during the encryption process into the "Secret Phrase" field.
           </li>
           <li>
+            3.
             View Decrypted Password: Once both fields are filled, the original
             password will be automatically decrypted and displayed.
           </li>

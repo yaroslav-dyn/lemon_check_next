@@ -8,6 +8,12 @@ import useScrollPosition from "@/services/useScrollPosition";
 
 export const BottomBarlinks = [
   {
+    title: "Home",
+    url: "/",
+    alias: "H",
+    isActive: false,
+  },
+  {
     title: "Password generator",
     url: "/password-generator",
     alias: "PG",
@@ -53,24 +59,30 @@ export default function AppHeader() {
     );
   };
 
-  useEffect(() => {
+  const setActiveMenu = () => {
+    BottomBarlinks &&
+      BottomBarlinks.map((it) => {
+        if (it.url === pathname) {
+          it.isActive = true;
+        } else {
+          it.isActive = false;
+        }
+      });
     document.querySelectorAll(".nav__item").forEach((it) => {
-      // if (pathname === "/") {
-      //   it.classList.remove("active");
-      // }
       if (it.dataset.url === pathname) {
         it.classList.add("active");
       } else {
         it.classList.remove("active");
       }
     });
+  };
+
+  useEffect(() => {
+    setTimeout(setActiveMenu, 100);
   }, [pathname]);
 
   useEffect(() => {
-
-    if(!topHeaderElement || !topHeaderElement.current)
-      return;
-    
+    if (!topHeaderElement || !topHeaderElement.current) return;
     if (isMobile && scrollPosition > 74) {
       topHeaderElement.current.classList.add("scrolled");
     } else {

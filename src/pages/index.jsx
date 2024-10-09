@@ -24,7 +24,6 @@ export default function Home() {
               Security & Tools
             </h1>
           </div>
-
           <div className="content__gaps">
             <p className="content-text">
               Simplify Your Digital{" "}
@@ -39,7 +38,6 @@ export default function Home() {
               efficient in one place!
             </p>
           </div>
-
           <article className="main_content">
             <p className="content-text">
               Are you tired of using the same password for all your online
@@ -62,11 +60,21 @@ export default function Home() {
               </Link>{" "}
               them for maximum protection—all in one place!
             </p>
+
+            <p className="content-text">
+              Simplify Your Digital Security & Tools Strengthen your online
+              presence with our all-in-one service! From generating strong,
+              secure passwords to encrypting them with ease, we’ve got you
+              covered. Need more? Convert images to Base64 for seamless data
+              handling or create custom QR codes in a flash. Everything you need
+              to stay secure and efficient in one place!
+            </p>
+
             <h3 className="--color-primary">
               For more information about us please visit{" "}
               <Link className="--base-color --default-link" href={"/about"}>
-                page{" "}
-              </Link>{" "}
+                this{" "}
+              </Link>
               or If You need help You may find it on{" "}
               <Link className="--base-color --default-link" href={"/faq"}>
                 FAQ{" "}
@@ -75,24 +83,6 @@ export default function Home() {
             </h3>
           </article>
 
-          {/* <article className="main_content">
-            <div className="content-text">
-              Are you tired of using the same password for all your online
-              accounts? If so, then it&apos;s time to start using a secure
-              password generator. A secure password generator is an online
-              service that can help you create strong, unique passwords for each
-              account <Link href="/password-generator">here</Link>.
-            </div>
-            <br />
-            <div className="content-text">
-              Using a secure password generator is essential in today&apos;s
-              digital world as hackers are constantly trying to gain access to
-              our personal information and accounts. With this tool, users can
-              easily generate random strings of characters which make it much
-              harder for anyone attempting unauthorized access into their
-              accounts or data.
-            </div>
-          </article> */}
         </main>
       </div>
     </>
