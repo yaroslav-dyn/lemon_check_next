@@ -106,7 +106,7 @@ const CryptoPassword = () => {
           </div>
 
           <div
-            className={`instruction__block container__limit ${
+            className={`instruction__block container__limit no-x-paddings ${
               mobileDevice ? "w-100" : ""
             } ${styles.instructionContainer}`}
           >
