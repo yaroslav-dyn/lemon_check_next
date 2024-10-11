@@ -6,21 +6,23 @@ import {
   downloadFile,
 } from "@/services/base.services";
 import styles from "@/styles/CryptoPassword.module.css";
-import aes from "crypto-js/aes";
+import aes, { encrypt } from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 import useDeviceType from "@/services/useDeviceType";
 
 const CryptoPassword = () => {
   const areaElement = useRef();
-  const [modelObject, setModelObject] = useState({
+  const defaultFormObject = {
+    alias: "",
     sourceText: "",
     secret: "",
     cryptedText: "",
-    alias: "",
-  });
+  };
+  const [modelObject, setModelObject] = useState(defaultFormObject);
   const [actionState, setActionState] = useState("encrypt"); // encrypt | decrypt
   const [instr, setInstructionStatus] = useState(false);
   const [instrB, setInstructioBStatus] = useState(false);
+  const encryptForm = useRef(null);
   const outTextInput = useRef(null);
   const outTextCrypted = useRef(null);
 
@@ -30,6 +32,16 @@ const CryptoPassword = () => {
     copyToClipboardMethod(
       actionState === "encrypt" ? outTextCrypted : outTextInput
     );
+  };
+
+  const clearForm = () => {
+    setModelObject(defaultFormObject);
+    encryptForm && encryptForm.current.reset();
+  };
+
+  const onChangeOperation = (e) => {
+    setActionState(e.target.value);
+    clearForm();
   };
 
   const onInputField = (e, field) => {
@@ -51,10 +63,19 @@ const CryptoPassword = () => {
       actionState === "decrypt" &&
       (field === "cryptedText" || field === "secret")
     ) {
-      outTextInput &&
-        (outTextInput.current.value = aes
-          .decrypt(mutatedModel.cryptedText, mutatedModel.secret)
-          .toString(CryptoJS.enc.Utf8));
+
+      // if(!mutatedModel.cryptedText || !mutatedModel.secret) {
+      //   return
+      // }
+      const encryptedpasswordObj = aes.decrypt(
+        mutatedModel.cryptedText,
+        mutatedModel.secret
+      );
+      
+        outTextInput &&
+          (outTextInput.current.value = encryptedpasswordObj.toString(
+            CryptoJS.enc.Utf8
+          ));
     }
 
     setModelObject(mutatedModel);
@@ -72,6 +93,8 @@ const CryptoPassword = () => {
 
   const saveToFile = () => {
     const dataToFile = { ...modelObject };
+    delete dataToFile.secret;
+    delete dataToFile.sourceText;
     const iterableData = [dataToFile];
     const fileContent = jsonToCsv(iterableData);
     fileContent &&
@@ -114,7 +137,7 @@ const CryptoPassword = () => {
               triggerInstruction={triggerInstruction}
             />
           </div>
-
+          {/* Type Switcher */}
           <div className={styles.instructionActionControls}>
             <div>
               <input
@@ -123,9 +146,7 @@ const CryptoPassword = () => {
                 id="encryptType"
                 value="encrypt"
                 checked={actionState === "encrypt"}
-                onChange={(e) => {
-                  setActionState(e.target.value);
-                }}
+                onChange={onChangeOperation}
               />
               <label htmlFor="encryptType">Encrypt</label>
             </div>
@@ -136,7 +157,7 @@ const CryptoPassword = () => {
                 id="decryptType"
                 value="decrypt"
                 checked={actionState === "decrypt"}
-                onChange={(e) => setActionState(e.target.value)}
+                onChange={onChangeOperation}
               />
               <label htmlFor="decryptType">Decrypt</label>
             </div>
@@ -148,7 +169,8 @@ const CryptoPassword = () => {
             }`}
           >
             <div>
-              <section
+              <form
+                ref={encryptForm}
                 className={`generator__content--actions --column no-x-paddings ${
                   mobileDevice ? "gap-x-3" : "gap-x-6"
                 }`}
@@ -169,7 +191,9 @@ const CryptoPassword = () => {
 
                 <textarea
                   name="password-secret"
-                  className="generator__content--area order-2"
+                  className={`generator__content--area ${
+                    actionState === "decrypt" ? "order-0" : "order-2"
+                  }`}
                   id="enSecretPassphrase"
                   type="text"
                   onInput={(e) => onInputField(e, "secret")}
@@ -187,14 +211,16 @@ const CryptoPassword = () => {
                   onInput={(e) => onInputField(e, "cryptedText")}
                   onChange={(e) => onInputField(e, "cryptedText")}
                   placeholder="Crypted password"
-                  readOnly={actionState !== "decrypt"}
+                  readOnly={
+                    actionState !== "decrypt"
+                  }
                 />
-              </section>
+              </form>
               {actionState === "encrypt" && (
                 <div data-left-text>
                   <label
                     onClick={() => triggerInstruction("A")}
-                    className="inline-block mb2"
+                    className="inline-block my2"
                     htmlFor="password-alias"
                   >
                     <span
@@ -204,7 +230,7 @@ const CryptoPassword = () => {
                     >
                       ?
                     </span>
-                    <spa> Alias for your password</spa>
+                    <span> Alias for your password</span>
                   </label>
                   <textarea
                     name="password-alias"
@@ -271,6 +297,10 @@ const InstructionModal = ({ tape }) => (
             3. View Encrypted Output: Once both fields are filled, the encrypted
             version of your password will be automatically generated and shown
             in the &apos;Encrypted Output&apos; field.
+          </li>
+          <li>
+            4. Once encrypted You can save crypted password string and alias for
+            current record into .csv (simple table) file to your device.
           </li>
           <strong className={styles.instrustionListTips}>
             Tip: Make sure to remember your secret phrase and crypted password,
