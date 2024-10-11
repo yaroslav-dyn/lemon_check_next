@@ -12,7 +12,7 @@
   flex-basis: 33.3333333333%;
 }
 .convertorImgPreview img {
-  max-width: 40vw;
+  max-width: 30vw;
   width: 100%;
   height: auto;
   display: inline-block;
@@ -53,7 +53,6 @@
   padding: 1rem 1.4rem;
   width: 100%;
   border: 2px solid lightgreen;
-  min-height: 300px;
 }
 
 .codeArea:focus {

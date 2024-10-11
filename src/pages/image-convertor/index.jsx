@@ -1,16 +1,18 @@
 import React, { useState, useRef } from 'react';
 import styles from '@/styles/ImageConvertor.module.css';
 import { copyToClipboardMethod } from '@/services/base.services';
-import Link from 'next/link';
+import useDeviceType from '@/services/useDeviceType';
+
+
 
 const ImageConvertor = () => {
-
+  
   const [imageBase64, setImageBase64] = useState('');
   const [imageBase64ForCopy, setTypedImageBase64] = useState('');
   const [selectedConvertedType, setSelectedConvertedType] = useState('data');
   const imageInputRef = useRef(null);
   const areaElement = useRef();
-
+  const mobileDevice = useDeviceType();
 
   const onChangeDataType = (type) => {
     setSelectedConvertedType(type.target.value);
@@ -40,10 +42,13 @@ const ImageConvertor = () => {
   return (
     <>
       <main className="main_content converter_content">
-        <div className="main__heading">
+        <div className={`main__heading ${mobileDevice ? "--small-bm" : ""}`}>
           <h1 className="h1_heading" data-centered-text>
-            Convert image to base64
+            IMAGE TO <span className="--color-primary">BASE64</span>
           </h1>
+          <div className="h2_heading mb2 mt1" data-centered-text>
+            Convert any image to BASE64
+          </div>
         </div>
 
         <div data-centered-text>
@@ -111,7 +116,7 @@ const ImageConvertor = () => {
                   name="base_code"
                   id="base_code"
                   cols="30"
-                  rows="10"
+                  rows={mobileDevice ? 8 : 10}
                   readOnly
                   onClick={copyToClipboard}
                 />
@@ -127,6 +132,7 @@ const ImageConvertor = () => {
               </div>
             </>
           )}
+
         </section>
       </main>
     </>

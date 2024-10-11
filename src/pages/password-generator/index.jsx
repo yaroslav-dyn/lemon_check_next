@@ -115,7 +115,7 @@ const PasswordGenerator = () => {
                     />
                   </div>
 
-                  <div className="flex__grid justify-center align-center gap-x-6">
+                  <div className="flex__grid justify-between align-center gap-x-6">
                     <input
                       className="bace_input"
                       id="passwordLength"

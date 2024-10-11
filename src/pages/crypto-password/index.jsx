@@ -9,7 +9,6 @@ import styles from "@/styles/CryptoPassword.module.css";
 import aes from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 import useDeviceType from "@/services/useDeviceType";
-import { isMobile } from "react-device-detect";
 
 const CryptoPassword = () => {
   const areaElement = useRef();
@@ -151,7 +150,7 @@ const CryptoPassword = () => {
             <div>
               <section
                 className={`generator__content--actions --column no-x-paddings ${
-                  isMobile ? "gap-x-3" : "gap-x-6"
+                  mobileDevice ? "gap-x-3" : "gap-x-6"
                 }`}
               >
                 <textarea
@@ -205,7 +204,7 @@ const CryptoPassword = () => {
                     >
                       ?
                     </span>
-                   <spa> Alias for your password</spa>
+                    <spa> Alias for your password</spa>
                   </label>
                   <textarea
                     name="password-alias"
@@ -220,7 +219,7 @@ const CryptoPassword = () => {
 
               <div
                 className={`flex__grig --small-gap ${
-                  isMobile ? "mt-2.4" : "mt-2.4"
+                  mobileDevice ? "mt-2.4" : "mt-2.4"
                 }`}
               >
                 <button
