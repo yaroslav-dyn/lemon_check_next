@@ -15,6 +15,12 @@ export default function Home() {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,700;1,900 display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
       <div className="main_page">
@@ -51,7 +57,7 @@ export default function Home() {
             </p>
             <p className="content-text">
               But that&apos;s not all! You can also encrypt your passwords with
-              an additional layer of security. Use a secret phrase to encode
+              an additional layer of security. Use a secret phrase to encrypt
               your passwords and ensure that only you can decrypt them.
               It&apos;s quick, easy, and safe. Start creating secure passwords
               and{" "}
@@ -71,18 +77,17 @@ export default function Home() {
             </p>
 
             <h3 className="--color-primary">
-              For more information about us please visit{" "}
-              <Link className="--base-color --default-link" href={"/about"}>
-                this{" "}
+              For more information about us please{" "}
+              <Link className="--color-base --default-link" href={"/about"}>
+                visit{" "}
               </Link>
               or If You need help You may find it on{" "}
-              <Link className="--base-color --default-link" href={"/faq"}>
+              <Link className="--color-base --default-link" href={"/faq"}>
                 FAQ{" "}
               </Link>{" "}
               <span>page</span>
             </h3>
           </article>
-
         </main>
       </div>
     </>

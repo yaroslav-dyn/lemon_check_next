@@ -43,7 +43,7 @@ export default function Footer() {
               className="--default-link"
               href={`mailto:lemon-check@proton.me`}
             >
-              EMAIL
+              Email
             </Link>
           </div>
         </div>

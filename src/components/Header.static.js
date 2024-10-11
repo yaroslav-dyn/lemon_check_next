@@ -20,7 +20,7 @@ export const BottomBarlinks = [
     isActive: false,
   },
   {
-    title: "Encode Password",
+    title: "Encrypt Password",
     url: "/crypto-password",
     alias: "EG",
     isActive: false,
@@ -126,7 +126,7 @@ export default function AppHeader() {
           ) : (
             <BottomBar />
           )}
-          <div className="flex__grid --small-gap">
+          <div className={`flex__grid ${!isMobile ? "--small-gap" : "--extra_small-gap"}`}>
             <Link
               href="/about"
               className={`instruction_info_icon  ${

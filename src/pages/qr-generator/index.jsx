@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import QRCodeCanvas from "qrcode.react";
-import { isMobile } from "react-device-detect";
+import useDeviceType from "@/services/useDeviceType";
 
 const QrCodeGenerator = () => {
   const [qrCodeString, setQrCodeString] = useState("");
   const [qrContent, setQrqrContent] = useState(null);
   const [withLabel, setwithLabel] = useState(null);
-
+  const isMobile = useDeviceType();
   //const refCanvas = useRef(null);
 
   const setQrString = (str) => {
@@ -20,12 +20,24 @@ const QrCodeGenerator = () => {
   };
 
   const saveQrToImage = () => {
-    const canvasElement = document.getElementById("refCanvas");
-    const image = canvasElement
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    console.log("image", image);
-    window.location.href = image;
+    // const canvasElement = document.getElementById("refCanvas");
+    // const image = canvasElement
+    //   .toDataURL("image/png")
+    //   .replace("image/png", "image/octet-stream");
+    // console.log("image", image);
+    // window.location.href = image;
+
+    var canvas = document.getElementById("refCanvas");
+    // Convert the canvas to data
+    var image = canvas.toDataURL();
+    // Create a link
+    var aDownloadLink = document.createElement("a");
+    // Add the name of the file to the link
+    aDownloadLink.download = `qr_${Date.now()}.png`;
+    // Attach the data to the link
+    aDownloadLink.href = image;
+    // Get the code to click the download link
+    aDownloadLink.click();
   };
 
   return (
@@ -55,7 +67,7 @@ const QrCodeGenerator = () => {
 
           <div className={`container__limit ${isMobile ? "" : "fit-content"}`}>
             <div
-              className="qrcode__content__actions generator__content--actions"
+              className="qrcode__content__actions generator__content--actions no-x-paddings"
               data-centered-text
             >
               <form
@@ -86,7 +98,7 @@ const QrCodeGenerator = () => {
                   id="refCanvas"
                   marginSize="1"
                   value={qrContent}
-                  size={isMobile ? "80" : "120"}
+                  size={isMobile ? "80" : "220"}
                   bgColor="#f2e302"
                 />
               )}
