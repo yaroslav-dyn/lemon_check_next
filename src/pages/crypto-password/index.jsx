@@ -9,7 +9,7 @@ import styles from "@/styles/CryptoPassword.module.css";
 import aes from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 import useDeviceType from "@/services/useDeviceType";
-import { isMobile, isIOS } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 const CryptoPassword = () => {
   const areaElement = useRef();
@@ -101,45 +101,19 @@ const CryptoPassword = () => {
       </Head>
       <div className="generator__page">
         <main className="main_content generator__content">
-          <div className="main__heading">
-            <h1 className="h1_heading">Protect your password</h1>
-          </div>
+          <div className="main__heading --x-small-bm">
+            <h1 className="h1_heading">
+              Protect your <span className="--color-primary">password</span>
+            </h1>
 
-          <div
-            className={`instruction__block container__limit no-x-paddings ${
-              mobileDevice ? "w-100" : ""
-            } ${styles.instructionContainer}`}
-          >
-            <h2
-              data-left-text
-              className={`${styles.instructionHeading} ${
-                instr ? styles.instrOpen : ""
-              } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
-              onClick={() => triggerInstruction("A")}
-            >
-              <div className={styles.instructionInfoIcon}>?</div>
-              <span>How to Encrypt Your Password ?</span>
-            </h2>
-            {instr && (
-              <div className={styles.instructionModalContainer}>
-                <InstructionModal tape="A" />
-              </div>
-            )}
-            <h2
-              data-left-text
-              className={`${styles.instructionHeading} ${
-                instrB ? styles.instrOpen : ""
-              } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
-              onClick={() => triggerInstruction("B")}
-            >
-              <div className={styles.instructionInfoIcon}>?</div>
-              <span>How to Decrypt Your Password ?</span>
-            </h2>
-            {instrB && (
-              <div className={styles.instructionModalContainer}>
-                <InstructionModal tape="B" />
-              </div>
-            )}
+            {/* Instruction */}
+            <InstructionModule
+              mobileDevice={mobileDevice}
+              actionState={actionState}
+              instr={instr}
+              instrB={instrB}
+              triggerInstruction={triggerInstruction}
+            />
           </div>
 
           <div className={styles.instructionActionControls}>
@@ -169,9 +143,17 @@ const CryptoPassword = () => {
             </div>
           </div>
 
-          <div className={`container__limit ${mobileDevice ? "w-100" : ""}`}>
+          <div
+            className={`container__limit --x-small ${
+              mobileDevice ? "w-100" : ""
+            }`}
+          >
             <div>
-              <section className="generator__content--actions --column no-x-paddings gap-x-6">
+              <section
+                className={`generator__content--actions --column no-x-paddings ${
+                  isMobile ? "gap-x-3" : "gap-x-6"
+                }`}
+              >
                 <textarea
                   name="password-text"
                   ref={outTextInput}
@@ -210,14 +192,30 @@ const CryptoPassword = () => {
                 />
               </section>
               {actionState === "encrypt" && (
-                <textarea
-                  name="password-alias"
-                  className={`generator__content--area order-0`}
-                  id="passworAlias"
-                  onInput={(e) => onInputField(e, "alias")}
-                  onChange={(e) => onInputField(e, "alias")}
-                  placeholder="Alias"
-                />
+                <div data-left-text>
+                  <label
+                    onClick={() => triggerInstruction("A")}
+                    className="inline-block mb2"
+                    htmlFor="password-alias"
+                  >
+                    <span
+                      className={`instruction_info_icon mr2${
+                        instr ? "active" : ""
+                      }`}
+                    >
+                      ?
+                    </span>
+                   <spa> Alias for your password</spa>
+                  </label>
+                  <textarea
+                    name="password-alias"
+                    className={`generator__content--area order-0`}
+                    id="passworAlias"
+                    onInput={(e) => onInputField(e, "alias")}
+                    onChange={(e) => onInputField(e, "alias")}
+                    placeholder="Alias"
+                  />
+                </div>
               )}
 
               <div
@@ -233,13 +231,16 @@ const CryptoPassword = () => {
                   Copy
                 </button>
                 {actionState === "encrypt" && (
-                  <button
-                    id="btn"
-                    className="generator__content--btn"
-                    onClick={() => saveToFile()}
-                  >
-                    Save
-                  </button>
+                  <>
+                    <hr className="--base-divider --bg-primary mb3" />
+                    <button
+                      id="btn"
+                      className="generator__content--btn"
+                      onClick={() => saveToFile()}
+                    >
+                      Save
+                    </button>
+                  </>
                 )}
               </div>
             </div>
@@ -250,6 +251,9 @@ const CryptoPassword = () => {
   );
 };
 
+/**
+ * Support components
+ */
 const InstructionModal = ({ tape }) => (
   <div className={styles.instructionWindow} data-left-text>
     <ul className={styles.instrustionList}>
@@ -277,19 +281,16 @@ const InstructionModal = ({ tape }) => (
       ) : (
         <>
           <li>
-            1.
-            Enter Encrypted Data: In the "Encrypted Output" field, input the
+            1. Enter Encrypted Data: In the "Encrypted Output" field, input the
             encrypted password you wish to decrypt.
           </li>
           <li>
-            2.
-            Provide the Secret Phrase: Enter the same secret phrase you used
+            2. Provide the Secret Phrase: Enter the same secret phrase you used
             during the encryption process into the "Secret Phrase" field.
           </li>
           <li>
-            3.
-            View Decrypted Password: Once both fields are filled, the original
-            password will be automatically decrypted and displayed.
+            3. View Decrypted Password: Once both fields are filled, the
+            original password will be automatically decrypted and displayed.
           </li>
           <strong className={styles.instrustionListTips}>
             Note: The secret phrase must match exactly. Otherwise, the password
@@ -298,6 +299,67 @@ const InstructionModal = ({ tape }) => (
         </>
       )}
     </ul>
+  </div>
+);
+
+const InstructionModule = ({
+  mobileDevice,
+  actionState,
+  instr,
+  instrB,
+  triggerInstruction,
+  className = "",
+}) => (
+  <div
+    className={`${className} instruction__block container__limit --x-small no-x-paddings ${
+      mobileDevice ? "w-100" : ""
+    }`}
+  >
+    {actionState === "encrypt" ? (
+      <div>
+        <h2
+          data-left-text
+          className={`${
+            styles.instructionHeading
+          } flex__grid align-center justify-center ${
+            instr ? styles.instrOpen : ""
+          } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
+          onClick={() => triggerInstruction("A")}
+        >
+          <div className={`instruction_info_icon ${instr ? "active" : ""}`}>
+            ?
+          </div>
+          <span>How to Encrypt Your Password?</span>
+        </h2>
+        {instr && (
+          <div className={styles.instructionModalContainer}>
+            <InstructionModal tape="A" />
+          </div>
+        )}
+      </div>
+    ) : (
+      <div>
+        <h2
+          data-left-text
+          className={`${
+            styles.instructionHeading
+          } flex__grid align-center justify-center ${
+            instrB ? styles.instrOpen : ""
+          } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
+          onClick={() => triggerInstruction("B")}
+        >
+          <div className={`instruction_info_icon ${instrB ? "active" : ""}`}>
+            ?
+          </div>
+          <span>How to Decrypt Your Password?</span>
+        </h2>
+        {instrB && (
+          <div className={styles.instructionModalContainer}>
+            <InstructionModal tape="B" />
+          </div>
+        )}
+      </div>
+    )}
   </div>
 );
 

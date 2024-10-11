@@ -1,11 +1,12 @@
 
 import React, { useState, useRef } from 'react';
 import { copyToClipboardMethod } from '@/services/base.services'
-import { isMobile } from "react-device-detect";
+import useDeviceType from "@/services/useDeviceType";
 
 const AliasGenerator = () => {
   const areaElement = useRef();
   const [allias, setAllias] = useState('');
+    const isMobile = useDeviceType();
 
   const copyToClipBoard = () => {
     copyToClipboardMethod(areaElement);

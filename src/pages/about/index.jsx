@@ -25,7 +25,14 @@ const AboutPage = () => {
 
           <article className="main_content">
             <section className="content-text">
-              <h2>Strong Password </h2>
+              <h2>
+                <Link
+                  className="text-decoration-none"
+                  href="/password-generator"
+                >
+                  Strong Password{" "}
+                </Link>
+              </h2>
               <p>
                 Are you tired of using the same password for all your online
                 accounts? If so, then it&apos;s time to start using a secure
@@ -43,27 +50,30 @@ const AboutPage = () => {
               </p>
             </section>
 
-             <section className="content-text">
-              <h2>Password Encryption </h2>
-            <p>
-              In today's digital world, keeping your accounts safe requires more
-              than just a strong password. That’s why we offer Password
-              Encryption, a feature designed to provide an extra layer of
-              security for your sensitive information.
-            </p>
+            <section className="content-text">
+              <h2>
+                <Link className="text-decoration-none" href="/crypto-password">
+                  Password Encryption
+                </Link>
+              </h2>
+              <p>
+                In today's digital world, keeping your accounts safe requires
+                more than just a strong password. That’s why we offer Password
+                Encryption, a feature designed to provide an extra layer of
+                security for your sensitive information.
+              </p>
 
-            <p>
-              Take Your Password Security to the Next Level with Encryption Why
-              settle for just a strong password when you can add an extra layer of
-              security? With our Password Encryption feature, you can protect your
-              sensitive information like never before. Simply use a secret phrase
-              to encode your passwords, ensuring that only you can unlock them.
-              Keep your accounts safe from prying eyes—start encrypting your
-              passwords today for maximum security and peace of mind!
-          </p>
-           </section>
-
-
+              <p>
+                Take Your Password Security to the Next Level with Encryption
+                Why settle for just a strong password when you can add an extra
+                layer of security? With our Password Encryption feature, you can
+                protect your sensitive information like never before. Simply use
+                a secret phrase to encrypt your passwords, ensuring that only
+                you can unlock them. Keep your accounts safe from prying
+                eyes—start encrypting your passwords today for maximum security
+                and peace of mind!
+              </p>
+            </section>
 
             {/* <section className="content-text">
               <h2>Password Encryption </h2>
