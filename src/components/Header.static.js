@@ -82,16 +82,12 @@ export default function AppHeader() {
   }, [pathname]);
 
   useEffect(() => {
-    console.log("rrt", scrollPosition);
-    
-    setTimeout(() => {
-      if (!topHeaderElement || !topHeaderElement.current) return;
-      if (isMobile && scrollPosition > 70) {
-        topHeaderElement.current.classList.add("scrolled");
-      } else {
-        topHeaderElement.current.classList.remove("scrolled");
-      }
-    }, 100);
+    if (!topHeaderElement || !topHeaderElement.current) return;
+    if (isMobile && scrollPosition > 70) {
+      topHeaderElement.current.classList.add("scrolled");
+    } else {
+      topHeaderElement.current.classList.remove("scrolled");
+    }
   }, [scrollPosition]);
 
   return (

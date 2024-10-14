@@ -74,7 +74,7 @@ export default function Home() {
               to stay secure and efficient in one place!
             </p>
 
-            <h3 className="--color-primary">
+            <h3 className="--color-primary m0 pt2 pb3">
               For more information about us please{" "}
               <Link className="--color-base --default-link" href={"/about"}>
                 visit{" "}

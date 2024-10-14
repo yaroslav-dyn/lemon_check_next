@@ -60,7 +60,8 @@ const QrCodeGenerator = () => {
         <main className="main_content qrcode__content">
           <div className="main__heading">
             <h1 className="h1_heading" data-centered-text>
-              Generate QR code
+              Generate <span className="--color-primary"> QR </span>
+              code
             </h1>
           </div>
 
