@@ -22,6 +22,7 @@ const CryptoPassword = () => {
   const [actionState, setActionState] = useState("encrypt"); // encrypt | decrypt
   const [instr, setInstructionStatus] = useState(false);
   const [instrB, setInstructioBStatus] = useState(false);
+  const [instrC, setInstructioCStatus] = useState(false);
   const encryptForm = useRef(null);
   const outTextInput = useRef(null);
   const outTextCrypted = useRef(null);
@@ -63,7 +64,6 @@ const CryptoPassword = () => {
       actionState === "decrypt" &&
       (field === "cryptedText" || field === "secret")
     ) {
-
       // if(!mutatedModel.cryptedText || !mutatedModel.secret) {
       //   return
       // }
@@ -71,11 +71,11 @@ const CryptoPassword = () => {
         mutatedModel.cryptedText,
         mutatedModel.secret
       );
-      
-        outTextInput &&
-          (outTextInput.current.value = encryptedpasswordObj.toString(
-            CryptoJS.enc.Utf8
-          ));
+
+      outTextInput &&
+        (outTextInput.current.value = encryptedpasswordObj.toString(
+          CryptoJS.enc.Utf8
+        ));
     }
 
     setModelObject(mutatedModel);
@@ -183,7 +183,6 @@ const CryptoPassword = () => {
                   onInput={(e) => onInputField(e, "sourceText")}
                   onChange={(e) => onInputField(e, "sourceText")}
                   placeholder="You password"
-                  readOnly={actionState !== "encrypt"}
                 />
 
                 <textarea
@@ -208,24 +207,41 @@ const CryptoPassword = () => {
                   onInput={(e) => onInputField(e, "cryptedText")}
                   onChange={(e) => onInputField(e, "cryptedText")}
                   placeholder="Crypted password"
-                  readOnly={actionState !== "decrypt"}
                 />
               </form>
               {actionState === "encrypt" && (
-                <div data-left-text>
-                  <label
-                    onClick={() => triggerInstruction("A")}
-                    className="inline-block my2"
-                    htmlFor="password-alias"
-                  >
-                    <span
-                      className={`instruction_info_icon mr2${
-                        instr ? "active" : ""
-                      }`}
+                <div className="left-align">
+                  <label className="inline-block" htmlFor="password-alias">
+                    <h2
+                      className={`${
+                        styles.instructionHeading
+                      } flex__grid align-center justify-left ${
+                        instrC ? styles.instrOpen : ""
+                      } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
+                      onClick={() => {
+                        let tolltipState = instrC;
+                        setInstructioCStatus((tolltipState = !tolltipState));
+                      }}
                     >
-                      ?
-                    </span>
-                    <span> Alias for your password</span>
+                      <div
+                        className={`instruction_info_icon ${
+                          instrC ? "active" : ""
+                        }`}
+                      >
+                        ?
+                      </div>
+                      <span> Alias for your password</span>
+                    </h2>
+                    {instrC && (
+                      <div className="mb2">
+                        <InstructionTooltip
+                          children={`
+                            Once encrypted You can save crypted password string and alias for
+                            current record into .csv (simple table) file to your device.
+                        `}
+                        />
+                      </div>
+                    )}
                   </label>
                   <textarea
                     name="password-alias"
@@ -277,7 +293,7 @@ const CryptoPassword = () => {
 const InstructionModal = ({ tape }) => (
   <div className={styles.instructionWindow} data-left-text>
     <ul className={styles.instrustionList}>
-      {tape === "A" ? (
+      {tape === "A" && (
         <>
           <li>
             1. Enter Your Password: Fill in the &apos;Password&apos; field with
@@ -293,16 +309,13 @@ const InstructionModal = ({ tape }) => (
             version of your password will be automatically generated and shown
             in the &apos;Encrypted Output&apos; field.
           </li>
-          <li>
-            4. Once encrypted You can save crypted password string and alias for
-            current record into .csv (simple table) file to your device.
-          </li>
           <strong className={styles.instrustionListTips}>
             Tip: Make sure to remember your secret phrase and crypted password,
             as you'll need it to decrypt your password later!
           </strong>
         </>
-      ) : (
+      )}
+      {tape === "B" && (
         <>
           <li>
             1. Enter Encrypted Data: In the "Encrypted Output" field, input the
@@ -384,6 +397,14 @@ const InstructionModule = ({
         )}
       </div>
     )}
+  </div>
+);
+
+const InstructionTooltip = ({ children }) => (
+  <div className={styles.instructionWindow} data-left-text>
+    <ul className={styles.instrustionList}>
+      <li>{children}</li>
+    </ul>
   </div>
 );
 

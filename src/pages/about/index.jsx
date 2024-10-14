@@ -12,7 +12,7 @@ const AboutPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="main_page">
+      <div className="main_content">
         <main className="container__limit">
           <div className="main__heading">
             <h1 className="h1_heading --color-primary" data-centered-text>
@@ -20,7 +20,7 @@ const AboutPage = () => {
             </h1>
           </div>
 
-          <article className="main_content">
+          <article>
             <section className="content-text">
               <h2>
                 <Link

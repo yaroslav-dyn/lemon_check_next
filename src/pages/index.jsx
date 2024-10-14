@@ -20,7 +20,7 @@ export default function Home() {
         />
       </Head>
 
-      <div className="main_page">
+      <div className="main_page main__content">
         <main className="container__limit">
           <div className="main__heading">
             <h1 className="h1_heading" data-centered-text>
@@ -42,7 +42,7 @@ export default function Home() {
               efficient in one place!
             </p>
           </div>
-          <article className="main_content">
+          <article className="content__gaps">
             <p className="content-text">
               Are you tired of using the same password for all your online
               accounts? If so, it&apos;s time to start using a secure password

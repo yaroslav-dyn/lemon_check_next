@@ -82,7 +82,10 @@ ul {
 
 .main_page {
   background-color: var(--default-page-bg);
+  min-height: 100vh;
+  padding-top: 80px;
 }
+
 
 a {
   color: var(--link-color);
@@ -321,7 +324,8 @@ a {
 
 /* SECTION Header */
 .top__header {
-  position: sticky;
+  position: fixed;
+  width: 100%;
   z-index: 50;
   top: 0;
   min-height: 80px;
@@ -405,7 +409,8 @@ a {
 
 .main_content {
   padding: 0 1.875rem;
-  min-height: calc(100vh - var(--header-height));
+  padding-top: var(--header-height);
+  min-height: 100vh;
   padding-bottom: 124px;
 }
 
@@ -415,7 +420,7 @@ a {
 
 @media (max-width: 767px) {
   .main_content {
-    padding: 0 1.285rem 7.5rem 0.875rem;
+    padding: var(--header-height) 1.285rem 7.5rem 0.875rem;
   }
 
   .content__gaps {

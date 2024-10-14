@@ -42,8 +42,8 @@ const AboutPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="main_page">
-        <main className="main_content">
+      <div className="main_content">
+        <main >
           <div className="main__heading">
             <h1 className="h1_heading --color-base" data-centered-text>
               Frequency Asked Questions

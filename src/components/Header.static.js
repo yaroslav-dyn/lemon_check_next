@@ -82,12 +82,16 @@ export default function AppHeader() {
   }, [pathname]);
 
   useEffect(() => {
-    if (!topHeaderElement || !topHeaderElement.current) return;
-    if (isMobile && scrollPosition > 74) {
-      topHeaderElement.current.classList.add("scrolled");
-    } else {
-      topHeaderElement.current.classList.remove("scrolled");
-    }
+    console.log("rrt", scrollPosition);
+    
+    setTimeout(() => {
+      if (!topHeaderElement || !topHeaderElement.current) return;
+      if (isMobile && scrollPosition > 70) {
+        topHeaderElement.current.classList.add("scrolled");
+      } else {
+        topHeaderElement.current.classList.remove("scrolled");
+      }
+    }, 100);
   }, [scrollPosition]);
 
   return (
@@ -126,7 +130,11 @@ export default function AppHeader() {
           ) : (
             <BottomBar />
           )}
-          <div className={`flex__grid ${!isMobile ? "--small-gap" : "--extra_small-gap"}`}>
+          <div
+            className={`flex__grid ${
+              !isMobile ? "--small-gap" : "--extra_small-gap"
+            }`}
+          >
             <Link
               href="/about"
               className={`instruction_info_icon  ${
