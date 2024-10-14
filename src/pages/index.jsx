@@ -10,10 +10,7 @@ export default function Home() {
         <title>LemonCheck</title>
         <meta name="description" content="LemonCheck" />
 
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,8 +23,9 @@ export default function Home() {
       <div className="main_page">
         <main className="container__limit">
           <div className="main__heading">
-            <h1 className="h1_heading --color-primary" data-centered-text>
-              Security & Tools
+            <h1 className="h1_heading" data-centered-text>
+              <span className="--color-primary">Security</span> &{" "}
+              <span className="--color-primary">Tools</span>
             </h1>
           </div>
           <div className="content__gaps">

@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
     <footer className="footer flex__grid --column justify-between">
-      <div className="footer__nav__panel flex__grid justify-between">
+      <div className={`footer__nav__panel flex__grid justify-between ${isMobile ? 'mb4' : 'mb4'}`}>
         <div className="base-1/2">
           <h5 className="footer__nav__heading">SERVICES</h5>
           <div className={`footer__nav ${isMobile ? "--one-column" : ""}`}>

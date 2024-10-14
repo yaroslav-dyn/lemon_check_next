@@ -88,7 +88,7 @@ const PasswordGenerator = () => {
           <div
             className={`container__limit ${mobileDevice ? "" : "fit-content"}`}
           >
-            <section className="generator__content--actions no-x-paddings mb2">
+            <section className="generator__content--actions no-x-paddings mb1">
               <textarea
                 defaultValue={password}
                 name="password-content"
@@ -138,7 +138,7 @@ const PasswordGenerator = () => {
                       onChange={setSpecialCharactersBox}
                     />
                     <label htmlFor="specialCharacters">
-                      Use special characters:{" "}
+                      Use special characters
                     </label>
                   </div>
                 </form>
@@ -153,7 +153,7 @@ const PasswordGenerator = () => {
                   Generate password
                 </button>
 
-                <hr className="--base-divider --bg-primary mb3" />
+                <hr className="--base-divider --bg-primary mb2" />
 
                 <button
                   id="btn"

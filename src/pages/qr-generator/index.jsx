@@ -16,17 +16,18 @@ const QrCodeGenerator = () => {
 
   const generateQrCode = (e) => {
     e.preventDefault();
-    setQrqrContent(qrCodeString);
+    try {
+      if (qrCodeString && qrCodeString.length < 200) {
+        setQrqrContent(qrCodeString);
+      } else {
+        alert('Max length of text is 199 symbols')
+      }
+    } catch(error) {
+      console.log('error qr convert', error)
+    }
   };
 
   const saveQrToImage = () => {
-    // const canvasElement = document.getElementById("refCanvas");
-    // const image = canvasElement
-    //   .toDataURL("image/png")
-    //   .replace("image/png", "image/octet-stream");
-    // console.log("image", image);
-    // window.location.href = image;
-
     var canvas = document.getElementById("refCanvas");
     // Convert the canvas to data
     var image = canvas.toDataURL();
@@ -96,7 +97,7 @@ const QrCodeGenerator = () => {
               {qrContent && (
                 <QRCodeCanvas
                   id="refCanvas"
-                  marginSize="1"
+                  marginSize={1}
                   value={qrContent}
                   size={isMobile ? "80" : "220"}
                   bgColor="#f2e302"

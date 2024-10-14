@@ -22,7 +22,7 @@ export const BottomBarlinks = [
   {
     title: "Encrypt Password",
     url: "/crypto-password",
-    alias: "EG",
+    alias: "EP",
     isActive: false,
   },
   {

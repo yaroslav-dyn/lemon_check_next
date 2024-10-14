@@ -115,10 +115,7 @@ const CryptoPassword = () => {
           content="Encrypt your password, Crypted password"
         />
         <meta name="title" content="Encrypt your password" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="generator__page">
@@ -211,9 +208,7 @@ const CryptoPassword = () => {
                   onInput={(e) => onInputField(e, "cryptedText")}
                   onChange={(e) => onInputField(e, "cryptedText")}
                   placeholder="Crypted password"
-                  readOnly={
-                    actionState !== "decrypt"
-                  }
+                  readOnly={actionState !== "decrypt"}
                 />
               </form>
               {actionState === "encrypt" && (
@@ -257,7 +252,7 @@ const CryptoPassword = () => {
                 </button>
                 {actionState === "encrypt" && (
                   <>
-                    <hr className="--base-divider --bg-primary mb3" />
+                    <hr className="--base-divider --bg-primary mb2" />
                     <button
                       id="btn"
                       className="generator__content--btn"

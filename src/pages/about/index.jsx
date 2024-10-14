@@ -8,10 +8,7 @@ const AboutPage = () => {
       <Head>
         <title>LemonCheck</title>
         <meta name="description" content="About LemonCheck" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

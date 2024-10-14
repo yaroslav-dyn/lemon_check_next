@@ -1,11 +1,15 @@
-
 export const copyToClipboardMethod = (element) => {
-  const passwordContent = element.current;
-  passwordContent.select();
-  passwordContent.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(passwordContent.value);
-}
-
+      console.log("vv", element.current.value);
+  const isSupported = navigator.clipboard && navigator.clipboard.writeText;
+  if (isSupported) {
+    const passwordContent = element.current;
+    passwordContent.select();
+    passwordContent.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(passwordContent.value);
+  } else {
+    document.execCommand("copy", false, element.current.value);
+  }
+};
 export function jsonToCsv(jsonData) {
   let csv = "";
 
