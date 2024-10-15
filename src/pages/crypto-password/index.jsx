@@ -9,6 +9,21 @@ import styles from "@/styles/CryptoPassword.module.css";
 import aes, { encrypt } from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 import useDeviceType from "@/services/useDeviceType";
+import UISwitcher from "@/components/ui.switcher";
+
+const operationOptions = [
+  {
+    label: "Encrypt",
+    value: "encrypt",
+    selectedBackgroundColor: "#E94E3D",
+  },
+  {
+    label: "Decrypt",
+    value: "decrypt",
+    selectedBackgroundColor: "#E94E3D",
+  },
+];
+
 
 const CryptoPassword = () => {
   const areaElement = useRef();
@@ -41,7 +56,7 @@ const CryptoPassword = () => {
   };
 
   const onChangeOperation = (e) => {
-    setActionState(e.target.value);
+    setActionState(e);
     clearForm();
   };
 
@@ -136,7 +151,7 @@ const CryptoPassword = () => {
           </div>
           {/* Type Switcher */}
           <div className={styles.instructionActionControls}>
-            <div>
+            {/* <div>
               <input
                 type="radio"
                 name="action-type"
@@ -157,7 +172,13 @@ const CryptoPassword = () => {
                 onChange={onChangeOperation}
               />
               <label htmlFor="decryptType">Decrypt</label>
-            </div>
+            </div> */}
+
+            <UISwitcher
+              options={operationOptions}
+              onSwitch={onChangeOperation}
+              elementWidth={160}
+            />
           </div>
 
           <div
