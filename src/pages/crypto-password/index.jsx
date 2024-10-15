@@ -234,12 +234,13 @@ const CryptoPassword = () => {
                     </h2>
                     {instrC && (
                       <div className="mb2">
-                        <InstructionTooltip
-                          children={`
-                            Once encrypted You can save crypted password string and alias for
-                            current record into .csv (simple table) file to your device.
-                        `}
-                        />
+                        <InstructionTooltip>
+                          <>
+                            Once encrypted You can save crypted password string
+                            and alias for current record into .csv (simple
+                            table) file to your device.
+                          </>
+                        </InstructionTooltip>
                       </div>
                     )}
                   </label>
