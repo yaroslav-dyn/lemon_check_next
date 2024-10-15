@@ -120,15 +120,6 @@ a {
   }
 }
 
-/*NOTE: Displays */
-.g-inline-block {
-  display: inline-block;
-}
-
-.g-block {
-  display: block;
-}
-
 .generator__page {
   background: var(--default-page-bg);
   background-attachment: fixed;
@@ -149,8 +140,12 @@ a {
 
 .content-text {
   font-size: 1.125rem;
-  line-height: 1.4;
+  line-height: 1.6;
   color: var(--theme-primary-text);
+}
+
+.mobile__view {
+  line-height: 1.4;
 }
 
 /* .about__page {
@@ -205,7 +200,7 @@ a {
   color: #000;
   padding-top: 30px;
   padding-bottom: 60px;
-  font-size: 3.8rem;
+  font-size: 2.375rem;
 }
 
 .main__heading.--small-bm {
@@ -216,11 +211,22 @@ a {
   padding-bottom: 15px;
 }
 
+.slogan__text {
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 300;
+}
+
 @media (max-width: 767px) {
   .main__heading {
     font-size: 1.8rem;
   }
+  .slogan__text {
+    font-size:  0.875rem;
+  }
 }
+
+
 
 .brand__logo {
   color: #f2e302;

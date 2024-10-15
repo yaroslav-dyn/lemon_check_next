@@ -104,11 +104,11 @@ const CryptoPassword = () => {
   return (
     <>
       <Head>
-        <title>LemonCheck</title>
-        <meta name="author" content="LemonCheck"></meta>
+        <title>LockBox</title>
+        <meta name="author" content="LockBox"></meta>
         <meta
           name="description"
-          content="LemonCheck, Encrypt your password, Crypted password"
+          content="LockBox, Encrypt your password, Crypted password"
         />
         <meta
           name="keywords"
@@ -206,7 +206,7 @@ const CryptoPassword = () => {
                   type="text"
                   onInput={(e) => onInputField(e, "cryptedText")}
                   onChange={(e) => onInputField(e, "cryptedText")}
-                  placeholder="Crypted password"
+                  placeholder="Enrypted password"
                 />
               </form>
               {actionState === "encrypt" && (

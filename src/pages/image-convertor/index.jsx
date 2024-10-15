@@ -58,6 +58,7 @@ const ImageConvertor = () => {
             type="file"
             ref={imageInputRef}
             onChange={handleImageChange}
+            assept={`image/*`}
           />
           <label
             className={styles.uploadButton + " action__btn"}
@@ -132,7 +133,6 @@ const ImageConvertor = () => {
               </div>
             </>
           )}
-
         </section>
       </main>
     </>

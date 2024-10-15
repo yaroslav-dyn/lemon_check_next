@@ -36,14 +36,14 @@ const AboutPage = () => {
   return (
     <>
       <Head>
-        <title>LemonCheck</title>
-        <meta name="description" content="About LemonCheck" />
+        <title>LockBox</title>
+        <meta name="description" content="About LockBox" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className="main_content">
-        <main >
+        <main>
           <div className="main__heading">
             <h1 className="h1_heading --color-base" data-centered-text>
               Frequency Asked Questions

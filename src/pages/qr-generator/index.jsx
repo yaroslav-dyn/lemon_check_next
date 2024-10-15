@@ -44,11 +44,11 @@ const QrCodeGenerator = () => {
   return (
     <>
       <Head>
-        <title>LemonCheck</title>
-        <meta name="author" content="LemonCheck LTD"></meta>
+        <title>LockBox</title>
+        <meta name="author" content="LockBox LTD"></meta>
         <meta
           name="description"
-          content="LemonCheck, Strong password generator"
+          content="LockBox, Strong password generator"
         />
         <meta name="keywords" content="Generate QR code" />
         <meta name="title" content="Generate QR code, QRcfrom input" />

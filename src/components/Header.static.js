@@ -99,7 +99,7 @@ export default function AppHeader() {
               <Image
                 className="base_img"
                 src={newLogo}
-                alt="lemonCheck"
+                alt="LockBox"
                 width="64"
                 height="64"
               />

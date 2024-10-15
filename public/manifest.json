@@ -1,6 +1,6 @@
 {
-  "name": "Security & Tools LemonCheck",
-  "short_name": "LemonCheck",
+  "name": "Security & Tools LockBox",
+  "short_name": "LockBox",
   "description": "A tool for generating passwords, encrypting them, converting images to Base64, and generating QR codes.",
   "start_url": "/",
   "display": "standalone",

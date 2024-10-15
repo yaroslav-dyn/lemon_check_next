@@ -26,7 +26,7 @@ export default function BottomBar() {
               >
                 <Link href={navLink.url} className="nav__item-link">
                   <div className="nav__item-icon">
-                    <span className="g-inline-block">{navLink.alias}</span>
+                    <span className="inline-block">{navLink.alias}</span>
                   </div>
                   <span className="nav__item-text">{navLink.title}</span>
                 </Link>

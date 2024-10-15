@@ -63,11 +63,11 @@ const PasswordGenerator = () => {
   return (
     <>
       <Head>
-        <title>LemonCheck</title>
-        <meta name="author" content="LemonCheck LTD"></meta>
+        <title>LockBox</title>
+        <meta name="author" content="LockBox LTD"></meta>
         <meta
           name="description"
-          content="LemonCheck, Strong password generator"
+          content="LockBox, Strong password generator"
         />
         <meta
           name="keywords"
@@ -75,7 +75,6 @@ const PasswordGenerator = () => {
         />
         <meta name="title" content="Strong password generator" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className="generator__page">

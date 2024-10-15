@@ -1,46 +1,49 @@
+import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import React from "react";
+import useDeviceType from "@/services/useDeviceType";
 
 export default function Home() {
-  //NOTE: HTML
+  
+const isMobile = useDeviceType();
+
   return (
     <>
       <Head>
-        <title>LemonCheck</title>
-        <meta name="description" content="LemonCheck" />
+        <title>LockBox</title>
+        <meta name="description" content="LockBox" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,700;1,900 display=swap"
-          rel="stylesheet"
-        />
       </Head>
 
       <div className="main_page main__content">
         <main className="container__limit">
-          <div className="main__heading">
-            <h1 className="h1_heading" data-centered-text>
-              <span className="--color-primary">Security</span> &{" "}
-              <span className="--color-primary">Tools</span>
+          <div className="main__heading --small-bm">
+            <h1 className="h1_heading pb1 lato-bold" data-centered-text>
+              <span className="--color-primary">L</span>
+              <span className="--color-base">ock</span>
+              <span className="--color-primary">B</span>
+              <span className="--color-base">ox</span>
             </h1>
+            <div className="center slogan__text">
+              Your All-in-One Tool {isMobile && <br />}
+              for Secure Passwords, Encryption, <br />
+              and Digital Utilities
+            </div>
           </div>
           <div className="content__gaps">
-            <p className="content-text">
-              Simplify Your Digital{" "}
-              <Link className="--default-link" href={"/"}>
-                LemonCheck
-              </Link>{" "}
-              Security & Tools with Strengthen your online presence with our
-              all-in-one service! From generating strong, secure passwords to
-              encrypting them with ease, we’ve got you covered. Need more?
-              Convert images to Base64 for seamless data handling or create
-              custom QR codes in a flash. Everything you need to stay secure and
-              efficient in one place!
-            </p>
+            <div className="content-text">
+              <h3 className="m0 --color-primary">Simplify Your Digital!</h3>
+              <p>
+                Security & Tools with Strengthen your online presence with our
+                all-in-one service! From generating strong, secure passwords to
+                encrypting them with ease, we’ve got you covered. Need more?
+                Convert images to Base64 for seamless data handling or create
+                custom QR codes in a flash. Everything you need to stay secure
+                and efficient in one place!
+              </p>
+            </div>
           </div>
           <article className="content__gaps">
             <p className="content-text">
@@ -74,17 +77,19 @@ export default function Home() {
               to stay secure and efficient in one place!
             </p>
 
-            <h3 className="--color-primary m0 pt2 pb3">
-              For more information about us please{" "}
+            <p className="content-text --color-primary mb0 pt2 pb4">
+              Want to learn more about what we do? Visit our{" "}
               <Link className="--color-base --default-link" href={"/about"}>
-                visit{" "}
-              </Link>
-              or If You need help You may find it on{" "}
+                About
+              </Link>{" "}
+              page!
+              <br />
+              Have questions? Check out our{" "}
               <Link className="--color-base --default-link" href={"/faq"}>
                 FAQ{" "}
               </Link>{" "}
-              <span>page</span>
-            </h3>
+              for answers and tips!
+            </p>
           </article>
         </main>
       </div>

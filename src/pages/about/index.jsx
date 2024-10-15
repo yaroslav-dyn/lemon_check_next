@@ -6,17 +6,18 @@ const AboutPage = () => {
   return (
     <>
       <Head>
-        <title>LemonCheck</title>
-        <meta name="description" content="About LemonCheck" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>LockBox</title>
+        <meta name="description" content="About LockBox" />
       </Head>
 
       <div className="main_content">
         <main className="container__limit">
-          <div className="main__heading">
-            <h1 className="h1_heading --color-primary" data-centered-text>
-              LemonCheck
+          <div className="main__heading --small-bm">
+            <h1 className="h1_heading pb1 lato-bold" data-centered-text>
+              <span className="--color-primary">L</span>
+              <span className="--color-base">ock</span>
+              <span className="--color-primary">B</span>
+              <span className="--color-base">ox</span>
             </h1>
           </div>
 
