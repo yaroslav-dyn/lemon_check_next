@@ -8,6 +8,7 @@ const AboutPage = () => {
       <Head>
         <title>LockBox</title>
         <meta name="description" content="About LockBox" />
+        <meta name="title" content="About LockBox" />
       </Head>
 
       <div className="main_content">

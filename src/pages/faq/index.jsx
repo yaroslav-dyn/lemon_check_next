@@ -37,9 +37,8 @@ const AboutPage = () => {
     <>
       <Head>
         <title>LockBox</title>
-        <meta name="description" content="About LockBox" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="LockBox Frequently asked questions" />
+        <meta name="title" content="LockBox FAQ" />
       </Head>
 
       <div className="main_content">

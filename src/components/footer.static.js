@@ -7,7 +7,11 @@ export default function Footer() {
 
   return (
     <footer className="footer flex__grid --column justify-between">
-      <div className={`footer__nav__panel flex__grid justify-between ${isMobile ? 'mb4' : 'mb4'}`}>
+      <div
+        className={`footer__nav__panel flex__grid justify-between ${
+          isMobile ? "mb4" : "mb4"
+        }`}
+      >
         <div className="base-1/2">
           <h5 className="footer__nav__heading">SERVICES</h5>
           <div className={`footer__nav ${isMobile ? "--one-column" : ""}`}>
@@ -22,7 +26,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="base-1/2">
-          <h5 className="footer__nav__heading">HELP</h5>
+          <h5 className="footer__nav__heading">DOCUMENTS & LEGAL</h5>
           <div className="footer__nav --one-column">
             <div>
               <Link className="--default-link" href="/about">
@@ -34,10 +38,15 @@ export default function Footer() {
                 FAQ
               </Link>
             </div>
+            <div>
+              <Link className="--default-link" href="/faq">
+                Privacy Policy
+              </Link>
+            </div>
           </div>
         </div>
         <div className="base-1/2">
-          <h5 className="footer__nav__heading"> CONTACT ME</h5>
+          <h5 className="footer__nav__heading"> CONTACT ME </h5>
           <div>
             <Link
               className="--default-link"
