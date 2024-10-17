@@ -44,10 +44,18 @@ const AboutPage = () => {
 
       <div className="main_content">
         <main>
-          <div className="main__heading">
-            <h1 className="h1_heading --color-base" data-centered-text>
-              Frequency Asked Questions
+          <div className={`main__heading ${isMobile ? "--x-small-bm" : ""}`}>
+            <h1 className="h1_heading pb1 lato-bold" data-centered-text>
+              <span className="--color-primary">L</span>
+              <span className="--color-base">ock</span>
+              <span className="--color-primary">B</span>
+              <span className="--color-base">ox</span>{" "}
+              <span className="--color-primary">F</span>
+              <span>AQ</span>
             </h1>
+            {/* <h1 className="h1_heading --color-base" data-centered-text>
+              Frequency Asked Questions
+            </h1> */}
           </div>
 
           <div className="md-flex">
