@@ -2,10 +2,10 @@ import AppHeader from '@/components/Header.static';
 import Footer from '@/components/footer.static';
 import useDeviceType from "@/services/useDeviceType";
 import '@/styles/normalize.css';
-import "basscss/css/basscss.min.css";
 import '@/styles/globals.css';
 import '@/styles/elements.css';
 import "@/styles/bottom_bar.css";
+import "basscss/css/basscss.min.css";
 
 export default function App({ Component, pageProps }) {
 
