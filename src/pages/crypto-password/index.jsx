@@ -378,7 +378,7 @@ const InstructionModule = ({
           data-left-text
           className={`${
             styles.instructionHeading
-          } flex__grid align-center justify-center ${
+          } flex__grid align-center ${
             instrB ? styles.instrOpen : ""
           } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
           onClick={() => triggerInstruction("B")}
