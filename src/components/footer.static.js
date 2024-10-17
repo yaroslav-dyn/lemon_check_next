@@ -39,7 +39,7 @@ export default function Footer() {
               </Link>
             </div>
             <div>
-              <Link className="--default-link" href="/faq">
+              <Link className="--default-link" href="/privacy">
                 Privacy Policy
               </Link>
             </div>
