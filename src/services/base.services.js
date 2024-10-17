@@ -1,5 +1,4 @@
 export const copyToClipboardMethod = (element) => {
-      console.log("vv", element.current.value);
   const isSupported = navigator.clipboard && navigator.clipboard.writeText;
   if (isSupported) {
     const passwordContent = element.current;

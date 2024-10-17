@@ -1,11 +1,11 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import { copyToClipboardMethod } from '@/services/base.services'
 import useDeviceType from "@/services/useDeviceType";
 
 const AliasGenerator = () => {
   const areaElement = useRef();
-  const [allias, setAllias] = useState('');
+  const [allias, setAlias] = useState('');
     const isMobile = useDeviceType();
 
   const copyToClipBoard = () => {
@@ -14,13 +14,28 @@ const AliasGenerator = () => {
 
   const generateAllias = () => {
     // Create a random string of letters, numbers, and symbols.
-    const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-={}[]:'\",.<>/?";
-    let nickname = '';
-    for (var i = 0; i < 10; i++) {
-      nickname += letters.charAt(Math.floor(Math.random() * letters.length));
+    const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const digitals = "0123456789";
+    const specialCharacters = "!@#$%^&*()_+-={}[]:'\",.<>/?";
+    const fullCharacters = `${letters}${digitals}${specialCharacters}`;
+    let nickname = "";
+
+    // Function to get a random character from a specific set
+    const getRandomCharacter = (fromSet) => {
+      return fromSet.charAt(Math.floor(Math.random() * fromSet.length));
     }
-    setAllias(nickname);
+
+    nickname += getRandomCharacter(letters);
+    for (let i = 1; i < 10; i++) {
+      nickname += getRandomCharacter(fullCharacters);
+    }
+
+    setAlias(nickname); 
   }
+
+  useEffect(() => {
+    generateAllias()
+  }, []);
 
   return (
     <>
@@ -45,10 +60,18 @@ const AliasGenerator = () => {
             <div>
               <button
                 id="btn"
-                className="generator__content--btn"
+                className="generator__content--btn mb2"
                 onClick={generateAllias}
               >
                 Generate alias
+              </button>
+              <hr className="--base-divider --bg-primary mb2" />
+              <button
+                id="btn"
+                className="generator__content--btn --small-margin --secondary-btn"
+                onClick={() => copyToClipBoard()}
+              >
+                Copy
               </button>
             </div>
           </div>

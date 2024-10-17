@@ -14,15 +14,13 @@ const AboutPage = () => {
         <main className="container__limit">
           <div className="main__heading --small-bm">
             <h1 className="h1_heading pb1 lato-bold" data-centered-text>
-              About {" "}
-              <span className="--color-primary">L</span>
+              About <span className="--color-primary">L</span>
               <span className="--color-base">ock</span>
               <span className="--color-primary">B</span>
               <span className="--color-base">ox</span>
             </h1>
           </div>
-
-          <article>
+          {/* <article>
             <section className="content-text">
               <h2>
                 <Link
@@ -47,9 +45,9 @@ const AboutPage = () => {
                 harder for anyone attempting unauthorized access into their
                 accounts or data.
               </p>
-            </section>
+            </section> 
 
-            <section className="content-text">
+              <section className="content-text">
               <h2>
                 <Link className="text-decoration-none" href="/crypto-password">
                   Password Encryption
@@ -74,7 +72,7 @@ const AboutPage = () => {
               </p>
             </section>
 
-            {/* <section className="content-text">
+              <section className="content-text">
               <h2>Password Encryption </h2>
               <p>
                 In today's digital world, keeping your accounts safe requires
@@ -131,7 +129,112 @@ const AboutPage = () => {
                 and peace of mind. Combine encryption with unique passwords for
                 the highest level of protection!
               </p>
-            </section> */}
+            </section>
+          </article> */}
+          <article>
+            <div className="content-text">
+              <h2>
+                <Link
+                  className="text-decoration-none"
+                  href="/password-generator"
+                >
+                  Strong Password Generator
+                </Link>
+              </h2>
+              <p>
+                In a world where cyber threats are becoming more sophisticated
+                every day, protecting your online accounts with strong, unique
+                passwords is crucial. Our Strong Password Generator is designed
+                to help you create random, secure passwords with just a click—no
+                more using the same password across multiple accounts.
+              </p>
+
+              <p>
+                By generating complex combinations of letters, numbers, and
+                symbols, our tool makes it much harder for hackers to guess or
+                crack your passwords. Whether you're securing your email, social
+                media, or financial accounts, a strong password is your first
+                line of defense.
+              </p>
+            </div>
+
+            <div className="content-text">
+              <h2>
+                <Link className="text-decoration-none" href="/crypto-password">
+                  Password Encryption
+                </Link>
+              </h2>
+
+              <p>
+                Passwords alone aren’t enough anymore. With our Password
+                Encryption feature, you can take your security a step further.
+                We help you protect your sensitive data by encrypting your
+                passwords with a secret phrase—ensuring that only you can
+                decrypt and access them.
+              </p>
+
+              <p>
+                This added layer of encryption means that even if someone were
+                to gain access to your encrypted password, it would be useless
+                without your unique secret phrase. Safeguard your private
+                information and enhance your security with our easy-to-use
+                encryption tool.
+              </p>
+
+              <h2>
+                <Link className="text-decoration-none" href="/">
+                  Why Choose LockBox?
+                </Link>
+              </h2>
+
+              <div>
+                At LockBox, we’re dedicated to providing you with the best tools
+                to secure your digital life. With our{" "}
+                <Link
+                  href={`/password-generator`}
+                  className="--default-link bold"
+                  target="_blank"
+                >
+                  {" "}
+                  <span className="--color-primary"> Password Generator,</span>
+                </Link>{" "}
+                <Link
+                  href={`/crypto-password`}
+                  className="--default-link bold"
+                  target="_blank"
+                >
+                  <span className="--color-base">Password Encryption</span>
+                </Link>,
+                {" "}
+                <Link
+                  href={`/image-convertor`}
+                  className="--default-link bold"
+                  target="_blank"
+                >
+                  <span className="--color-primary">
+                    Image to Base64 Converter
+                  </span>
+                </Link>
+                ,{" "}
+                <Link
+                  href={`/allias-generator`}
+                  className="--default-link bold"
+                  target="_blank"
+                >
+                  <span className="--color-base">Alias Generator, {" "} </span>
+                </Link>
+                and {" "}
+                <Link
+                  href={`/qr-generator`}
+                  className="--default-link bold"
+                  target="_blank"
+                >
+                  <span className="--color-primary">QR Code Generator</span>
+                </Link>
+                ,{" "}we offer everything you need to strengthen your online
+                security and simplify your digital tasks.
+              </div>
+            </div>
           </article>
         </main>
       </div>
