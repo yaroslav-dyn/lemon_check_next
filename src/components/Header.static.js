@@ -18,6 +18,7 @@ export const BottomBarlinks = [
     url: "/password-generator",
     alias: "PG",
     isActive: false,
+    icon: "/assets/img/password_generator_icon.png",
   },
   {
     title: "Encrypt Password",
