@@ -46,10 +46,7 @@ const QrCodeGenerator = () => {
       <Head>
         <title>LockBox</title>
         <meta name="author" content="LockBox LTD"></meta>
-        <meta
-          name="description"
-          content="LockBox, Strong password generator"
-        />
+        <meta name="description" content="LockBox, Strong password generator" />
         <meta name="keywords" content="Generate QR code" />
         <meta name="title" content="Generate QR code, QRcfrom input" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -58,15 +55,13 @@ const QrCodeGenerator = () => {
 
       <div className="qr__page">
         <main className="main_content qrcode__content">
-          <div className="main__heading">
+          <div className={`main__heading ${isMobile ? "--small-bm" : ""}`}>
             <h1 className="h1_heading" data-centered-text>
               Generate <span className="--color-primary"> QR </span>
               code
             </h1>
           </div>
-
-          <br />
-
+          
           <div className={`container__limit ${isMobile ? "" : "fit-content"}`}>
             <div
               className="qrcode__content__actions generator__content--actions no-x-paddings --small-gap"

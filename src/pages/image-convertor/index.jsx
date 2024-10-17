@@ -2,7 +2,21 @@ import React, { useState, useRef } from 'react';
 import styles from '@/styles/ImageConvertor.module.css';
 import { copyToClipboardMethod } from '@/services/base.services';
 import useDeviceType from '@/services/useDeviceType';
+import UISwitcher from "@/components/ui.switcher";
 
+
+const operationOptions = [
+  {
+    label: "Like data",
+    value: "data",
+    selectedBackgroundColor: "#E94E3D",
+  },
+  {
+    label: "Like image",
+    value: "image",
+    selectedBackgroundColor: "#E94E3D",
+  },
+];
 
 
 const ImageConvertor = () => {
@@ -15,10 +29,10 @@ const ImageConvertor = () => {
   const mobileDevice = useDeviceType();
 
   const onChangeDataType = (type) => {
-    setSelectedConvertedType(type.target.value);
-    if (type.target.value === 'image') {
+    setSelectedConvertedType(type);
+    if (type === 'image') {
       setTypedImageBase64(`<img src='${imageBase64}' />`);
-    } else if (type.target.value === 'data') {
+    } else if (type === 'data') {
       setTypedImageBase64(imageBase64);
     }
   }
@@ -67,7 +81,7 @@ const ImageConvertor = () => {
             UPLOAD IMAGE
           </label>
         </div>
-        <section className={styles.resultBlock}>
+        <section className={`${styles.resultBlock} container__limit gap-x-3`}>
           {imageBase64 && (
             <>
               <a
@@ -78,32 +92,12 @@ const ImageConvertor = () => {
               </a>
 
               <div className={styles.convertorControlBlock} data-centered-text>
-                <div className="flex__grid justify-center">
-                  <div className={styles.codeTypeBoxes}>
-                    <input
-                      className={styles.codeTypeBoxesCheckbox}
-                      type="radio"
-                      id="dataType"
-                      name="base64CodeType"
-                      value="data"
-                      checked={selectedConvertedType === "data"}
-                      onChange={onChangeDataType}
-                    />
-                    <label htmlFor="dataType">Like data</label>
-                  </div>
-
-                  <div>
-                    <input
-                      className={styles.codeTypeBoxesCheckbox}
-                      type="radio"
-                      id="imageType"
-                      name="base64CodeType"
-                      value="image"
-                      checked={selectedConvertedType === "image"}
-                      onChange={onChangeDataType}
-                    />
-                    <label htmlFor="imageType">Like image</label>
-                  </div>
+                <div className="flex__grid justify-center ">
+                  <UISwitcher
+                    options={operationOptions}
+                    onSwitch={onChangeDataType}
+                    elementWidth={180}
+                  />
                 </div>
                 <br />
                 <div></div>

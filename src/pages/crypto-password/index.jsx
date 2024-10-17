@@ -24,6 +24,8 @@ const operationOptions = [
   },
 ];
 
+const infoIcon = "/assets/img/icons8-question-mark-48.png";
+
 
 const CryptoPassword = () => {
   const areaElement = useRef();
@@ -130,8 +132,6 @@ const CryptoPassword = () => {
           content="Encrypt your password, Crypted password"
         />
         <meta name="title" content="Encrypt your password" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="generator__page">
         <main className="main_content generator__content">
@@ -139,7 +139,21 @@ const CryptoPassword = () => {
             <h1 className="h1_heading">
               Protect your <span className="--color-primary">password</span>
             </h1>
+            {/* Type Switcher */}
+            <div className={styles.instructionActionControls}>
+              <UISwitcher
+                options={operationOptions}
+                onSwitch={onChangeOperation}
+                elementWidth={160}
+              />
+            </div>
+          </div>
 
+          <div
+            className={`container__limit --x-small ${
+              mobileDevice ? "w-100" : ""
+            }`}
+          >
             {/* Instruction */}
             <InstructionModule
               mobileDevice={mobileDevice}
@@ -148,48 +162,10 @@ const CryptoPassword = () => {
               instrB={instrB}
               triggerInstruction={triggerInstruction}
             />
-          </div>
-          {/* Type Switcher */}
-          <div className={styles.instructionActionControls}>
-            {/* <div>
-              <input
-                type="radio"
-                name="action-type"
-                id="encryptType"
-                value="encrypt"
-                checked={actionState === "encrypt"}
-                onChange={onChangeOperation}
-              />
-              <label htmlFor="encryptType">Encrypt</label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="action-type"
-                id="decryptType"
-                value="decrypt"
-                checked={actionState === "decrypt"}
-                onChange={onChangeOperation}
-              />
-              <label htmlFor="decryptType">Decrypt</label>
-            </div> */}
-
-            <UISwitcher
-              options={operationOptions}
-              onSwitch={onChangeOperation}
-              elementWidth={160}
-            />
-          </div>
-
-          <div
-            className={`container__limit --x-small ${
-              mobileDevice ? "w-100" : ""
-            }`}
-          >
             <div>
               <form
                 ref={encryptForm}
-                className={`generator__content--actions --column no-x-paddings ${
+                className={`generator__content--actions --column no-x-paddings pt0 ${
                   mobileDevice ? "gap-x-3" : "gap-x-6"
                 }`}
               >
@@ -245,11 +221,11 @@ const CryptoPassword = () => {
                       }}
                     >
                       <div
-                        className={`instruction_info_icon ${
+                        className={`instruction_info_icon  ${
                           instrC ? "active" : ""
                         }`}
                       >
-                        ?
+                        <img src={infoIcon} width={30} />
                       </div>
                       <span> Alias for your password</span>
                     </h2>
@@ -380,13 +356,13 @@ const InstructionModule = ({
           data-left-text
           className={`${
             styles.instructionHeading
-          } flex__grid align-center justify-center ${
+          } flex__grid align-center ${
             instr ? styles.instrOpen : ""
           } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
           onClick={() => triggerInstruction("A")}
         >
-          <div className={`instruction_info_icon ${instr ? "active" : ""}`}>
-            ?
+          <div className={`instruction_info_icon  ${instr ? "active" : ""}`}>
+            <img src={infoIcon} width={30} />
           </div>
           <span>How to Encrypt Your Password?</span>
         </h2>
@@ -407,8 +383,13 @@ const InstructionModule = ({
           } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
           onClick={() => triggerInstruction("B")}
         >
-          <div className={`instruction_info_icon ${instrB ? "active" : ""}`}>
+          {/* <div
+            className={`instruction_info_icon--text ${instrB ? "active" : ""}`}
+          >
             ?
+          </div> */}
+          <div className={`instruction_info_icon  ${instrB ? "active" : ""}`}>
+            <img src={infoIcon} width={30} />
           </div>
           <span>How to Decrypt Your Password?</span>
         </h2>

@@ -27,7 +27,7 @@ const AliasGenerator = () => {
       <div className="generator__page">
         <main className="main_content generator__content">
           <div className="main__heading">
-            <h1 className="h1_heading">Generate Allias</h1>
+            <h1 className="h1_heading">Generate Alias</h1>
           </div>
 
           <div className={`container__limit ${isMobile ? "" : "fit-content"}`}>
@@ -48,7 +48,7 @@ const AliasGenerator = () => {
                 className="generator__content--btn"
                 onClick={generateAllias}
               >
-                Generate allias
+                Generate alias
               </button>
             </div>
           </div>

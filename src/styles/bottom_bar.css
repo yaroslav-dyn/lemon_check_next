@@ -16,6 +16,7 @@
   background-color: #fff;
   box-shadow: 0px 0px 16px 0px #4444;
   border-radius: 8px;
+  border: 4px solid var #000;
 }
 
 .nav-container {
@@ -72,6 +73,19 @@
 .nav__item-icon span {
   font-weight: 500;
 }
+.nav__item-icon--img {
+  max-width: 40px;
+  max-height: 40px;
+  display: block;
+  border-radius: 50%;
+}
+
+.nav__item-icon--img.--desktop {
+  max-width: 20px;
+  max-height: 20px;
+  filter: invert()
+}
+
 
 .nav__item-text {
   position: absolute;

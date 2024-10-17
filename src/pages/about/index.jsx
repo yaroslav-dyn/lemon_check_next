@@ -14,6 +14,7 @@ const AboutPage = () => {
         <main className="container__limit">
           <div className="main__heading --small-bm">
             <h1 className="h1_heading pb1 lato-bold" data-centered-text>
+              About {" "}
               <span className="--color-primary">L</span>
               <span className="--color-base">ock</span>
               <span className="--color-primary">B</span>

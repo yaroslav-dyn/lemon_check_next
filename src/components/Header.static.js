@@ -6,47 +6,58 @@ import { usePathname } from "next/navigation";
 import useDeviceType from "@/services/useDeviceType";
 import useScrollPosition from "@/services/useScrollPosition";
 
+const newLogo = "/assets/img/logos/lc_dally_logo@3x.png";
+
 export const BottomBarlinks = [
   {
     title: "Home",
     url: "/",
     alias: "H",
     isActive: false,
+    icon: "/assets/img/icons8-home-48.png",
   },
   {
     title: "Password generator",
     url: "/password-generator",
     alias: "PG",
     isActive: false,
+    icon: "/assets/img/icons8-binary-lock-48.png",
   },
   {
     title: "Encrypt Password",
     url: "/crypto-password",
     alias: "EP",
     isActive: false,
+    icon: "/assets/img/icons8-security-aes-48.png",
   },
   {
     title: "Allias generator",
     url: "/allias-generator",
     alias: "AG",
     isActive: false,
+    icon: "/assets/img/icons8-name-48.png",
   },
   {
     title: "image-convertor",
     url: "/image-convertor",
     alias: "IC",
     isActive: false,
+    icon: "/assets/img/icons8-image-refresh-48.png",
   },
   {
     title: "QR generator",
     url: "/qr-generator",
     alias: "QR",
     isActive: false,
+    icon: "/assets/img/icons8-qrcode-64.png",
   },
 ];
 
+const infoIcon = "/assets/img/icons8-info-48-white.png";
+const FaqIcon = "/assets/img/icons8-faq-48.png";
+
 export default function AppHeader() {
-  const newLogo = "/assets/img/logos/lc_dally_logo@3x.png";
+
 
   const isMobile = useDeviceType();
   const pathname = usePathname();
@@ -119,7 +130,15 @@ export default function AppHeader() {
                     data-url={navLink.url}
                     onClick={() => onClikNavItem(navLink.alias)}
                   >
-                    <Link href={navLink.url}>{navLink.title}</Link>
+                    <Link href={navLink.url}>
+                      <div className="flex__grid align-center --extra_small-gap">
+                        <img
+                          src={navLink.icon}
+                          className="nav__item-icon--img --desktop"
+                        />
+                        <span>{navLink.title}</span>
+                      </div>
+                    </Link>
                   </div>
                 ))}
             </div>
@@ -137,7 +156,7 @@ export default function AppHeader() {
                 pathname === "/about" ? "active" : ""
               }`}
             >
-              <span>?</span>
+              <img src={infoIcon} width={40} />
             </Link>
 
             <Link
@@ -146,7 +165,7 @@ export default function AppHeader() {
                 pathname === "/faq" ? "active" : ""
               }`}
             >
-              <span>F</span>
+              <img src={FaqIcon} width={40} />
             </Link>
           </div>
         </div>

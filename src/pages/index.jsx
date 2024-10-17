@@ -83,7 +83,6 @@ const isMobile = useDeviceType();
                 About
               </Link>{" "}
               page!
-              <br />
               Have questions? Check out our{" "}
               <Link className="--color-base --default-link" href={"/faq"}>
                 FAQ{" "}
