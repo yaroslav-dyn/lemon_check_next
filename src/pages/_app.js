@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import AppHeader from '@/components/Header.static';
 import Footer from '@/components/footer.static';
 import useDeviceType from "@/services/useDeviceType";
@@ -10,6 +11,17 @@ import "basscss/css/basscss.min.css";
 export default function App({ Component, pageProps }) {
 
 const isMobile = useDeviceType();
+
+ useEffect(() => {
+   if ("serviceWorker" in navigator) {
+     navigator.serviceWorker
+       .register("/service-worker.js")
+       .then((reg) => console.log("Service Worker registered"))
+       .catch((err) =>
+         console.error("Service Worker registration failed", err)
+       );
+   }
+ }, []);
 
   return (
     <>

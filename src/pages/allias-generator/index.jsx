@@ -57,7 +57,7 @@ const AliasGenerator = () => {
               ></textarea>
             </section>
 
-            <div>
+            <div className="py2">
               <button
                 id="btn"
                 className="generator__content--btn mb2"
