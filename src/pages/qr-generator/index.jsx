@@ -61,9 +61,7 @@ const QrCodeGenerator = () => {
               code
             </h1>
           </div>
-
-          <br />
-
+          
           <div className={`container__limit ${isMobile ? "" : "fit-content"}`}>
             <div
               className="qrcode__content__actions generator__content--actions no-x-paddings --small-gap"

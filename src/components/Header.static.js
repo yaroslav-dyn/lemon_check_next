@@ -130,7 +130,15 @@ export default function AppHeader() {
                     data-url={navLink.url}
                     onClick={() => onClikNavItem(navLink.alias)}
                   >
-                    <Link href={navLink.url}>{navLink.title}</Link>
+                    <Link href={navLink.url}>
+                      <div className="flex__grid align-center --extra_small-gap">
+                        <img
+                          src={navLink.icon}
+                          className="nav__item-icon--img --desktop"
+                        />
+                        <span>{navLink.title}</span>
+                      </div>
+                    </Link>
                   </div>
                 ))}
             </div>
