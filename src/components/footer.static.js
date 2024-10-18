@@ -60,7 +60,7 @@ export default function Footer() {
           <h5 className="footer__nav__heading"> CONTACT ME </h5>
           <div>
             <ContactEmail
-              email={`lemon-check@proton@@me`}
+              email={`contact@lockboxapp@@com`}
               title={`Contact email`}
               isHidden
             />

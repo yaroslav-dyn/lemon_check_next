@@ -151,7 +151,7 @@ const Security = () => {
               <address>
                 Email:{" "}
                 <ContactEmail
-                  email={`lemon-check@proton@@me`}
+                  email={`contact@lockboxapp@@com`}
                   title={`Contact email`}
                   isHidden
                 />
