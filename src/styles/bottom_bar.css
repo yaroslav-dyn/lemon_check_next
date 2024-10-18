@@ -1,6 +1,6 @@
 .bottom_bar {
   position: fixed;
-  bottom: 0;
+  bottom: 4px;
   width: 100%;
   padding: 24px;
   padding-bottom: 4px;
