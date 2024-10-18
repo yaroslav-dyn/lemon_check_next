@@ -1,12 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
+import ContactEmail from "@/components/elements/contact_email.element";
 
 const Privacy = () => {
   return (
     <>
       <Head>
-        <title>LockBox: Privacy Policy</title>
+        <title>LockBox | Privacy Policy</title>
         <meta name="keywords" content="LockBox Privacy Policy" />
         <meta name="description" content="LockBox Privacy Policy" />
         <meta name="title" content="LockBox Privacy Policy" />
@@ -45,16 +46,17 @@ const Privacy = () => {
                 </p>
                 <ul className="list-reset">
                   <li>
-                    Automatically Generated Data: When using our password
-                    generator or encryption services, all password and
-                    encryption-related activities happen locally on your device.
-                    We do not have access to your passwords or encrypted data.
+                    <strong>Automatically Generated Data</strong>: When using
+                    our password generator or encryption services, all password
+                    and encryption-related activities happen locally on your
+                    device. We do not have access to your passwords or encrypted
+                    data.
                   </li>
                   <li>
-                    User Data: We do not collect or store your passwords,
-                    encryption phrases, or any other sensitive information. All
-                    sensitive operations happen within your device's environment
-                    and are not transmitted to our servers.
+                    <strong>User Data:</strong> We do not collect or store your
+                    passwords, encryption phrases, or any other sensitive
+                    information. All sensitive operations happen within your
+                    device's environment and are not transmitted to our servers.
                   </li>
                 </ul>
               </li>
@@ -103,23 +105,27 @@ const Privacy = () => {
                 </p>
               </li>
               <li>
-                <h2>Your Consent</h2>
+                <h2>6. Your Consent</h2>
                 <p>
                   By using our services, you agree to this Privacy Policy. If we
                   make any significant changes to our Privacy Policy, we will
                   update this page and notify users as required.
                 </p>
               </li>
-              <li>7. Contact Us</li>
-              <p>
-                If you have any questions or concerns about our Privacy Policy
-                or how your data is handled, please contact us at:
-              </p>
+              <li>
+                <h2>7. Contact Us</h2>
+                <p>
+                  If you have any questions or concerns about our Privacy Policy
+                  or how your data is handled, please contact us at:
+                </p>
+              </li>
               <address>
                 Email:{" "}
-                <Link href={`mailto:lemon-check@proton.me`}>
-                  lemon-check@proton.me
-                </Link>
+                <ContactEmail
+                  email={`lemon-check@proton@@me`}
+                  title={`Contact email`}
+                  isHidden
+                />.
               </address>
             </ul>
           </div>

@@ -16,15 +16,19 @@ const QrCodeGenerator = () => {
 
   const generateQrCode = (e) => {
     e.preventDefault();
-    try {
-      if (qrCodeString && qrCodeString.length < 200) {
-        setQrqrContent(qrCodeString);
-      } else {
-        alert('Max length of text is 199 symbols')
+    if (!qrCodeString) {
+      setQrqrContent(null)
+      return;
+    } 
+      try {
+        if (qrCodeString && qrCodeString.length < 200) {
+          setQrqrContent(qrCodeString);
+        } else {
+          alert("Max length of text is 199 symbols");
+        }
+      } catch (error) {
+        console.log("error qr convert", error);
       }
-    } catch(error) {
-      console.log('error qr convert', error)
-    }
   };
 
   const saveQrToImage = () => {

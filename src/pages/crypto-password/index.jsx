@@ -26,7 +26,6 @@ const operationOptions = [
 
 const infoIcon = "/assets/img/icons8-question-mark-48.png";
 
-
 const CryptoPassword = () => {
   const areaElement = useRef();
   const defaultFormObject = {
@@ -305,7 +304,7 @@ const InstructionModal = ({ tape }) => (
           <li>
             3. View Encrypted Output: Once both fields are filled, the encrypted
             version of your password will be automatically generated and shown
-            in the &apos;Encrypted Output&apos; field.
+            in the "Encrypted password" field.
           </li>
           <strong className={styles.instrustionListTips}>
             Tip: Make sure to remember your secret phrase and crypted password,
@@ -316,12 +315,12 @@ const InstructionModal = ({ tape }) => (
       {tape === "B" && (
         <>
           <li>
-            1. Enter Encrypted Data: In the "Encrypted Output" field, input the
-            encrypted password you wish to decrypt.
+            1. Provide the Secret Phrase: Enter the same secret phrase you used
+            during the encryption process into the "Secret phrase" field.
           </li>
           <li>
-            2. Provide the Secret Phrase: Enter the same secret phrase you used
-            during the encryption process into the "Secret Phrase" field.
+            2. Enter Encrypted Data: In the "Encrypted password"
+            field, input the encrypted password you wish to decrypt.
           </li>
           <li>
             3. View Decrypted Password: Once both fields are filled, the
@@ -354,9 +353,7 @@ const InstructionModule = ({
       <div>
         <h2
           data-left-text
-          className={`${
-            styles.instructionHeading
-          } flex__grid align-center ${
+          className={`${styles.instructionHeading} flex__grid align-center ${
             instr ? styles.instrOpen : ""
           } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
           onClick={() => triggerInstruction("A")}
@@ -376,9 +373,7 @@ const InstructionModule = ({
       <div>
         <h2
           data-left-text
-          className={`${
-            styles.instructionHeading
-          } flex__grid align-center ${
+          className={`${styles.instructionHeading} flex__grid align-center ${
             instrB ? styles.instrOpen : ""
           } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
           onClick={() => triggerInstruction("B")}

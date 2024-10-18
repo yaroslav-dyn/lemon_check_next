@@ -1,6 +1,7 @@
 import { BottomBarlinks } from "@/components/Header.static";
 import Link from "next/link";
 import useDeviceType from "@/services/useDeviceType";
+import ContactEmail from "@/components/elements/contact_email.element";
 
 export default function Footer() {
   const isMobile = useDeviceType();
@@ -43,17 +44,17 @@ export default function Footer() {
                 Privacy Policy
               </Link>
             </div>
+            <div>
+              <Link className="--default-link" href="/terms">
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
         <div className="base-1/2">
           <h5 className="footer__nav__heading"> CONTACT ME </h5>
           <div>
-            <Link
-              className="--default-link"
-              href={`mailto:lemon-check@proton.me`}
-            >
-              Email
-            </Link>
+            <ContactEmail email={`lemon-check@proton@@me`} title={`Contact email`} isHidden />
           </div>
         </div>
       </div>
