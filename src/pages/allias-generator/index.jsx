@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
+import Head from "next/head";
 import { copyToClipboardMethod } from '@/services/base.services'
 import useDeviceType from "@/services/useDeviceType";
 
@@ -39,6 +40,20 @@ const AliasGenerator = () => {
 
   return (
     <>
+      <Head>
+        <title>
+          LockBox | Alias generator - Strong Password Generator & Encryption
+          Tools
+        </title>
+        <meta
+          name="description"
+          content="Generate strong, unique passwords with LockBox's free password generator. Strengthen your online security today."
+        />
+        <meta
+          name="keywords"
+          content="password generator, strong passwords, secure passwords, generate passwords, online password generator"
+        />
+      </Head>
       <div className="generator__page">
         <main className="main_content generator__content">
           <div className="main__heading">

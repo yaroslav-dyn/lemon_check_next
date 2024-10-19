@@ -36,9 +36,13 @@ const AboutPage = () => {
   return (
     <>
       <Head>
-        <title>LockBox</title>
-        <meta name="description" content="LockBox Frequently asked questions" />
-        <meta name="title" content="LockBox FAQ" />
+        <title>
+          LockBox | FAQ - Strong Password Generator & Encryption Tools
+        </title>
+        <meta
+          name="description"
+          content="LockBox Frequently asked questions, FAQ"
+        />
       </Head>
 
       <div className="main_content">

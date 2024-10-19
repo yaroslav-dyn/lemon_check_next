@@ -7,10 +7,10 @@ const Terms = () => {
   return (
     <>
       <Head>
-        <title>LockBox | Terms of Service</title>
-        <meta name="keywords" content="LockBox Terms of Service" />
-        <meta name="description" content="LockBox Terms of Service" />
-        <meta name="title" content="LockBox Terms of Service" />
+        <title>
+          LockBox | Terms of Service - Strong Password Generator & Encryption
+          Tools
+        </title>
       </Head>
 
       <div className="main_content">
@@ -151,7 +151,8 @@ const Terms = () => {
                 email={`contact@lockboxapp@@com`}
                 title={`Contact email`}
                 isHidden
-              />.
+              />
+              .
             </ul>
           </section>
         </main>

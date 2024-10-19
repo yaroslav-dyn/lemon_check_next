@@ -48,13 +48,18 @@ const QrCodeGenerator = () => {
   return (
     <>
       <Head>
-        <title>LockBox</title>
-        <meta name="author" content="LockBox LTD"></meta>
-        <meta name="description" content="LockBox, Strong password generator" />
-        <meta name="keywords" content="Generate QR code" />
-        <meta name="title" content="Generate QR code, QRcfrom input" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>
+          LockBox | QR code generator - Strong Password Generator & Encryption
+          Tools
+        </title>
+        <meta
+          name="description"
+          content="Generate custom QR codes with LockBox's online QR code generator. Create QR codes for websites, WiFi, contact info, and more."
+        />
+        <meta
+          name="keywords"
+          content="QR code generator, create QR codes, custom QR codes, free QR code generator, generate QR code online"
+        />
       </Head>
 
       <div className="qr__page">
@@ -65,7 +70,7 @@ const QrCodeGenerator = () => {
               code
             </h1>
           </div>
-          
+
           <div className={`container__limit ${isMobile ? "" : "fit-content"}`}>
             <div
               className="qrcode__content__actions generator__content--actions no-x-paddings --small-gap"

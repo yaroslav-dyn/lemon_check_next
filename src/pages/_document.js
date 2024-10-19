@@ -8,6 +8,15 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>LockBox - Strong Password Generator & Encryption Tools</title>
+        <meta
+          name="description"
+          content="LockBox offers a secure password generator, encryption tools, image-to-base64 conversion, QR code generation, and more. Stay secure online with ease."
+        />
+        <meta
+          name="keywords"
+          content="password generator, password encryption, QR code generator, image to base64, online security, secure passwords"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,700;1,900 display=swap"
           rel="stylesheet"

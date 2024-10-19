@@ -4,8 +4,9 @@
   "description": "A tool for generating passwords, encrypting them, converting images to Base64, and generating QR codes.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#000000",
   "theme_color": "#000000",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "assets/icons/icon-36x36.png",
