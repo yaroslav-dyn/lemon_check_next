@@ -10,7 +10,9 @@ const isMobile = useDeviceType();
   return (
     <>
       <Head>
-        <title>LockBox | Home - Strong Password Generator & Encryption Tools</title>
+        <title>
+          LockBox | Home - Strong Password Generator & Encryption Tools
+        </title>
       </Head>
 
       <div className="main_page main__content">
@@ -71,18 +73,21 @@ const isMobile = useDeviceType();
               handling or create custom QR codes in a flash. Everything you need
               to stay secure and efficient in one place!
             </p>
-            <p className="content-text">
+            <h3 className="m0 --color-primary">
               Install <span className="--color-primary">LockBoxApp</span> as a{" "}
-              <span className="--color-primary">PWA</span> for Easy Access! Did
-              you know you can install LockBox directly to your device for quick
-              and easy access? With our Progressive Web App (PWA) feature, you
-              can use LockBox just like a native app, without the need for
-              downloads from an app store. Fast Access: Launch LockBox instantly
-              from your home screen. Offline Capability: Some features are
-              available even without an internet connection. No Updates Needed:
-              Always have the latest version, automatically. To install, simply
-              click the "Add to Home Screen" option in your browser’s settings
-              and enjoy LockBox anytime, anywhere!
+              <span className="--color-primary">PWA</span>
+            </h3>
+            <p className="content-text">
+              For Easy Access! Did you know you can install LockBox directly to
+              your device for quick and easy access? With our Progressive Web
+              App (PWA) feature, you can use LockBox just like a native app,
+              without the need for downloads from an app store. Fast Access:
+              Launch LockBox instantly from your home screen. Offline
+              Capability: Some features are available even without an internet
+              connection. No Updates Needed: Always have the latest version,
+              automatically. To install, simply click the "Add to Home Screen"
+              option in your browser’s settings and enjoy LockBox anytime,
+              anywhere!
             </p>
             <p className="content-text --color-primary mb0 pt2 pb4">
               Want to learn more about what we do? Visit our{" "}
