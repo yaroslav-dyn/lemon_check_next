@@ -7,10 +7,10 @@ const Privacy = () => {
   return (
     <>
       <Head>
-        <title>LockBox | Privacy Policy</title>
-        <meta name="keywords" content="LockBox Privacy Policy" />
-        <meta name="description" content="LockBox Privacy Policy" />
-        <meta name="title" content="LockBox Privacy Policy" />
+        <title>
+          LockBox | Privacy Policy - Strong Password Generator & Encryption
+          Tools
+        </title>
       </Head>
 
       <div className="main_content">
@@ -125,7 +125,8 @@ const Privacy = () => {
                   email={`contact@lockboxapp@@com`}
                   title={`Contact email`}
                   isHidden
-                />.
+                />
+                .
               </address>
             </ul>
           </div>

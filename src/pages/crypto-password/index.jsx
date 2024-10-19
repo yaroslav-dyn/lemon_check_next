@@ -120,17 +120,18 @@ const CryptoPassword = () => {
   return (
     <>
       <Head>
-        <title>LockBox</title>
-        <meta name="author" content="LockBox"></meta>
+        <title>
+          LockBox | Password encryption - Strong Password Generator & Encryption
+          Tools
+        </title>
         <meta
           name="description"
-          content="LockBox, Encrypt your password, Crypted password"
+          content="Secure your sensitive information with LockBox's password encryption tool. Encrypt your passwords for enhanced security."
         />
         <meta
           name="keywords"
-          content="Encrypt your password, Crypted password"
+          content="password encryption, encrypt passwords, secure passwords, encrypt password online, password protection, online encryption tool"
         />
-        <meta name="title" content="Encrypt your password" />
       </Head>
       <div className="generator__page">
         <main className="main_content generator__content">

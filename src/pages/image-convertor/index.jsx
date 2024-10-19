@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Head from "next/head";
 import styles from '@/styles/ImageConvertor.module.css';
 import { copyToClipboardMethod } from '@/services/base.services';
 import useDeviceType from '@/services/useDeviceType';
@@ -47,7 +48,6 @@ const ImageConvertor = () => {
     reader.readAsDataURL(file);
   };
 
-
   const copyToClipboard = () => {
     copyToClipboardMethod(areaElement)
   }
@@ -55,6 +55,20 @@ const ImageConvertor = () => {
   // NOTE: HTML!
   return (
     <>
+      <Head>
+        <title>
+          LockBox | Image convertor - Strong Password Generator & Encryption
+          Tools
+        </title>
+        <meta
+          name="description"
+          content="Easily convert images to Base64 format with LockBox. Our free tool lets you encode images into Base64 for seamless integration into your applications."
+        />
+        <meta
+          name="keywords"
+          content="convert image to base64, image to base64 online, encode image to base64, Base64 converter, free Base64 encoding tool"
+        />
+      </Head>
       <main className="main_content converter_content">
         <div className={`main__heading ${mobileDevice ? "--small-bm" : ""}`}>
           <h1 className="h1_heading" data-centered-text>

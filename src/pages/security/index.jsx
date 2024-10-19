@@ -7,10 +7,10 @@ const Security = () => {
   return (
     <>
       <Head>
-        <title>LockBox | Security at LockBox At LockBox</title>
-        <meta name="keywords" content="Security at LockBox At LockBox" />
-        <meta name="description" content="Security at LockBox At LockBox" />
-        <meta name="title" content="Security at LockBox At LockBox" />
+        <title>
+          LockBox | Security at LockBox - Strong Password Generator & Encryption
+          Tools
+        </title>
       </Head>
 
       <div className="main_content">
@@ -147,7 +147,8 @@ const Security = () => {
               For questions or concerns about your security while using{" "}
               <Link className="--default-link" href={`/`} target="_blank">
                 LockBox
-              </Link>, feel free to reach out to us at{" "}
+              </Link>
+              , feel free to reach out to us at{" "}
               <address>
                 Email:{" "}
                 <ContactEmail

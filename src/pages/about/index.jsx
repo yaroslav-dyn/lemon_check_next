@@ -6,9 +6,9 @@ const AboutPage = () => {
   return (
     <>
       <Head>
-        <title>LockBox</title>
-        <meta name="description" content="About LockBox" />
-        <meta name="title" content="About LockBox" />
+        <title>
+          LockBox | About LockBox - Strong Password Generator & Encryption Tools
+        </title>
       </Head>
 
       <div className="main_content">
@@ -205,8 +205,8 @@ const AboutPage = () => {
                   target="_blank"
                 >
                   <span className="--color-base">Password Encryption</span>
-                </Link>,
-                {" "}
+                </Link>
+                ,{" "}
                 <Link
                   href={`/image-convertor`}
                   className="--default-link bold"
@@ -222,9 +222,9 @@ const AboutPage = () => {
                   className="--default-link bold"
                   target="_blank"
                 >
-                  <span className="--color-base">Alias Generator, {" "} </span>
+                  <span className="--color-base">Alias Generator, </span>
                 </Link>
-                and {" "}
+                and{" "}
                 <Link
                   href={`/qr-generator`}
                   className="--default-link bold"
@@ -232,7 +232,7 @@ const AboutPage = () => {
                 >
                   <span className="--color-primary">QR Code Generator</span>
                 </Link>
-                ,{" "}we offer everything you need to strengthen your online
+                , we offer everything you need to strengthen your online
                 security and simplify your digital tasks.
               </div>
             </div>

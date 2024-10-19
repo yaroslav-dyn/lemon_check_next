@@ -63,18 +63,18 @@ const PasswordGenerator = () => {
   return (
     <>
       <Head>
-        <title>LockBox</title>
-        <meta name="author" content="LockBox LTD"></meta>
+        <title>
+          LockBox | Password Generator - Strong Password Generator & Encryption
+          Tools
+        </title>
         <meta
           name="description"
-          content="LockBox, Strong password generator"
+          content="Generate strong, unique passwords with LockBox's free password generator. Strengthen your online security today."
         />
         <meta
           name="keywords"
-          content="Strong password generator, Strong password, online generate password"
+          content="password generator, strong passwords, secure passwords, generate passwords, online password generator"
         />
-        <meta name="title" content="Strong password generator" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="generator__page">
