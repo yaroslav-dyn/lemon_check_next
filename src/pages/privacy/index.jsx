@@ -64,10 +64,7 @@ const Privacy = () => {
                 <h2>2. Use of Cookies</h2>
                 <p>
                   Our service does not use cookies for tracking or marketing
-                  purposes. However, if you use additional features like saving
-                  data on your device (e.g., using localStorage or IndexedDB),
-                  you may need to agree to use these features, which are solely
-                  for enhancing your user experience.
+                  purposes. 
                 </p>
               </li>
               <li>
