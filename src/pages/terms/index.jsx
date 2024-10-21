@@ -8,7 +8,7 @@ const Terms = () => {
     <>
       <Head>
         <title>
-          LockBox | Terms of Service - Strong Password Generator & Encryption
+          LockBoxApp | Terms of Service - Strong Password Generator & Encryption
           Tools
         </title>
       </Head>
@@ -26,7 +26,7 @@ const Terms = () => {
             <article>
               Welcome to{" "}
               <Link className="--default-link" href={`/`} target="_blank">
-                LockBox
+                LockBoxApp
               </Link>
               .
               <p>
@@ -39,7 +39,7 @@ const Terms = () => {
             <ul className="list-reset">
               <li>
                 <p>
-                  1. Acceptance of Terms By using the LockBox website, mobile
+                  1. Acceptance of Terms By using the LockBoxApp website, mobile
                   app, or any related services (collectively, the "Service"),
                   you acknowledge that you have read, understood, and agree to
                   be bound by these Terms and any applicable laws and
@@ -49,7 +49,7 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  2. Description of Services LockBox provides tools including,
+                  2. Description of Services LockBoxApp provides tools including,
                   but not limited to:
                 </p>
                 <p>
@@ -63,7 +63,7 @@ const Terms = () => {
                 <p>
                   3. User Responsibilities Account Security: Users are
                   responsible for the confidentiality of any data they generate
-                  using the Service. LockBox does not store passwords,
+                  using the Service. LockBoxApp does not store passwords,
                   encryption keys, or other sensitive data, and users are
                   responsible for safeguarding this information. Compliance with
                   Laws: Users agree to comply with all applicable laws and
@@ -77,9 +77,9 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  4. Disclaimer of Warranties LockBox provides the Service "as
+                  4. Disclaimer of Warranties LockBoxApp provides the Service "as
                   is" and without any warranty or condition, whether express,
-                  implied, or statutory. LockBox specifically disclaims any
+                  implied, or statutory. LockBoxApp specifically disclaims any
                   implied warranties of title, merchantability, fitness for a
                   particular purpose, and non-infringement.
                 </p>
@@ -93,7 +93,7 @@ const Terms = () => {
               <li>
                 <p>
                   5. Limitation of Liability To the fullest extent permitted by
-                  law, LockBox will not be liable for any damages, losses, or
+                  law, LockBoxApp will not be liable for any damages, losses, or
                   claims arising from your use of or inability to use the
                   Service. This includes but is not limited to:
                 </p>
@@ -104,7 +104,7 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  6 .Modifications to the Service LockBox reserves the right to
+                  6 .Modifications to the Service LockBoxApp reserves the right to
                   modify, update, or discontinue the Service at any time without
                   notice. We are not liable for any changes or disruptions that
                   may occur as a result.

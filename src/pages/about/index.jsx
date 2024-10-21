@@ -1,25 +1,21 @@
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
+import LogoTextElement from "@/components/elements/logo_text.element";
 
 const AboutPage = () => {
   return (
     <>
       <Head>
         <title>
-          LockBox | About LockBox - Strong Password Generator & Encryption Tools
+          LockBoxApp | About LockBoxApp - Strong Password Generator & Encryption Tools
         </title>
       </Head>
 
       <div className="main_content">
         <main className="container__limit">
           <div className="main__heading --small-bm">
-            <h1 className="h1_heading pb1 lato-bold" data-centered-text>
-              About <span className="--color-primary">L</span>
-              <span className="--color-base">ock</span>
-              <span className="--color-primary">B</span>
-              <span className="--color-base">ox</span>
-            </h1>
+            <LogoTextElement prefix='About' />
           </div>
           {/* <article>
             <section className="content-text">
@@ -184,12 +180,12 @@ const AboutPage = () => {
 
               <h2>
                 <Link className="text-decoration-none" href="/">
-                  Why Choose LockBox?
+                  Why Choose LockBoxApp?
                 </Link>
               </h2>
 
               <div>
-                At LockBox, we’re dedicated to providing you with the best tools
+                At LockBoxApp, we’re dedicated to providing you with the best tools
                 to secure your digital life. With our{" "}
                 <Link
                   href={`/password-generator`}

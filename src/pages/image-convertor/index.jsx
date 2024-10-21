@@ -57,12 +57,12 @@ const ImageConvertor = () => {
     <>
       <Head>
         <title>
-          LockBox | Image convertor - Strong Password Generator & Encryption
+          LockBoxApp | Image convertor - Strong Password Generator & Encryption
           Tools
         </title>
         <meta
           name="description"
-          content="Easily convert images to Base64 format with LockBox. Our free tool lets you encode images into Base64 for seamless integration into your applications."
+          content="Easily convert images to Base64 format with LockBoxApp. Our free tool lets you encode images into Base64 for seamless integration into your applications."
         />
         <meta
           name="keywords"
@@ -100,7 +100,7 @@ const ImageConvertor = () => {
             <>
               <a
                 download={`base64-image-${Date.now()}.png`}
-                className={styles.convertorImgPreview}
+                className={`${styles.convertorImgPreview} mb2`}
               >
                 <img src={imageBase64} alt="chosen" />
               </a>

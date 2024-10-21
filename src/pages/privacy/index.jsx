@@ -8,7 +8,7 @@ const Privacy = () => {
     <>
       <Head>
         <title>
-          LockBox | Privacy Policy - Strong Password Generator & Encryption
+          LockBoxApp | Privacy Policy - Strong Password Generator & Encryption
           Tools
         </title>
       </Head>
@@ -26,7 +26,7 @@ const Privacy = () => {
             <p>
               At{" "}
               <Link className="--default-link" href={`/`} target="_blank">
-                LockBox
+                LockBoxApp
               </Link>
               , we take your privacy seriously. This Privacy Policy outlines how
               we collect, use, and protect your personal information when you
@@ -39,7 +39,7 @@ const Privacy = () => {
               <li>
                 <h2>1. Information We Collect</h2>
                 <p>
-                  We aim to limit the personal information we collect. LockBox
+                  We aim to limit the personal information we collect. LockBoxApp
                   does not collect, store, or share any personal data unless
                   explicitly provided by you for customer support or
                   communication purposes.

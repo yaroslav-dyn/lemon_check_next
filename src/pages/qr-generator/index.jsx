@@ -49,12 +49,12 @@ const QrCodeGenerator = () => {
     <>
       <Head>
         <title>
-          LockBox | QR code generator - Strong Password Generator & Encryption
+          LockBoxApp | QR code generator - Strong Password Generator & Encryption
           Tools
         </title>
         <meta
           name="description"
-          content="Generate custom QR codes with LockBox's online QR code generator. Create QR codes for websites, WiFi, contact info, and more."
+          content="Generate custom QR codes with LockBoxApp's online QR code generator. Create QR codes for websites, WiFi, contact info, and more."
         />
         <meta
           name="keywords"

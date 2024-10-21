@@ -121,12 +121,12 @@ const CryptoPassword = () => {
     <>
       <Head>
         <title>
-          LockBox | Password encryption - Strong Password Generator & Encryption
+          LockBoxApp | Password encryption - Strong Password Generator & Encryption
           Tools
         </title>
         <meta
           name="description"
-          content="Secure your sensitive information with LockBox's password encryption tool. Encrypt your passwords for enhanced security."
+          content="Secure your sensitive information with LockBoxApp's password encryption tool. Encrypt your passwords for enhanced security."
         />
         <meta
           name="keywords"

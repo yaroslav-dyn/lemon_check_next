@@ -64,12 +64,12 @@ const PasswordGenerator = () => {
     <>
       <Head>
         <title>
-          LockBox | Password Generator - Strong Password Generator & Encryption
+          LockBoxApp | Password Generator - Strong Password Generator & Encryption
           Tools
         </title>
         <meta
           name="description"
-          content="Generate strong, unique passwords with LockBox's free password generator. Strengthen your online security today."
+          content="Generate strong, unique passwords with LockBoxApp's free password generator. Strengthen your online security today."
         />
         <meta
           name="keywords"
@@ -85,7 +85,9 @@ const PasswordGenerator = () => {
             </h1>
           </div>
           <div
-            className={`container__limit ${mobileDevice ? "" : "fit-content"}`}
+            className={`container__limit --x-small ${
+              mobileDevice ? "w-100" : ""
+            }`}
           >
             <section className="generator__content--actions no-x-paddings mb1">
               <textarea

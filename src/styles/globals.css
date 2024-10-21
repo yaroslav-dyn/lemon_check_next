@@ -177,10 +177,11 @@ a {
 .company_logo {
   display: flex;
   align-items: center;
-  padding: 10px 24px;
-  padding-right: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 24px;
   text-decoration: none;
-  max-width: 80px;
+  max-width: 76px;
   transition: all 0.2s ease-in;
 }
 
@@ -192,12 +193,12 @@ a {
   transform: rotate(360deg);
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .company_logo {
     padding-left: 0;
     max-width: 60px;
   }
-}
+} */
 
 .main__heading {
   color: #000;
@@ -354,7 +355,7 @@ a {
 }
 
 .top__header.scrolled .company_logo {
-  max-width: 46px;
+  max-width: 60px;
 }
 
 .footer {
@@ -697,6 +698,7 @@ a {
 .instruction_info_icon {
   display: inline-block;
   border: 2px solid transparent;
+  height: max-content;
 }
 
 .instruction_info_icon>img {
@@ -708,6 +710,10 @@ a {
 .instruction_info_icon:hover {
   border-color: var(--color-primary);
   border-radius: 50%;
+}
+
+.instruction_info_icon.scrolled > img {
+  max-width: 32px;
 }
 
 .mt-1\.4 {

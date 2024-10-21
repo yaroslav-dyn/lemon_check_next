@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BottomBar from "@/components/bottom_bar.static";
@@ -57,7 +57,7 @@ const infoIcon = "/assets/img/icons8-info-48-white.png";
 const FaqIcon = "/assets/img/icons8-faq-48.png";
 
 export default function AppHeader() {
-
+  const [tabletScreen, setTableteScreen] = useState(false);
 
   const isMobile = useDeviceType();
   const pathname = usePathname();
@@ -90,14 +90,20 @@ export default function AppHeader() {
 
   useEffect(() => {
     setTimeout(setActiveMenu, 100);
+    setTableteScreen(window.innerWidth < 1180);
   }, [pathname]);
 
   useEffect(() => {
+    const pageIcons = document.querySelectorAll(".instruction_info_icon");
     if (!topHeaderElement || !topHeaderElement.current) return;
     if (isMobile && scrollPosition > 70) {
       topHeaderElement.current.classList.add("scrolled");
+      if (!pageIcons || pageIcons.length < 1) return;
+      pageIcons.forEach((i) => i.classList.add("scrolled"));
     } else {
       topHeaderElement.current.classList.remove("scrolled");
+      if (!pageIcons || pageIcons.length < 1) return;
+      pageIcons.forEach((i) => i.classList.remove("scrolled"));
     }
   }, [scrollPosition]);
 
@@ -110,7 +116,7 @@ export default function AppHeader() {
               <Image
                 className="base_img"
                 src={newLogo}
-                alt="LockBox"
+                alt="LockBoxApp"
                 width="64"
                 height="64"
               />
@@ -118,7 +124,7 @@ export default function AppHeader() {
             </Link>
           </div>
 
-          {!isMobile ? (
+          {!isMobile && !tabletScreen ? (
             <div className="main__nav__links">
               {BottomBarlinks &&
                 BottomBarlinks.map((navLink) => (

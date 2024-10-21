@@ -2,10 +2,10 @@
 
 ### **Last Updated: [Insert Date]**
 
-At **LockBox**, we take your privacy seriously. This Privacy Policy outlines how we collect, use, and protect your personal information when you use our services, including the password generator, encryption tools, image-to-Base64 converter, alias generator, and QR code generator.
+At **LockBoxApp**, we take your privacy seriously. This Privacy Policy outlines how we collect, use, and protect your personal information when you use our services, including the password generator, encryption tools, image-to-Base64 converter, alias generator, and QR code generator.
 
 ### **1. Information We Collect**
-We aim to limit the personal information we collect. **LockBox** does not collect, store, or share any personal data unless explicitly provided by you for customer support or communication purposes.
+We aim to limit the personal information we collect. **LockBoxApp** does not collect, store, or share any personal data unless explicitly provided by you for customer support or communication purposes.
 
 - **Automatically Generated Data**: When using our password generator or encryption services, all password and encryption-related activities happen locally on your device. We do not have access to your passwords or encrypted data.
 - **User Data**: We do not collect or store your passwords, encryption phrases, or any other sensitive information. All sensitive operations happen within your device's environment and are not transmitted to our servers.
