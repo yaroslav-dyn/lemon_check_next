@@ -74,7 +74,7 @@ const isMobile = useDeviceType();
               to stay secure and efficient in one place!
             </p>
             <h3 className="m0 --color-primary">
-              Install <span className="--color-primary">LockBoxApp</span> as a{" "}
+              Install <span className="--color-primary">LockBox</span> as a{" "}
               <span className="--color-primary">PWA</span>
             </h3>
             <p className="content-text">

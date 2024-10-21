@@ -85,7 +85,9 @@ const PasswordGenerator = () => {
             </h1>
           </div>
           <div
-            className={`container__limit ${mobileDevice ? "" : "fit-content"}`}
+            className={`container__limit --x-small ${
+              mobileDevice ? "w-100" : ""
+            }`}
           >
             <section className="generator__content--actions no-x-paddings mb1">
               <textarea

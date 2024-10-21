@@ -7,7 +7,7 @@ import useDeviceType from "@/services/useDeviceType";
 const AliasGenerator = () => {
   const areaElement = useRef();
   const [allias, setAlias] = useState('');
-    const isMobile = useDeviceType();
+    const mobileDevice = useDeviceType();
 
   const copyToClipBoard = () => {
     copyToClipboardMethod(areaElement);
@@ -60,7 +60,11 @@ const AliasGenerator = () => {
             <h1 className="h1_heading">Generate Alias</h1>
           </div>
 
-          <div className={`container__limit ${isMobile ? "" : "fit-content"}`}>
+          <div
+            className={`container__limit --x-small ${
+              mobileDevice ? "w-100" : ""
+            }`}
+          >
             <section className="generator__content--actions no-x-paddings">
               <textarea
                 defaultValue={allias}
