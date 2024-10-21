@@ -86,6 +86,9 @@
   filter: invert()
 }
 
+.light__theme .nav__item-icon--img.--desktop {
+  filter: none;
+}
 
 .nav__item-text {
   position: absolute;

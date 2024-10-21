@@ -4,8 +4,12 @@ import SwitchSelector from "react-switch-selector";
 
 const UISwitcher = ({ options, onSwitch, elementWidth }) => {
   return (
-    <div className="your-required-wrapper" style={{ width: elementWidth ? elementWidth : 200, height: 40 }}>
+    <div
+      className="your-required-wrapper"
+      style={{ width: elementWidth ? elementWidth : 200, height: 40 }}
+    >
       <SwitchSelector
+        name='componentSelector'
         onChange={onSwitch}
         options={options}
         initialSelectedIndex={0}
