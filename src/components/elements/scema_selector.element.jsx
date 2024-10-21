@@ -57,13 +57,17 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
 
   const onChangeSelector = (theme) => {
     setCurrentTheme(theme);
+    localStorage.setItem("lb_current__theme", theme);
     if (theme === "auto__theme") {
       window.matchMedia("(prefers-color-scheme: dark)").matches
         ? onChangeTheme("primary__theme")
         : onChangeTheme("light__theme");
+         setCurrentTheme("auto__theme");
+        localStorage.setItem("lb_current__theme", "auto__theme");
     } else {
       onChangeTheme(theme);
     }
+
   };
 
   // TODO: Wierd sideeffect on all swithers
@@ -74,14 +78,12 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
   };
 
   useEffect(() => {
-    // TODO: Wierd sideeffect on all swithers
-    // window
-    //   .matchMedia("(prefers-color-scheme: dark)")
-    //   .addEventListener("change", onChangeSystemTheme);
     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
       ? "primary__theme"
       : "light__theme";
+    setCurrentTheme(systemTheme);
     onChangeSelector(systemTheme);
+    localStorage.setItem("lb_current__theme", "auto__theme");
   }, []);
 
   return (
@@ -93,7 +95,7 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
         name="ThemeSelector"
         onChange={onChangeSelector}
         options={options}
-        initialSelectedIndex={currentTheme === "primary__theme" ? 2 : 0}
+        initialSelectedIndex={1}
         backgroundColor={"fff"}
         fontColor={"#fff"}
         selectedFontColor={"#fff"}
