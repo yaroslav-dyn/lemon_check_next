@@ -9,6 +9,7 @@ export const copyToClipboardMethod = (element) => {
     document.execCommand("copy", false, element.current.value);
   }
 };
+
 export function jsonToCsv(jsonData) {
   let csv = "";
 

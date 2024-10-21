@@ -1,6 +1,6 @@
 {
-  "name": "Security & Tools LockBox",
-  "short_name": "LockBox",
+  "name": "Security & Tools LockBoxApp",
+  "short_name": "LockBoxApp",
   "description": "A tool for generating passwords, encrypting them, converting images to Base64, and generating QR codes.",
   "start_url": "/",
   "display": "standalone",

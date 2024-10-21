@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import LogoTextElement from "@/components/elements/logo_text.element"
 import useDeviceType from "@/services/useDeviceType";
 
 export default function Home() {
@@ -11,19 +12,14 @@ const isMobile = useDeviceType();
     <>
       <Head>
         <title>
-          LockBox | Home - Strong Password Generator & Encryption Tools
+          LockBoxApp | Home - Strong Password Generator & Encryption Tools
         </title>
       </Head>
 
       <div className="main_page main__content">
         <main className="container__limit">
           <div className="main__heading --small-bm">
-            <h1 className="h1_heading pb1 lato-bold" data-centered-text>
-              <span className="--color-primary">L</span>
-              <span className="--color-base">ock</span>
-              <span className="--color-primary">B</span>
-              <span className="--color-base">ox</span>
-            </h1>
+            <LogoTextElement />
             <div className="center slogan__text">
               Your All-in-One Tool {isMobile && <br />}
               for Secure Passwords, Encryption, <br />
@@ -74,19 +70,19 @@ const isMobile = useDeviceType();
               to stay secure and efficient in one place!
             </p>
             <h3 className="m0 --color-primary">
-              Install <span className="--color-primary">LockBox</span> as a{" "}
+              Install <span className="--color-primary">LockBoxApp</span> as a{" "}
               <span className="--color-primary">PWA</span>
             </h3>
             <p className="content-text">
-              For Easy Access! Did you know you can install LockBox directly to
+              For Easy Access! Did you know you can install LockBoxApp directly to
               your device for quick and easy access? With our Progressive Web
-              App (PWA) feature, you can use LockBox just like a native app,
+              App (PWA) feature, you can use LockBoxApp just like a native app,
               without the need for downloads from an app store. Fast Access:
-              Launch LockBox instantly from your home screen. Offline
+              Launch LockBoxApp instantly from your home screen. Offline
               Capability: Some features are available even without an internet
               connection. No Updates Needed: Always have the latest version,
               automatically. To install, simply click the "Add to Home Screen"
-              option in your browser’s settings and enjoy LockBox anytime,
+              option in your browser’s settings and enjoy LockBoxApp anytime,
               anywhere!
             </p>
             <p className="content-text --color-primary mb0 pt2 pb4">

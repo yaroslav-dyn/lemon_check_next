@@ -64,12 +64,12 @@ const PasswordGenerator = () => {
     <>
       <Head>
         <title>
-          LockBox | Password Generator - Strong Password Generator & Encryption
+          LockBoxApp | Password Generator - Strong Password Generator & Encryption
           Tools
         </title>
         <meta
           name="description"
-          content="Generate strong, unique passwords with LockBox's free password generator. Strengthen your online security today."
+          content="Generate strong, unique passwords with LockBoxApp's free password generator. Strengthen your online security today."
         />
         <meta
           name="keywords"

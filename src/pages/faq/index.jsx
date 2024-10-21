@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import useDeviceType from "@/services/useDeviceType";
+import LogoTextElement from "@/components/elements/logo_text.element";
 
 const faqContent = [
   {
@@ -37,25 +38,18 @@ const AboutPage = () => {
     <>
       <Head>
         <title>
-          LockBox | FAQ - Strong Password Generator & Encryption Tools
+          LockBoxApp | FAQ - Strong Password Generator & Encryption Tools
         </title>
         <meta
           name="description"
-          content="LockBox Frequently asked questions, FAQ"
+          content="LockBoxApp Frequently asked questions, FAQ"
         />
       </Head>
 
       <div className="main_content">
         <main>
           <div className={`main__heading ${isMobile ? "--x-small-bm" : ""}`}>
-            <h1 className="h1_heading pb1 lato-bold" data-centered-text>
-              <span className="--color-primary">L</span>
-              <span className="--color-base">ock</span>
-              <span className="--color-primary">B</span>
-              <span className="--color-base">ox</span>{" "}
-              <span className="--color-primary">F</span>
-              <span>AQ</span>
-            </h1>
+            <LogoTextElement suffix="FAQ" />
             {/* <h1 className="h1_heading --color-base" data-centered-text>
               Frequency Asked Questions
             </h1> */}

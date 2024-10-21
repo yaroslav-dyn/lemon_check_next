@@ -8,7 +8,7 @@ const Security = () => {
     <>
       <Head>
         <title>
-          LockBox | Security at LockBox - Strong Password Generator & Encryption
+          LockBoxApp | Security at LockBoxApp - Strong Password Generator & Encryption
           Tools
         </title>
       </Head>
@@ -19,7 +19,7 @@ const Security = () => {
             <h1 className="h1_heading pb1 lato-bold" data-centered-text>
               <span className="--color-base">Security</span> at{" "}
               <Link className="--default-link" href={`/`} target="_blank">
-                LockBox
+                LockBoxApp
               </Link>{" "}
             </h1>
           </div>
@@ -28,7 +28,7 @@ const Security = () => {
             <p>
               At{" "}
               <Link className="--default-link" href={`/`} target="_blank">
-                LockBox
+                LockBoxApp
               </Link>
               , we take your privacy and security seriously. Below is a summary
               of our current security practices to protect your information and
@@ -38,7 +38,7 @@ const Security = () => {
             <ul className="list-reset">
               <li>
                 <p>
-                  1.<strong> No Password Storage</strong> LockBox does not store
+                  1.<strong> No Password Storage</strong> LockBoxApp does not store
                   any passwords or sensitive information. All password
                   generation and encryption occur directly on your device,
                   meaning no data is transmitted to our servers. This ensures
@@ -55,14 +55,14 @@ const Security = () => {
                     <strong>Password Encryption</strong> When using our
                   </strong>{" "}
                   feature, your passwords are encrypted using asecret phrase.
-                  This encryption happens locally in your browser, and LockBox
+                  This encryption happens locally in your browser, and LockBoxApp
                   does not store or have access to the secret phrase or
                   encrypted passwords.
                 </p>
               </li>
               <li>
                 <p>
-                  3. Data Protection Since LockBox currently does not save any
+                  3. Data Protection Since LockBoxApp currently does not save any
                   data, there is no risk of data breaches or unauthorized access
                   to your passwords. All processing is done on the client side,
                   ensuring your data stays secure on your own device.
@@ -102,7 +102,7 @@ const Security = () => {
                 <p>
                   7. Transparency{" "}
                   <Link className="--default-link" href={`/`} target="_blank">
-                    LockBox
+                    LockBoxApp
                   </Link>{" "}
                   will always keep users informed about any changes to our
                   security practices. As we add new features, we will update
@@ -116,7 +116,7 @@ const Security = () => {
             <p>
               When using{" "}
               <Link className="--default-link" href={`/`} target="_blank">
-                LockBox
+                LockBoxApp
               </Link>{" "}
               to generate and encrypt your passwords, it's critical to remember
               your secret phrase and store your encrypted passwords safely.
@@ -125,7 +125,7 @@ const Security = () => {
             <p>
               Since{" "}
               <Link className="--default-link" href={`/`} target="_blank">
-                LockBox
+                LockBoxApp
               </Link>{" "}
               does not save or store any data, if you lose your secret phrase or
               encrypted password string, it will be impossible to recover the
@@ -146,7 +146,7 @@ const Security = () => {
             <div>
               For questions or concerns about your security while using{" "}
               <Link className="--default-link" href={`/`} target="_blank">
-                LockBox
+                LockBoxApp
               </Link>
               , feel free to reach out to us at{" "}
               <address>

@@ -177,10 +177,11 @@ a {
 .company_logo {
   display: flex;
   align-items: center;
-  padding: 10px 24px;
-  padding-right: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 24px;
   text-decoration: none;
-  max-width: 80px;
+  max-width: 60px;
   transition: all 0.2s ease-in;
 }
 

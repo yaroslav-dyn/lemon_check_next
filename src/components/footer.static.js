@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex__grid justify-center">
-        <small className="--color-primary">©2024 LockBox </small>
+        <small className="--color-primary">©2024 LockBoxApp </small>
       </div>
     </footer>
   );
