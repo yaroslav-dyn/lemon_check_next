@@ -142,7 +142,7 @@ export default function AppHeader({ changeSchema }) {
                     data-url={navLink.url}
                     onClick={() => onClikNavItem(navLink.alias)}
                   >
-                    <Link href={navLink.url}>
+                    <Link className="nav__item__link" href={navLink.url}>
                       <div className="flex__grid align-center --extra_small-gap">
                         <img
                           src={navLink.icon}

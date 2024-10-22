@@ -15,9 +15,7 @@ export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState('light__theme')
 
   function setColorschema (theme)  {
-        
-    setTheme(theme);
-    
+    setTheme(theme); 
   };
 
   useEffect(() => {
@@ -34,12 +32,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <div className={`${isMobile ? "mobile__view" : ""}`}>
-        <div
-          id="appContainer"
-          className={`app__container ${theme}`}
-        >
+        <div id="appContainer" className={`app__container ${theme}`}>
           <AppHeader changeSchema={setColorschema} />
-          <Component {...pageProps} />
+          <Component {...pageProps} theme={theme} />
           <Footer />
         </div>
       </div>

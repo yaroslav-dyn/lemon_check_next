@@ -1,9 +1,12 @@
 /* SECTION: PRIMARY THEME */
 
 .primary__theme {
-  --link-color: var(--link-color-active);
-    --theme-footer-background: #000;
+  --link-color: #E94E3D;
+  --link-color-active: #fff;
+  --theme-footer-background: #000;
 }
+
+
 
 .primary__theme .main_content {
   background: var(--theme-primary-background);
@@ -37,7 +40,7 @@
   opacity: 0.7;
 }
 
-.main__nav__links a {
+.main__nav__links a.nav__item__link, .main__nav__links a.nav__item__link:hover {
   color: var(--theme-primary-text);
 }
 
@@ -68,14 +71,22 @@
   --theme-primary-accent: limegreen;
   --theme-footer-background: #fff;
 
+  --link-color: #444;
+  --link-color-active: limegreen;
 }
+
 
 .light__theme .footer  {
   /* background-color: var(--theme-footer-background); */
   background-color: var(--default-page-bg);
-  border-bottom: 1px solid limegreen;
 }
 
+.light__theme a {
+  color: var(--link-color);
+} 
+.light__theme a:hover {
+  color: var(--link-color-active);
+}
 
 .light__theme .main__nav__links a:hover,
 .light__theme .nav__item.desktop.active a {

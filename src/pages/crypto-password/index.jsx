@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import Head from "next/head";
 import {
   copyToClipboardMethod,
@@ -11,23 +11,32 @@ import CryptoJS from "crypto-js";
 import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
 
-const operationOptions = [
-  {
-    label: "Encrypt",
-    value: "encrypt",
-    selectedBackgroundColor: "#E94E3D",
-  },
-  {
-    label: "Decrypt",
-    value: "decrypt",
-    selectedBackgroundColor: "#E94E3D",
-  },
-];
-
 const infoIcon = "/assets/img/icons8-question-mark-48.png";
 
-const CryptoPassword = () => {
-  const areaElement = useRef();
+const CryptoPassword = (props) => {
+
+ 
+  const isDarkTheme = useMemo(() => 
+    props.theme === 'primary__theme', [props.theme]);
+
+  const operationOptions = [
+    {
+      label: "Encrypt",
+      value: "encrypt",
+      selectedBackgroundColor: !isDarkTheme ? "limegreen" : "#E94E3D",
+      fontColor: !isDarkTheme ? "#000" : "#fff",
+      selectedFontColor: "#fff",
+    },
+    {
+      label: "Decrypt",
+      value: "decrypt",
+      selectedBackgroundColor: !isDarkTheme ? "limegreen" : "#E94E3D",
+      fontColor: !isDarkTheme ? "#000" : "#fff",
+      selectedFontColor: "#fff",
+    },
+  ];
+
+
   const defaultFormObject = {
     alias: "",
     sourceText: "",
@@ -121,8 +130,8 @@ const CryptoPassword = () => {
     <>
       <Head>
         <title>
-          LockBoxApp | Password encryption - Strong Password Generator & Encryption
-          Tools
+          LockBoxApp | Password encryption - Strong Password Generator &
+          Encryption Tools
         </title>
         <meta
           name="description"
@@ -142,6 +151,7 @@ const CryptoPassword = () => {
             {/* Type Switcher */}
             <div className={styles.instructionActionControls}>
               <UISwitcher
+                isDark={isDarkTheme}
                 options={operationOptions}
                 onSwitch={onChangeOperation}
                 elementWidth={160}
@@ -161,6 +171,7 @@ const CryptoPassword = () => {
               instr={instr}
               instrB={instrB}
               triggerInstruction={triggerInstruction}
+              isDarkTheme={isDarkTheme}
             />
             <div>
               <form
@@ -221,11 +232,17 @@ const CryptoPassword = () => {
                       }}
                     >
                       <div
-                        className={`instruction_info_icon  ${
+                        className={`instruction_info_icon ${
                           instrC ? "active" : ""
                         }`}
                       >
-                        <img src={infoIcon} width={30} />
+                        <img
+                          className={`${
+                            isDarkTheme ? "--dark-theme" : "--light-theme"
+                          } `}
+                          src={infoIcon}
+                          width={30}
+                        />
                       </div>
                       <span> Alias for your password</span>
                     </h2>
@@ -288,8 +305,13 @@ const CryptoPassword = () => {
 /**
  * Support components
  */
-const InstructionModal = ({ tape }) => (
-  <div className={styles.instructionWindow} data-left-text>
+const InstructionModal = ({ tape, isDarkTheme }) => (
+  <div
+    className={`${styles.instructionWindow} ${
+      !isDarkTheme ? "--light-theme" : "--dark-theme"
+    }`}
+    data-left-text
+  >
     <ul className={styles.instrustionList}>
       {tape === "A" && (
         <>
@@ -320,8 +342,8 @@ const InstructionModal = ({ tape }) => (
             during the encryption process into the "Secret phrase" field.
           </li>
           <li>
-            2. Enter Encrypted Data: In the "Encrypted password"
-            field, input the encrypted password you wish to decrypt.
+            2. Enter Encrypted Data: In the "Encrypted password" field, input
+            the encrypted password you wish to decrypt.
           </li>
           <li>
             3. View Decrypted Password: Once both fields are filled, the
@@ -344,6 +366,7 @@ const InstructionModule = ({
   instrB,
   triggerInstruction,
   className = "",
+  isDarkTheme,
 }) => (
   <div
     className={`${className} instruction__block container__limit --x-small no-x-paddings ${
@@ -360,13 +383,17 @@ const InstructionModule = ({
           onClick={() => triggerInstruction("A")}
         >
           <div className={`instruction_info_icon  ${instr ? "active" : ""}`}>
-            <img src={infoIcon} width={30} />
+            <img
+              className={`${isDarkTheme ? "--dark-theme" : "--light-theme"}`}
+              src={infoIcon}
+              width={30}
+            />
           </div>
           <span>How to Encrypt Your Password?</span>
         </h2>
         {instr && (
           <div className={styles.instructionModalContainer}>
-            <InstructionModal tape="A" />
+            <InstructionModal tape="A" isDarkTheme={isDarkTheme} />
           </div>
         )}
       </div>
@@ -384,14 +411,22 @@ const InstructionModule = ({
           >
             ?
           </div> */}
-          <div className={`instruction_info_icon  ${instrB ? "active" : ""}`}>
-            <img src={infoIcon} width={30} />
+          <div
+            className={`instruction_info_icon ${
+              isDarkTheme ? "--dark-theme" : "--light-theme"
+            }  ${instrB ? "active" : ""}`}
+          >
+            <img
+              className={`${isDarkTheme ? "--dark-theme" : "--light-theme"}`}
+              src={infoIcon}
+              width={30}
+            />
           </div>
           <span>How to Decrypt Your Password?</span>
         </h2>
         {instrB && (
           <div className={styles.instructionModalContainer}>
-            <InstructionModal tape="B" />
+            <InstructionModal tape="B" isDarkTheme={isDarkTheme} />
           </div>
         )}
       </div>
