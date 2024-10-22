@@ -68,7 +68,7 @@ const Privacy = () => {
                   We store user preferences, such as theme selection (light/dark
                   mode), using local storage on the user's device. This data is
                   used solely to enhance the user experience and is not shared
-                  with third parties or stored on our servers."
+                  with third parties or stored on our servers.
                   {/* purposes. However, if you use additional features like saving
                   data on your device (e.g., using localStorage or IndexedDB),
                   you may need to agree to use these features, which are solely
