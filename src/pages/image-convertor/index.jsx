@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
 import styles from '@/styles/ImageConvertor.module.css';
 import { copyToClipboardMethod } from '@/services/base.services';
@@ -6,21 +6,7 @@ import useDeviceType from '@/services/useDeviceType';
 import UISwitcher from "@/components/ui.switcher";
 
 
-const operationOptions = [
-  {
-    label: "Like data",
-    value: "data",
-    selectedBackgroundColor: "#E94E3D",
-  },
-  {
-    label: "Like image",
-    value: "image",
-    selectedBackgroundColor: "#E94E3D",
-  },
-];
-
-
-const ImageConvertor = () => {
+const ImageConvertor = (props) => {
   
   const [imageBase64, setImageBase64] = useState('');
   const [imageBase64ForCopy, setTypedImageBase64] = useState('');
@@ -28,6 +14,29 @@ const ImageConvertor = () => {
   const imageInputRef = useRef(null);
   const areaElement = useRef();
   const mobileDevice = useDeviceType();
+
+  const isDarkTheme = useMemo(
+    () => props.theme === "primary__theme",
+    [props.theme]
+  );
+
+  const operationOptions = [
+    {
+      label: "Like data",
+      value: "data",
+      selectedBackgroundColor: !isDarkTheme ? "limegreen" : "#E94E3D",
+      fontColor: !isDarkTheme ? "#000" : "#fff",
+      selectedFontColor: "#fff",
+    },
+    {
+      label: "Like image",
+      value: "image",
+      selectedBackgroundColor: !isDarkTheme ? "limegreen" : "#E94E3D",
+      fontColor: !isDarkTheme ? "#000" : "#fff",
+      selectedFontColor: "#fff",
+    },
+  ];
+
 
   const onChangeDataType = (type) => {
     setSelectedConvertedType(type);
@@ -108,6 +117,7 @@ const ImageConvertor = () => {
               <div className={styles.convertorControlBlock} data-centered-text>
                 <div className="flex__grid justify-center ">
                   <UISwitcher
+                    isDark={isDarkTheme}
                     options={operationOptions}
                     onSwitch={onChangeDataType}
                     elementWidth={180}

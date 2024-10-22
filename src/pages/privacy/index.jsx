@@ -15,7 +15,7 @@ const Privacy = () => {
 
       <div className="main_content">
         <main className="container__limit">
-          <h5 className="underline">Last Updated: october 17, 2024</h5>
+          <h5 className="underline">Last Updated: october 22, 2024</h5>
           <div className="main__heading --small-bm">
             <h1 className="h1_heading pb1 lato-bold" data-centered-text>
               Privacy <span className="--color-primary">Policy</span>
@@ -39,9 +39,9 @@ const Privacy = () => {
               <li>
                 <h2>1. Information We Collect</h2>
                 <p>
-                  We aim to limit the personal information we collect. LockBoxApp
-                  does not collect, store, or share any personal data unless
-                  explicitly provided by you for customer support or
+                  We aim to limit the personal information we collect.
+                  LockBoxApp does not collect, store, or share any personal data
+                  unless explicitly provided by you for customer support or
                   communication purposes.
                 </p>
                 <ul className="list-reset">
@@ -63,8 +63,16 @@ const Privacy = () => {
               <li>
                 <h2>2. Use of Cookies</h2>
                 <p>
-                  Our service does not use cookies for tracking or marketing
-                  purposes. 
+                  {/* TODO: Check and edit then */}
+                  Our service does not use cookies for tracking or marketing. 
+                  We store user preferences, such as theme selection (light/dark
+                  mode), using local storage on the user's device. This data is
+                  used solely to enhance the user experience and is not shared
+                  with third parties or stored on our servers.
+                  {/* purposes. However, if you use additional features like saving
+                  data on your device (e.g., using localStorage or IndexedDB),
+                  you may need to agree to use these features, which are solely
+                  for enhancing your user experience. */}
                 </p>
               </li>
               <li>

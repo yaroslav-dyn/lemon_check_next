@@ -104,7 +104,7 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  6 .Modifications to the Service LockBoxApp reserves the right to
+                  6. Modifications to the Service LockBoxApp reserves the right to
                   modify, update, or discontinue the Service at any time without
                   notice. We are not liable for any changes or disruptions that
                   may occur as a result.

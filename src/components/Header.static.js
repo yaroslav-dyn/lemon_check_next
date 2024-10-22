@@ -5,6 +5,7 @@ import BottomBar from "@/components/bottom_bar.static";
 import { usePathname } from "next/navigation";
 import useDeviceType from "@/services/useDeviceType";
 import useScrollPosition from "@/services/useScrollPosition";
+import SchemaSelectorElement from "@/components/elements/scema_selector.element";
 
 const newLogo = "/assets/img/logos/lc_dally_logo@3x.png";
 
@@ -56,7 +57,7 @@ export const BottomBarlinks = [
 const infoIcon = "/assets/img/icons8-info-48-white.png";
 const FaqIcon = "/assets/img/icons8-faq-48.png";
 
-export default function AppHeader() {
+export default function AppHeader({ changeSchema }) {
   const [tabletScreen, setTableteScreen] = useState(false);
 
   const isMobile = useDeviceType();
@@ -95,15 +96,20 @@ export default function AppHeader() {
 
   useEffect(() => {
     const pageIcons = document.querySelectorAll(".instruction_info_icon");
+    const themeIcons = document.querySelectorAll(".lb__theme_icon");
     if (!topHeaderElement || !topHeaderElement.current) return;
     if (isMobile && scrollPosition > 70) {
       topHeaderElement.current.classList.add("scrolled");
       if (!pageIcons || pageIcons.length < 1) return;
       pageIcons.forEach((i) => i.classList.add("scrolled"));
+      if (!themeIcons || themeIcons.length < 1) return;
+      themeIcons.forEach((l) => l.classList.add("scrolled"));
     } else {
       topHeaderElement.current.classList.remove("scrolled");
       if (!pageIcons || pageIcons.length < 1) return;
       pageIcons.forEach((i) => i.classList.remove("scrolled"));
+      if (!themeIcons || themeIcons.length < 1) return;
+      themeIcons.forEach((l) => l.classList.remove("scrolled"));
     }
   }, [scrollPosition]);
 
@@ -136,11 +142,11 @@ export default function AppHeader() {
                     data-url={navLink.url}
                     onClick={() => onClikNavItem(navLink.alias)}
                   >
-                    <Link href={navLink.url}>
+                    <Link className="nav__item__link" href={navLink.url}>
                       <div className="flex__grid align-center --extra_small-gap">
                         <img
                           src={navLink.icon}
-                          className="nav__item-icon--img --desktop"
+                          className="nav__item-icon--img --desktop show__desktop"
                         />
                         <span>{navLink.title}</span>
                       </div>
@@ -152,27 +158,30 @@ export default function AppHeader() {
             <BottomBar />
           )}
           <div
-            className={`flex__grid ${
+            className={`flex__grid align-center ${
               !isMobile ? "--small-gap" : "--extra_small-gap"
             }`}
           >
-            <Link
-              href="/about"
-              className={`instruction_info_icon  ${
-                pathname === "/about" ? "active" : ""
-              }`}
-            >
-              <img src={infoIcon} width={40} />
-            </Link>
+            <SchemaSelectorElement onChangeTheme={changeSchema} />
 
-            <Link
-              href="/faq"
-              className={`instruction_info_icon ${
-                pathname === "/faq" ? "active" : ""
-              }`}
-            >
-              <img src={FaqIcon} width={40} />
-            </Link>
+            <div>
+              <Link
+                href="/about"
+                className={`instruction_info_icon  ${
+                  pathname === "/about" ? "active" : ""
+                }`}
+              >
+                <img src={infoIcon} width={40} />
+              </Link>
+              <Link
+                href="/faq"
+                className={`instruction_info_icon ${
+                  pathname === "/faq" ? "active" : ""
+                }`}
+              >
+                <img src={FaqIcon} width={40} />
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
