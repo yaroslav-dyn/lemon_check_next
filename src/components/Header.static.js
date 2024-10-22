@@ -146,7 +146,7 @@ export default function AppHeader({ changeSchema }) {
                       <div className="flex__grid align-center --extra_small-gap">
                         <img
                           src={navLink.icon}
-                          className="nav__item-icon--img --desktop"
+                          className="nav__item-icon--img --desktop show__desktop"
                         />
                         <span>{navLink.title}</span>
                       </div>
@@ -163,6 +163,7 @@ export default function AppHeader({ changeSchema }) {
             }`}
           >
             <SchemaSelectorElement onChangeTheme={changeSchema} />
+
             <div>
               <Link
                 href="/about"

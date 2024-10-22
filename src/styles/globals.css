@@ -432,7 +432,12 @@ a:hover, a:focus, a:active {
   display: inline-block;
 }
 
-
+@media (max-width: 1298px) {
+  .nav__item.desktop {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}
 
 .main_content {
   padding: 0 1.875rem;
@@ -515,7 +520,6 @@ a:hover, a:focus, a:active {
 [data-right-text] {
   text-align: right;
 }
-
 
 .--color-base {
   color: var(--color-base) !important;
