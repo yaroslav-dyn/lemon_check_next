@@ -60,11 +60,9 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
         ? onChangeTheme("primary__theme")
         : onChangeTheme("light__theme");
          setCurrentTheme("auto__theme");
-        localStorage.setItem("lb_current__theme", "auto__theme");
     } else {
       onChangeTheme(theme);
     }
-
   };
 
   // TODO: Wierd sideeffect on all swithers
@@ -76,14 +74,10 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("lb_current__theme");
-    const systemTheme = savedTheme ? savedTheme :(window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    )
-      ? "primary__theme"
-      : "light__theme");
-      savedTheme && localStorage.setItem("lb_current__theme", "auto__theme");
+    const systemTheme = savedTheme ? savedTheme : 'auto__theme';
+      !savedTheme && localStorage.setItem("lb_current__theme", "auto__theme");
     setCurrentTheme(systemTheme || "auto__theme");
-    onChangeSelector(systemTheme);
+    onChangeSelector(systemTheme || "auto__theme");
   }, []);
 
 
