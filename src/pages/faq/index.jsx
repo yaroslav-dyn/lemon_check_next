@@ -85,7 +85,7 @@ const AboutPage = () => {
             <article className="md-col-8">
               <section className="content-text">
                 <h3 className="--color-primary" id="password-generator">
-                  How can I use the Password Generator ?
+                  How can I use the Password Generator?
                 </h3>
 
                 <p className="pt">
@@ -158,7 +158,7 @@ const AboutPage = () => {
 
               <section id="decrypt-password" className="content-text">
                 <h3 className="--color-primary">
-                  How I can decrypt my password ?
+                  How I can decrypt my password?
                 </h3>
 
                 <p>

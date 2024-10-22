@@ -11,27 +11,6 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
   const osThemeIcon = "/assets/icons/icons8-operating-system-48-light.png";
   const moonIcon = "/assets/icons/icons8-moon-48-light.png";
 
-  // const options = [
-  //   {
-  //     label: mobileDevice ? "L" : "Light",
-  //     value: "light__theme",
-  //     selectedBackgroundColor: "limegreen",
-  //     selectedFontColor: "#fff",
-  //   },
-  //   {
-  //     label: mobileDevice ? "A" : "Auto",
-  //     value: "auto__theme",
-  //     selectedBackgroundColor: "#066bc0",
-  //     // currentTheme === "light__theme" ? "limegreen" : "E94E3D",
-  //     selectedFontColor: "#fff",
-  //   },
-  //   {
-  //     label: mobileDevice ? "D" :"Dark",
-  //     value: "primary__theme",
-  //     selectedBackgroundColor: "#E94E3D",
-  //     selectedFontColor: "#fff",
-  //   },
-  // ];
 
   const options = [
     {
@@ -96,24 +75,30 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
   };
 
   useEffect(() => {
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+    const savedTheme = localStorage.getItem("lb_current__theme");
+    const systemTheme = savedTheme ? savedTheme :(window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    )
       ? "primary__theme"
-      : "light__theme";
-    setCurrentTheme(systemTheme);
+      : "light__theme");
+      savedTheme && localStorage.setItem("lb_current__theme", "auto__theme");
+    setCurrentTheme(systemTheme || "auto__theme");
     onChangeSelector(systemTheme);
-    localStorage.setItem("lb_current__theme", "auto__theme");
   }, []);
+
 
   return (
     <div
       className="theme__selector"
-      style={{ width: 'max-content', height: 'auto' }}
+      style={{ width: "max-content", height: "auto" }}
     >
       <SwitchSelector
         name="ThemeSelector"
         onChange={onChangeSelector}
         options={options}
-        initialSelectedIndex={1}
+        forcedSelectedIndex={options.findIndex(
+          (opt) => opt.value === currentTheme
+        )}
         backgroundColor={"fff"}
         fontColor={"#fff"}
         selectedFontColor={"#fff"}
