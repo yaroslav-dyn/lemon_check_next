@@ -1,8 +1,20 @@
 
+import { useState, useEffect } from "react";
 import SwitchSelector from "react-switch-selector";
 
 
 const UISwitcher = ({ options, onSwitch, elementWidth }) => {
+
+const [currentColorTheme, setCurrentTheme] = useState("auto__theme");
+
+
+useEffect(() => {
+  const themeFromStorage = localStorage.getItem("lb_current__theme");
+  setCurrentTheme(themeFromStorage);
+  console.log("ct", themeFromStorage);
+}, [currentColorTheme]);
+
+
   return (
     <div
       className="your-required-wrapper"
@@ -13,7 +25,7 @@ const UISwitcher = ({ options, onSwitch, elementWidth }) => {
         onChange={onSwitch}
         options={options}
         initialSelectedIndex={0}
-        backgroundColor={"#6a6565"}
+        backgroundColor={"#000"}
         fontColor={"#ffffff"}
       />
     </div>

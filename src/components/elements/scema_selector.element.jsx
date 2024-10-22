@@ -35,20 +35,38 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
 
   const options = [
     {
-      label: <img src={sunIcon} style={{ width: 44, height: 'auto' }} />,
+      label: (
+        <img
+          className="lb__theme_icon"
+          src={sunIcon}
+          style={{ width: 40, height: "auto" }}
+        />
+      ),
       value: "light__theme",
       selectedBackgroundColor: "limegreen",
       selectedFontColor: "#fff",
     },
     {
-      label: <img src={osThemeIcon} style={{ width: 44, height: 'auto' }} />,
+      label: (
+        <img
+          className="lb__theme_icon"
+          src={osThemeIcon}
+          style={{ width: 40, height: "auto" }}
+        />
+      ),
       value: "auto__theme",
       selectedBackgroundColor: "#066bc0",
       // currentTheme === "light__theme" ? "limegreen" : "E94E3D",
       selectedFontColor: "#fff",
     },
     {
-      label: <img src={moonIcon} style={{ width: 44, height: 'auto' }} />,
+      label: (
+        <img
+          className="lb__theme_icon"
+          src={moonIcon}
+          style={{ width: 40, height: "auto" }}
+        />
+      ),
       value: "primary__theme",
       selectedBackgroundColor: "#E94E3D",
       selectedFontColor: "#fff",

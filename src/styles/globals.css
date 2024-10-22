@@ -661,6 +661,10 @@ a {
   max-width: 32px;
 }
 
+.lb__theme_icon.scrolled {
+  max-width: 32px;
+}
+
 .mt-1\.4 {
   margin-top: 1.4rem
 }
