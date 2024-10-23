@@ -70,6 +70,10 @@ ul {
   width: 100%;
 }
 
+.--uppercase {
+  text-transform: uppercase;
+}
+
 .container__limit {
   max-width: 960px;
   padding-left: 1rem;

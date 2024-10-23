@@ -70,3 +70,33 @@ input[type=range]::-ms-thumb {
   margin-bottom: 12px;
   margin-top: 10px;
 }
+
+
+ .marquee-container {
+   width: 100%;
+   overflow: hidden;
+   white-space: nowrap;
+   display: flex;
+   gap: 1rem;
+   /* Gap between the two lines */
+ }
+
+ .marquee__line {
+   display: flex;
+   column-gap: 1rem;
+    animation: marquee 40s linear infinite backwards;
+ }
+
+ .marquee span {
+   padding-right: 50px;
+   /* Space between repetitions */
+ }
+
+ @keyframes marquee {
+   from {
+     transform: translateX(-100%);
+   }
+   to {
+     transform: translateX(100%);
+   }
+ }

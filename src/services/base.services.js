@@ -10,7 +10,7 @@ export const copyToClipboardMethod = (element) => {
   }
 };
 
-function camelToSentence(camelCaseStr) {
+export function camelToSentence(camelCaseStr) {
   const result = camelCaseStr
     .replace(/([A-Z])/g, " $1")
     .replace(/^./, (str) => str.toUpperCase());
