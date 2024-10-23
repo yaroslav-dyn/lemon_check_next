@@ -93,7 +93,7 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
         forcedSelectedIndex={options.findIndex(
           (opt) => opt.value === currentTheme
         )}
-        backgroundColor={"fff"}
+        backgroundColor={"transparen"}
         fontColor={"#fff"}
         selectedFontColor={"#fff"}
       ></SwitchSelector>

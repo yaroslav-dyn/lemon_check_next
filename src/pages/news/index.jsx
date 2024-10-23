@@ -85,7 +85,7 @@ const NewsPage = () => {
               </li>
             </ul>
           </article>
-          <hr className="--base-divider --bg-primary mt0 mb2" />
+          <hr className="--base-divider x2 --bg-primary mt0 mb2" />
 
           <div className="flex__grid justify-between">
             <img
@@ -105,7 +105,7 @@ const NewsPage = () => {
               alt="QR code"
             />
           </div>
-          <hr className="--base-divider --bg-primary mb2" />
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
           <article className="content-text">
             <h2 className="mb0">Upcoming Features (In Progress)</h2>
             <p>
