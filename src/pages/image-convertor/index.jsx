@@ -1,16 +1,14 @@
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
-import styles from '@/styles/ImageConvertor.module.css';
-import { copyToClipboardMethod } from '@/services/base.services';
-import useDeviceType from '@/services/useDeviceType';
+import styles from "@/styles/ImageConvertor.module.css";
+import { copyToClipboardMethod } from "@/services/base.services";
+import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
 
-
 const ImageConvertor = (props) => {
-  
-  const [imageBase64, setImageBase64] = useState('');
-  const [imageBase64ForCopy, setTypedImageBase64] = useState('');
-  const [selectedConvertedType, setSelectedConvertedType] = useState('data');
+  const [imageBase64, setImageBase64] = useState("");
+  const [imageBase64ForCopy, setTypedImageBase64] = useState("");
+  const [selectedConvertedType, setSelectedConvertedType] = useState("data");
   const imageInputRef = useRef(null);
   const areaElement = useRef();
   const mobileDevice = useDeviceType();
@@ -37,29 +35,28 @@ const ImageConvertor = (props) => {
     },
   ];
 
-
   const onChangeDataType = (type) => {
     setSelectedConvertedType(type);
-    if (type === 'image') {
+    if (type === "image") {
       setTypedImageBase64(`<img src='${imageBase64}' />`);
-    } else if (type === 'data') {
+    } else if (type === "data") {
       setTypedImageBase64(imageBase64);
     }
-  }
+  };
 
   const handleImageChange = () => {
     const file = imageInputRef.current.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
       setImageBase64(reader.result);
-      setTypedImageBase64(reader.result);;
+      setTypedImageBase64(reader.result);
     };
     reader.readAsDataURL(file);
   };
 
   const copyToClipboard = () => {
-    copyToClipboardMethod(areaElement)
-  }
+    copyToClipboardMethod(areaElement);
+  };
 
   // NOTE: HTML!
   return (
@@ -83,27 +80,23 @@ const ImageConvertor = (props) => {
           <h1 className="h1_heading" data-centered-text>
             IMAGE TO <span className="--color-primary">BASE64</span>
           </h1>
-          <div className="h2_heading mb2 mt1" data-centered-text>
-            Convert any image to BASE64
+          <div className="h2_heading mb1 mt1" data-centered-text>
+            Convert an image to BASE64
           </div>
+          <small className="--base-label block center">
+            ** accept{" "}
+            <span className="--color-primary">png, jpeg, jpg, gif,webp</span>{" "}
+          </small>
         </div>
 
-        <div data-centered-text>
-          <input
-            id="imageInput"
-            className={styles.imageInput}
-            type="file"
-            ref={imageInputRef}
-            onChange={handleImageChange}
-            assept={`image/*`}
+        {!imageBase64 && (
+          <FileInpuElement
+            handleImageChange={handleImageChange}
+            imageInputRef={imageInputRef}
+            mobileDevice={mobileDevice}
           />
-          <label
-            className={styles.uploadButton + " action__btn"}
-            htmlFor="imageInput"
-          >
-            UPLOAD IMAGE
-          </label>
-        </div>
+        )}
+
         <section className={`${styles.resultBlock} container__limit gap-x-3`}>
           {imageBase64 && (
             <>
@@ -114,19 +107,28 @@ const ImageConvertor = (props) => {
                 <img src={imageBase64} alt="chosen" />
               </a>
 
-              <div className={styles.convertorControlBlock} data-centered-text>
-                <div className="flex__grid justify-center ">
-                  <UISwitcher
-                    isDark={isDarkTheme}
-                    options={operationOptions}
-                    onSwitch={onChangeDataType}
-                    elementWidth={180}
-                  />
+              <div className="flex__grid --column justify-between">
+                <div
+                  className={styles.convertorControlBlock}
+                  data-centered-text
+                >
+                  <div className="flex__grid justify-center ">
+                    <UISwitcher
+                      isDark={isDarkTheme}
+                      options={operationOptions}
+                      onSwitch={onChangeDataType}
+                      elementWidth={180}
+                    />
+                  </div>
+                  <br />
+                  <div></div>
                 </div>
-                <br />
-                <div></div>
-              </div>
 
+                <FileInpuElement
+                  handleImageChange={handleImageChange}
+                  imageInputRef={imageInputRef}
+                />
+              </div>
               <div className={styles.generatedCodeBlock}>
                 <textarea
                   className={styles.codeArea}
@@ -142,7 +144,10 @@ const ImageConvertor = (props) => {
                 <div>
                   <br />
                   <button
-                    className={styles.uploadButton + " action__btn w100"}
+                    className={
+                      styles.uploadButton +
+                      " action__btn --secondary-btn    w100"
+                    }
                     onClick={copyToClipboard}
                   >
                     Copy code
@@ -155,7 +160,31 @@ const ImageConvertor = (props) => {
       </main>
     </>
   );
-}//
+}; //
 
 export default ImageConvertor;
 
+const FileInpuElement = ({
+  handleImageChange,
+  imageInputRef,
+  mobileDevice,
+}) => {
+  return (
+    <div className="container__limit --x-small my2" data-centered-text>
+      <input
+        id="imageInput"
+        className={`${styles.imageInput} ${mobileDevice ? 'block' : ''}`}
+        type="file"
+        ref={imageInputRef}
+        onChange={handleImageChange}
+        assept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+      />
+      <label
+        className={styles.uploadButton + " action__btn"}
+        htmlFor="imageInput"
+      >
+        UPLOAD IMAGE
+      </label>
+    </div>
+  );
+};

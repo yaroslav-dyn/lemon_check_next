@@ -54,8 +54,9 @@ export const BottomBarlinks = [
   },
 ];
 
-const infoIcon = "/assets/img/icons8-info-48-white.png";
-const FaqIcon = "/assets/img/icons8-faq-48.png";
+const infoIcon = "/assets/icons/icons8-info-48-white.png";
+const FaqIcon = "/assets/icons/icons8-faq-48.png";
+const newsIcon = "/assets/icons/icons8-message-64-white.png";
 
 export default function AppHeader({ changeSchema }) {
   const [tabletScreen, setTableteScreen] = useState(false);
@@ -165,22 +166,32 @@ export default function AppHeader({ changeSchema }) {
             <SchemaSelectorElement onChangeTheme={changeSchema} />
 
             <div>
-              <Link
-                href="/about"
-                className={`instruction_info_icon  ${
-                  pathname === "/about" ? "active" : ""
-                }`}
-              >
-                <img src={infoIcon} width={40} />
-              </Link>
-              <Link
-                href="/faq"
-                className={`instruction_info_icon ${
-                  pathname === "/faq" ? "active" : ""
-                }`}
-              >
-                <img src={FaqIcon} width={40} />
-              </Link>
+              <div className="flex__grid --extra_small-x-gap">
+                <Link
+                  href="/about"
+                  className={`instruction_info_icon colored 
+                    ${!isMobile ? "mr1" : "mr0.5"}
+                    ${pathname === "/about" ? "active" : ""}`}
+                >
+                  <img src={infoIcon} width={40} />
+                </Link>
+                <Link
+                  href="/faq"
+                  className={`instruction_info_icon colored ${
+                    !isMobile ? "mr1" : "mr0.5"
+                  } ${pathname === "/faq" ? "active" : ""}`}
+                >
+                  <img src={FaqIcon} width={40} />
+                </Link>
+                <Link
+                  href="/news"
+                  className={`instruction_info_icon colored ${
+                    pathname === "/news" ? "active" : ""
+                  }`}
+                >
+                  <img src={newsIcon} width={40} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

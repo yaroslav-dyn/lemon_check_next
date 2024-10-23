@@ -7,6 +7,7 @@
   --link-color-active: #E94E3D;
 
   --color-primary: #E94E3D;
+  --color-accent: #7C160D;
   --color-base: #fff;
 
   --theme-primary-accent: #E94E3D;
@@ -354,6 +355,10 @@ a:hover, a:focus, a:active {
   padding-right: 1.875rem;
   transition: all 0.2s ease-in;
 }
+.mobile__view .top__header {
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+}
 
 .top__header.scrolled {
   min-height: 60px;
@@ -466,10 +471,6 @@ a:hover, a:focus, a:active {
 
 
 
-/*SECTION About */
-.about__content {}
-
-
 /* SECTION: Helpers */
 .flex__grid {
   display: flex;
@@ -499,8 +500,16 @@ a:hover, a:focus, a:active {
   gap: 0.5rem;
 }
 
+.--extra_small-x-gap {
+  row-gap: 0.5rem;
+}
+
 .--base-gap {
   gap: 0.93rem;
+}
+
+.mr0\.5 {
+  margin-right: 0.5rem;
 }
 
 .--pos-sticky {
@@ -553,6 +562,39 @@ a:hover, a:focus, a:active {
   height: 1px;
   border: none;
   background-color: var(--color-primary);
+}
+.--base-divider.x2 {
+  height: 2px;
+}
+.--base-label {
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.custom__checkbox input {
+  display: none;
+}
+
+.custom__checkbox input[type=checkbox] + label {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-primary);
+  border-radius: 6px
+}
+
+.custom__checkbox input[type=checkbox]:checked + label:after {
+ content: "\2715";
+ font-weight: bold;
+ color: var(--color-primary);
+ font-size: 1.1rem;
+ display: inline-block;
+ position: relative;
+
+}
+
+.mobile__view .custom__checkbox input[type=checkbox]:checked+label:after {
+  top: -2px;
 }
 
 /* ACTIONS */
@@ -658,6 +700,14 @@ a:hover, a:focus, a:active {
   height: max-content;
 }
 
+.instruction_info_icon.colored {
+  border: none;
+}
+
+.instruction_info_icon.colored > img {
+  padding: 0;
+}
+
 .instruction_info_icon>img {
   vertical-align: middle;
   padding: 2px;
@@ -667,10 +717,17 @@ a:hover, a:focus, a:active {
   filter: invert();
 }
 
-.instruction_info_icon.active,
-.instruction_info_icon:hover {
+.instruction_info_icon:not(.colored).active,
+.instruction_info_icon:not(.colored):hover {
   border-color: var(--color-primary);
   border-radius: 50%;
+}
+
+.instruction_info_icon.colored.active,
+.instruction_info_icon.colored:hover {
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  border: none;
 }
 
 .instruction_info_icon.scrolled>img {

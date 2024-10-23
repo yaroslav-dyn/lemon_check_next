@@ -130,7 +130,7 @@ const AboutPage = () => {
           </article> */}
           <article>
             <div className="content-text">
-              <h2>
+              <h2 className="mt0">
                 <Link
                   className="text-decoration-none"
                   href="/password-generator"
