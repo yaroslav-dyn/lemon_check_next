@@ -26,9 +26,12 @@ const PasswordGenerator = () => {
 
   const generateCode = () => {
     let generatePassword = "";
+    const alphabet =
+      "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const specialCharactersSymbols = "!@#$%^&*?";  
     const characters = hasSpecialCharacters
-      ? "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*?"
-      : "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      ? `${alphabet}${specialCharactersSymbols}`
+      : alphabet;
 
     for (var i = 0; i < passwordLength; i++) {
       generatePassword += characters.charAt(
@@ -64,8 +67,8 @@ const PasswordGenerator = () => {
     <>
       <Head>
         <title>
-          LockBoxApp | Password Generator - Strong Password Generator & Encryption
-          Tools
+          LockBoxApp | Password Generator - Strong Password Generator &
+          Encryption Tools
         </title>
         <meta
           name="description"
@@ -131,13 +134,16 @@ const PasswordGenerator = () => {
                   </div>
 
                   <br />
-                  <div className="flex__grid justify-between">
-                    <input
-                      id="specialCharacters"
-                      type="checkbox"
-                      checked={hasSpecialCharacters}
-                      onChange={setSpecialCharactersBox}
-                    />
+                  <div className="flex__grid align-center justify-between">
+                    <div className="custom__checkbox">
+                      <input
+                        id="specialCharacters"
+                        type="checkbox"
+                        checked={hasSpecialCharacters}
+                        onChange={setSpecialCharactersBox}
+                      />
+                      <label htmlFor="specialCharacters"></label>
+                    </div>
                     <label htmlFor="specialCharacters">
                       Use special characters
                     </label>

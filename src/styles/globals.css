@@ -7,6 +7,7 @@
   --link-color-active: #E94E3D;
 
   --color-primary: #E94E3D;
+  --color-accent: #7C160D;
   --color-base: #fff;
 
   --theme-primary-accent: #E94E3D;
@@ -558,6 +559,32 @@ a:hover, a:focus, a:active {
 .--base-label {
   font-size: 1.125rem;
   font-weight: 400;
+}
+
+.custom__checkbox input {
+  display: none;
+}
+
+.custom__checkbox input[type=checkbox] + label {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-primary);
+  border-radius: 6px
+}
+
+.custom__checkbox input[type=checkbox]:checked + label:after {
+ content: "\2715";
+ font-weight: bold;
+ color: var(--color-primary);
+ font-size: 1.1rem;
+ display: inline-block;
+ position: relative;
+
+}
+
+.mobile__view .custom__checkbox input[type=checkbox]:checked+label:after {
+  top: -2px;
 }
 
 /* ACTIONS */
