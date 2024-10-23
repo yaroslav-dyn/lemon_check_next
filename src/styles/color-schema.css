@@ -26,7 +26,7 @@
   border: none;
 }
 
-.primary__theme .generator__content--btn.generator__content--btn.--secondary-btn {
+.primary__theme .--secondary-btn, .primary__theme .generator__content--btn.--secondary-btn {
   background-color: #6a6565;
 }
 
@@ -96,6 +96,12 @@
 
 .light__theme .password__label__normal {
   color: inherit;
+}
+
+.light__theme .generator__content--btn.--secondary-btn, .light__theme .--secondary-btn {
+  background-color: #444;
+  box-shadow: none;
+  border: none;
 }
 
 /* .primary__theme {

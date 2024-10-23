@@ -555,6 +555,11 @@ a:hover, a:focus, a:active {
   background-color: var(--color-primary);
 }
 
+.--base-label {
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
 /* ACTIONS */
 .action__btn {
   display: inline-block;
