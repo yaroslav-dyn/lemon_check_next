@@ -5,7 +5,14 @@ import LogoTextElement from "@/components/elements/logo_text.element";
 import useDeviceType from "@/services/useDeviceType";
 
 const NewsPage = () => {
+
   const mobileDevice = useDeviceType();
+  const pixelEncryptImg = "/assets/img/pixel_crypto.png";
+  const lockboxAlt = "/assets/img/lockboxAlt.webp";
+  const passwordGeneratorImg = "/assets/img/password_generator_icon.png";
+  const cryptoQr = "/assets/img/qr_crypto__img.png";
+  const cryptoMatrix = "/assets/img/crypto_matrix.png";
+
   return (
     <>
       <Head>
@@ -83,20 +90,19 @@ const NewsPage = () => {
           <div className="flex__grid justify-between">
             <img
               style={{ width: mobileDevice ? 60 : 200, height: "auto" }}
-              src="/assets/img/pixel_crypto.png"
-              alt="pixel_crypto"
+              src={passwordGeneratorImg}
+              alt="password generator"
             />
 
             <img
               style={{ width: mobileDevice ? 60 : 200, height: "auto" }}
-              src="/assets/img/pixel_crypto.png"
-              alt="pixel_crypto"
+              src={cryptoMatrix}
+              alt="crypto matrix"
             />
-
             <img
               style={{ width: mobileDevice ? 60 : 200, height: "auto" }}
-              src="/assets/img/pixel_crypto.png"
-              alt="pixel_crypto"
+              src={cryptoQr}
+              alt="QR code"
             />
           </div>
           <hr className="--base-divider --bg-primary mb2" />

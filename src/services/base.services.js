@@ -10,12 +10,23 @@ export const copyToClipboardMethod = (element) => {
   }
 };
 
+function camelToSentence(camelCaseStr) {
+  const result = camelCaseStr
+    .replace(/([A-Z])/g, " $1")
+    .replace(/^./, (str) => str.toUpperCase());
+  return result.trim();
+}
+
 export function jsonToCsv(jsonData) {
   let csv = "";
 
   // Extract headers
   const headers = Object.keys(jsonData[0]);
-  csv += headers.join(",") + "\n";
+  const trimedheaders = headers && headers.map(h => {
+    return camelToSentence(h)
+  })
+  console.log("🚀 ~ jsonToCsv ~ headers:", trimedheaders);
+  csv += trimedheaders.join(",") + "\n";
 
   // Extract values
   jsonData.forEach((obj) => {
