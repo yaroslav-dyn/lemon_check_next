@@ -120,7 +120,7 @@ const Privacy = () => {
                   and conditions of{" "}
                   <Link href={`https://ip-api.com`}>ip-api.com</Link>. You can
                   find more details about their terms and privacy policy{" "}
-                  <Link href={`https://ip-api.com/legal`} target="_blank">
+                  <Link href={`https://ip-api.com/docs/legal`} target="_blank">
                     here
                   </Link>
                   .
