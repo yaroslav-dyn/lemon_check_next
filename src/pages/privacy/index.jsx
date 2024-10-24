@@ -64,8 +64,8 @@ const Privacy = () => {
                 <h2>2. Use of Cookies</h2>
                 <p>
                   {/* TODO: Check and edit then */}
-                  Our service does not use cookies for tracking or marketing. 
-                  We store user preferences, such as theme selection (light/dark
+                  Our service does not use cookies for tracking or marketing. We
+                  store user preferences, such as theme selection (light/dark
                   mode), using local storage on the user's device. This data is
                   used solely to enhance the user experience and is not shared
                   with third parties or stored on our servers.
@@ -107,6 +107,23 @@ const Privacy = () => {
                   Cloudflare for hosting) may be used for site functionality,
                   and they may collect anonymous usage statistics for their
                   purposes.
+                </p>
+                <p>
+                  LockBoxApp integrates third-party services, including but not
+                  limited to, the IP Geolocation service provided by{" "}
+                  <Link href={`https://ip-api.com`}>ip-api.com</Link> This
+                  service is used to display location information based on the
+                  IP addresses entered by users. While we use this service to
+                  offer geolocation data, LockBoxApp does not control or
+                  guarantee the accuracy of the data provided by "ip-api.com".
+                  By using our IP Geolocation Checker, you agree to the terms
+                  and conditions of{" "}
+                  <Link href={`https://ip-api.com`}>ip-api.com</Link>. You can
+                  find more details about their terms and privacy policy{" "}
+                  <Link href={`https://ip-api.com/legal`} target="_blank">
+                    here
+                  </Link>
+                  .
                 </p>
               </li>
               <li>

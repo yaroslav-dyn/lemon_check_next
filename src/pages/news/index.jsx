@@ -5,7 +5,6 @@ import LogoTextElement from "@/components/elements/logo_text.element";
 import useDeviceType from "@/services/useDeviceType";
 
 const NewsPage = () => {
-
   const mobileDevice = useDeviceType();
   const pixelEncryptImg = "/assets/img/pixel_crypto.png";
   const lockboxAlt = "/assets/img/lockboxAlt.webp";
@@ -37,6 +36,48 @@ const NewsPage = () => {
               !
             </div>
           </div>
+          <article className="content-text">
+            <h2 className="mb0">
+              October 24, 2024 – New Feature:{" "}
+              <span className="--color-primary">IP Geolocation Checker Now Live!</span>
+            </h2>
+            <p>
+              We are excited to announce the release of our latest feature—IP
+              Geolocation Checker! This tool allows you to instantly check the
+              location information of any IP address, including details like
+              country, region, city, and even latitude and longitude.
+            </p>
+            <h3 className="mb1 --color-primary">How It Works:</h3>
+            <ul className="list-reset">
+              <li>
+                &#8212; On page load, the tool automatically detects and
+                displays your current IP address.
+              </li>
+              <li>
+                &#8212; You can also enter any other IP address to check its
+                geolocation data.
+              </li>
+              <li>
+                &#8212; Use this tool to explore IP data quickly and accurately,
+                whether it's your own or another IP you're curious about!
+              </li>
+            </ul>
+            <p>
+              Check out the{" "}
+              <Link
+                className="--default-link --color-primary"
+                href={`/ip-checker`}
+                target={mobileDevice ? "_self" : "_blank"}
+              >
+                IP Geolocation Checker
+              </Link>{" "}
+              now and explore more at{" "}
+              <Link href={"/"} className="--default-link --color-primary">
+                LockBoxApp
+              </Link>
+            </p>
+          </article>
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
           <article className="content-text">
             <h2 className="mb0">
               October 22, 2024 – Dark/Light Theme Introduced
