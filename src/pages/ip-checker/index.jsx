@@ -10,7 +10,7 @@ import Preloader from "@/components/elements/loading.element";
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
 
-const extAPIURL = "http://ip-api.com/json";
+const extAPIURL = "https://ip-api.com/json";
 
 const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
 
