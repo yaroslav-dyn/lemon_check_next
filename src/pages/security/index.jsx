@@ -107,7 +107,7 @@ const Security = () => {
                   does not store or save any IP address data entered into our IP
                   Geolocation Checker tool. All geolocation data is fetched
                   directly from{" "}
-                  <Link className="--default-link" href={`https://ip-api.com`} target="_blank">ip-api.com</Link> and used
+                  <Link className="--default-link" href={`https://ipwhois.io`} target="_blank">ipwhois.io</Link> and used
                   only for display purposes.
                 </p>
               </li>

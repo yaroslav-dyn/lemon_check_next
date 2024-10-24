@@ -111,23 +111,23 @@ const Privacy = () => {
                 <p>
                   LockBoxApp integrates third-party services, including but not
                   limited to, the IP Geolocation service provided by{" "}
-                  <Link className="--default-link" href={`https://ip-api.com`}>
-                    ip-api.com
+                  <Link className="--default-link" href={`https://ipwhois.io`}>
+                    ipwhois.io
                   </Link>{" "}
                   This service is used to display location information based on
                   the IP addresses entered by users. While we use this service
                   to offer geolocation data, LockBoxApp does not control or
-                  guarantee the accuracy of the data provided by "ip-api.com".
+                  guarantee the accuracy of the data provided by "ipwhois.io".
                   By using our IP Geolocation Checker, you agree to the terms
                   and conditions of{" "}
-                  <Link className="--default-link" href={`https://ip-api.com`}>
-                    ip-api.com
+                  <Link className="--default-link" href={`https://ipwhois.io`}>
+                    ipwhois.io
                   </Link>
                   . You can find more details about their terms and privacy
                   policy{" "}
                   <Link
                     className="--default-link"
-                    href={`https://ip-api.com/docs/legal`}
+                    href={`https://ipwhois.io/terms`}
                     target="_blank"
                   >
                     here

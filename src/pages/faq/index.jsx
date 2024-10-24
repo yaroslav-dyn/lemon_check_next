@@ -204,8 +204,8 @@ const AboutPage = () => {
                 <p>
                   <b>Real-Time Information</b>: The results are fetched in real-time
                   from{" "}
-                  <Link className="--default-link" href={`https://ip-api.com/docs/legal`} target="_blank">
-                    ip-api.com
+                  <Link className="--default-link" href={`https://ipwhois.io/terms`} target="_blank">
+                    ipwhois.io
                   </Link>
                   , so you can get up-to-date location data instantly.
                 </p>
