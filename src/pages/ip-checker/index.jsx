@@ -10,7 +10,7 @@ import Preloader from "@/components/elements/loading.element";
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
 
-const extAPIURL = "https://ip-api.com/json";
+const extAPIURL = "https://ipwhois.app/json/";
 
 const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
 
@@ -31,6 +31,8 @@ const IPChecker = (props) => {
   const ipDataMaped = useMemo(() => {
     const mData =
       ipData && Object.entries(ipData).map((key) => ({ [key[0]]: key[1] }));
+      console.log("mData", mData);
+      
     return mData;
   }, [ipData]);
 
@@ -62,9 +64,9 @@ const IPChecker = (props) => {
         false
       );
       setApiData(res);
-      setIpinput(res && res.query);
+      setIpinput(res && res.ip);
       setLoading(false);
-      !ip && setInitialIP(res.query);
+      !ip && setInitialIP(res.ip);
     } catch (error) {
       console.error("error");
       setLoading(false);
@@ -123,7 +125,13 @@ const IPChecker = (props) => {
                     <div className="ip__section mb2">
                       <h2
                         className={`${styles.ipBlock} ${
-                          mobileDevice ? (ipNotValid ? "mb0" : "mb2") : (ipNotValid ? "mb0": "mb3")
+                          mobileDevice
+                            ? ipNotValid
+                              ? "mb0"
+                              : "mb2"
+                            : ipNotValid
+                            ? "mb0"
+                            : "mb3"
                         } center flex__grid justify-between align-center`}
                       >
                         <div className="flex__grid align-center">
@@ -204,10 +212,18 @@ const IPChecker = (props) => {
                                   ? "--color-primary"
                                   : "--color-base"
                               }`}
-                              key={ipd.query}
+                              key={ipd.ip}
                             >
                               <span>{getKeyLikeText(Object.keys(ipd))}: </span>
-                              <span>{Object.values(ipd)}</span>
+                              {Object.keys(ipd).shift() === "country_flag" ? (
+                                <img
+                                  height={24}
+                                  src={Object.values(ipd)}
+                                  alt={Object.keys(ipd)}
+                                />
+                              ) : (
+                                <span>{Object.values(ipd)}</span>
+                              )}
                             </li>
                           ))}
                       </ul>
