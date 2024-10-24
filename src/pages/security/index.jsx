@@ -8,8 +8,8 @@ const Security = () => {
     <>
       <Head>
         <title>
-          LockBoxApp | Security at LockBoxApp - Strong Password Generator & Encryption
-          Tools
+          LockBoxApp | Security at LockBoxApp - Strong Password Generator &
+          Encryption Tools
         </title>
       </Head>
 
@@ -38,8 +38,8 @@ const Security = () => {
             <ul className="list-reset">
               <li>
                 <p>
-                  1.<strong> No Password Storage</strong> LockBoxApp does not store
-                  any passwords or sensitive information. All password
+                  1.<strong> No Password Storage</strong> LockBoxApp does not
+                  store any passwords or sensitive information. All password
                   generation and encryption occur directly on your device,
                   meaning no data is transmitted to our servers. This ensures
                   that your passwords and sensitive data remain under your
@@ -55,17 +55,17 @@ const Security = () => {
                     <strong>Password Encryption</strong> When using our
                   </strong>{" "}
                   feature, your passwords are encrypted using asecret phrase.
-                  This encryption happens locally in your browser, and LockBoxApp
-                  does not store or have access to the secret phrase or
-                  encrypted passwords.
+                  This encryption happens locally in your browser, and
+                  LockBoxApp does not store or have access to the secret phrase
+                  or encrypted passwords.
                 </p>
               </li>
               <li>
                 <p>
-                  3. Data Protection Since LockBoxApp currently does not save any
-                  data, there is no risk of data breaches or unauthorized access
-                  to your passwords. All processing is done on the client side,
-                  ensuring your data stays secure on your own device.
+                  3. Data Protection Since LockBoxApp currently does not save
+                  any data, there is no risk of data breaches or unauthorized
+                  access to your passwords. All processing is done on the client
+                  side, ensuring your data stays secure on your own device.
                 </p>
               </li>
               <li>
@@ -100,7 +100,21 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  7. Transparency{" "}
+                  7.{" "}
+                  <Link className="--default-link" href={`/`} target="_blank">
+                    LockBoxApp
+                  </Link>{" "}
+                  does not store or save any IP address data entered into our IP
+                  Geolocation Checker tool. All geolocation data is fetched
+                  directly from{" "}
+                  <Link className="--default-link" href={`https://ip-api.com`} target="_blank">ip-api.com</Link> and used
+                  only for display purposes.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  8. Transparency{" "}
                   <Link className="--default-link" href={`/`} target="_blank">
                     LockBoxApp
                   </Link>{" "}

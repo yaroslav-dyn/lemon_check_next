@@ -1,0 +1,10 @@
+
+.ipCheckerPage {
+  overflow-x: hidden;
+}
+
+.ipBlock {
+  border: 2px solid var(--color-primary);
+  padding: 2px;
+  border-radius: 6px;
+}

@@ -1,16 +1,21 @@
+export 
+const ipRegex = /^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}$/;
+
 export const copyToClipboardMethod = (element) => {
   const isSupported = navigator.clipboard && navigator.clipboard.writeText;
-  if (isSupported) {
-    const passwordContent = element.current;
-    passwordContent.select();
-    passwordContent.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(passwordContent.value);
-  } else {
-    document.execCommand("copy", false, element.current.value);
-  }
+  if (!element.hasOwnProperty("current"))
+    return
+    if (isSupported) {
+      const passwordContent = element.current;
+      passwordContent.select();
+      passwordContent.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(passwordContent.value);
+    } else {
+      document.execCommand("copy", false, element.current.value);
+    }
 };
 
-function camelToSentence(camelCaseStr) {
+export function camelToSentence(camelCaseStr) {
   const result = camelCaseStr
     .replace(/([A-Z])/g, " $1")
     .replace(/^./, (str) => str.toUpperCase());
@@ -56,3 +61,6 @@ export function downloadFile(data, filename, type) {
     }, 0);
   }
 }
+
+
+

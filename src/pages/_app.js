@@ -8,6 +8,7 @@ import "@/styles/color-schema.css";
 import "@/styles/elements.css";
 import "@/styles/bottom_bar.css";
 import "basscss/css/basscss.min.css";
+import { isTablet } from "react-device-detect";
 
 export default function App({ Component, pageProps }) {
   const appContainerRef = useRef(null);
@@ -31,7 +32,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <div className={`${isMobile ? "mobile__view" : ""}`}>
+      <div className={`${isMobile ? "mobile__view" : ""} ${isTablet ? 'tablet__view' : ''} `}>
         <div id="appContainer" className={`app__container ${theme}`}>
           <AppHeader changeSchema={setColorschema} />
           <Component {...pageProps} theme={theme} />

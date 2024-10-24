@@ -9,6 +9,7 @@ import SchemaSelectorElement from "@/components/elements/scema_selector.element"
 
 const newLogo = "/assets/img/logos/lc_dally_logo@3x.png";
 
+
 export const BottomBarlinks = [
   {
     title: "Home",
@@ -30,6 +31,13 @@ export const BottomBarlinks = [
     alias: "EP",
     isActive: false,
     icon: "/assets/img/icons8-security-aes-48.png",
+  },
+  {
+    title: "IP Checker",
+    url: "/ip-checker",
+    alias: "IP",
+    isActive: false,
+    icon: "/assets/icons/icons8-ip-48.png",
   },
   {
     title: "Allias generator",
@@ -92,7 +100,7 @@ export default function AppHeader({ changeSchema }) {
 
   useEffect(() => {
     setTimeout(setActiveMenu, 100);
-    setTableteScreen(window.innerWidth < 1180);
+    setTableteScreen(window.innerWidth <= 1180);
   }, [pathname]);
 
   useEffect(() => {

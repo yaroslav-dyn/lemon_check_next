@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Head from "next/head";
-import { copyToClipboardMethod } from '@/services/base.services'
+import { copyToClipboardMethod } from '@/services/base.services';
 import useDeviceType from "@/services/useDeviceType";
 
 const AliasGenerator = () => {

@@ -70,6 +70,10 @@ ul {
   width: 100%;
 }
 
+.--uppercase {
+  text-transform: uppercase;
+}
+
 .container__limit {
   max-width: 960px;
   padding-left: 1rem;
@@ -308,7 +312,8 @@ a:hover, a:focus, a:active {
 }
 
 .generator__content--btn:hover {
-  box-shadow: 0 4px 0 #f2e302;
+  /* box-shadow: 0 4px 0 #f2e302; */
+box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 /*NOTE: textArea */
@@ -437,7 +442,7 @@ a:hover, a:focus, a:active {
   display: inline-block;
 }
 
-@media (max-width: 1298px) {
+@media (max-width: 1479px) {
   .nav__item.desktop {
     font-size: 14px;
     white-space: nowrap;
@@ -491,6 +496,13 @@ a:hover, a:focus, a:active {
 .flex__grid.justify-between {
   justify-content: space-between;
 }
+.flex__grid.justify-evently {
+  justify-content: space-evenly;
+}
+.flex__grid.justify-end {
+  justify-content: flex-end;
+}
+
 
 .--small-gap {
   gap: 0.75rem;
@@ -536,6 +548,10 @@ a:hover, a:focus, a:active {
 
 .--color-primary {
   color: var(--color-primary) !important;
+}
+
+.--color-accent {
+  color: var(--color-accent) !important;
 }
 
 .--bg-base {
@@ -675,6 +691,17 @@ a:hover, a:focus, a:active {
 .fit-content {
   max-width: fit-content;
 }
+
+.--img-filter-invert {
+  filter: invert();
+}
+
+.--no_style-input, .--no_style-input:focus {
+  background: none;
+  border: none;
+  outline: none;
+}
+
 
 .w-100 {
   width: 100%;
