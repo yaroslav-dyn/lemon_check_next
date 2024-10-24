@@ -1,13 +1,21 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, ref, useRef } from "react";
 import Head from "next/head";
 import useDeviceType from "@/services/useDeviceType";
 import { getApiResponse } from "@/services/api.servise";
 import styles from "@/styles/IPChecker.module.css";
-import {camelToSentence} from "@/services/base.services";
+import { camelToSentence } from "@/services/base.services";
+import { copyToClipboardMethod } from "@/services/base.services";
 
-const IPChecker = () => {
+const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
   const [ipData, setApiData] = useState({});
+  const copyIcon = "/assets/icons/icons8-clipboard-64.png";
+  const refId = useRef(null)
+
+   const isDarkTheme = useMemo(
+     () => props.theme === "primary__theme",
+     [props.theme]
+   );
 
   const ipDataMaped = useMemo(() => {
     const mData =
@@ -18,7 +26,7 @@ const IPChecker = () => {
   const getKeyLikeText = (key) => {
     const keyToModify = Array.isArray(key) ? key.shift() : key;
     return keyToModify ? camelToSentence(keyToModify) : key;
-  }
+  };
 
   const getIpData = async () => {
     const extUrl = "http://ip-api.com/json";
@@ -37,6 +45,10 @@ const IPChecker = () => {
       console.error("error");
     }
   };
+
+  const copyIp = () => {
+    copyToClipboardMethod(refId);
+  } ;
 
   useEffect(() => {
     getIpData();
@@ -70,24 +82,32 @@ const IPChecker = () => {
             </h1>
           </div>
 
-          <div class="marquee-container">
-            <h2 class="marquee__line --uppercase">
-              <span className="--color-primary">
-                — Check Your IP — Know Your Timezone
-              </span>
-              <span>Guess Latitude/Longitude — </span>
+          <div className={`marquee-container ${mobileDevice ? 'mb2' : 'mb4'}`}>
+            <h2 className="marquee__line --uppercase">
+              <span className="--color-primary">Check Your IP</span>
+              <span className="--color-base">&#10070;</span>
+              <span>Know Your Timezone</span>
+              <span>&#10070;</span>
+              <span className="--color-primary">Guess Latitude/Longitude</span>
+              <span>&#10070;</span>
               <span className="--color-base">Explore Your Location</span>
-              <span>Verify ISP Details — </span>
-              <span>Identify Your Region</span>
-            </h2>
-            <h2 class="marquee__line --uppercase">
-              <span className="--color-primary">
-                Check Your IP — Know Your Timezone — Guess Latitude/Longitude —
-              </span>
-              <span className="--color-base">
-                Explore Your Location — Verify ISP Details — Identify Your
-                Region —
-              </span>
+              <span>&#10070;</span>
+              <span className="--color-primary">Verify ISP Details</span>
+              <span>&#10070;</span>
+              <span className="--color-base">Identify Your Region</span>
+              <span className="--color-base">&#10070;</span>
+
+              <span className="--color-primary">Check Your IP</span>
+              <span className="--color-base">&#10070;</span>
+              <span>Know Your Timezone</span>
+              <span>&#10070;</span>
+              <span className="--color-primary">Guess Latitude/Longitude</span>
+              <span>&#10070;</span>
+              <span className="--color-base">Explore Your Location</span>
+              <span>&#10070;</span>
+              <span className="--color-primary">Verify ISP Details</span>
+              <span>&#10070;</span>
+              <span className="--color-base">Identify Your Region</span>
             </h2>
           </div>
 
@@ -99,9 +119,35 @@ const IPChecker = () => {
             <article className="content-text">
               {ipData && Object.keys(ipData).length > 0 ? (
                 <>
-                  <h2 className={`${styles.ipBlock} mb4 center`}>
-                    <span className="--color-primary">IP:</span>{" "}
-                    <span>{ipData.query}</span>
+                  <h2
+                    className={`${styles.ipBlock} mb4 center flex__grid justify-between align-center`}
+                  >
+                    <span></span>
+                    <div>
+                      {!mobileDevice && (
+                        <span className="--color-base">IP: </span>
+                      )}
+                      <input
+                        className="--no_style-input --color-primary"
+                        ref={refId}
+                        type="text"
+                        value={ipData.query}
+                      />
+                    </div>
+                    <div
+                      className={`inline-block ${
+                        mobileDevice ? "" : "cursor-pointer-screen"
+                      } `}
+                      onClick={copyIp}
+                    >
+                      <img
+                        className={`align-middle ${
+                          isDarkTheme ? "" : "--img-filter-invert"
+                        }`}
+                        style={{ width: 36, height: "auto" }}
+                        src={copyIcon}
+                      />
+                    </div>
                   </h2>
 
                   <div className="ip_data__block">
@@ -113,9 +159,9 @@ const IPChecker = () => {
                           }`}
                           key={ipd.query}
                         >
-                          <li className="flex__grid justify-between">
+                          <li className="flex__grid justify-between mb1">
                             <span>{getKeyLikeText(Object.keys(ipd))}: </span>
-                            <spn> {Object.values(ipd)}</spn>
+                            <span>{Object.values(ipd)}</span>
                           </li>
                           {/* <hr
                             className={`--base-divider ${

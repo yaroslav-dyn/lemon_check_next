@@ -1,13 +1,15 @@
 export const copyToClipboardMethod = (element) => {
   const isSupported = navigator.clipboard && navigator.clipboard.writeText;
-  if (isSupported) {
-    const passwordContent = element.current;
-    passwordContent.select();
-    passwordContent.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(passwordContent.value);
-  } else {
-    document.execCommand("copy", false, element.current.value);
-  }
+  if (!element.hasOwnProperty("current"))
+    return
+    if (isSupported) {
+      const passwordContent = element.current;
+      passwordContent.select();
+      passwordContent.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(passwordContent.value);
+    } else {
+      document.execCommand("copy", false, element.current.value);
+    }
 };
 
 export function camelToSentence(camelCaseStr) {
