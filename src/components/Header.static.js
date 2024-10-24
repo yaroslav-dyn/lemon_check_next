@@ -100,7 +100,7 @@ export default function AppHeader({ changeSchema }) {
 
   useEffect(() => {
     setTimeout(setActiveMenu, 100);
-    setTableteScreen(window.innerWidth < 1180);
+    setTableteScreen(window.innerWidth <= 1180);
   }, [pathname]);
 
   useEffect(() => {

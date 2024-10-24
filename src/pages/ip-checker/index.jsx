@@ -3,19 +3,30 @@ import Head from "next/head";
 import useDeviceType from "@/services/useDeviceType";
 import { getApiResponse } from "@/services/api.servise";
 import styles from "@/styles/IPChecker.module.css";
-import { camelToSentence } from "@/services/base.services";
+import { camelToSentence, ipRegex } from "@/services/base.services";
 import { copyToClipboardMethod } from "@/services/base.services";
+import Preloader from "@/components/elements/loading.element";
+
+const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
+const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
+
+const extAPIURL = "http://ip-api.com/json";
+
+const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
 
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
   const [ipData, setApiData] = useState({});
+  const [initialIP, setInitialIP] = useState("");
+  const [ipInput, setIpinput] = useState("");
+  const [isLoading, setLoading] = useState(false);
   const copyIcon = "/assets/icons/icons8-clipboard-64.png";
-  const refId = useRef(null)
+  const refId = useRef(null);
 
-   const isDarkTheme = useMemo(
-     () => props.theme === "primary__theme",
-     [props.theme]
-   );
+  const isDarkTheme = useMemo(
+    () => props.theme === "primary__theme",
+    [props.theme]
+  );
 
   const ipDataMaped = useMemo(() => {
     const mData =
@@ -23,17 +34,27 @@ const IPChecker = (props) => {
     return mData;
   }, [ipData]);
 
+  const ipNotValid = useMemo(() => !ipRegex.test(ipInput), [ipInput]);
+
   const getKeyLikeText = (key) => {
     const keyToModify = Array.isArray(key) ? key.shift() : key;
     return keyToModify ? camelToSentence(keyToModify) : key;
   };
 
-  const getIpData = async () => {
-    const extUrl = "http://ip-api.com/json";
+  const setIpAddress = (addr) => setIpinput(addr);
+
+  const searchIp = async () => {
+    if (ipNotValid) return;
+    const res = await getIpData(ipInput);
+  };
+
+  const getIpData = async (ip) => {
+    setLoading(true);
+
     try {
       const res = await getApiResponse(
         null,
-        extUrl,
+        !ip ? extAPIURL : extIPFilledUrl(ip),
         "GET",
         null,
         false,
@@ -41,14 +62,18 @@ const IPChecker = (props) => {
         false
       );
       setApiData(res);
+      setIpinput(res && res.query);
+      setLoading(false);
+      !ip && setInitialIP(res.query);
     } catch (error) {
       console.error("error");
+      setLoading(false);
     }
   };
 
   const copyIp = () => {
     copyToClipboardMethod(refId);
-  } ;
+  };
 
   useEffect(() => {
     getIpData();
@@ -77,105 +102,128 @@ const IPChecker = (props) => {
         <main className="main_content ">
           <div className={`main__heading --small-bm`}>
             <h1 className="h1_heading" data-centered-text>
-              <span className="--color-primary"> IP </span>
+              <span className="--color-primary">IP</span>{" "}
               <span className="--color-base">Checker</span>
             </h1>
           </div>
 
-          <div className={`marquee-container ${mobileDevice ? 'mb2' : 'mb4'}`}>
-            <h2 className="marquee__line --uppercase">
-              <span className="--color-primary">Check Your IP</span>
-              <span className="--color-base">&#10070;</span>
-              <span>Know Your Timezone</span>
-              <span>&#10070;</span>
-              <span className="--color-primary">Guess Latitude/Longitude</span>
-              <span>&#10070;</span>
-              <span className="--color-base">Explore Your Location</span>
-              <span>&#10070;</span>
-              <span className="--color-primary">Verify ISP Details</span>
-              <span>&#10070;</span>
-              <span className="--color-base">Identify Your Region</span>
-              <span className="--color-base">&#10070;</span>
-
-              <span className="--color-primary">Check Your IP</span>
-              <span className="--color-base">&#10070;</span>
-              <span>Know Your Timezone</span>
-              <span>&#10070;</span>
-              <span className="--color-primary">Guess Latitude/Longitude</span>
-              <span>&#10070;</span>
-              <span className="--color-base">Explore Your Location</span>
-              <span>&#10070;</span>
-              <span className="--color-primary">Verify ISP Details</span>
-              <span>&#10070;</span>
-              <span className="--color-base">Identify Your Region</span>
-            </h2>
-          </div>
+          <MarqueeElement mobileDevice={mobileDevice} />
 
           <div
             className={`container__limit --x-small ${
               mobileDevice ? "w-100" : ""
             }`}
           >
-            <article className="content-text">
-              {ipData && Object.keys(ipData).length > 0 ? (
-                <>
-                  <h2
-                    className={`${styles.ipBlock} mb4 center flex__grid justify-between align-center`}
-                  >
-                    <span></span>
-                    <div>
-                      {!mobileDevice && (
-                        <span className="--color-base">IP: </span>
-                      )}
-                      <input
-                        className="--no_style-input --color-primary"
-                        ref={refId}
-                        type="text"
-                        value={ipData.query}
-                      />
-                    </div>
-                    <div
-                      className={`inline-block ${
-                        mobileDevice ? "" : "cursor-pointer-screen"
-                      } `}
-                      onClick={copyIp}
-                    >
-                      <img
-                        className={`align-middle ${
-                          isDarkTheme ? "" : "--img-filter-invert"
-                        }`}
-                        style={{ width: 36, height: "auto" }}
-                        src={copyIcon}
-                      />
-                    </div>
-                  </h2>
-
-                  <div className="ip_data__block">
-                    {ipDataMaped &&
-                      ipDataMaped.map((ipd, index) => (
-                        <ul
-                          className={`list-reset ${
-                            index % 2 > 0 ? "--color-primary" : "--color-base"
-                          }`}
-                          key={ipd.query}
+            {isLoading ? (
+              <Preloader />
+            ) : (
+              <article className="content-text">
+                {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
+                  <>
+                    <div className="ip__section mb2">
+                      <h2
+                        className={`${styles.ipBlock} ${
+                          mobileDevice ? (ipNotValid ? "mb0" : "mb2") : (ipNotValid ? "mb0": "mb3")
+                        } center flex__grid justify-between align-center`}
+                      >
+                        <div className="flex__grid align-center">
+                          {initialIP === ipInput && (
+                            <img
+                              src={isDarkTheme ? primaryIPIcon : lightIPIcon}
+                              alt="Your IP"
+                              height={30}
+                            />
+                          )}
+                        </div>
+                        <div className="flex__grid">
+                          <form
+                            style={{
+                              maxWidth: mobileDevice ? "220px" : "unset",
+                            }}
+                            name={`ipSearching`}
+                            onSubmit={(e) => {
+                              e.preventDefault();
+                              searchIp();
+                            }}
+                          >
+                            <input
+                              className={`--no_style-input ${
+                                initialIP === ipInput
+                                  ? "--color-primary"
+                                  : "--color-base"
+                              }`}
+                              ref={refId}
+                              type="text"
+                              value={ipInput}
+                              onInput={(e) => setIpAddress(e.target.value)}
+                            />
+                          </form>
+                        </div>
+                        <div
+                          className={`inline-block ${
+                            mobileDevice ? "" : "cursor-pointer-screen"
+                          } `}
+                          onClick={copyIp}
                         >
-                          <li className="flex__grid justify-between mb1">
-                            <span>{getKeyLikeText(Object.keys(ipd))}: </span>
-                            <span>{Object.values(ipd)}</span>
-                          </li>
-                          {/* <hr
-                            className={`--base-divider ${
-                              index % 2 > 0 ? "--bg-primary" : "--bg-base"
+                          <img
+                            className={`align-middle ${
+                              isDarkTheme ? "" : "--img-filter-invert"
                             }`}
-                          /> */}
-                        </ul>
-                      ))}
-                  </div>
-                </>
-              ) : (
-                <h2 className="mb0 center">Data is not available, sorry</h2>
-              )}
-            </article>
+                            style={{ width: "auto", height: "28px" }}
+                            src={copyIcon}
+                          />
+                        </div>
+                      </h2>
+                      {/*SECTION: INVALID IP MESSAGE */}
+                      {ipNotValid && (
+                        <p className="flex__grid justify-end my1">
+                          <span className="--color-accent">
+                            IP address is not valid
+                          </span>
+                        </p>
+                      )}
+                      <div>
+                        {ipInput && (
+                          <button
+                            disabled={ipNotValid}
+                            className="generator__content--btn lato-regular"
+                            onClick={searchIp}
+                          >
+                            SEARCH IP
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="ip_data__block">
+                      <ul className={`list-reset`}>
+                        {ipDataMaped &&
+                          ipDataMaped.map((ipd, index) => (
+                            <li
+                              className={`flex__grid justify-between mb1 ${
+                                index % 2 > 0
+                                  ? "--color-primary"
+                                  : "--color-base"
+                              }`}
+                              key={ipd.query}
+                            >
+                              <span>{getKeyLikeText(Object.keys(ipd))}: </span>
+                              <span>{Object.values(ipd)}</span>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {!isLoading && (
+                      <h2 className="mb0 center --color-base">
+                        Data is not available, sorry
+                      </h2>
+                    )}
+                  </>
+                )}
+              </article>
+            )}
           </div>
         </main>
       </div>
@@ -184,3 +232,37 @@ const IPChecker = (props) => {
 };
 
 export default IPChecker;
+
+//TODO: Temporary solution (add dynamic line with calculating count)
+const MarqueeElement = ({ mobileDevice }) => {
+  return (
+    <div className={`marquee-container ${mobileDevice ? "mb2" : "mb4"}`}>
+      <h2 className="marquee__line --uppercase">
+        <span className="--color-primary">Check Your IP</span>
+        <span className="--color-base">&#10070;</span>
+        <span>Know Your Timezone</span>
+        <span>&#10070;</span>
+        <span className="--color-primary">Guess Latitude/Longitude</span>
+        <span>&#10070;</span>
+        <span className="--color-base">Explore Your Location</span>
+        <span>&#10070;</span>
+        <span className="--color-primary">Verify ISP Details</span>
+        <span>&#10070;</span>
+        <span className="--color-base">Identify Your Region</span>
+        <span className="--color-base">&#10070;</span>
+
+        <span className="--color-primary">Check Your IP</span>
+        <span className="--color-base">&#10070;</span>
+        <span>Know Your Timezone</span>
+        <span>&#10070;</span>
+        <span className="--color-primary">Guess Latitude/Longitude</span>
+        <span>&#10070;</span>
+        <span className="--color-base">Explore Your Location</span>
+        <span>&#10070;</span>
+        <span className="--color-primary">Verify ISP Details</span>
+        <span>&#10070;</span>
+        <span className="--color-base">Identify Your Region</span>
+      </h2>
+    </div>
+  );
+};
