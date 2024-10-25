@@ -9,6 +9,7 @@ import {
   copyToClipboardMethod,
 } from "@/services/base.services";
 import Preloader from "@/components/elements/loading.element";
+import MapWorldElement from "@/components/elements/map_world.element";
 
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
@@ -36,16 +37,15 @@ const IPChecker = (props) => {
     [props.theme]
   );
 
-
   const safeKeyFromArray = (ipF) => {
-    if( ipF && Object.keys(ipF) && Array.isArray( Object.keys(ipF)) ) {
-      return Object.keys(ipF)
-    } else return []
-  } 
+    if (ipF && Object.keys(ipF) && Array.isArray(Object.keys(ipF))) {
+      return Object.keys(ipF);
+    } else return [];
+  };
 
   const ipDataMaped = useMemo(() => {
     const mData =
-      ipData && Object.entries(ipData).map((key) => ({ [key[0]]: key[1] }));  
+      ipData && Object.entries(ipData).map((key) => ({ [key[0]]: key[1] }));
     return mData.filter(
       (ipF) => ipF && !ipExcludedFields.includes(safeKeyFromArray(ipF).shift())
     );
@@ -134,7 +134,7 @@ const IPChecker = (props) => {
             ) : (
               <article
                 className={` ${
-                  !mobileDevice ? "flex__grid justify-between" : ""
+                  !mobileDevice ? "flex__grid justify-between --big-gap" : ""
                 } content-text`}
               >
                 {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
@@ -148,7 +148,7 @@ const IPChecker = (props) => {
                               : "mb2"
                             : ipNotValid
                             ? "mb0"
-                            : "mb3"
+                            : "mb2"
                         } center flex__grid justify-between align-center`}
                       >
                         <div className="flex__grid align-center">
@@ -185,7 +185,7 @@ const IPChecker = (props) => {
                           </form>
                         </div>
                         <div
-                          className={`inline-block ${
+                          className={`inline-block mr0.5 ${
                             mobileDevice ? "" : "cursor-pointer-screen"
                           } `}
                           onClick={copyIp}
@@ -194,7 +194,7 @@ const IPChecker = (props) => {
                             className={`align-middle ${
                               isDarkTheme ? "" : "--img-filter-invert"
                             }`}
-                            style={{ width: "auto", height: "28px" }}
+                            style={{ width: "auto", height: "26px" }}
                             src={copyIcon}
                           />
                         </div>
@@ -211,13 +211,20 @@ const IPChecker = (props) => {
                         {ipInput && (
                           <button
                             disabled={ipNotValid}
-                            className="generator__content--btn lato-regular"
+                            className="generator__content--btn mb1 lato-regular"
                             onClick={searchIp}
                           >
                             SEARCH IP
                           </button>
                         )}
                       </div>
+
+                      <MapWorldElement
+                        size={mobileDevice ? "responsive" : "md"}
+                        value={ipInput}
+                        color={isDarkTheme ? "#E94E3D" : "limegreen"}
+                        ipLocation={ipData}
+                      />
                     </div>
                     <div className="ip_data__block">
                       <ul
