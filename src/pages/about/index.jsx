@@ -8,14 +8,15 @@ const AboutPage = () => {
     <>
       <Head>
         <title>
-          LockBoxApp | About LockBoxApp - Strong Password Generator & Encryption Tools
+          LockBoxApp | About LockBoxApp - Strong Password Generator & Encryption
+          Tools
         </title>
       </Head>
 
       <div className="main_content">
         <main className="container__limit">
           <div className="main__heading --small-bm">
-            <LogoTextElement prefix='About' />
+            <LogoTextElement prefix="About" />
           </div>
           {/* <article>
             <section className="content-text">
@@ -130,7 +131,7 @@ const AboutPage = () => {
           </article> */}
           <article>
             <div className="content-text">
-              <h2>
+              <h2 className="mt0">
                 <Link
                   className="text-decoration-none"
                   href="/password-generator"
@@ -185,8 +186,8 @@ const AboutPage = () => {
               </h2>
 
               <div>
-                At LockBoxApp, we’re dedicated to providing you with the best tools
-                to secure your digital life. With our{" "}
+                At LockBoxApp, we’re dedicated to providing you with the best
+                tools to secure your digital life. With our{" "}
                 <Link
                   href={`/password-generator`}
                   className="--default-link bold"
@@ -227,6 +228,14 @@ const AboutPage = () => {
                   target="_blank"
                 >
                   <span className="--color-primary">QR Code Generator</span>
+                </Link>
+                ,{" "}
+                <Link
+                  href={`/ip-checker`}
+                  className="--default-link bold"
+                  target="_blank"
+                >
+                  <span className="--color-base">IP Checker</span>
                 </Link>
                 , we offer everything you need to strengthen your online
                 security and simplify your digital tasks.

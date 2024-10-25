@@ -6,6 +6,7 @@ import useDeviceType from "@/services/useDeviceType";
 const PasswordGenerator = () => {
   const [passwordLength, setPasswordLength] = useState(12);
   const [hasSpecialCharacters, setSpecialCharacters] = useState(true);
+  const [hasDigits, setDigitsCharacters] = useState(true);
   const [password, setPassword] = useState("");
   const areaElement = useRef();
 
@@ -20,15 +21,21 @@ const PasswordGenerator = () => {
     setPasswordLength(currentLength);
   };
 
-  const setSpecialCharactersBox = (status) => {
+  const setSpecialCharactersBox = (status) => 
     setSpecialCharacters(status.target.checked);
-  };
+
+  const setDigitsBox = (status) => 
+    setDigitsCharacters(status.target.checked);
 
   const generateCode = () => {
     let generatePassword = "";
+    const alphabet =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const digits = "1234567890";
+    const specialCharactersSymbols = "!@#$%^&*?";  
     const characters = hasSpecialCharacters
-      ? "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*?"
-      : "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      ? `${alphabet}${hasDigits ? digits : ""}${specialCharactersSymbols}`
+      : `${alphabet}${hasDigits ? digits : ""}`;
 
     for (var i = 0; i < passwordLength; i++) {
       generatePassword += characters.charAt(
@@ -64,8 +71,8 @@ const PasswordGenerator = () => {
     <>
       <Head>
         <title>
-          LockBoxApp | Password Generator - Strong Password Generator & Encryption
-          Tools
+          LockBoxApp | Password Generator - Strong Password Generator &
+          Encryption Tools
         </title>
         <meta
           name="description"
@@ -115,7 +122,6 @@ const PasswordGenerator = () => {
                       onChange={getPasswordLength}
                     />
                   </div>
-
                   <div className="flex__grid justify-between align-center gap-x-6">
                     <input
                       className="bace_input"
@@ -129,15 +135,33 @@ const PasswordGenerator = () => {
                       LENGTH
                     </label>
                   </div>
-
                   <br />
-                  <div className="flex__grid justify-between">
-                    <input
-                      id="specialCharacters"
-                      type="checkbox"
-                      checked={hasSpecialCharacters}
-                      onChange={setSpecialCharactersBox}
-                    />
+
+                  <div className="flex__grid align-center justify-between">
+                    <div className="custom__checkbox">
+                      <input
+                        id="digitCharacters"
+                        type="checkbox"
+                        checked={hasDigits}
+                        onChange={setDigitsBox}
+                      />
+                      <label htmlFor="digitCharacters"></label>
+                    </div>
+                    <label htmlFor="digitCharacters">
+                      Use digitals
+                    </label>
+                  </div>
+                  <br />
+                  <div className="flex__grid align-center justify-between">
+                    <div className="custom__checkbox">
+                      <input
+                        id="specialCharacters"
+                        type="checkbox"
+                        checked={hasSpecialCharacters}
+                        onChange={setSpecialCharactersBox}
+                      />
+                      <label htmlFor="specialCharacters"></label>
+                    </div>
                     <label htmlFor="specialCharacters">
                       Use special characters
                     </label>

@@ -58,12 +58,17 @@ export default function Footer() {
         </div>
         <div className="base-1/2">
           <h5 className="footer__nav__heading"> CONTACT ME </h5>
-          <div>
-            <ContactEmail
-              email={`contact@lockboxapp@@com`}
-              title={`Contact email`}
-              isHidden
-            />
+          <div className={`footer__nav ${isMobile ? "--one-column" : ""}`}>
+            <Link className="--default-link" href="/news">
+              News & Updates
+            </Link>
+            <div>
+              <ContactEmail
+                email={`contact@lockboxapp@@com`}
+                title={`Contact email`}
+                isHidden
+              />
+            </div>
           </div>
         </div>
       </div>

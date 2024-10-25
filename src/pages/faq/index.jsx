@@ -18,10 +18,16 @@ const faqContent = [
     url: "#encrypt-password",
   },
   {
-    title: " How can I decrypt my password?",
+    title: "How can I decrypt my password?",
     content: "",
     id: "decrypt-password",
     url: "#decrypt-password",
+  },
+  {
+    title: "How can I use the IP Checker?",
+    content: "",
+    id: "ip-checker",
+    url: "#ip-checker",
   },
 ];
 
@@ -85,7 +91,7 @@ const AboutPage = () => {
             <article className="md-col-8">
               <section className="content-text">
                 <h3 className="--color-primary" id="password-generator">
-                  How can I use the Password Generator ?
+                  How can I use the Password Generator?
                 </h3>
 
                 <p className="pt">
@@ -158,7 +164,7 @@ const AboutPage = () => {
 
               <section id="decrypt-password" className="content-text">
                 <h3 className="--color-primary">
-                  How I can decrypt my password ?
+                  How I can decrypt my password?
                 </h3>
 
                 <p>
@@ -166,6 +172,42 @@ const AboutPage = () => {
                   input the same secret phrase and encrypted password. The
                   system will decrypt the encrypted data back into your
                   password, allowing you access to your secure information.
+                </p>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="ip-checker" className="content-text">
+                <h3 className="--color-primary">
+                  How can I use the IP Checker?
+                </h3>
+                <strong>Using our IP Checker is simple! Here's how: </strong>
+
+                <p>
+                  <b>Automatic IP Detection</b>: When you visit the IP Checker
+                  page, it will automatically detect and display geolocation
+                  information based on your current IP address. This includes
+                  your country, city, latitude, longitude, and more.
+                </p>
+
+                <p>
+                  <b>Manual IP Lookup</b>: If you'd like to check the geolocation of a
+                  different IP address, simply type it into the input field and
+                  click Search IP. The page will then display geolocation
+                  information for the IP address you entered.
+                </p>
+
+                <p>
+                  <b>Real-Time Information</b>: The results are fetched in real-time
+                  from{" "}
+                  <Link className="--default-link" href={`https://ipwhois.io/terms`} target="_blank">
+                    ipwhois.io
+                  </Link>
+                  , so you can get up-to-date location data instantly.
                 </p>
               </section>
             </article>

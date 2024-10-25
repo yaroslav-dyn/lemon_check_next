@@ -74,8 +74,8 @@ const isMobile = useDeviceType();
               <span className="--color-primary">PWA</span>
             </h3>
             <p className="content-text">
-              For Easy Access! Did you know you can install LockBoxApp directly to
-              your device for quick and easy access? With our Progressive Web
+              For Easy Access! Did you know you can install LockBoxApp directly
+              to your device for quick and easy access? With our Progressive Web
               App (PWA) feature, you can use LockBoxApp just like a native app,
               without the need for downloads from an app store. Fast Access:
               Launch LockBoxApp instantly from your home screen. Offline
@@ -90,7 +90,11 @@ const isMobile = useDeviceType();
               <Link className="--color-base --default-link" href={"/about"}>
                 About
               </Link>{" "}
-              page! Have questions? Check out our{" "}
+              and {" "}
+              <Link className="--color-base --default-link" href={"/news"}>
+                News & updates
+              </Link>{" "}
+              pages! Have questions? Check out our{" "}
               <Link className="--color-base --default-link" href={"/faq"}>
                 FAQ{" "}
               </Link>{" "}
@@ -102,3 +106,9 @@ const isMobile = useDeviceType();
     </>
   );
 }
+
+
+
+
+
+
