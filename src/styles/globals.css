@@ -15,6 +15,8 @@
   --theme-primary-text: #fff;
   --theme-footer-background: #E94E3D;
 
+  --base-rounded: 8px;
+
   --desktop-screen-min: 1179px;
 }
 
@@ -240,7 +242,6 @@ a:hover, a:focus, a:active {
     font-size: 0.875rem;
   }
 }
-
 
 
 .brand__logo {
@@ -488,6 +489,9 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 .flex__grid.align-center {
   align-items: center;
 }
+.flex__grid.align-end {
+  align-items: end;
+}
 
 .flex__grid.justify-center {
   justify-content: center;
@@ -590,6 +594,18 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
   font-size: 1.125rem;
   font-weight: 400;
 }
+
+.--border-2x {
+  border-width: 2px !important;
+}
+.--border-3x {
+  border-width: 3px !important;
+}
+
+.--base-rounded {
+  border-radius: var(--base-rounded) !important;
+}
+
 
 .custom__checkbox input {
   display: none;

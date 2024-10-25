@@ -69,6 +69,15 @@ export default function Footer() {
                 isHidden
               />
             </div>
+            <div>
+              <Link
+                className="--default-link"
+                target="_blank"
+                href={`https://www.paypal.com/donate/?hosted_button_id=3QS2H6HWRV2V8`}
+              >
+                Support Me (Pay<span className="--base-color">Pal</span>)
+              </Link>
+            </div>
           </div>
         </div>
       </div>
