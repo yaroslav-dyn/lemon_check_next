@@ -520,6 +520,10 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
   gap: 0.93rem;
 }
 
+.--big-gap {
+    gap: 1.2rem;
+}
+
 .mr0\.5 {
   margin-right: 0.5rem;
 }
