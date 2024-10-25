@@ -117,7 +117,9 @@ const IPChecker = (props) => {
 
       <div className={`${styles.ipCheckerPage} ip_checker__page`}>
         <main className="main_content ">
-          <div className={`main__heading --small-bm`}>
+          <div
+            className={`main__heading ${mobileDevice ? "pb0" : "--small-bm"}`}
+          >
             <h1 className="h1_heading" data-centered-text>
               <span className="--color-primary">IP</span>{" "}
               <span className="--color-base">Checker</span>
@@ -126,20 +128,20 @@ const IPChecker = (props) => {
 
           <MarqueeElement mobileDevice={mobileDevice} />
 
-          <div
-            className={`container__limit --x-small ${
-              mobileDevice ? "w-100" : ""
-            }`}
-          >
+          <div className={`container__limit ${mobileDevice ? "w-100" : ""}`}>
             {isLoading ? (
               <Preloader />
             ) : (
-              <article className="content-text">
+              <article
+                className={` ${
+                  !mobileDevice ? "flex__grid justify-between" : ""
+                } content-text`}
+              >
                 {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
                   <>
                     <div className="ip__section mb2">
                       <h2
-                        className={`${styles.ipBlock} ${
+                        className={`mt0 ${styles.ipBlock} ${
                           mobileDevice
                             ? ipNotValid
                               ? "mb0"
@@ -218,7 +220,13 @@ const IPChecker = (props) => {
                       </div>
                     </div>
                     <div className="ip_data__block">
-                      <ul className={`list-reset`}>
+                      <ul
+                        className={`list-reset ${
+                          !mobileDevice
+                            ? styles.ipDataTable
+                            : styles.ipDataTableMobile
+                        }`}
+                      >
                         {ipDataMaped &&
                           ipDataMaped.map((ipd, index) => (
                             <li
