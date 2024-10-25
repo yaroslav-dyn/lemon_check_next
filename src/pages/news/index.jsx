@@ -4,6 +4,10 @@ import React from "react";
 import LogoTextElement from "@/components/elements/logo_text.element";
 import useDeviceType from "@/services/useDeviceType";
 
+const payPalQr = `assets/img/payment/QRCode_PayPal.png`;
+const payPalLink =
+  "https://www.paypal.com/donate/?hosted_button_id=3QS2H6HWRV2V8";
+
 const NewsPage = () => {
   const mobileDevice = useDeviceType();
   const pixelEncryptImg = "/assets/img/pixel_crypto.png";
@@ -39,7 +43,9 @@ const NewsPage = () => {
           <article className="content-text">
             <h2 className="mb0">
               October 24, 2024 – New Feature:{" "}
-              <span className="--color-primary">IP Geolocation Checker Now Live!</span>
+              <span className="--color-primary">
+                IP Geolocation Checker Now Live!
+              </span>
             </h2>
             <p>
               We are excited to announce the release of our latest feature—IP
@@ -179,6 +185,31 @@ const NewsPage = () => {
               Stay tuned for regular updates as we continue to add more features
               and improve the user experience!
             </p>
+          </article>
+          <hr className="--base-divider --bg-primary mb2" />
+          <article className="content-text">
+            <h2 className="mb2">Support New Features and Improvements</h2>{" "}
+            <div className="">
+              <div className="flex__grid  justify-between align-end">
+                <div className="py2">
+                  <span className="--color-primary">Scan</span> to{" "}
+                  <span className="--color-primary">Support</span> Future
+                  Updates or use the{" "}
+                  <Link
+                    className="--base-link"
+                    href={payPalLink}
+                    target="_blank"
+                  >
+                    link
+                  </Link>
+                </div>
+                <div className="flex__grid justify-center">
+                  <div className="border --border-3x --base-rounded inline-block --color-primary px1 pt1 pb0">
+                    <img src={payPalQr} alt={`payPalLink`} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </article>
         </main>
       </div>
