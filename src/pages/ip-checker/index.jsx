@@ -3,16 +3,25 @@ import Head from "next/head";
 import useDeviceType from "@/services/useDeviceType";
 import { getApiResponse } from "@/services/api.servise";
 import styles from "@/styles/IPChecker.module.css";
-import { camelToSentence, ipRegex } from "@/services/base.services";
-import { copyToClipboardMethod } from "@/services/base.services";
+import {
+  snakeToSentence,
+  ipRegex,
+  copyToClipboardMethod,
+} from "@/services/base.services";
 import Preloader from "@/components/elements/loading.element";
+import MapWorldElement from "@/components/elements/map_world.element";
 
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
-
 const extAPIURL = "https://ipwhois.app/json/";
-
 const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
+const ipExcludedFields = [
+  "success",
+  "country_neighbours",
+  "timezone_dstOffset",
+  "timezone_gmtOffset",
+  "currency_plural",
+];
 
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
@@ -28,19 +37,25 @@ const IPChecker = (props) => {
     [props.theme]
   );
 
+  const safeKeyFromArray = (ipF) => {
+    if (ipF && Object.keys(ipF) && Array.isArray(Object.keys(ipF))) {
+      return Object.keys(ipF);
+    } else return [];
+  };
+
   const ipDataMaped = useMemo(() => {
     const mData =
       ipData && Object.entries(ipData).map((key) => ({ [key[0]]: key[1] }));
-      console.log("mData", mData);
-      
-    return mData;
+    return mData.filter(
+      (ipF) => ipF && !ipExcludedFields.includes(safeKeyFromArray(ipF).shift())
+    );
   }, [ipData]);
 
   const ipNotValid = useMemo(() => !ipRegex.test(ipInput), [ipInput]);
 
   const getKeyLikeText = (key) => {
     const keyToModify = Array.isArray(key) ? key.shift() : key;
-    return keyToModify ? camelToSentence(keyToModify) : key;
+    return keyToModify ? snakeToSentence(keyToModify) : key;
   };
 
   const setIpAddress = (addr) => setIpinput(addr);
@@ -102,7 +117,9 @@ const IPChecker = (props) => {
 
       <div className={`${styles.ipCheckerPage} ip_checker__page`}>
         <main className="main_content ">
-          <div className={`main__heading --small-bm`}>
+          <div
+            className={`main__heading ${mobileDevice ? "pb0" : "--small-bm"}`}
+          >
             <h1 className="h1_heading" data-centered-text>
               <span className="--color-primary">IP</span>{" "}
               <span className="--color-base">Checker</span>
@@ -111,27 +128,27 @@ const IPChecker = (props) => {
 
           <MarqueeElement mobileDevice={mobileDevice} />
 
-          <div
-            className={`container__limit --x-small ${
-              mobileDevice ? "w-100" : ""
-            }`}
-          >
+          <div className={`container__limit ${mobileDevice ? "w-100" : ""}`}>
             {isLoading ? (
               <Preloader />
             ) : (
-              <article className="content-text">
+              <article
+                className={` ${
+                  !mobileDevice ? "flex__grid justify-between --big-gap" : ""
+                } content-text`}
+              >
                 {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
                   <>
                     <div className="ip__section mb2">
                       <h2
-                        className={`${styles.ipBlock} ${
+                        className={`mt0 ${styles.ipBlock} ${
                           mobileDevice
                             ? ipNotValid
                               ? "mb0"
                               : "mb2"
                             : ipNotValid
                             ? "mb0"
-                            : "mb3"
+                            : "mb2"
                         } center flex__grid justify-between align-center`}
                       >
                         <div className="flex__grid align-center">
@@ -168,7 +185,7 @@ const IPChecker = (props) => {
                           </form>
                         </div>
                         <div
-                          className={`inline-block ${
+                          className={`inline-block mr0.5 ${
                             mobileDevice ? "" : "cursor-pointer-screen"
                           } `}
                           onClick={copyIp}
@@ -177,7 +194,7 @@ const IPChecker = (props) => {
                             className={`align-middle ${
                               isDarkTheme ? "" : "--img-filter-invert"
                             }`}
-                            style={{ width: "auto", height: "28px" }}
+                            style={{ width: "auto", height: "26px" }}
                             src={copyIcon}
                           />
                         </div>
@@ -194,16 +211,29 @@ const IPChecker = (props) => {
                         {ipInput && (
                           <button
                             disabled={ipNotValid}
-                            className="generator__content--btn lato-regular"
+                            className="generator__content--btn mb1 lato-regular"
                             onClick={searchIp}
                           >
                             SEARCH IP
                           </button>
                         )}
                       </div>
+
+                      <MapWorldElement
+                        size={mobileDevice ? "responsive" : "md"}
+                        value={ipInput}
+                        color={isDarkTheme ? "#E94E3D" : "limegreen"}
+                        ipLocation={ipData}
+                      />
                     </div>
                     <div className="ip_data__block">
-                      <ul className={`list-reset`}>
+                      <ul
+                        className={`list-reset ${
+                          !mobileDevice
+                            ? styles.ipDataTable
+                            : styles.ipDataTableMobile
+                        }`}
+                      >
                         {ipDataMaped &&
                           ipDataMaped.map((ipd, index) => (
                             <li

@@ -2,7 +2,7 @@
   "name": "lockboxapp",
   "version": "1.0.5",
   "private": true,
-   "packageManager": "yarn@1.22.22",
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -22,6 +22,7 @@
     "react": "18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
+    "react-svg-worldmap": "^2.0.0-alpha.16",
     "react-switch-selector": "^2.3.0"
   }
 }

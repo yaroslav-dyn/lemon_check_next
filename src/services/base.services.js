@@ -22,6 +22,14 @@ export function camelToSentence(camelCaseStr) {
   return result.trim();
 }
 
+export function snakeToSentence(camelCaseStr) {
+  const result = camelCaseStr
+    .replace(/_/g, " ")
+    .replace(/(^\w|\s\w)/g, (match) => match.toUpperCase()); 
+  return result.trim();
+}
+
+
 export function jsonToCsv(jsonData) {
   let csv = "";
 
