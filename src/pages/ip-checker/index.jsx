@@ -3,16 +3,24 @@ import Head from "next/head";
 import useDeviceType from "@/services/useDeviceType";
 import { getApiResponse } from "@/services/api.servise";
 import styles from "@/styles/IPChecker.module.css";
-import { camelToSentence, ipRegex } from "@/services/base.services";
-import { copyToClipboardMethod } from "@/services/base.services";
+import {
+  snakeToSentence,
+  ipRegex,
+  copyToClipboardMethod,
+} from "@/services/base.services";
 import Preloader from "@/components/elements/loading.element";
 
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
-
 const extAPIURL = "https://ipwhois.app/json/";
-
 const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
+const ipExcludedFields = [
+  "success",
+  "country_neighbours",
+  "timezone_dstOffset",
+  "timezone_gmtOffset",
+  "currency_plural",
+];
 
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
@@ -28,19 +36,26 @@ const IPChecker = (props) => {
     [props.theme]
   );
 
+
+  const safeKeyFromArray = (ipF) => {
+    if( ipF && Object.keys(ipF) && Array.isArray( Object.keys(ipF)) ) {
+      return Object.keys(ipF)
+    } else return []
+  } 
+
   const ipDataMaped = useMemo(() => {
     const mData =
-      ipData && Object.entries(ipData).map((key) => ({ [key[0]]: key[1] }));
-      console.log("mData", mData);
-      
-    return mData;
+      ipData && Object.entries(ipData).map((key) => ({ [key[0]]: key[1] }));  
+    return mData.filter(
+      (ipF) => ipF && !ipExcludedFields.includes(safeKeyFromArray(ipF).shift())
+    );
   }, [ipData]);
 
   const ipNotValid = useMemo(() => !ipRegex.test(ipInput), [ipInput]);
 
   const getKeyLikeText = (key) => {
     const keyToModify = Array.isArray(key) ? key.shift() : key;
-    return keyToModify ? camelToSentence(keyToModify) : key;
+    return keyToModify ? snakeToSentence(keyToModify) : key;
   };
 
   const setIpAddress = (addr) => setIpinput(addr);
