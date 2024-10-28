@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "@/styles/Imageconverter.module.css";
+import styles from "@/styles/ImageConverter.module.css";
 import { copyToClipboardMethod, base64ToImage } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
