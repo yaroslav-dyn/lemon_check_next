@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef } from "react";
 import Head from "next/head";
+import Image from "next/image";
 import styles from "@/styles/Imageconverter.module.css";
 import { copyToClipboardMethod, base64ToImage } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
@@ -110,7 +111,7 @@ const Imageconverter = (props) => {
           content="convert image to base64 and visa versa, image to base64 online, base64 to image, online encode image to base64, online encode base64 to image converter, free Base64 encoding tool"
         />
       </Head>
-      //SECTION: CONVERTER HEADING
+      {/* SECTION: CONVERTER HEADING */}
       <main className="main_content converter_content">
         <div className={`main__heading ${mobileDevice ? "--small-bm" : ""}`}>
           <>
@@ -348,9 +349,11 @@ const ConverterHeading = ({ type, changeConverterType, isDarkTheme }) => {
               className="align-middle bg-primary"
               onClick={changeConverterType}
             >
-              <img
+              <Image
                 src={isDarkTheme ? backIconLight : backIconDark}
                 alt="back"
+                width={48}
+                height={48}
               />
             </span>
             <span></span> IMAGE TO{" "}
@@ -374,9 +377,11 @@ const ConverterHeading = ({ type, changeConverterType, isDarkTheme }) => {
               className="align-middle bg-primary"
               onClick={changeConverterType}
             >
-              <img
+              <Image
                 src={isDarkTheme ? backIconLight : backIconDark}
                 alt="back"
+                width={48}
+                height={48}
               />
             </span>
             <span>
