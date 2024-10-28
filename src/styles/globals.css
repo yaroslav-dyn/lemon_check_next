@@ -590,6 +590,7 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
   height: 1px;
   border: none;
   background-color: var(--color-primary);
+  width: auto;
 }
 .--base-divider.x2 {
   height: 2px;

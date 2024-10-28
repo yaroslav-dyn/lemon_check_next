@@ -5,6 +5,9 @@ import { copyToClipboardMethod, base64ToImage } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
 
+const backIconLight  = '/assets/icons/icons8-logout-rounded-left-48.png'
+const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
+
 const Imageconverter = (props) => {
   const [imageBase64, setImageBase64] = useState("");
   const [rootConvertType, setConvertType] = useState(undefined);
@@ -25,15 +28,15 @@ const Imageconverter = (props) => {
 
   const operationOptions = [
     {
-      label: "Like image",
-      value: "image",
+      label: "Like data",
+      value: "data",
       selectedBackgroundColor: !isDarkTheme ? "limegreen" : "#E94E3D",
       fontColor: !isDarkTheme ? "#000" : "#fff",
       selectedFontColor: "#fff",
     },
     {
-      label: "Like data",
-      value: "data",
+      label: "Like image",
+      value: "image",
       selectedBackgroundColor: !isDarkTheme ? "limegreen" : "#E94E3D",
       fontColor: !isDarkTheme ? "#000" : "#fff",
       selectedFontColor: "#fff",
@@ -100,11 +103,11 @@ const Imageconverter = (props) => {
         </title>
         <meta
           name="description"
-          content="Easily convert images to Base64 format with LockBoxApp. Our free tool lets you encode images into Base64 for seamless integration into your applications."
+          content="Easily convert images to Base64 and visa versa format with LockBoxApp. Our free tool lets you encode images into Base64 for seamless integration into your applications."
         />
         <meta
           name="keywords"
-          content="convert image to base64, image to base64 online, encode image to base64, Base64 converter, free Base64 encoding tool"
+          content="convert image to base64 and visa versa, image to base64 online, base64 to image, online encode image to base64, online encode base64 to image converter, free Base64 encoding tool"
         />
       </Head>
       //SECTION: CONVERTER HEADING
@@ -125,32 +128,36 @@ const Imageconverter = (props) => {
                 <ConverterHeading
                   type={rootConvertType}
                   changeConverterType={changeConverterType}
+                  isDarkTheme={isDarkTheme}
                 />
               </div>
             )}
           </>
         </div>
 
-        {/*SECTION: CONVERTER TYPE  */}
+        {/*SECTION: CONVERTER TYPES LIST*/}
         {!rootConvertType && (
           <section className={"container__limit gap-x-3"}>
             <div
-              className={`flex__grid ${
-                mobileDevice ? "--column" : ""
-              } --base-gap justify-center`}
+              className={`flex__grid ${mobileDevice ? "--column" : ""} ${
+                !mobileDevice ? "--base-gap" : ""
+              } justify-center`}
             >
               <button
                 onClick={() => setConvertType("image")}
-                className={`action__btn --secondary-btn 
+                className={`action__btn --primary-btn 
                   ${
                     mobileDevice
                       ? styles.convertTypeBageMobile
                       : styles.convertTypeBage
                   }
-                }`}
+                `}
               >
                 image to base64
               </button>
+              {mobileDevice && (
+                <hr className="--base-divider x2 --bg-primary w-100 my2" />
+              )}
               <button
                 onClick={() => setConvertType("data")}
                 className={`action__btn --secondary-btn
@@ -203,7 +210,7 @@ const Imageconverter = (props) => {
                   name="text_will_convert"
                   id="textWillConvert"
                   cols="30"
-                  rows={mobileDevice ? 8 : 10}
+                  rows={mobileDevice ? 8 : 14}
                   placeholder="Input base64 data"
                   onInput={(e) => {
                     setDataToConvert(e.target.value);
@@ -328,15 +335,24 @@ const Imageconverter = (props) => {
 export default Imageconverter;
 
 //SECTION: HEADING ELEMENT
-const ConverterHeading = ({ type, changeConverterType }) => {
+const ConverterHeading = ({ type, changeConverterType, isDarkTheme }) => {
   return (
     <div>
       {type === "image" ? (
         <div>
           <h1 className="h1_heading" data-centered-text>
-            <button className="action__btn--text" onClick={changeConverterType}>
+            {/* <button className="action__btn--text" onClick={changeConverterType}>
               &#8592;
-            </button>
+            </button> */}
+            <span
+              className="align-middle bg-primary"
+              onClick={changeConverterType}
+            >
+              <img
+                src={isDarkTheme ? backIconLight : backIconDark}
+                alt="back"
+              />
+            </span>
             <span></span> IMAGE TO{" "}
             <span className="--color-primary">BASE64</span>
           </h1>
@@ -350,10 +366,19 @@ const ConverterHeading = ({ type, changeConverterType }) => {
         </div>
       ) : (
         <>
-          <h1 className="h1_heading" data-centered-text>
-            <button className="action__btn--text" onClick={changeConverterType}>
-              &#8592;
-            </button>
+          <h1 className="h1_heading " data-centered-text>
+            {/* <button className="action__btn--text" onClick={changeConverterType}>
+              &#8592; 
+            </button> */}
+            <span
+              className="align-middle bg-primary"
+              onClick={changeConverterType}
+            >
+              <img
+                src={isDarkTheme ? backIconLight : backIconDark}
+                alt="back"
+              />
+            </span>
             <span>
               {" "}
               BASE64 TO <span className="--color-primary">IMAGE</span>

@@ -64,13 +64,13 @@
   min-height: 120px;
 }
 
-.convertTypeBage.mobile-veiw {
+.convertTypeBageMobile {
     min-height: 74px;
 }
 
-.convertTypeBage:hover, .convertTypeBage:active, .convertTypeBage:focus {
+/* .convertTypeBage:hover, .convertTypeBage:active, .convertTypeBage:focus {
   background-color: var(--color-primary);
-}
+} */
 
 
 @media (max-width: 997px) {
