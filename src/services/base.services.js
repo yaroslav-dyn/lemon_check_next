@@ -70,5 +70,41 @@ export function downloadFile(data, filename, type) {
   }
 }
 
+function isBase64(base64String) {
+  const base64Regex =
+    /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
 
+  return base64Regex.test(base64String);
+}
+
+export function base64ToImage(base64String, filename) {
+
+  const base64Data = base64String.replace(
+    /^data:image\/(png|jpeg|webp);base64,/,
+    ""
+  );
+   
+  if (!isBase64(base64Data)) {
+    return;
+  }
+  const binaryString = atob(base64Data);
+  const len = binaryString.length;
+  const bytes = new Uint8Array(len);
+
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+
+  const blob = new Blob([bytes], { type: "image/png" });
+
+  return blob;
+
+  // Create a download link
+  // const link = document.createElement("a");
+  // link.href = URL.createObjectURL(blob);
+  // link.download = filename || "image.png";
+  // document.body.appendChild(link);
+  // link.click();
+  // document.body.removeChild(link);
+}
 

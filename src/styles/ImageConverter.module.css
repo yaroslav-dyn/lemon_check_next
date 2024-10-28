@@ -8,22 +8,22 @@
 
 }
 
-.convertorImgPreview {
+.converterImgPreview {
   flex-basis: 33.3333333333%;
 }
-.convertorImgPreview img {
+.converterImgPreview img {
   max-width: 30vw;
   width: 100%;
   height: auto;
   display: inline-block;
 }
 
-.convertorControlBlock {
+.converterControlBlock {
   flex-basis: 33.3333333333%;
 }
 
 .uploadButton {
-  margin-bottom: 30px;
+  margin-bottom: 14px;
 }
 
 .imageInput {
@@ -52,11 +52,24 @@
 .codeArea {
   padding: 1rem 1.4rem;
   width: 100%;
-  border: 2px solid lightgreen;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--base-rounded);
 }
 
 .codeArea:focus {
   outline: 2px #f2e302;
+}
+
+.convertTypeBage {
+  min-height: 120px;
+}
+
+.convertTypeBage.mobile-veiw {
+    min-height: 74px;
+}
+
+.convertTypeBage:hover, .convertTypeBage:active, .convertTypeBage:focus {
+  background-color: var(--color-primary);
 }
 
 

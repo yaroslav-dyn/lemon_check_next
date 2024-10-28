@@ -47,8 +47,8 @@ export const BottomBarlinks = [
     icon: "/assets/img/icons8-name-48.png",
   },
   {
-    title: "image-convertor",
-    url: "/image-convertor",
+    title: "image-converter",
+    url: "/image-converter",
     alias: "IC",
     isActive: false,
     icon: "/assets/img/icons8-image-refresh-48.png",

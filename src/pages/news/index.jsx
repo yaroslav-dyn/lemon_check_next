@@ -165,10 +165,10 @@ const NewsPage = () => {
                 <strong> Advanced File/Image Converter</strong>: Expanding the
                 image converter with more file formats and advanced features.
               </li>
-              <li>
+              {/* <li>
                 <strong>IP Geolocation Checker</strong>: Check the geolocation
                 of an IP address with ease.
-              </li>
+              </li> */}
               <li>
                 <strong>Save Encrypted Passwords & Aliases</strong>: We’ll soon
                 offer the ability to securely save encrypted passwords and
