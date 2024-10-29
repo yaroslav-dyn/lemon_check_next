@@ -1,12 +1,15 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import styles from "@/styles/ImageConverter.module.css";
 import { copyToClipboardMethod, base64ToImage } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
+import { useRouter } from "next/navigation";
 
-const backIconLight  = '/assets/icons/icons8-logout-rounded-left-48.png'
+const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
 
 const Imageconverter = (props) => {
@@ -16,11 +19,13 @@ const Imageconverter = (props) => {
   const [dataToConvert, setDataToConvert] = useState("");
   const [convertedFromData, setConvertedFromData] = useState("");
   const [invalidBase64, setBase64invalidState] = useState("");
-  const [selectedConvertedType, setSelectedConvertedType] = useState("data");
   const imageInputRef = useRef(null);
   const areaElement = useRef();
   const convertedFromDataLink = useRef(null);
   const mobileDevice = useDeviceType();
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const isDarkTheme = useMemo(
     () => props.theme === "primary__theme",
@@ -45,7 +50,6 @@ const Imageconverter = (props) => {
   ];
 
   const onChangeDataType = (type) => {
-    setSelectedConvertedType(type);
     if (type === "image") {
       setTypedImageBase64(`<img src='${imageBase64}' />`);
     } else if (type === "data") {
@@ -66,10 +70,10 @@ const Imageconverter = (props) => {
   const convertFromDataToImage = () => {
     if (dataToConvert) {
       const blobFromData = base64ToImage(dataToConvert);
-      if(!blobFromData) {
-        setBase64invalidState(true)
+      if (!blobFromData) {
+        setBase64invalidState(true);
         setConvertedFromData("");
-        return
+        return;
       }
       setBase64invalidState(false);
       const urlFromBlob = URL.createObjectURL(blobFromData);
@@ -87,12 +91,22 @@ const Imageconverter = (props) => {
     copyToClipboardMethod(areaElement);
   };
 
-  const changeConverterType = () => {
+  const changeConverterType = (type) => {
     setImageBase64("");
     setConvertedFromData("");
     setBase64invalidState(false);
-    setConvertType(undefined);
+    setConvertType(type);
+    router.replace("/image-converter");
   };
+
+  useEffect(() => {
+    if (searchParams.has("type")) {
+      const sParam = searchParams.get("type");
+      if (sParam === "image" || sParam === "data") {
+        setConvertType(sParam);
+      }
+    }
+  }, [searchParams]);
 
   // NOTE: HTML!
   return (
@@ -111,18 +125,20 @@ const Imageconverter = (props) => {
           content="convert image to base64 and visa versa, image to base64 online, base64 to image, online encode image to base64, online encode base64 to image converter, free Base64 encoding tool"
         />
       </Head>
-      {/* SECTION: CONVERTER HEADING */}
+      {/* SECTION: CONVERTER MAIN HEADING */}
       <main className="main_content converter_content">
         <div className={`main__heading ${mobileDevice ? "--small-bm" : ""}`}>
           <>
             {!rootConvertType ? (
               <div data-centered-text>
-                <h1 className="h1_heading --uppercase">
-                  image <span className="--color-primary"> Converter </span>
+                <h1 className="h1_heading">
+                  Image <span className="--color-primary"> Converter </span>
                 </h1>
-                {/* <div className="h2_heading mb1 mt1" data-centered-text>
-                  Choose an option
-                </div> */}
+                <div className="slogan__text mb1 mt1" data-centered-text>
+                  Convert images seamlessly:{" "}
+                  <span className="--color-primary">encode</span> or{" "}
+                  <span className="--color-primary">decode</span> with a click
+                </div>
               </div>
             ) : (
               <div>
@@ -130,13 +146,14 @@ const Imageconverter = (props) => {
                   type={rootConvertType}
                   changeConverterType={changeConverterType}
                   isDarkTheme={isDarkTheme}
+                  mobileDevice={mobileDevice}
                 />
               </div>
             )}
           </>
         </div>
 
-        {/*SECTION: CONVERTER TYPES LIST*/}
+        {/*SECTION: CONVERTER TYPES LIST (BUTTONS)*/}
         {!rootConvertType && (
           <section className={"container__limit gap-x-3"}>
             <div
@@ -144,32 +161,52 @@ const Imageconverter = (props) => {
                 !mobileDevice ? "--base-gap" : ""
               } justify-center`}
             >
-              <button
-                onClick={() => setConvertType("image")}
-                className={`action__btn --primary-btn 
-                  ${
-                    mobileDevice
-                      ? styles.convertTypeBageMobile
-                      : styles.convertTypeBage
-                  }
-                `}
-              >
-                image to base64
-              </button>
+              <div>
+                <button
+                  onClick={() => {
+                    setConvertType("image");
+                    router.replace("/image-converter?type=image");
+                  }}
+                  className={`action__btn --bg-accent --uppercase w-100
+                    ${
+                      mobileDevice
+                        ? styles.convertTypeBageMobile
+                        : styles.convertTypeBage
+                    }
+                  `}
+                >
+                  image to base64
+                </button>
+                {!mobileDevice && (
+                  <p className="center">
+                    Convert images for web usage <br /> or storage
+                  </p>
+                )}
+              </div>
               {mobileDevice && (
                 <hr className="--base-divider x2 --bg-primary w-100 my2" />
               )}
-              <button
-                onClick={() => setConvertType("data")}
-                className={`action__btn --secondary-btn
-                  ${
-                    mobileDevice
-                      ? styles.convertTypeBageMobile
-                      : styles.convertTypeBage
-                  }`}
-              >
-                base64 to image{" "}
-              </button>
+              <div>
+                <button
+                  onClick={() => {
+                    setConvertType("data");
+                    router.replace("/image-converter?type=data");
+                  }}
+                  className={`action__btn --bg-accent --uppercase w-100  
+                    ${
+                      mobileDevice
+                        ? styles.convertTypeBageMobile
+                        : styles.convertTypeBage
+                    }`}
+                >
+                  base64 to image{" "}
+                </button>
+                {!mobileDevice && (
+                  <p className="center">
+                    Decode base64 strings <br /> back to images
+                  </p>
+                )}
+              </div>
             </div>
           </section>
         )}
@@ -203,11 +240,11 @@ const Imageconverter = (props) => {
                   : convertedFromData
                   ? "flex__grid justify-between align-baseline"
                   : "")
-              }`}
+              } --base-gap`}
             >
-              <div className="flex__grid --column justify-between ">
+              <div className="flex__grid --column justify-between flex-1 --base-gap">
                 <textarea
-                  className={`${styles.codeArea} mb2`}
+                  className={`${styles.codeArea} mb2 flex-1`}
                   name="text_will_convert"
                   id="textWillConvert"
                   cols="30"
@@ -231,7 +268,7 @@ const Imageconverter = (props) => {
               {invalidBase64 && (
                 <h3 className="center --color-accent">Invalid base64 data!</h3>
               )}
-              {convertedFromData && !invalidBase64 && (
+              {dataToConvert && convertedFromData && !invalidBase64 && (
                 <div className={``}>
                   <div>
                     <a
@@ -335,8 +372,13 @@ const Imageconverter = (props) => {
 
 export default Imageconverter;
 
-//SECTION: HEADING ELEMENT
-const ConverterHeading = ({ type, changeConverterType, isDarkTheme }) => {
+//SECTION: (TYPE pages) HEADING ELEMENT
+const ConverterHeading = ({
+  type,
+  changeConverterType,
+  isDarkTheme,
+  mobileDevice,
+}) => {
   return (
     <div>
       {type === "image" ? (
@@ -346,14 +388,16 @@ const ConverterHeading = ({ type, changeConverterType, isDarkTheme }) => {
               &#8592;
             </button> */}
             <span
-              className="align-middle bg-primary"
-              onClick={changeConverterType}
+              className={`align-middle ${
+                mobileDevice ? "" : "cursor-pointer-screen"
+              } `}
+              onClick={() => changeConverterType()}
             >
               <Image
                 src={isDarkTheme ? backIconLight : backIconDark}
                 alt="back"
-                width={48}
-                height={48}
+                width={44}
+                height={44}
               />
             </span>
             <span></span> IMAGE TO{" "}
@@ -374,14 +418,16 @@ const ConverterHeading = ({ type, changeConverterType, isDarkTheme }) => {
               &#8592; 
             </button> */}
             <span
-              className="align-middle bg-primary"
-              onClick={changeConverterType}
+              className={`align-middle bg-primary ${
+                mobileDevice ? "" : "cursor-pointer-screen"
+              } `}
+              onClick={() => changeConverterType()}
             >
               <Image
                 src={isDarkTheme ? backIconLight : backIconDark}
                 alt="back"
-                width={48}
-                height={48}
+                width={44}
+                height={44}
               />
             </span>
             <span>

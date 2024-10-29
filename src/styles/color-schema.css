@@ -63,11 +63,12 @@
 
 .light__theme {
   --color-primary: limegreen;
+  --color-accent: darkgreen;
   --color-base: #000;
 
   --theme-primary-background: #fff;
   --theme-primary-text: #000;
-  --theme-primary-accent: limegreen;
+  --theme-primary-accent: darkgreen;
   --theme-footer-background: #fff;
 
   --link-color: #444;
