@@ -43,23 +43,26 @@ const NewsPage = () => {
 
           <article className="content-text">
             <h2 className="mb0">
-              October 29, 2024 – 🎉 Update: Enhanced Image Converter{" "}
+              🎉 October 29, 2024 – Update: Enhanced{" "}
+              <span className="--color-primary">Image Converter</span>{" "}
             </h2>
             <p>
-              Now Supports both: data and image Format! We’ve added a new capability to
-              our Image Converter feature. Alongside converting between standard
-              base64 and image formats, the converter now seamlessly handles
-              images in the base64 data and image format: <br />
-              <code>{"<img src='data:image/png;base64,....' />"}</code>
+              Now Supports both: data and image Format! We’ve added a new
+              capability to our Image Converter feature. Alongside converting
+              between standard base64 and image formats, the converter now
+              seamlessly handles images in{" "}<span className="--color-primary">base64 data</span> and like image:{" "}
+              <br />
+              <code className="--color-primary">{"<img src='data:image/png;base64,....' />"}</code>.
             </p>
-            <p>What’s New:</p>
+            <strong className="--color-base"> What’s New:</strong>
             <p>
               Automatic Data URI Detection: Paste a data URI (starting with
               data:image/...;base64,) directly into the converter, and it will
               handle the cleanup automatically. Flexible Conversion: The
               converter now removes any extra HTML elements or characters (like
-              /&gt;) for a smooth experience. How It Works:
+              /&gt;) for a smooth experience.
             </p>
+            <strong className="--color-base"> How It Works:</strong>
             <p>
               Image to Base64: Upload any image, and it will be converted to a
               base64 string ready for embedding or use. Base64 to Image: Paste
