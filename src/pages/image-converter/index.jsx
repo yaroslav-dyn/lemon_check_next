@@ -163,6 +163,9 @@ const Imageconverter = (props) => {
                 !mobileDevice ? "--base-gap" : ""
               } justify-center`}
             >
+              {/* {mobileDevice && (
+                <hr className="--base-divider x2 --bg-primary w-100 my1" />
+              )} */}
               <div>
                 <button
                   onClick={() => {
@@ -191,7 +194,9 @@ const Imageconverter = (props) => {
                   </div>
                 </button>
                 {!mobileDevice && (
-                  <div className="flex__grid align-center --extra_small-gap">
+                  <div
+                    className={`flex__grid align-center --extra_small-gap ${styles.converterInfoBlockOne}`}
+                  >
                     <Image
                       className={`${isDarkTheme ? "" : "--img-filter-invert"}`}
                       src={imgTypeBageIcon}
@@ -206,7 +211,7 @@ const Imageconverter = (props) => {
                 )}
               </div>
               {mobileDevice && (
-                <hr className="--base-divider x2 --bg-primary w-100 my2" />
+                <hr className="--base-divider x2 --bg-primary w-100 my1" />
               )}
               <div
                 className={`${
@@ -241,7 +246,9 @@ const Imageconverter = (props) => {
                   </div>
                 </button>
                 {!mobileDevice && (
-                  <div className="flex__grid align-center --extra_small-gap">
+                  <div
+                    className={`flex__grid align-center --extra_small-gap ${styles.converterInfoBlockTwo}`}
+                  >
                     <Image
                       className={`${isDarkTheme ? "" : "--img-filter-invert"}`}
                       src={dataTypeBageIcon}
@@ -254,6 +261,9 @@ const Imageconverter = (props) => {
                   </div>
                 )}
               </div>
+              {/* {mobileDevice && (
+                <hr className="--base-divider x2 --bg-primary w-100 my1" />
+              )} */}
             </div>
           </section>
         )}

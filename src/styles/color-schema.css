@@ -104,6 +104,11 @@
   border: none;
 }
 
+.light__theme .generator__content--btn:hover,
+.light__theme .action__btn:hover {
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
 /* .primary__theme {
   --link-color: var(--link-color-active);
 }
