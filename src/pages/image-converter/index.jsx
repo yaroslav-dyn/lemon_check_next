@@ -289,6 +289,19 @@ const Imageconverter = (props) => {
               convertedFromData ? "" : "--x-small"
             }`}
           >
+            {/* <p className="justify">
+              <small className="">
+                Paste base64 string starts from <br />
+                <span className="--color-primary">
+                  {"<img src='data:image/png;base64,....'/> "}
+                </span>
+                <br />
+                or{" "}
+                <span className="--color-primary">
+                  {"data:image/png;base64,..."}
+                </span>
+              </small>
+            </p> */}
             <div
               className={`${
                 dataToConvert &&
@@ -306,7 +319,7 @@ const Imageconverter = (props) => {
                   id="textWillConvert"
                   cols="30"
                   rows={mobileDevice ? 8 : 14}
-                  placeholder="Input base64 data"
+                  placeholder="Input base64 data here"
                   onInput={(e) => {
                     setDataToConvert(e.target.value);
                   }}

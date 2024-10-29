@@ -40,6 +40,37 @@ const NewsPage = () => {
               !
             </div>
           </div>
+
+          <article className="content-text">
+            <h2 className="mb0">
+              October 29, 2024 – 🎉 Update: Enhanced Image Converter{" "}
+            </h2>
+            <p>
+              Now Supports both: data and image Format! We’ve added a new capability to
+              our Image Converter feature. Alongside converting between standard
+              base64 and image formats, the converter now seamlessly handles
+              images in the base64 data and image format: <br />
+              <code>{"<img src='data:image/png;base64,....' />"}</code>
+            </p>
+            <p>What’s New:</p>
+            <p>
+              Automatic Data URI Detection: Paste a data URI (starting with
+              data:image/...;base64,) directly into the converter, and it will
+              handle the cleanup automatically. Flexible Conversion: The
+              converter now removes any extra HTML elements or characters (like
+              /&gt;) for a smooth experience. How It Works:
+            </p>
+            <p>
+              Image to Base64: Upload any image, and it will be converted to a
+              base64 string ready for embedding or use. Base64 to Image: Paste
+              your base64 string, whether it’s standalone or embedded in a data
+              URI, and convert it back to a downloadable image file. We’re
+              always looking for ways to make the LockBox tools more
+              user-friendly and versatile. Give it a try on our Image Converter
+              page, and let us know what you think!
+            </p>
+          </article>
+
           <article className="content-text">
             <h2 className="mb0">
               October 24, 2024 – New Feature:{" "}
