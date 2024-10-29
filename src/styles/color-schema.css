@@ -63,11 +63,12 @@
 
 .light__theme {
   --color-primary: limegreen;
+  --color-accent: darkgreen;
   --color-base: #000;
 
   --theme-primary-background: #fff;
   --theme-primary-text: #000;
-  --theme-primary-accent: limegreen;
+  --theme-primary-accent: darkgreen;
   --theme-footer-background: #fff;
 
   --link-color: #444;
@@ -101,6 +102,11 @@
   background-color: #444;
   box-shadow: none;
   border: none;
+}
+
+.light__theme .generator__content--btn:hover,
+.light__theme .action__btn:hover {
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* .primary__theme {

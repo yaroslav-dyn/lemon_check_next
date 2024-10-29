@@ -205,7 +205,7 @@ const AboutPage = () => {
                 </Link>
                 ,{" "}
                 <Link
-                  href={`/image-convertor`}
+                  href={`/image-converter`}
                   className="--default-link bold"
                   target="_blank"
                 >
