@@ -13,6 +13,7 @@
 }
 .converterImgPreview img {
   max-width: 30vw;
+  max-width: 327px;
   width: 100%;
   height: auto;
   display: inline-block;

@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 
 const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
+const imgTypeBageIcon = "/assets/icons/icons8-image-file-48.png";
+const dataTypeBageIcon = "/assets/icons/icons8-64-bit-50.png";
 
 const Imageconverter = (props) => {
   const [imageBase64, setImageBase64] = useState("");
@@ -175,18 +177,44 @@ const Imageconverter = (props) => {
                     }
                   `}
                 >
-                  image to base64
+                  <div
+                    className={`${
+                      mobileDevice
+                        ? "flex__grid align-center justify-center --extra_small-gap"
+                        : ""
+                    }`}
+                  >
+                    {mobileDevice && (
+                      <Image src={imgTypeBageIcon} width={24} height={24} />
+                    )}
+                    <span> image to base64</span>
+                  </div>
                 </button>
                 {!mobileDevice && (
-                  <p className="center">
-                    Convert images for web usage <br /> or storage
-                  </p>
+                  <div className="flex__grid align-center --extra_small-gap">
+                    <Image
+                      className={`${isDarkTheme ? "" : "--img-filter-invert"}`}
+                      src={imgTypeBageIcon}
+                      width={38}
+                      height={38}
+                    />
+                    <p className="left">
+                      Convert images for <br />
+                      web usage or storage
+                    </p>
+                  </div>
                 )}
               </div>
               {mobileDevice && (
                 <hr className="--base-divider x2 --bg-primary w-100 my2" />
               )}
-              <div>
+              <div
+                className={`${
+                  mobileDevice
+                    ? "flex__grid align-center justify-center --extra_small-gap"
+                    : ""
+                }`}
+              >
                 <button
                   onClick={() => {
                     setConvertType("data");
@@ -199,12 +227,31 @@ const Imageconverter = (props) => {
                         : styles.convertTypeBage
                     }`}
                 >
-                  base64 to image{" "}
+                  <div
+                    className={`${
+                      mobileDevice
+                        ? "flex__grid align-center justify-center --extra_small-gap"
+                        : ""
+                    }`}
+                  >
+                    {mobileDevice && (
+                      <Image src={dataTypeBageIcon} width={24} height={24} />
+                    )}
+                    <span> base64 to image </span>
+                  </div>
                 </button>
                 {!mobileDevice && (
-                  <p className="center">
-                    Decode base64 strings <br /> back to images
-                  </p>
+                  <div className="flex__grid align-center --extra_small-gap">
+                    <Image
+                      className={`${isDarkTheme ? "" : "--img-filter-invert"}`}
+                      src={dataTypeBageIcon}
+                      width={38}
+                      height={38}
+                    />
+                    <p className="left">
+                      Decode base64 strings <br /> back to images
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
@@ -279,8 +326,10 @@ const Imageconverter = (props) => {
                       } mb2 block`}
                       href={convertedFromData}
                     >
-                      <img
-                        className="w-100"
+                      <Image
+                        width={327}
+                        height={327}
+                        className="w-100 --h-auto"
                         src={convertedFromData}
                         alt="converted from base64"
                       />
