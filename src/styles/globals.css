@@ -690,6 +690,12 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
   color: rgb(82, 129, 10);
 }
 
+.records__list {
+  display: grid;
+  /* columns: 4 auto; */
+  grid-template-columns: 10% repeat(3, minmax(25%, auto));
+}
+
 
 /* HELPERS */
 .order-0 {

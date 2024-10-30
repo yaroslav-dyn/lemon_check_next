@@ -2,12 +2,11 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "@/styles/ImageConverter.module.css";
 import { copyToClipboardMethod, base64ToImage } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
-import { useRouter } from "next/navigation";
 
 const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
