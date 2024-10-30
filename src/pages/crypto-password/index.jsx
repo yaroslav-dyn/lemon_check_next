@@ -11,7 +11,7 @@ import aes, { encrypt } from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
-
+import { useSnackbar } from "notistack";
 import EncryptedPasswordManager from "@/components/elements/records_list.element";
 import { saveEncryptedPassword } from "@/services/db.servise";
 
@@ -38,6 +38,7 @@ const CryptoPassword = (props) => {
   const outTextInput = useRef(null);
   const outTextCrypted = useRef(null);
   const mobileDevice = useDeviceType();
+  const { enqueueSnackbar } = useSnackbar();
   const isDarkTheme = useMemo(
     () => props.theme === "primary__theme",
     [props.theme]
@@ -136,15 +137,15 @@ const CryptoPassword = (props) => {
     }
   };
 
-  const saveToFile = () => {
-    const dataToFile = { ...modelObject };
-    delete dataToFile.secret;
-    delete dataToFile.sourceText;
-    const iterableData = [dataToFile];
-    const fileContent = jsonToCsv(iterableData);
-    fileContent &&
-      downloadFile(fileContent, dataToFile.alias + ".csv", "text/csv");
-  };
+  // const saveToFile = () => {
+  //   const dataToFile = { ...modelObject };
+  //   delete dataToFile.secret;
+  //   delete dataToFile.sourceText;
+  //   const iterableData = [dataToFile];
+  //   const fileContent = jsonToCsv(iterableData);
+  //   fileContent &&
+  //     downloadFile(fileContent, dataToFile.alias + ".csv", "text/csv");
+  // };
 
   /**
    * SECTION: SAVE TO DEVICE
@@ -152,7 +153,25 @@ const CryptoPassword = (props) => {
   const saveToDB = async () => {
     const { alias, cryptedText } = modelObject;
     if (alias && cryptedText) {
-      await saveEncryptedPassword(alias, cryptedText);
+      try {
+        const req = await saveEncryptedPassword(alias, cryptedText);
+        if (!req) {
+          return;
+        }
+        enqueueSnackbar("Saved to device!", {
+          variant: "success",
+          preventDuplicate: true,
+          autoHideDuration: 2200,
+          anchorOrigin: { horizontal: "center", vertical: "bottom" },
+        });
+      } catch (error) {
+        enqueueSnackbar("Error: Record hasn't been saved!", {
+          variant: "error",
+          preventDuplicate: true,
+          autoHideDuration: 2200,
+          anchorOrigin: { horizontal: "center", vertical: "bottom" },
+        });
+      }
     }
   };
 
@@ -331,33 +350,40 @@ const CryptoPassword = (props) => {
                       mobileDevice ? "mt-2.4" : "mt-2.4"
                     }`}
                   >
-                    <button
-                      id="btn"
-                      className="generator__content--btn --small-margin --secondary-btn"
-                      onClick={() => copyToClipBoard()}
+                    <hr className="--base-divider x2 --bg-primary mb2" />
+                    <div
+                      className={`${
+                        mobileDevice ? "" : "flex__grid align-start --small-gap"
+                      }`}
                     >
-                      Copy
-                    </button>
-                    {actionState === "encrypt" && (
-                      <>
-                        <hr className="--base-divider --bg-primary mb2" />
-                        <button
-                          id="btn"
-                          className="generator__content--btn --secondary-btn"
-                          onClick={() => saveToFile()}
-                        >
-                          Save to CSV
-                        </button>
+                      <button
+                        id="btn"
+                        className="action__btn --secondary-btn flex-1 w-100"
+                        onClick={() => copyToClipBoard()}
+                      >
+                        Copy
+                      </button>
+                      {actionState === "encrypt" && (
+                        <>
+                          {/* TODO: DEPRECATED */}
+                          {/* <button
+                            id="btn"
+                            className="generator__content--btn --secondary-btn"
+                            onClick={() => saveToFile()}
+                          >
+                            Save to CSV
+                          </button> */}
 
-                        <button
-                          id="btn"
-                          className="generator__content--btn"
-                          onClick={() => saveToDB()}
-                        >
-                          Save to DB
-                        </button>
-                      </>
-                    )}
+                          <button
+                            id="btn"
+                            className="action__btn flex-1 w-100"
+                            onClick={() => saveToDB()}
+                          >
+                            Save to DB
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
               </>

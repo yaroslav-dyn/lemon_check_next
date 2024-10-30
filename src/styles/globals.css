@@ -514,6 +514,9 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
   justify-content: flex-end;
 }
 
+.--small-font {
+  font-size: 0.875rem;
+}
 
 .--small-gap {
   gap: 0.75rem;
@@ -693,7 +696,7 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 .records__list {
   display: grid;
   /* columns: 4 auto; */
-  grid-template-columns: 10% repeat(3, minmax(25%, auto));
+  grid-template-columns: 10% 20% 60% 10%;
 }
 
 

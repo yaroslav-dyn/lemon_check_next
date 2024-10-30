@@ -9,15 +9,16 @@ import "@/styles/elements.css";
 import "@/styles/bottom_bar.css";
 import "basscss/css/basscss.min.css";
 import { isTablet } from "react-device-detect";
+import { SnackbarProvider } from "notistack";
 
 export default function App({ Component, pageProps }) {
   const appContainerRef = useRef(null);
   const isMobile = useDeviceType();
-  const [theme, setTheme] = useState('light__theme')
+  const [theme, setTheme] = useState("light__theme");
 
-  function setColorschema (theme)  {
-    setTheme(theme); 
-  };
+  function setColorschema(theme) {
+    setTheme(theme);
+  }
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
@@ -32,12 +33,18 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <div className={`${isMobile ? "mobile__view" : ""} ${isTablet ? 'tablet__view' : ''} `}>
-        <div id="appContainer" className={`app__container ${theme}`}>
-          <AppHeader changeSchema={setColorschema} />
-          <Component {...pageProps} theme={theme} />
-          <Footer />
-        </div>
+      <div
+        className={`${isMobile ? "mobile__view" : ""} ${
+          isTablet ? "tablet__view" : ""
+        } `}
+      >
+        <SnackbarProvider>
+          <div id="appContainer" className={`app__container ${theme}`}>
+            <AppHeader changeSchema={setColorschema} />
+            <Component {...pageProps} theme={theme} />
+            <Footer />
+          </div>
+        </SnackbarProvider>
       </div>
     </>
   );
