@@ -1,11 +1,8 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
   copyToClipboardMethod,
-  jsonToCsv,
-  downloadFile,
 } from "@/services/base.services";
 import styles from "@/styles/CryptoPassword.module.css";
 import aes, { encrypt } from "crypto-js/aes";
@@ -143,7 +140,6 @@ const CryptoPassword = (props) => {
     }
   };
 
-
   /**
    * SECTION: SAVE TO DEVICE
    **/
@@ -216,14 +212,17 @@ const CryptoPassword = (props) => {
             </h1>
 
             {/* Type Switcher */}
-            <div className={styles.instructionActionControls}>
-              <UISwitcher
-                isDark={isDarkTheme}
-                options={operationOptions}
-                onSwitch={onChangeOperation}
-                elementWidth={200}
-                selected={selectedTypeIndex}
-              />
+            <div className={`container__limit --x-small`}>
+              <div className={`${styles.instructionActionControls} mb0`}>
+                <UISwitcher
+                  isDark={isDarkTheme}
+                  options={operationOptions}
+                  onSwitch={onChangeOperation}
+                  elementWidth={200}
+                  selected={selectedTypeIndex}
+                />
+              </div>
+              <hr className="--base-divider x2 --bg-accent mb0" />
             </div>
           </div>
 
@@ -370,7 +369,7 @@ const CryptoPassword = (props) => {
                     >
                       <button
                         id="btn"
-                        className="action__btn --secondary-btn flex-1 w-100"
+                        className="action__btn --secondary-btn flex-1 w-100 lato-light"
                         onClick={() => copyToClipBoard()}
                       >
                         Copy
@@ -388,7 +387,7 @@ const CryptoPassword = (props) => {
 
                           <button
                             id="btn"
-                            className="action__btn flex-1 w-100"
+                            className="action__btn flex-1 w-100 lato-light"
                             onClick={() => saveToDB()}
                           >
                             Save record

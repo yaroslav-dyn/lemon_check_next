@@ -592,6 +592,18 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
   background-color: var(--color-accent) !important;
 }
 
+.--bcolor-accent {
+  border-color: var(--color-accent)
+}
+
+.--bcolor-primary {
+  border-color: var(--color-primary)
+}
+
+.--bcolor-base {
+  border-color: var(--color-base)
+}
+
 .--default-link, 
 .--default-link:visited {
   text-decoration: none;
