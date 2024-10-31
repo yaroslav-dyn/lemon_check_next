@@ -1,5 +1,6 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
   copyToClipboardMethod,
@@ -14,6 +15,7 @@ import UISwitcher from "@/components/ui.switcher";
 import { useSnackbar } from "notistack";
 import EncryptedPasswordManager from "@/components/elements/records_list.element";
 import { saveEncryptedPassword } from "@/services/db.servise";
+import { isMobile } from "react-device-detect";
 
 const infoIcon = "/assets/img/icons8-question-mark-48.png";
 
@@ -37,12 +39,14 @@ const CryptoPassword = (props) => {
   const encryptForm = useRef(null);
   const outTextInput = useRef(null);
   const outTextCrypted = useRef(null);
+  const aliasRef = useRef(null);
   const mobileDevice = useDeviceType();
   const { enqueueSnackbar } = useSnackbar();
   const isDarkTheme = useMemo(
     () => props.theme === "primary__theme",
     [props.theme]
   );
+
 
   const operationOptions = [
     {
@@ -85,6 +89,8 @@ const CryptoPassword = (props) => {
     encryptForm &&
       encryptForm.hasOwnProperty("current") &&
       encryptForm.current.reset();
+     aliasRef && aliasRef?.current 
+     && (aliasRef.current.value = ""); 
   };
 
   const onChangeOperation = (e) => {
@@ -137,15 +143,6 @@ const CryptoPassword = (props) => {
     }
   };
 
-  // const saveToFile = () => {
-  //   const dataToFile = { ...modelObject };
-  //   delete dataToFile.secret;
-  //   delete dataToFile.sourceText;
-  //   const iterableData = [dataToFile];
-  //   const fileContent = jsonToCsv(iterableData);
-  //   fileContent &&
-  //     downloadFile(fileContent, dataToFile.alias + ".csv", "text/csv");
-  // };
 
   /**
    * SECTION: SAVE TO DEVICE
@@ -154,18 +151,16 @@ const CryptoPassword = (props) => {
     const { alias, cryptedText } = modelObject;
     if (alias && cryptedText) {
       try {
-        const req = await saveEncryptedPassword(alias, cryptedText);
-        if (!req) {
-          return;
-        }
-        enqueueSnackbar("Saved to device!", {
+        await saveEncryptedPassword(alias, cryptedText);
+        enqueueSnackbar("Success: Saved to device!", {
           variant: "success",
           preventDuplicate: true,
           autoHideDuration: 2200,
           anchorOrigin: { horizontal: "center", vertical: "bottom" },
         });
+        clearForm();
       } catch (error) {
-        enqueueSnackbar("Error: Record hasn't been saved!", {
+        enqueueSnackbar(`${error}`, {
           variant: "error",
           preventDuplicate: true,
           autoHideDuration: 2200,
@@ -202,17 +197,18 @@ const CryptoPassword = (props) => {
       <div className="generator__page">
         <main className="main_content generator__content">
           <div className="main__heading --x-small-bm">
-            <h1 className="h1_heading">
+            <h1 className="h1_heading lato-regular">
               Protect your <span className="--color-primary">password</span>
-              <div className="py1 center slogan__text caps">
+              <div className="py1 center slogan__text ">
                 {actionState === "list" ? (
                   <span>
-                    <span className="--color-primary">Encrypted</span> Password
-                    Manager
+                    <span className="--color-primary">Password</span> Manager
                   </span>
                 ) : (
                   <span>
-                    <span className="--color-primary">Encrypte / Decrypt </span>{" "}
+                    <span className="--color-primary">
+                      {actionState === "encrypt" ? "Encrypte" : "Decrypt"}{" "}
+                    </span>{" "}
                     Your Password
                   </span>
                 )}
@@ -326,15 +322,25 @@ const CryptoPassword = (props) => {
                           <div className="mb2">
                             <InstructionTooltip>
                               <>
-                                Once encrypted You can save crypted password
-                                string and alias for current record into .csv
-                                (simple table) file to your device.
+                                After encrypting, you can save the encrypted
+                                password and alias to your device for easy
+                                access. They’ll be available anytime on the
+                                <span
+                                  className={`--color-primary ${
+                                    isMobile ? "" : "cursor-pointer-screen"
+                                  }`}
+                                  onClick={() => onChangeOperation("list")}
+                                >
+                                  {" "}
+                                  Records list{" "}
+                                </span>
                               </>
                             </InstructionTooltip>
                           </div>
                         )}
                       </label>
                       <textarea
+                        ref={aliasRef}
                         name="password-alias"
                         className={`generator__content--area order-0`}
                         id="passworAlias"
@@ -350,10 +356,16 @@ const CryptoPassword = (props) => {
                       mobileDevice ? "mt-2.4" : "mt-2.4"
                     }`}
                   >
-                    <hr className="--base-divider x2 --bg-primary mb2" />
+                    <hr
+                      className={`--base-divider x2 ${
+                        isDarkTheme ? "--bg-accent" : "--bg-accent"
+                      }  mb2`}
+                    />
                     <div
-                      className={`${
-                        mobileDevice ? "" : "flex__grid align-start --small-gap"
+                      className={`flex__grid ${
+                        mobileDevice
+                          ? "--column --small-gap"
+                          : "align-start --small-gap"
                       }`}
                     >
                       <button
@@ -379,7 +391,7 @@ const CryptoPassword = (props) => {
                             className="action__btn flex-1 w-100"
                             onClick={() => saveToDB()}
                           >
-                            Save to DB
+                            Save record
                           </button>
                         </>
                       )}

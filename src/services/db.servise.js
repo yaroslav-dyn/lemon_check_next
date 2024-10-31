@@ -8,7 +8,11 @@ export function initializeDB() {
     request.onupgradeneeded = function (event) {
       const db = event.target.result;
       if (!db.objectStoreNames.contains("encryptedPasswords")) {
-        db.createObjectStore("encryptedPasswords", { keyPath: "alias" });
+        const store = db.createObjectStore("encryptedPasswords", {
+          keyPath: "id",
+        });
+        // Create an index on alias with unique constraint to prevent duplicates
+        store.createIndex("alias", "alias", { unique: true });
       }
     };
 
@@ -24,16 +28,31 @@ export function initializeDB() {
 
 // IndexedDB functions
 export async function saveEncryptedPassword(alias, encryptedString) {
-
   const db = await initializeDB();
   const transaction = db.transaction(["encryptedPasswords"], "readwrite");
   const store = transaction.objectStore("encryptedPasswords");
-  const record = { id: generateId(), alias, encryptedString };  
-  const request = store.add(record);
 
   return new Promise((resolve, reject) => {
-    request.onsuccess = () => resolve();
-    request.onerror = (event) => reject(event.target.error);
+    // Check if an entry with the given alias already exists
+    const aliasCheckRequest = store.index("alias").get(alias);
+
+    aliasCheckRequest.onsuccess = () => {
+      if (aliasCheckRequest.result) {
+        // Alias already exists
+        reject(
+           new Error("Alias already exists! Please choose a unique alias.")
+        );
+      } else {
+        // Alias is unique, proceed with adding the record
+        const record = { id: generateId(), alias, encryptedString };
+        const addRequest = store.add(record);
+
+        addRequest.onsuccess = () => resolve();
+        addRequest.onerror = (event) => reject(event.target.error);
+      }
+    };
+
+    aliasCheckRequest.onerror = (event) => reject(event.target.error);
   });
 }
 
@@ -49,14 +68,59 @@ export async function getAllEncryptedPasswords() {
   });
 }
 
-export async function deleteEncryptedPassword(alias) {
+export async function deleteEncryptedPassword(id) {
   const db = await initializeDB();
   const transaction = db.transaction(["encryptedPasswords"], "readwrite");
   const store = transaction.objectStore("encryptedPasswords");
 
-  const request = store.delete(alias);
+  const request = store.delete(id);
   return new Promise((resolve, reject) => {
     request.onsuccess = () => resolve();
     request.onerror = (event) => reject(event.target.error);
   });
 }
+
+//SECTION: Import records from CSV
+
+function parseCSV(csvText) {
+  const lines = csvText.trim().split("\n");
+  const headers = lines[0].split(","); // ['Id', 'Alias', 'Encrypted String']
+
+  return lines.slice(1).map((line) => {
+    const values = line.split(",");
+    return headers.reduce((obj, header, index) => {
+      obj[header.trim()] = values[index].trim();
+      return obj;
+    }, {});
+  });
+}
+
+export async function importRecordsFromCSV(file) {
+  const db = await initializeDB();
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = async (event) => {
+      const csvText = event.target.result;
+      const records = parseCSV(csvText);
+
+      const transaction = db.transaction("encryptedPasswords", "readwrite");
+      const store = transaction.objectStore("encryptedPasswords");
+
+      for (const record of records) {
+        const { Id, Alias, "Encrypted String": EncryptedString } = record;
+        const data = { id: Id, alias: Alias, encryptedString: EncryptedString };
+        store.put(data); // Add or update the record in the store
+      }
+
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error);
+    };
+
+    reader.onerror = () => reject("File reading failed");
+    reader.readAsText(file); // Reads the file as text
+  });
+}
+
+

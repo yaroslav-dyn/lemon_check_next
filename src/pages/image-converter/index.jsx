@@ -515,6 +515,7 @@ const ConverterHeading = ({
   );
 };
 
+//TODO: Re-write to base component
 const FileInpuElement = ({
   handleImageChange,
   handleConverterType,

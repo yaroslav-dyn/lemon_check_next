@@ -120,3 +120,12 @@ export function base64ToImage(base64String, filename) {
   const blob = new Blob([bytes], { type: "image/png" });
   return blob;
 }
+
+
+export function debounce(func, delay) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}

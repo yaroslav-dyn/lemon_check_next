@@ -1,28 +1,46 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import {
   getAllEncryptedPasswords,
   deleteEncryptedPassword,
+  importRecordsFromCSV,
 } from "@/services/db.servise";
 import DeleteIconlement from "@/components/elements/delete_icon.elment";
 import CopyToClipBoardElement from "@/components/elements/copy_clipboard.element";
+import FileInpuElement from "@/components/elements/input_file.element";
 import {
   copyToClipboardMethod,
   jsonToCsv,
   downloadFile,
+  debounce,
 } from "@/services/base.services";
 import { useSnackbar } from "notistack";
 import CONSTANTS from "@/services/constants";
 
 //SECTION Component
 const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
+  const [searchString, setSearch] = useState("");
   const [passwords, setPasswords] = useState([]);
   const cryptedInput = useRef([]);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   //SECTION: LOAD HOOK
   useEffect(() => {
     loadPasswords();
   }, []);
+
+  const passwordsArray = useMemo(
+    () =>
+      passwords && searchString && searchString.length > 0
+        ? passwords.filter((ps) => ps && ps.alias.includes(searchString))
+        : passwords,
+    [searchString, passwords]
+  );
 
   //TODO: DEPRECATED
   // const action = (snackbarId) => (
@@ -62,24 +80,16 @@ const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
 
   const loadPasswords = async () => {
     const allPasswords = await getAllEncryptedPasswords();
-    console.log("🚀 ~ loadPasswords ~ allPasswords:", allPasswords);
     setPasswords(allPasswords);
   };
 
-  const handleDelete = async (alias) => {
-    // enqueueSnackbar(`Delete record: ${alias}`, {
-    //   variant: "warning",
-    //   preventDuplicate: true,
-    //   autoHideDuration: false,
-    //   persist: true,
-    //   anchorOrigin: { horizontal: "center", vertical: "top" },
-    //   action,
-    //   onClose: (e) => console.log('closeoo', e)
-    // });
+  const handleDelete = async (id, alias) => {
     const acceptdeleting = confirm(`You realy wan\'t to delete: ${alias}`);
-    if(!acceptdeleting) return
-    await deleteEncryptedPassword(alias);
-    loadPasswords();
+    if (!acceptdeleting) return;
+    try {
+      await deleteEncryptedPassword(id);
+      loadPasswords();
+    } catch (error) {}
   };
 
   const saveToFile = () => {
@@ -89,42 +99,71 @@ const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
       downloadFile(fileContent, `records-${Date.now()}` + ".csv", "text/csv");
   };
 
+  const handleFileLoad = async (e) => {
+    console.log("file", e.target.value);
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        await importRecordsFromCSV(file);
+
+        enqueueSnackbar("Records imported successfully!", {
+          variant: "success",
+          preventDuplicate: true,
+          autoHideDuration: 2200,
+          anchorOrigin: { horizontal: "center", vertical: "bottom" },
+        });
+        loadPasswords();
+      } catch (error) {
+        enqueueSnackbar(`Import failed: ${error}`, {
+          variant: "error",
+          preventDuplicate: true,
+          autoHideDuration: 2200,
+          anchorOrigin: { horizontal: "center", vertical: "bottom" },
+        });
+      }
+    }
+  };
+  // const onSeach = (str) => {
+  //   debounce()
+  // setSearch(str)
+  // }
+
+  const onSeach = useCallback(
+    debounce((value) => {
+      setSearch(value);
+    }, 600),
+    []
+  );
+
   return (
     <div className="password_manager__page">
       <div>
-        {/* <input
-          type="text"
-          value={alias}
-          onChange={(e) => setAlias(e.target.value)}
-          placeholder="Enter alias"
-        />
         <input
+          className="w-100 p1 mb2 --search-style-input --color-base border-bottom"
           type="text"
-          value={encryptedString}
-          onChange={(e) => setEncryptedString(e.target.value)}
-          placeholder="Enter encrypted password"
+          onChange={(e) => onSeach(e.target.value)}
+          placeholder="Search by alias"
         />
-        <button onClick={handleSave}>Save Encrypted Password</button> */}
       </div>
-      <div className="--color-base border-bottom --border-2x">
-        <div className="records__list py1 border-bottom --border-2x caps">
-          <div className="left-align --color-accent">
+      <div className="--color-base border --base-radius p1">
+        <div className="records__list py1 p1 border-bottom --small-font lato-bold">
+          <div className="left-align --color-base">
             <span>#</span>
           </div>
-          <div className="left-align --color-accent">
+          <div className="left-align --color-base">
             <span>Alias</span>
           </div>
-          <div className="center --color-accent">
+          <div className="left-align --color-base">
             <span>Encrypted String</span>
           </div>
-          <div className="right-align --color-accent">
+          <div className="right-align --color-base">
             <span>Action</span>
           </div>
         </div>
-        {passwords.length > 0 ? (
-          passwords.map((record, index) => (
+        {passwordsArray.length > 0 ? (
+          passwordsArray.map((record, index) => (
             <div
-              className="records__list records__list__body --small-font lato-thin my2"
+              className="records__list records__list__body items-center --small-font lato-thin py2"
               key={record.alias}
             >
               <div className="left-align">
@@ -134,31 +173,33 @@ const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
                 <span> {record.alias}</span>
               </span>
               <div className="center">
-                <div className="flex__grid --small-gap">
+                <div>
                   <input
-                    className="--no_style-input --color-base flex-1 w-100"
+                    className={`--no_style-input --color-base flex-1 ${
+                      mobileDevice ? "w-auto" : "w-100"
+                    }`}
                     ref={(ref) => (cryptedInput.current[index] = ref)}
                     defaultValue={record.encryptedString}
                   />
                 </div>
               </div>
               <div>
-                <div className="right-align flex__grid justify-end">
+                <div className="right-align flex__grid justify-end items-center">
                   <div onClick={() => copyToClipBoard(index)}>
                     <CopyToClipBoardElement
                       className={`${
-                        !mobileDevice ? "cursor-pointer-screen" : ""
+                        !mobileDevice ? "cursor-pointer-screen w-auto" : ""
                       }`}
                       color={
                         isDarkTheme
-                          ? CONSTANTS.dark.colorAccent
-                          : CONSTANTS.light.colorAccent
+                          ? CONSTANTS.dark.colorPrimary
+                          : CONSTANTS.light.colorPrimary
                       }
                     />
                   </div>
                   <button
                     className="action__btn--text --color-primary"
-                    onClick={() => handleDelete(record.alias)}
+                    onClick={() => handleDelete(record.id, record.alias)}
                   >
                     <DeleteIconlement
                       color={
@@ -173,10 +214,24 @@ const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
             </div>
           ))
         ) : (
-          <h2 className="--color-primary center">No saved passwords found.</h2>
+          <h2
+            className={`${
+              mobileDevice ? "--small-font" : ""
+            } --color-primary center lato-regular --uppercase`}
+          >
+            No saved passwords found!
+          </h2>
         )}
       </div>
-      <div className="ps__manager__actions flex__grid justify-end mt3">
+      <div className="ps__manager__actions flex__grid justify-end items-start --small-gap mt3">
+        <FileInpuElement
+          labelClasses="--limit-width --secondary-btn"
+          handleFileLoad={handleFileLoad}
+          mobileDevice={mobileDevice}
+          accept=".csv"
+          slug="records"
+          title="Import CSV"
+        />
         <button
           id="btn"
           className="action__btn --limit-width --primary-btn"
