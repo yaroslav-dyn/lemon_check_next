@@ -247,7 +247,7 @@ const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
           className="action__btn --limit-width --primary-btn lato-light"
           onClick={() => saveToFile()}
         >
-          Save to CSV
+          Export CSV
         </button>
       </div>
     </div>
