@@ -194,11 +194,16 @@ const CryptoPassword = (props) => {
         <main className="main_content generator__content">
           <div className="main__heading --x-small-bm">
             <h1 className="h1_heading lato-regular">
-              Protect your <span className="--color-primary">password</span>
-              <div className="py1 center slogan__text ">
+              <span>
+                Protect your <span className="--color-primary">password</span>
+              </span>
+              <div className="py1 center slogan__text mt0.5">
                 {actionState === "list" ? (
                   <span>
-                    <span className="--color-primary">Password</span> Manager
+                    <span className="--color-primary">Password</span> Manager{" "}
+                    <sup className="--color-white --bg-accent p1 --base-rounded">
+                      Experimental
+                    </sup>
                   </span>
                 ) : (
                   <span>
@@ -227,7 +232,7 @@ const CryptoPassword = (props) => {
           </div>
 
           <div
-            className={`container__limit --x-small ${
+            className={`container__limit relative --x-small ${
               mobileDevice ? "w-100" : ""
             }`}
           >
@@ -287,7 +292,7 @@ const CryptoPassword = (props) => {
                     />
                   </form>
                   {actionState === "encrypt" && (
-                    <div className="left-align">
+                    <div className="left-align relative">
                       <label className="inline-block" htmlFor="password-alias">
                         <h2
                           className={`${
@@ -318,7 +323,7 @@ const CryptoPassword = (props) => {
                           <span> Alias for your password</span>
                         </h2>
                         {instrC && (
-                          <div className="mb2">
+                          <div className="mb2 absolute">
                             <InstructionTooltip>
                               <>
                                 After encrypting, you can save the encrypted
@@ -405,6 +410,7 @@ const CryptoPassword = (props) => {
               <EncryptedPasswordManager
                 isDarkTheme={isDarkTheme}
                 mobileDevice={mobileDevice}
+                InstructionTooltip={InstructionTooltip}
               />
             )}
           </div>
@@ -489,7 +495,7 @@ const InstructionModule = ({
       <div>
         <h2
           data-left-text
-          className={`${styles.instructionHeading} flex__grid align-center ${
+          className={`${styles.instructionHeading} flex__grid align-center relative ${
             instr ? styles.instrOpen : ""
           } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
           onClick={() => triggerInstruction("A")}
@@ -504,7 +510,7 @@ const InstructionModule = ({
           <span>How to Encrypt Your Password?</span>
         </h2>
         {instr && (
-          <div className={styles.instructionModalContainer}>
+          <div className={`${styles.instructionModalContainer} absolute`}>
             <InstructionModal tape="A" isDarkTheme={isDarkTheme} />
           </div>
         )}
@@ -512,7 +518,7 @@ const InstructionModule = ({
     ) : (
       <>
         {actionState === "decrypt" && (
-          <div>
+          <div className="relative">
             <h2
               data-left-text
               className={`${
@@ -543,7 +549,7 @@ const InstructionModule = ({
               <span>How to Decrypt Your Password?</span>
             </h2>
             {instrB && (
-              <div className={styles.instructionModalContainer}>
+              <div className={`${styles.instructionModalContainer} absolute`}>
                 <InstructionModal tape="B" isDarkTheme={isDarkTheme} />
               </div>
             )}

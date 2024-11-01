@@ -187,7 +187,7 @@ const Imageconverter = (props) => {
                     }`}
                   >
                     {mobileDevice && (
-                      <Image src={imgTypeBageIcon} width={24} height={24} />
+                      <Image src={imgTypeBageIcon} width={24} height={24} alt="Image type" />
                     )}
                     <span> image to base64</span>
                   </div>
@@ -201,6 +201,7 @@ const Imageconverter = (props) => {
                       src={imgTypeBageIcon}
                       width={38}
                       height={38}
+                      alt="base64 type"
                     />
                     <p className="left">
                       Convert images for <br />
@@ -253,6 +254,7 @@ const Imageconverter = (props) => {
                       src={dataTypeBageIcon}
                       width={38}
                       height={38}
+                      alt="data type"
                     />
                     <p className="left">
                       Decode base64 strings <br /> back to images

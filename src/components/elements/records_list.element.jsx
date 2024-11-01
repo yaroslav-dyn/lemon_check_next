@@ -23,11 +23,18 @@ import {
 import { useSnackbar } from "notistack";
 import CONSTANTS from "@/services/constants";
 
+const infoIcon = "/assets/img/icons8-question-mark-48.png";
+
 //SECTION Component
-const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
+const EncryptedPasswordManager = ({
+  isDarkTheme,
+  mobileDevice,
+  InstructionTooltip,
+}) => {
   const [searchString, setSearch] = useState("");
   const [passwords, setPasswords] = useState([]);
   const [isLoading, setLoadingState] = useState(false);
+  const [tooltipState, setTooltipState] = useState(false);
   const cryptedInput = useRef([]);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -43,28 +50,6 @@ const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
         : passwords,
     [searchString, passwords]
   );
-
-  //TODO: DEPRECATED
-  // const action = (snackbarId) => (
-  //   <>
-  //     <button
-  //       className="action__btn--text"
-  //       onClick={() => {
-  //         alert(`I belong to snackbar with id ${snackbarId}`);
-  //       }}
-  //     >
-  //       Undo
-  //     </button>
-  //     <button
-  //       className="action__btn--text"
-  //       onClick={() => {
-  //         closeSnackbar(snackbarId);
-  //       }}
-  //     >
-  //       Dismiss
-  //     </button>
-  //   </>
-  // );
 
   const copyToClipBoard = (index) => {
     if (!cryptedInput || !cryptedInput?.current) {
@@ -139,7 +124,59 @@ const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
   );
 
   return (
-    <div className="password_manager__page">
+    <div className="password_manager__page relative">
+      {/*NOTE: Instruction tooltip */}
+      <div className="left">
+        <h2
+          className={`inline-block flex__grid justify-left items-center ${
+            tooltipState ? "open__tooltip --color-primary" : ""
+          } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
+          onClick={() => {
+            let toolpState = tooltipState;
+            setTooltipState((toolpState = !toolpState));
+          }}
+        >
+          <div
+            className={`instruction_info_icon mr0.5 ${
+              tooltipState ? "active" : ""
+            }`}
+          >
+            <img
+              className={`${isDarkTheme ? "--dark-theme" : "--light-theme"}`}
+              src={infoIcon}
+              width={30}
+            />
+          </div>
+          <span className="">Important Notice</span>
+        </h2>
+        {tooltipState && (
+          <div className="absolute">
+            <InstructionTooltip>
+              <>
+                <strong>Experimental Feature</strong>
+                <p>
+                  This feature for saving encrypted passwords is experimental
+                  and should not be used as a primary or long-term password
+                  storage solution. Data is saved locally using IndexedDB, a
+                  browser-based storage system that depends on your device and
+                  browser settings. Browser Cache and Storage Risks: While
+                  IndexedDB is not typically affected by clearing the browser
+                  cache, it can be erased if you clear "Cookies and Site Data"
+                  in your browser settings. Additionally, some mobile browsers
+                  may clear this data automatically if device storage runs low.
+                  Data Backup: To avoid accidental data loss, it is recommended
+                  to periodically back up your saved records by exporting them
+                  as a CSV file. Security Note: For secure password management,
+                  consider using a dedicated, secure password manager. This
+                  feature is not intended as a replacement for
+                  professional-grade password storage solutions.
+                </p>
+              </>
+            </InstructionTooltip>
+          </div>
+        )}
+      </div>
+
       <div>
         <input
           className="w-100 p1 mb2 --search-style-input --color-base border-bottom --bcolor-base x2"
@@ -223,13 +260,13 @@ const EncryptedPasswordManager = ({ isDarkTheme, mobileDevice }) => {
               </div>
             ))
           ) : (
-            <h2
+            <h3
               className={`${
                 mobileDevice ? "--small-font" : ""
               } --color-primary center lato-regular --uppercase`}
             >
               No saved passwords found!
-            </h2>
+            </h3>
           )}
         </div>
       )}

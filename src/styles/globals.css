@@ -549,6 +549,15 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 .mr0\.5 {
   margin-right: 0.5rem;
 }
+.ml0\.5 {
+  margin-left: 0.5rem;
+}
+.mt0\.5 {
+  margin-top: 0.5rem;
+}
+.mt0\.5 {
+  margin-bottom: 0.5rem;
+}
 
 .--pos-sticky {
   position: sticky;
@@ -578,6 +587,9 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 
 .--color-accent {
   color: var(--color-accent) !important;
+}
+.--color-white {
+  color: #fff;
 }
 
 .--bg-base {
