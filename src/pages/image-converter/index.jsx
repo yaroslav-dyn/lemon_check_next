@@ -2,12 +2,11 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "@/styles/ImageConverter.module.css";
 import { copyToClipboardMethod, base64ToImage } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
-import { useRouter } from "next/navigation";
 
 const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
@@ -188,7 +187,7 @@ const Imageconverter = (props) => {
                     }`}
                   >
                     {mobileDevice && (
-                      <Image src={imgTypeBageIcon} width={24} height={24} />
+                      <Image src={imgTypeBageIcon} width={24} height={24} alt="Image type" />
                     )}
                     <span> image to base64</span>
                   </div>
@@ -202,6 +201,7 @@ const Imageconverter = (props) => {
                       src={imgTypeBageIcon}
                       width={38}
                       height={38}
+                      alt="base64 type"
                     />
                     <p className="left">
                       Convert images for <br />
@@ -254,6 +254,7 @@ const Imageconverter = (props) => {
                       src={dataTypeBageIcon}
                       width={38}
                       height={38}
+                      alt="data type"
                     />
                     <p className="left">
                       Decode base64 strings <br /> back to images
@@ -516,6 +517,7 @@ const ConverterHeading = ({
   );
 };
 
+//TODO: Re-write to base component
 const FileInpuElement = ({
   handleImageChange,
   handleConverterType,

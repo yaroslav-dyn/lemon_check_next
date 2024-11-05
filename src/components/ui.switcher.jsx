@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import SwitchSelector from "react-switch-selector";
 
 
-const UISwitcher = ({ options, onSwitch, elementWidth, isDark }) => {
+const UISwitcher = ({ options, onSwitch, elementWidth, isDark, selected=0 }) => {
 
 const [currentColorTheme, setCurrentTheme] = useState("auto__theme");
 
@@ -24,6 +24,7 @@ useEffect(() => {
         onChange={onSwitch}
         options={options}
         initialSelectedIndex={0}
+        forcedSelectedIndex={selected || 0}
         backgroundColor={isDark ? "#000" : "#f3faf2"}
         fontColor={"#ffffff"}
       />

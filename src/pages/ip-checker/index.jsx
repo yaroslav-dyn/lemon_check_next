@@ -14,6 +14,7 @@ import MapWorldElement from "@/components/elements/map_world.element";
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
 const extAPIURL = "https://ipwhois.app/json/";
+const copyIcon = "/assets/icons/icons8-clipboard-64.png";
 const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
 const ipExcludedFields = [
   "success",
@@ -29,7 +30,6 @@ const IPChecker = (props) => {
   const [initialIP, setInitialIP] = useState("");
   const [ipInput, setIpinput] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const copyIcon = "/assets/icons/icons8-clipboard-64.png";
   const refId = useRef(null);
 
   const isDarkTheme = useMemo(
@@ -62,12 +62,11 @@ const IPChecker = (props) => {
 
   const searchIp = async () => {
     if (ipNotValid) return;
-    const res = await getIpData(ipInput);
+    await getIpData(ipInput);
   };
 
   const getIpData = async (ip) => {
     setLoading(true);
-
     try {
       const res = await getApiResponse(
         null,

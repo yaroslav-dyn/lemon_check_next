@@ -58,6 +58,17 @@ const Privacy = () => {
                     information. All sensitive operations happen within your
                     device's environment and are not transmitted to our servers.
                   </li>
+                  <li>
+                    <strong>Local Storage for Passwords</strong>: We offer an
+                    optional encrypted password storage feature, allowing users
+                    to save encrypted passwords with aliases on their device.
+                    This data is stored in IndexedDB within your browser,
+                    meaning it remains on your device and is not accessible to
+                    LockBoxApp or any third party. Please note that IndexedDB is
+                    an experimental storage feature and may be subject to
+                    limitations or data loss due to browser cache clearing or
+                    other device issues.
+                  </li>
                 </ul>
               </li>
               <li>
@@ -92,6 +103,12 @@ const Privacy = () => {
                   <li>
                     Passwords and secret phrases are processed locally on your
                     device to ensure that no one, including us, can access them.
+                  </li>
+                  <li>
+                    The optional encrypted password storage remains on your
+                    device in the IndexedDB database. Since this storage is
+                    experimental, users should use it with caution and maintain
+                    external backups of essential data.
                   </li>
                   <li>
                     Any communications you initiate with us (via email or other

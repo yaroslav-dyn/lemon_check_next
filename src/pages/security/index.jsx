@@ -61,8 +61,18 @@ const Security = () => {
                 </p>
               </li>
               <li>
+                3.<strong> Local Storage</strong> for Encrypted Passwords Our
+                Encrypted Password Storage feature allows users to optionally
+                save encrypted passwords with aliases directly on their device
+                using IndexedDB. This data remains on your device, and
+                LockBoxApp has no access to it. However, IndexedDB is
+                experimental and may be subject to clearing if browser data or
+                cache is removed. We recommend backing up critical data securely
+                elsewhere, as this storage is intended for local convenience.
+              </li>
+              <li>
                 <p>
-                  3. Data Protection Since LockBoxApp currently does not save
+                  4. Data Protection Since LockBoxApp currently does not save
                   any data, there is no risk of data breaches or unauthorized
                   access to your passwords. All processing is done on the client
                   side, ensuring your data stays secure on your own device.
@@ -70,7 +80,7 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  4. Future Security Features We are committed to continually
+                  5. Future Security Features We are committed to continually
                   improving security as we introduce new features. In the
                   future, we plan to offer an optional feature to save encrypted
                   passwords and aliases locally on your device using IndexedDB,
@@ -81,7 +91,7 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  5. <strong>HTTPS Encryption </strong>Our entire platform
+                  6. <strong>HTTPS Encryption </strong>Our entire platform
                   operates over a secure HTTPS connection. This encryption
                   ensures that any communication between your browser and our
                   service is safe from interception.
@@ -89,10 +99,8 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  6. User Responsibility We encourage users to follow best
-                  practices, such as:
-                </p>
-                <p>
+                  7. User Responsibility We encourage users to follow best
+                  practices, such as: <br />
                   Keeping your secret phrases confidential. Regularly updating
                   your passwords. Using a strong and unique password for each of
                   your accounts.
@@ -100,21 +108,26 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  7.{" "}
+                  8.{" "}
                   <Link className="--default-link" href={`/`} target="_blank">
                     LockBoxApp
                   </Link>{" "}
                   does not store or save any IP address data entered into our IP
                   Geolocation Checker tool. All geolocation data is fetched
                   directly from{" "}
-                  <Link className="--default-link" href={`https://ipwhois.io`} target="_blank">ipwhois.io</Link> and used
-                  only for display purposes.
+                  <Link
+                    className="--default-link"
+                    href={`https://ipwhois.io`}
+                    target="_blank"
+                  >
+                    ipwhois.io
+                  </Link>{" "}
+                  and used only for display purposes.
                 </p>
               </li>
-
               <li>
                 <p>
-                  8. Transparency{" "}
+                  9. Transparency{" "}
                   <Link className="--default-link" href={`/`} target="_blank">
                     LockBoxApp
                   </Link>{" "}

@@ -159,9 +159,9 @@ a:hover, a:focus, a:active {
   color: var(--theme-primary-text);
 }
 
-.mobile__view {
+/* .mobile__view:not(label) {
   line-height: 1.4;
-}
+} */
 
 /* .about__page {
   background-image: url(./img/78EA180C-9D7A-4AD6-BB87-14998DEA5CE8.png);
@@ -514,6 +514,13 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
   justify-content: flex-end;
 }
 
+.--small-font {
+  font-size: 0.875rem;
+}
+
+.--extra-smal-font {
+  font-size: 0.75rem;
+}
 
 .--small-gap {
   gap: 0.75rem;
@@ -535,8 +542,25 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
     gap: 1.2rem;
 }
 
+.--base-radius {
+    border-radius: var(--base-rounded);
+}
+
+.--radius-none {
+  border-radius: 0;
+}
+
 .mr0\.5 {
   margin-right: 0.5rem;
+}
+.ml0\.5 {
+  margin-left: 0.5rem;
+}
+.mt0\.5 {
+  margin-top: 0.5rem;
+}
+.mt0\.5 {
+  margin-bottom: 0.5rem;
 }
 
 .--pos-sticky {
@@ -568,6 +592,9 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 .--color-accent {
   color: var(--color-accent) !important;
 }
+.--color-white {
+  color: #fff;
+}
 
 .--bg-base {
   background-color: var(--color-base) !important;
@@ -579,6 +606,18 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 
 .--bg-accent {
   background-color: var(--color-accent) !important;
+}
+
+.--bcolor-accent {
+  border-color: var(--color-accent)
+}
+
+.--bcolor-primary {
+  border-color: var(--color-primary)
+}
+
+.--bcolor-base {
+  border-color: var(--color-base)
 }
 
 .--default-link, 
@@ -642,7 +681,7 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .mobile__view .custom__checkbox input[type=checkbox]:checked+label:after {
-  top: -2px;
+  /* top: -2px; */
 }
 
 /* ACTIONS */
@@ -688,6 +727,12 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 
 .password__label__strong {
   color: rgb(82, 129, 10);
+}
+
+.records__list {
+  display: grid;
+  /* columns: 4 auto; */
+  grid-template-columns: 10% 20% 60% 10%;
 }
 
 
@@ -739,13 +784,29 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 .--no_style-input, .--no_style-input:focus {
   background: none;
   border: none;
+}
+.--no_style-input:focus {
   outline: none;
 }
 
+.--search-style-input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--base-color);
+}
+
+.--search-style-input:focus {
+  outline: none;
+}
 
 .w-100 {
   width: 100%;
   max-width: 100%;
+}
+
+.w-auto {
+  width: auto;
+  max-width: uset;
 }
 
 .--h-auto {

@@ -43,6 +43,33 @@ const NewsPage = () => {
 
           <article className="content-text">
             <h2 className="mb0">
+              November 5, 2024 – New Feature: Securely{" "}
+              <span className="--color-primary">Store Encrypted Passwords</span>{" "}
+              on Your Device
+            </h2>
+            <p>
+              We’re excited to announce a new addition to LockBoxApp’s
+              functionality—users can now save encrypted passwords with an alias
+              on their device, enhancing accessibility while maintaining
+              security. With this feature, you can encrypt your passwords and
+              store them locally within your device’s storage (IndexedDB),
+              making it easy to retrieve them anytime.
+            </p>
+            <p>
+              <strong>Please note</strong>: that this feature uses experimental local storage
+              (IndexedDB) and is designed to support users needing quick access
+              to securely stored data on their own devices. However, as this
+              storage is experimental, we recommend continuing to use external
+              password recovery or management systems for critical passwords.
+              LockBoxApp cannot guarantee recovery of lost data due to
+              limitations of local storage.
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
               🎉 October 29, 2024 – Update: Enhanced{" "}
               <span className="--color-primary">Image Converter</span>{" "}
             </h2>
@@ -50,9 +77,13 @@ const NewsPage = () => {
               Now Supports both: data and image Format! We’ve added a new
               capability to our Image Converter feature. Alongside converting
               between standard base64 and image formats, the converter now
-              seamlessly handles images in{" "}<span className="--color-primary">base64 data</span> and like image:{" "}
-              <br />
-              <code className="--color-primary">{"<img src='data:image/png;base64,....' />"}</code>.
+              seamlessly handles images in{" "}
+              <span className="--color-primary">base64 data</span> and like
+              image: <br />
+              <code className="--color-primary">
+                {"<img src='data:image/png;base64,....' />"}
+              </code>
+              .
             </p>
             <strong className="--color-base"> What’s New:</strong>
             <p>

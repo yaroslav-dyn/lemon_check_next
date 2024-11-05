@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
-import ContactEmail from "@/components/elements/contact_email.element"
+import ContactEmail from "@/components/elements/contact_email.element";
 
 const Terms = () => {
   return (
@@ -35,8 +35,7 @@ const Terms = () => {
                 you do not agree to these Terms, please do not use our services.
               </p>
             </article>
-
-            <ul className="list-reset">
+            {/* <ul className="list-reset">
               <li>
                 <p>
                   1. Acceptance of Terms By using the LockBoxApp website, mobile
@@ -49,8 +48,8 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  2. Description of Services LockBoxApp provides tools including,
-                  but not limited to:
+                  2. Description of Services LockBoxApp provides tools
+                  including, but not limited to:
                 </p>
                 <p>
                   Password Generator Password Encryption Image-to-Base64
@@ -61,7 +60,24 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  3. User Responsibilities Account Security: Users are
+                  3. Local Storage for Encrypted Passwords User Responsibility:
+                  LockBoxApp now allows users to save encrypted passwords in
+                  local storage (IndexedDB) on their device for easy retrieval.
+                  It is important to note that LockBoxApp cannot access or
+                  retrieve this data for you. Data Limitations: The encrypted
+                  data stored locally in IndexedDB is vulnerable to loss if the
+                  browser cache is cleared or if there is an issue with the
+                  browser's storage system. LockBoxApp holds no responsibility
+                  for the loss of locally stored data. Security Recommendations:
+                  We encourage users to back up encrypted strings in a secure
+                  external location, like a password manager, to prevent loss.
+                  Users are also responsible for securely managing their secret
+                  phrases or any data related to encrypted passwords.
+                </p>
+              </li>
+              <li>
+                <p>
+                  4. User Responsibilities Account Security: Users are
                   responsible for the confidentiality of any data they generate
                   using the Service. LockBoxApp does not store passwords,
                   encryption keys, or other sensitive data, and users are
@@ -77,11 +93,11 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  4. Disclaimer of Warranties LockBoxApp provides the Service "as
-                  is" and without any warranty or condition, whether express,
-                  implied, or statutory. LockBoxApp specifically disclaims any
-                  implied warranties of title, merchantability, fitness for a
-                  particular purpose, and non-infringement.
+                  5. Disclaimer of Warranties LockBoxApp provides the Service
+                  "as is" and without any warranty or condition, whether
+                  express, implied, or statutory. LockBoxApp specifically
+                  disclaims any implied warranties of title, merchantability,
+                  fitness for a particular purpose, and non-infringement.
                 </p>
                 <p>
                   While we strive to provide a secure and reliable service, we
@@ -104,10 +120,10 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  6. Modifications to the Service LockBoxApp reserves the right to
-                  modify, update, or discontinue the Service at any time without
-                  notice. We are not liable for any changes or disruptions that
-                  may occur as a result.
+                  6. Modifications to the Service LockBoxApp reserves the right
+                  to modify, update, or discontinue the Service at any time
+                  without notice. We are not liable for any changes or
+                  disruptions that may occur as a result.
                 </p>
               </li>
               <li>
@@ -153,6 +169,104 @@ const Terms = () => {
                 isHidden
               />
               .
+            </ul> */}
+            <ul className="list-reset">
+              <li>
+                <p>
+                  1. Acceptance of Terms By using LockBoxApp, you agree to
+                  comply with these Terms. If you do not agree, please
+                  discontinue your use of our services.
+                </p>
+              </li>
+              <li>
+                <p>
+                  2. Service Description LockBoxApp provides tools for password
+                  generation, encryption, and geolocation checking. New
+                  functionality may be added periodically to enhance user
+                  experience.
+                </p>
+              </li>
+              <li>
+                <p>
+                  3.Data Privacy and Security LockBoxApp takes privacy and
+                  security seriously. We do not store or share personal data
+                  unless explicitly provided by the user for customer support or
+                  feedback purposes.
+                </p>
+              </li>
+
+              <li>
+                <div>
+                  4. Local Storage for Encrypted Passwords
+                  <ul className="list-reset">
+                    <li>
+                      <p>
+                        <strong> User Responsibility</strong>: LockBoxApp now
+                        allows users to save encrypted passwords in local
+                        storage (IndexedDB) on their device for easy retrieval.
+                        It is important to note that LockBoxApp cannot access or
+                        retrieve this data for you.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <strong> Data Limitations</strong>: The encrypted data
+                        stored locally in IndexedDB is vulnerable to loss if the
+                        browser cache is cleared or if there is an issue with
+                        the browser's storage system. LockBoxApp holds no
+                        responsibility for the loss of locally stored data.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <strong>Security Recommendations</strong>: We encourage
+                        users to back up encrypted strings in a secure external
+                        location, like a password manager, to prevent loss.
+                        Users are also responsible for securely managing their
+                        secret phrases or any data related to encrypted
+                        passwords.
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <p>
+                  5. Third-Party Services LockBoxApp integrates third-party
+                  services to enhance functionality, such as IP geolocation
+                  through ipwhois.io. Please refer to their terms for any
+                  additional conditions.
+                </p>
+              </li>
+              <li>
+                <p>
+                  6. Disclaimer of Warranties LockBoxApp is provided "as-is"
+                  without any guarantees. We do not assume responsibility for
+                  the data stored locally or for any issues that may arise from
+                  using the service. Changes to Terms We may update these Terms
+                  to reflect new features, legal obligations, or service
+                  improvements.
+                </p>
+              </li>
+              <li>
+                <p>
+                  7. Changes will be communicated on this page, and continued
+                  use of the service implies acceptance.
+                </p>
+              </li>
+              <li>
+                <p>
+                  8. Contact Us For any questions regarding these Terms of
+                  Service, please contact us at: <br />
+                  Email:{" "}
+                  <ContactEmail
+                    email={`contact@lockboxapp@@com`}
+                    title={`Contact email`}
+                    isHidden
+                  />
+                  .
+                </p>
+              </li>
             </ul>
           </section>
         </main>
