@@ -43,7 +43,7 @@ const NewsPage = () => {
 
           <article className="content-text">
             <h2 className="mb0">
-              November 1, 2024 – New Feature: Securely{" "}
+              November 5, 2024 – New Feature: Securely{" "}
               <span className="--color-primary">Store Encrypted Passwords</span>{" "}
               on Your Device
             </h2>
@@ -56,7 +56,7 @@ const NewsPage = () => {
               making it easy to retrieve them anytime.
             </p>
             <p>
-              Please note that this feature uses experimental local storage
+              <strong>Please note</strong>: that this feature uses experimental local storage
               (IndexedDB) and is designed to support users needing quick access
               to securely stored data on their own devices. However, as this
               storage is experimental, we recommend continuing to use external

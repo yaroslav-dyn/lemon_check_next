@@ -68,6 +68,30 @@ export async function getAllEncryptedPasswords() {
   });
 }
 
+// Retrieve records sorted from newest to oldest
+export async function getSortedEncryptedPasswords() {
+  const db = await initializeDB();
+  const transaction = db.transaction("encryptedPasswords", "readonly");
+  const store = transaction.objectStore("encryptedPasswords");
+  
+  return new Promise((resolve, reject) => {
+    const result = [];
+    const request = store.openCursor(null, "prev"); // "prev" sorts descending
+
+    request.onsuccess = (event) => {
+      const cursor = event.target.result;
+      if (cursor) {
+        result.push(cursor.value);
+        cursor.continue();
+      } else {
+        resolve(result); // All records retrieved in sorted order
+      }
+    };
+    request.onerror = (event) => reject(event.target.error);
+  });
+}
+
+
 export async function deleteEncryptedPassword(id) {
   const db = await initializeDB();
   const transaction = db.transaction(["encryptedPasswords"], "readwrite");

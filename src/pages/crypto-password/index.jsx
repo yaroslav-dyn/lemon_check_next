@@ -328,16 +328,19 @@ const CryptoPassword = (props) => {
                               <>
                                 After encrypting, you can save the encrypted
                                 password and alias to your device for easy
-                                access. They’ll be available anytime on the
+                                access. They’ll be available anytime on the {" "}
                                 <span
                                   className={`--color-primary ${
                                     isMobile ? "" : "cursor-pointer-screen"
                                   }`}
                                   onClick={() => onChangeOperation("list")}
                                 >
-                                  {" "}
-                                  Records list{" "}
+                                  Records list.
                                 </span>
+                                <br />
+                                <strong className="--color-primary block">
+                                  Alias must not contain commas.
+                                </strong>
                               </>
                             </InstructionTooltip>
                           </div>

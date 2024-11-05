@@ -546,6 +546,10 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
     border-radius: var(--base-rounded);
 }
 
+.--radius-none {
+  border-radius: 0;
+}
+
 .mr0\.5 {
   margin-right: 0.5rem;
 }
@@ -677,7 +681,7 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .mobile__view .custom__checkbox input[type=checkbox]:checked+label:after {
-  top: -2px;
+  /* top: -2px; */
 }
 
 /* ACTIONS */
