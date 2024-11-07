@@ -48,16 +48,11 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  <strong>2. Password Encryption</strong> When using our
-                  <strong>
-                    <strong>Password Encryption</strong> When using our Password
-                    Encryption
-                    <strong>Password Encryption</strong> When using our
-                  </strong>{" "}
-                  feature, your passwords are encrypted using asecret phrase.
-                  This encryption happens locally in your browser, and
-                  LockBoxApp does not store or have access to the secret phrase
-                  or encrypted passwords.
+                  <strong>2. Password Encryption</strong> <br />
+                  When using our Password Encryption feature, your passwords are
+                  encrypted using asecret phrase. This encryption happens
+                  locally in your browser, and LockBoxApp does not store or have
+                  access to the secret phrase or encrypted passwords.
                 </p>
               </li>
               <li>

@@ -18,6 +18,7 @@ const Imageconverter = (props) => {
   const [rootConvertType, setConvertType] = useState(undefined);
   const [imageBase64ForCopy, setTypedImageBase64] = useState("");
   const [dataToConvert, setDataToConvert] = useState("");
+  const [selectedTypeIndex, setSelectedTypeIdex] = useState(0);
   const [convertedFromData, setConvertedFromData] = useState("");
   const [invalidBase64, setBase64invalidState] = useState("");
   const imageInputRef = useRef(null);
@@ -52,8 +53,10 @@ const Imageconverter = (props) => {
 
   const onChangeDataType = (type) => {
     if (type === "image") {
+      setSelectedTypeIdex(1);
       setTypedImageBase64(`<img src='${imageBase64}' />`);
     } else if (type === "data") {
+      setSelectedTypeIdex(0);
       setTypedImageBase64(imageBase64);
     }
   };
@@ -187,7 +190,12 @@ const Imageconverter = (props) => {
                     }`}
                   >
                     {mobileDevice && (
-                      <Image src={imgTypeBageIcon} width={24} height={24} alt="Image type" />
+                      <Image
+                        src={imgTypeBageIcon}
+                        width={24}
+                        height={24}
+                        alt="Image type"
+                      />
                     )}
                     <span> image to base64</span>
                   </div>
@@ -396,6 +404,7 @@ const Imageconverter = (props) => {
                         options={operationOptions}
                         onSwitch={onChangeDataType}
                         elementWidth={180}
+                        selected={selectedTypeIndex}
                       />
                     </div>
                     <br />
