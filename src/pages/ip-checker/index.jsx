@@ -10,6 +10,7 @@ import {
 } from "@/services/base.services";
 import Preloader from "@/components/elements/loading.element";
 import MapWorldElement from "@/components/elements/map_world.element";
+import CopyBtnElement from "@/components/elements/copy_button.element"
 
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
@@ -27,10 +28,13 @@ const ipExcludedFields = [
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
   const [ipData, setApiData] = useState({});
+  const [domainData, setDomainData] = useState({});
+  const [domainName, setDomainName] = useState('');
   const [initialIP, setInitialIP] = useState("");
   const [ipInput, setIpinput] = useState("");
   const [isLoading, setLoading] = useState(false);
   const refId = useRef(null);
+  const refDomain = useRef(null);
 
   const isDarkTheme = useMemo(
     () => props.theme === "primary__theme",
@@ -91,6 +95,10 @@ const IPChecker = (props) => {
     copyToClipboardMethod(refId);
   };
 
+  const copyDomain = () => {
+    copyToClipboardMethod(refDomain);
+  }
+
   useEffect(() => {
     getIpData();
   }, []);
@@ -139,7 +147,28 @@ const IPChecker = (props) => {
                 {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
                   <>
                     <div className="ip__section mb2">
-                      <h2
+                      <div className={`${styles.ipBlock} mb2`}>
+                        <input
+                          className={`--no_style-input ${
+                            initialIP === ipInput
+                              ? "--color-primary"
+                              : "--color-base"
+                          }`}
+                          ref={refDomain}
+                          type="text"
+                          value={domainName}
+                          onInput={(e) => setDomainName(e.target.value)}
+                          placeholder="Get by domain name"
+                        />
+
+                        <CopyBtnElement
+                          mobileDevice={mobileDevice}
+                          isDarkTheme={isDarkTheme}
+                          copyIcon={copyIcon}
+                          copyAction={copyDomain}
+                        />
+                      </div>
+                      <div
                         className={`mt0 ${styles.ipBlock} ${
                           mobileDevice
                             ? ipNotValid
@@ -183,21 +212,14 @@ const IPChecker = (props) => {
                             />
                           </form>
                         </div>
-                        <div
-                          className={`inline-block mr0.5 ${
-                            mobileDevice ? "" : "cursor-pointer-screen"
-                          } `}
-                          onClick={copyIp}
-                        >
-                          <img
-                            className={`align-middle ${
-                              isDarkTheme ? "" : "--img-filter-invert"
-                            }`}
-                            style={{ width: "auto", height: "26px" }}
-                            src={copyIcon}
-                          />
-                        </div>
-                      </h2>
+
+                        <CopyBtnElement
+                          mobileDevice={mobileDevice}
+                          isDarkTheme={isDarkTheme}
+                          copyIcon={copyIcon}
+                          copyAction={copyIp}
+                        />
+                      </div>
                       {/*SECTION: INVALID IP MESSAGE */}
                       {ipNotValid && (
                         <p className="flex__grid justify-end my1">

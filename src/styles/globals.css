@@ -718,7 +718,20 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
 .password__label__normal {
   opacity: 0.8;
   color: #fff;
-  
+}
+
+.--no-style-btn {
+  border: none;
+  outline: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile__view {
+  .--no-style-btn {
+    cursor: default;
+  }
 }
 
 .password__label__short {
