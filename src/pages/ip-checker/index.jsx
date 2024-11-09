@@ -15,6 +15,7 @@ import CopyBtnElement from "@/components/elements/copy_button.element"
 
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
+const defaultIPIcon = "/assets/icons/icons8-ip-48.png";
 const domainIcon = "/assets/icons/domain-registration-website-svgrepo-com.svg";
 
 const extAPIURL = "https://ipwhois.app/json/";
@@ -27,7 +28,9 @@ const ipExcludedFields = [
   "timezone_gmtOffset",
   "currency_plural",
 ];
-const extDomainAPIURL = (domain) =>  `https://dns.google/resolve?name=${domain}&type=A`;
+//const extDomainAPIURL = (domain) =>  `https://dns.google/resolve?name=${domain}&type=A`;
+const extDomainAPIURL = (domain) => extAPIURL + "/" + domain;
+
 
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
@@ -88,6 +91,7 @@ const IPChecker = (props) => {
       setApiData(res);
       setIpinput(res && res.ip);
       setLoading(false);
+      setDomainName('')
       !ip && setInitialIP(res.ip);
     } catch (error) {
       console.error("error");
@@ -104,9 +108,11 @@ const IPChecker = (props) => {
   }
   
   const getDataByDomain = async() => {
-   const domainSearchURL = extDomainAPIURL(domainName);
-   try {
-   const res = await getApiResponse(
+    let domain = domainName.replace(/(^\w+:|^)\/\//, "");
+    domain = domain.split("/")[0];
+    const domainSearchURL = extDomainAPIURL(domain);
+    try {
+      const res = await getApiResponse(
         null,
         domainSearchURL,
         "GET",
@@ -115,11 +121,13 @@ const IPChecker = (props) => {
         false,
         false
       );
-      console.log('res domain', domain);
-      
-   } catch (error) {
-
-   }
+      setApiData(res);
+      setIpinput(res && res.ip);
+      setLoading(false);
+    } catch (error) {
+      console.error("error");
+      setLoading(false);
+    }
   }
 
   // useEffect(() => {
@@ -174,7 +182,7 @@ const IPChecker = (props) => {
                 {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
                   <>
                     <div className="ip__section mb2">
-                      <div>
+                      <div className="mb2">
                         <div
                           className={`${styles.ipBlock} flex__grid justify-between align-center mb2`}
                         >
@@ -197,7 +205,7 @@ const IPChecker = (props) => {
                             type="text"
                             value={domainName}
                             onInput={(e) => setDomainName(e.target.value)}
-                            placeholder="Get data by domain name"
+                            placeholder="Get data by domain"
                           />
 
                           <CopyBtnElement
@@ -210,7 +218,7 @@ const IPChecker = (props) => {
                         {domainName && (
                           <button
                             disabled={!domainName}
-                            className="generator__content--btn mb1 lato-regular"
+                            className="generator__content--btn --secondary-btn mb1 lato-regular"
                             onClick={getDataByDomain}
                           >
                             SEARCH BY DOMAIN
@@ -229,10 +237,21 @@ const IPChecker = (props) => {
                         } center flex__grid justify-between align-center`}
                       >
                         <div className="flex__grid align-center">
-                          {initialIP === ipInput && (
-                            <img
+                          {initialIP === ipInput ? (
+                            <Image
                               src={isDarkTheme ? primaryIPIcon : lightIPIcon}
                               alt="Your IP"
+                              height={30}
+                              width={30}
+                            />
+                          ) : (
+                            <Image
+                              className={`${
+                              isDarkTheme ? "--img-filter-invert" : ""
+                            }`}
+                              src={defaultIPIcon}
+                              alt="Your IP"
+                              width={30}
                               height={30}
                             />
                           )}
