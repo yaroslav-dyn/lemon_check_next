@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo, ref, useRef } from "react";
 import Head from "next/head";
+import Image from "next/image";
 import useDeviceType from "@/services/useDeviceType";
 import { getApiResponse } from "@/services/api.servise";
 import styles from "@/styles/IPChecker.module.css";
@@ -14,6 +15,8 @@ import CopyBtnElement from "@/components/elements/copy_button.element"
 
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
+const domainIcon = "/assets/icons/domain-registration-website-svgrepo-com.svg";
+
 const extAPIURL = "https://ipwhois.app/json/";
 const copyIcon = "/assets/icons/icons8-clipboard-64.png";
 const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
@@ -24,6 +27,7 @@ const ipExcludedFields = [
   "timezone_gmtOffset",
   "currency_plural",
 ];
+const extDomainAPIURL = (domain) =>  `https://dns.google/resolve?name=${domain}&type=A`;
 
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
@@ -98,6 +102,29 @@ const IPChecker = (props) => {
   const copyDomain = () => {
     copyToClipboardMethod(refDomain);
   }
+  
+  const getDataByDomain = async() => {
+   const domainSearchURL = extDomainAPIURL(domainName);
+   try {
+   const res = await getApiResponse(
+        null,
+        domainSearchURL,
+        "GET",
+        null,
+        false,
+        false,
+        false
+      );
+      console.log('res domain', domain);
+      
+   } catch (error) {
+
+   }
+  }
+
+  // useEffect(() => {
+  //   getDataByDomain()
+  // }, [domainName]);
 
   useEffect(() => {
     getIpData();
@@ -147,26 +174,48 @@ const IPChecker = (props) => {
                 {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
                   <>
                     <div className="ip__section mb2">
-                      <div className={`${styles.ipBlock} mb2`}>
-                        <input
-                          className={`--no_style-input ${
-                            initialIP === ipInput
-                              ? "--color-primary"
-                              : "--color-base"
-                          }`}
-                          ref={refDomain}
-                          type="text"
-                          value={domainName}
-                          onInput={(e) => setDomainName(e.target.value)}
-                          placeholder="Get by domain name"
-                        />
+                      <div>
+                        <div
+                          className={`${styles.ipBlock} flex__grid justify-between align-center mb2`}
+                        >
+                          <Image
+                            className={`${
+                              isDarkTheme ? "--img-filter-invert" : ""
+                            }`}
+                            src={domainIcon}
+                            alt="Your domain"
+                            height={30}
+                            width={30}
+                          />
+                          <input
+                            className={`--no_style-input ${
+                              initialIP === ipInput
+                                ? "--color-primary"
+                                : "--color-base"
+                            }`}
+                            ref={refDomain}
+                            type="text"
+                            value={domainName}
+                            onInput={(e) => setDomainName(e.target.value)}
+                            placeholder="Get data by domain name"
+                          />
 
-                        <CopyBtnElement
-                          mobileDevice={mobileDevice}
-                          isDarkTheme={isDarkTheme}
-                          copyIcon={copyIcon}
-                          copyAction={copyDomain}
-                        />
+                          <CopyBtnElement
+                            mobileDevice={mobileDevice}
+                            isDarkTheme={isDarkTheme}
+                            copyIcon={copyIcon}
+                            copyAction={copyDomain}
+                          />
+                        </div>
+                        {domainName && (
+                          <button
+                            disabled={!domainName}
+                            className="generator__content--btn mb1 lato-regular"
+                            onClick={getDataByDomain}
+                          >
+                            SEARCH BY DOMAIN
+                          </button>
+                        )}
                       </div>
                       <div
                         className={`mt0 ${styles.ipBlock} ${
@@ -247,6 +296,7 @@ const IPChecker = (props) => {
                         ipLocation={ipData}
                       />
                     </div>
+
                     <div className="ip_data__block">
                       <ul
                         className={`list-reset ${
