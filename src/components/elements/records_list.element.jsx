@@ -47,7 +47,10 @@ const EncryptedPasswordManager = ({
   const passwordsArray = useMemo(
     () =>
       passwords && searchString && searchString.length > 0
-        ? passwords.filter((ps) => ps && ps.alias.toLowerCase().includes(searchString))
+        ? passwords.filter(
+            (ps) =>
+              ps && ps.alias.toLowerCase().includes(searchString.toLowerCase())
+          )
         : passwords,
     [searchString, passwords]
   );
