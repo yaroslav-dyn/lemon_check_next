@@ -173,32 +173,32 @@ const EncryptedPasswordManager = ({
                   professional-grade password storage solutions.
                 </p> */}
                 <p>
-                 <strong> Experimental Feature</strong> This feature for saving encrypted
-                  passwords is experimental and should not be used as a primary
-                  or long-term password storage solution. Data is saved locally
-                  using IndexedDB, a browser-based storage system that depends
-                  on your device and browser settings.
+                  <strong> Experimental Feature</strong> This feature for saving
+                  encrypted passwords is experimental and should not be used as
+                  a primary or long-term password storage solution. Data is
+                  saved locally using IndexedDB, a browser-based storage system
+                  that depends on your device and browser settings.
                 </p>
                 <p>
-                  <strong>Browser Cache and Storage Risks</strong>: While IndexedDB is not
-                  typically affected by clearing the browser cache, it can be
-                  erased if you clear "Cookies and Site Data" in your browser
-                  settings. Additionally, some mobile browsers may clear this
-                  data automatically if device storage runs low.
+                  <strong>Browser Cache and Storage Risks</strong>: While
+                  IndexedDB is not typically affected by clearing the browser
+                  cache, it can be erased if you clear "Cookies and Site Data"
+                  in your browser settings. Additionally, some mobile browsers
+                  may clear this data automatically if device storage runs low.
                 </p>
                 <p>
-                  <strong>Data Backup and Restoration</strong>: To avoid accidental data loss, it
-                  is recommended to periodically back up your saved records by
-                  exporting them as a CSV file. You can restore records if
-                  needed by importing the CSV file back into the app. This helps
-                  ensure continuity in case of browser data clearing or
-                  switching devices.
+                  <strong>Data Backup and Restoration</strong>: To avoid
+                  accidental data loss, it is recommended to periodically back
+                  up your saved records by exporting them as a CSV file. You can
+                  restore records if needed by importing the CSV file back into
+                  the app. This helps ensure continuity in case of browser data
+                  clearing or switching devices.
                 </p>
                 <p>
-                 <strong> Security Note</strong>: For secure password management, consider using
-                  a dedicated, secure password manager. This feature is not
-                  intended as a replacement for professional-grade password
-                  storage solutions.
+                  <strong> Security Note</strong>: For secure password
+                  management, consider using a dedicated, secure password
+                  manager. This feature is not intended as a replacement for
+                  professional-grade password storage solutions.
                 </p>
               </>
             </InstructionTooltip>
@@ -225,10 +225,10 @@ const EncryptedPasswordManager = ({
             <div className="left-align --color-base">
               <span>#</span>
             </div>
-            <div className="left-align --color-base">
+            <div className="left-align --color-base truncate">
               <span>Alias</span>
             </div>
-            <div className="left-align --color-base">
+            <div className="left-align --color-base truncate">
               <span>Encrypted String</span>
             </div>
             <div className="right-align --color-base">

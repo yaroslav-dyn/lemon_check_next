@@ -11,12 +11,13 @@ import {
 } from "@/services/base.services";
 import Preloader from "@/components/elements/loading.element";
 import MapWorldElement from "@/components/elements/map_world.element";
-import CopyBtnElement from "@/components/elements/copy_button.element"
+import CopyBtnElement from "@/components/elements/copy_button.element";
 
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
 const defaultIPIcon = "/assets/icons/icons8-ip-48.png";
 const domainIcon = "/assets/icons/domain-registration-website-svgrepo-com.svg";
+const searchIcon = "/assets/icons/find-location-symbolic.svg";
 
 const extAPIURL = "https://ipwhois.app/json/";
 const copyIcon = "/assets/icons/icons8-clipboard-64.png";
@@ -28,15 +29,14 @@ const ipExcludedFields = [
   "timezone_gmtOffset",
   "currency_plural",
 ];
-//const extDomainAPIURL = (domain) =>  `https://dns.google/resolve?name=${domain}&type=A`;
-const extDomainAPIURL = (domain) => extAPIURL + "/" + domain;
 
+const extDomainAPIURL = (domain) => extAPIURL + "/" + domain;
 
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
   const [ipData, setApiData] = useState({});
-  const [domainData, setDomainData] = useState({});
-  const [domainName, setDomainName] = useState('');
+  const [domainDataValid, setDomainDataStatus] = useState(false);
+  const [domainName, setDomainName] = useState("");
   const [initialIP, setInitialIP] = useState("");
   const [ipInput, setIpinput] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -91,7 +91,8 @@ const IPChecker = (props) => {
       setApiData(res);
       setIpinput(res && res.ip);
       setLoading(false);
-      setDomainName('')
+      setDomainName("");
+      setDomainDataStatus(false);
       !ip && setInitialIP(res.ip);
     } catch (error) {
       console.error("error");
@@ -105,9 +106,9 @@ const IPChecker = (props) => {
 
   const copyDomain = () => {
     copyToClipboardMethod(refDomain);
-  }
-  
-  const getDataByDomain = async() => {
+  };
+
+  const getDataByDomain = async () => {
     let domain = domainName.replace(/(^\w+:|^)\/\//, "");
     domain = domain.split("/")[0];
     const domainSearchURL = extDomainAPIURL(domain);
@@ -121,6 +122,11 @@ const IPChecker = (props) => {
         false,
         false
       );
+      if (!res || (res && !res?.ip)) {
+        setDomainDataStatus(true)
+        return;
+      }
+      setDomainDataStatus(false);
       setApiData(res);
       setIpinput(res && res.ip);
       setLoading(false);
@@ -128,7 +134,7 @@ const IPChecker = (props) => {
       console.error("error");
       setLoading(false);
     }
-  }
+  };
 
   // useEffect(() => {
   //   getDataByDomain()
@@ -181,133 +187,168 @@ const IPChecker = (props) => {
               >
                 {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
                   <>
-                    <div className="ip__section mb2">
-                      <div className="mb2">
-                        <div
-                          className={`${styles.ipBlock} flex__grid justify-between align-center mb2`}
-                        >
-                          <Image
-                            className={`${
-                              isDarkTheme ? "--img-filter-invert" : ""
-                            }`}
-                            src={domainIcon}
-                            alt="Your domain"
-                            height={30}
-                            width={30}
-                          />
-                          <input
-                            className={`--no_style-input ${
-                              initialIP === ipInput
-                                ? "--color-primary"
-                                : "--color-base"
-                            }`}
-                            ref={refDomain}
-                            type="text"
-                            value={domainName}
-                            onInput={(e) => setDomainName(e.target.value)}
-                            placeholder="Get data by domain"
-                          />
-
-                          <CopyBtnElement
-                            mobileDevice={mobileDevice}
-                            isDarkTheme={isDarkTheme}
-                            copyIcon={copyIcon}
-                            copyAction={copyDomain}
-                          />
-                        </div>
-                        {domainName && (
-                          <button
-                            disabled={!domainName}
-                            className="generator__content--btn --secondary-btn mb1 lato-regular"
-                            onClick={getDataByDomain}
+                    <div className="ip__section mb2 flex__grid --column justify-between">
+                      <div>
+                        <div className="mb2">
+                          <div
+                            className={`${styles.ipBlock} flex__grid align-center mb2 --small-gap`}
                           >
-                            SEARCH BY DOMAIN
-                          </button>
-                        )}
-                      </div>
-                      <div
-                        className={`mt0 ${styles.ipBlock} ${
-                          mobileDevice
-                            ? ipNotValid
-                              ? "mb0"
-                              : "mb2"
-                            : ipNotValid
-                            ? "mb0"
-                            : "mb2"
-                        } center flex__grid justify-between align-center`}
-                      >
-                        <div className="flex__grid align-center">
-                          {initialIP === ipInput ? (
-                            <Image
-                              src={isDarkTheme ? primaryIPIcon : lightIPIcon}
-                              alt="Your IP"
-                              height={30}
-                              width={30}
-                            />
-                          ) : (
                             <Image
                               className={`${
-                              isDarkTheme ? "--img-filter-invert" : ""
-                            }`}
-                              src={defaultIPIcon}
-                              alt="Your IP"
-                              width={30}
+                                isDarkTheme ? "--img-filter-invert" : ""
+                              } ml0.5`}
+                              src={domainIcon}
+                              alt="Your domain"
                               height={30}
+                              width={30}
                             />
-                          )}
-                        </div>
-                        <div className="flex__grid">
-                          <form
-                            style={{
-                              maxWidth: mobileDevice ? "220px" : "unset",
-                            }}
-                            name={`ipSearching`}
-                            onSubmit={(e) => {
-                              e.preventDefault();
-                              searchIp();
-                            }}
-                          >
                             <input
-                              className={`--no_style-input ${
-                                initialIP === ipInput
-                                  ? "--color-primary"
-                                  : "--color-base"
-                              }`}
-                              ref={refId}
+                              className={`--no_style-input --color-base flex-1`}
+                              ref={refDomain}
                               type="text"
-                              value={ipInput}
-                              onInput={(e) => setIpAddress(e.target.value)}
+                              value={domainName}
+                              onInput={(e) => setDomainName(e.target.value)}
+                              placeholder="Get data by domain"
                             />
-                          </form>
+
+                            <div className="flex__grid items-center --small-gap">
+                              <CopyBtnElement
+                                mobileDevice={mobileDevice}
+                                isDarkTheme={isDarkTheme}
+                                copyIcon={copyIcon}
+                                copyAction={copyDomain}
+                              />
+                              <button
+                                disabled={!domainName}
+                                className="--no-style-btn"
+                                onClick={getDataByDomain}
+                              >
+                                <Image
+                                  className={`${
+                                    isDarkTheme ? "--img-filter-invert" : ""
+                                  }`}
+                                  src={searchIcon}
+                                  height={24}
+                                  width={24}
+                                  alt="search"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                          {/* {domainName && (
+                            <button
+                              disabled={!domainName}
+                              className="generator__content--btn --secondary-btn mb1 lato-regular"
+                              onClick={getDataByDomain}
+                            >
+                              SEARCH BY DOMAIN
+                            </button>
+                          )} */}
                         </div>
+                        <div
+                          className={`mt0 ${styles.ipBlock} ${
+                            mobileDevice
+                              ? ipNotValid
+                                ? "mb0"
+                                : "mb2"
+                              : ipNotValid
+                              ? "mb0"
+                              : "mb2"
+                          } center flex__grid align-center --small-gap`}
+                        >
+                          <div className="flex__grid align-center">
+                            {initialIP === ipInput ? (
+                              <Image
+                                className="ml0.5"
+                                src={isDarkTheme ? primaryIPIcon : lightIPIcon}
+                                alt="Your IP"
+                                height={30}
+                                width={30}
+                              />
+                            ) : (
+                              <Image
+                                className={`${
+                                  isDarkTheme ? "--img-filter-invert" : ""
+                                } ml0.5`}
+                                src={defaultIPIcon}
+                                alt="Your IP"
+                                width={30}
+                                height={30}
+                              />
+                            )}
+                          </div>
+                          <div className="flex__grid flex-1">
+                            <form
+                              style={{
+                                maxWidth: mobileDevice ? "220px" : "unset",
+                              }}
+                              name={`ipSearching`}
+                              onSubmit={(e) => {
+                                e.preventDefault();
+                                searchIp();
+                              }}
+                            >
+                              <input
+                                className={`--no_style-input flex-1 ${
+                                  initialIP === ipInput
+                                    ? "--color-primary"
+                                    : "--color-base"
+                                }`}
+                                ref={refId}
+                                type="text"
+                                value={ipInput}
+                                onInput={(e) => setIpAddress(e.target.value)}
+                              />
+                            </form>
+                          </div>
 
-                        <CopyBtnElement
-                          mobileDevice={mobileDevice}
-                          isDarkTheme={isDarkTheme}
-                          copyIcon={copyIcon}
-                          copyAction={copyIp}
-                        />
-                      </div>
-                      {/*SECTION: INVALID IP MESSAGE */}
-                      {ipNotValid && (
-                        <p className="flex__grid justify-end my1">
-                          <span className="--color-accent">
-                            IP address is not valid
-                          </span>
-                        </p>
-                      )}
-                      <div>
-                        {ipInput && (
-                          <button
-                            disabled={ipNotValid}
-                            className="generator__content--btn mb1 lato-regular"
-                            onClick={searchIp}
-                          >
-                            SEARCH IP
-                          </button>
-                        )}
-                      </div>
+                          <div className="flex__grid items-center --small-gap">
+                            <CopyBtnElement
+                              mobileDevice={mobileDevice}
+                              isDarkTheme={isDarkTheme}
+                              copyIcon={copyIcon}
+                              copyAction={copyIp}
+                            />
 
+                            <button
+                              disabled={!domainName}
+                              className="--no-style-btn"
+                              onClick={getDataByDomain}
+                            >
+                              <Image
+                                className={`${
+                                  isDarkTheme ? "--img-filter-invert" : ""
+                                }`}
+                                src={searchIcon}
+                                height={24}
+                                width={24}
+                                alt="search"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                        {/*SECTION: INVALID IP MESSAGE */}
+                        {ipNotValid ||
+                          (domainDataValid && (
+                            <p className="flex__grid justify-end my1">
+                              <span className="--color-accent">
+                                {domainDataValid ? "Domain name" : "IP address"} is
+                                not valid
+                              </span>
+                            </p>
+                          ))}
+                        {/* <div>
+                          {ipInput && (
+                            <button
+                              disabled={ipNotValid}
+                              className="generator__content--btn mb1 lato-regular"
+                              onClick={searchIp}
+                            >
+                              SEARCH IP
+                            </button>
+                          )}
+                        </div> */}
+                      </div>
                       <MapWorldElement
                         size={mobileDevice ? "responsive" : "md"}
                         value={ipInput}
