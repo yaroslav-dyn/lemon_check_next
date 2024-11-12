@@ -78,10 +78,12 @@ const IPChecker = (props) => {
 
   const getIpData = async (ip) => {
     setLoading(true);
+    const searchUrl = !ip ? extAPIURL : extIPFilledUrl(ip);
+    console.log("🚀 ~ getIpData ~ searchUrl:", searchUrl);
     try {
       const res = await getApiResponse(
         null,
-        !ip ? extAPIURL : extIPFilledUrl(ip),
+        searchUrl,
         "GET",
         null,
         false,
@@ -123,7 +125,7 @@ const IPChecker = (props) => {
         false
       );
       if (!res || (res && !res?.ip)) {
-        setDomainDataStatus(true)
+        setDomainDataStatus(true);
         return;
       }
       setDomainDataStatus(false);
@@ -256,7 +258,10 @@ const IPChecker = (props) => {
                               : "mb2"
                           } center flex__grid align-center --small-gap`}
                         >
-                          <div className="flex__grid align-center">
+                          <div
+                            className="flex__grid align-center"
+                            onClick={() => getIpData()}
+                          >
                             {initialIP === ipInput ? (
                               <Image
                                 className="ml0.5"
@@ -311,9 +316,8 @@ const IPChecker = (props) => {
                             />
 
                             <button
-                              disabled={!domainName}
                               className="--no-style-btn"
-                              onClick={getDataByDomain}
+                              onClick={() => searchIp()}
                             >
                               <Image
                                 className={`${
@@ -328,15 +332,14 @@ const IPChecker = (props) => {
                           </div>
                         </div>
                         {/*SECTION: INVALID IP MESSAGE */}
-                        {ipNotValid ||
-                          (domainDataValid && (
-                            <p className="flex__grid justify-end my1">
-                              <span className="--color-accent">
-                                {domainDataValid ? "Domain name" : "IP address"} is
-                                not valid
-                              </span>
-                            </p>
-                          ))}
+                        {(ipNotValid || domainDataValid) && (
+                          <p className="flex__grid justify-end my1">
+                            <span className="--color-accent">
+                              {ipNotValid ? "IP address" : "Domain name "} is
+                              not valid
+                            </span>
+                          </p>
+                        )}
                         {/* <div>
                           {ipInput && (
                             <button
