@@ -161,7 +161,7 @@ const IPChecker = (props) => {
 
         <meta
           name="keywords"
-          content="IP geolocation checker, IP address location, find IP address, IP geolocation, locate IP address, IP lookup, IP geolocation tool, LockBoxApp IP checker"
+          content="IP geolocation checker, IP address location, find IP address, IP geolocation, locate IP address, IP lookup, IP geolocation tool, LockBoxApp IP checker, IP by domain"
         />
       </Head>
 
@@ -191,6 +191,7 @@ const IPChecker = (props) => {
                   <>
                     <div className="ip__section mb2 flex__grid --column justify-between">
                       <div>
+                        {/*SECTION: DOMAIN FORM */}
                         <div className="mb2">
                           <div
                             className={`${styles.ipBlock} flex__grid align-center mb2 --small-gap`}
@@ -204,15 +205,26 @@ const IPChecker = (props) => {
                               height={30}
                               width={30}
                             />
-                            <input
-                              className={`--no_style-input --color-base flex-1`}
-                              ref={refDomain}
-                              type="text"
-                              value={domainName}
-                              onInput={(e) => setDomainName(e.target.value)}
-                              placeholder="Get data by domain"
-                            />
-
+                            <form
+                              style={{
+                                maxWidth: mobileDevice ? "220px" : "unset",
+                              }}
+                              className="w-100"
+                              name={`domainSearching`}
+                              onSubmit={(e) => {
+                                e.preventDefault();
+                                getDataByDomain();
+                              }}
+                            >
+                              <input
+                                className={`--no_style-input --color-base flex-1`}
+                                ref={refDomain}
+                                type="text"
+                                value={domainName}
+                                onInput={(e) => setDomainName(e.target.value)}
+                                placeholder="Get data by domain"
+                              />
+                            </form>
                             <div className="flex__grid items-center --small-gap">
                               <CopyBtnElement
                                 mobileDevice={mobileDevice}
@@ -228,7 +240,7 @@ const IPChecker = (props) => {
                                 <Image
                                   className={`${
                                     isDarkTheme ? "--img-filter-invert" : ""
-                                  }`}
+                                  } cursor-pointer-screen`}
                                   src={searchIcon}
                                   height={24}
                                   width={24}
@@ -247,6 +259,7 @@ const IPChecker = (props) => {
                             </button>
                           )} */}
                         </div>
+                        {/*SECTION: IP FORM */}
                         <div
                           className={`mt0 ${styles.ipBlock} ${
                             mobileDevice
@@ -264,7 +277,7 @@ const IPChecker = (props) => {
                           >
                             {initialIP === ipInput ? (
                               <Image
-                                className="ml0.5"
+                                className="ml0.5 cursor-pointer-screen"
                                 src={isDarkTheme ? primaryIPIcon : lightIPIcon}
                                 alt="Your IP"
                                 height={30}
@@ -274,7 +287,7 @@ const IPChecker = (props) => {
                               <Image
                                 className={`${
                                   isDarkTheme ? "--img-filter-invert" : ""
-                                } ml0.5`}
+                                } ml0.5 cursor-pointer-screen`}
                                 src={defaultIPIcon}
                                 alt="Your IP"
                                 width={30}
@@ -322,7 +335,7 @@ const IPChecker = (props) => {
                               <Image
                                 className={`${
                                   isDarkTheme ? "--img-filter-invert" : ""
-                                }`}
+                                } cursor-pointer-screen`}
                                 src={searchIcon}
                                 height={24}
                                 width={24}
