@@ -1,4 +1,6 @@
 import { useEffect, useState, useMemo, ref, useRef } from "react";
+import { Tooltip } from "react-tooltip";
+
 import Head from "next/head";
 import Image from "next/image";
 import useDeviceType from "@/services/useDeviceType";
@@ -206,9 +208,6 @@ const IPChecker = (props) => {
                               width={30}
                             />
                             <form
-                              style={{
-                                maxWidth: mobileDevice ? "220px" : "unset",
-                              }}
                               className="w-100"
                               name={`domainSearching`}
                               onSubmit={(e) => {
@@ -222,6 +221,7 @@ const IPChecker = (props) => {
                                 type="text"
                                 value={domainName}
                                 onInput={(e) => setDomainName(e.target.value)}
+                                onChange={() => getDataByDomain()}
                                 placeholder="Get data by domain"
                               />
                             </form>
@@ -273,6 +273,7 @@ const IPChecker = (props) => {
                         >
                           <div
                             className="flex__grid align-center"
+                            id="findInitialIp"
                             onClick={() => getIpData()}
                           >
                             {initialIP === ipInput ? (
@@ -295,11 +296,13 @@ const IPChecker = (props) => {
                               />
                             )}
                           </div>
+                          <Tooltip
+                            anchorSelect="#findInitialIp"
+                            content="Go to current IP"
+                            place="bottom"
+                          />
                           <div className="flex__grid flex-1">
                             <form
-                              style={{
-                                maxWidth: mobileDevice ? "220px" : "unset",
-                              }}
                               name={`ipSearching`}
                               onSubmit={(e) => {
                                 e.preventDefault();

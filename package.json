@@ -24,6 +24,7 @@
     "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
     "react-svg-worldmap": "^2.0.0-alpha.16",
-    "react-switch-selector": "^2.3.0"
+    "react-switch-selector": "^2.3.0",
+    "react-tooltip": "^5.28.0"
   }
 }

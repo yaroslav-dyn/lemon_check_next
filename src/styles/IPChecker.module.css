@@ -12,13 +12,13 @@
 .ipDataTable {
   display: grid;
   grid-template-columns: 2fr 2fr;
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--color-accent);
   padding: 1rem;
   column-gap: 1.6rem;
   border-radius: 8px;
 }
 
 .ipDataTableMobile {
-  border-top: 2px solid var(--color-primary);
+  border-top: 2px solid var(--color-accent);
   padding: 1rem;
 }

@@ -85,7 +85,7 @@ const AboutPage = () => {
               </div>
             </aside>
 
-            {isMobile && <hr className="block --base-divider my4" />}
+            {isMobile && <hr className="block --base-divider x2 my3" />}
 
             {/* FAQ Content */}
             <article className="md-col-8">
