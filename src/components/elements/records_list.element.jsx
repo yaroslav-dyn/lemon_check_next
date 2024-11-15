@@ -56,12 +56,7 @@ const EncryptedPasswordManager = ({
     if (!cryptedInput || !cryptedInput?.current) {
       return;
     }
-    enqueueSnackbar("copied to clipboard", {
-      variant: "success",
-      preventDuplicate: true,
-      autoHideDuration: 1200,
-      anchorOrigin: { horizontal: "center", vertical: "bottom" },
-    });
+    enqueueSnackbar("copied to clipboard", CONSTANTS.defualtSnakeConfig);
     const selectedRef = { current: cryptedInput.current[index] };
     copyToClipboardMethod(selectedRef);
   };

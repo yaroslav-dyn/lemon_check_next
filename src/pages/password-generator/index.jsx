@@ -2,6 +2,8 @@ import Head from "next/head";
 import React, { useState, useEffect, useRef } from "react";
 import { copyToClipboardMethod } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
+import { useSnackbar } from "notistack";
+import CONSTANTS from "@/services/constants";
 
 const PasswordGenerator = () => {
   const [passwordLength, setPasswordLength] = useState(12);
@@ -10,6 +12,7 @@ const PasswordGenerator = () => {
   const [hasDigits, setDigitsCharacters] = useState(true);
   const [password, setPassword] = useState("");
   const areaElement = useRef();
+  const { enqueueSnackbar } = useSnackbar();
 
   const mobileDevice = useDeviceType();
 
@@ -54,7 +57,7 @@ const PasswordGenerator = () => {
 
   const copyToClipBoard = () => {
     copyToClipboardMethod(areaElement);
-    //alert('Copy to clipboard')
+    enqueueSnackbar("copied to clipboard", CONSTANTS.defualtSnakeConfig);
   };
 
   const getLabelColor = () => {
