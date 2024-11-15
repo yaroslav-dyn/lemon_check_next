@@ -1,5 +1,8 @@
 import { useEffect, useState, useMemo, ref, useRef } from "react";
+import { Tooltip } from "react-tooltip";
+
 import Head from "next/head";
+import Image from "next/image";
 import useDeviceType from "@/services/useDeviceType";
 import { getApiResponse } from "@/services/api.servise";
 import styles from "@/styles/IPChecker.module.css";
@@ -10,9 +13,14 @@ import {
 } from "@/services/base.services";
 import Preloader from "@/components/elements/loading.element";
 import MapWorldElement from "@/components/elements/map_world.element";
+import CopyBtnElement from "@/components/elements/copy_button.element";
 
 const primaryIPIcon = "/assets/icons/icons8-ip-48-primary.png";
 const lightIPIcon = "/assets/icons/icons8-ip-48-light.png";
+const defaultIPIcon = "/assets/icons/icons8-ip-48.png";
+const domainIcon = "/assets/icons/domain-registration-website-svgrepo-com.svg";
+const searchIcon = "/assets/icons/find-location-symbolic.svg";
+
 const extAPIURL = "https://ipwhois.app/json/";
 const copyIcon = "/assets/icons/icons8-clipboard-64.png";
 const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
@@ -24,13 +32,18 @@ const ipExcludedFields = [
   "currency_plural",
 ];
 
+const extDomainAPIURL = (domain) => extAPIURL + "/" + domain;
+
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
   const [ipData, setApiData] = useState({});
+  const [domainDataValid, setDomainDataStatus] = useState(false);
+  const [domainName, setDomainName] = useState("");
   const [initialIP, setInitialIP] = useState("");
   const [ipInput, setIpinput] = useState("");
   const [isLoading, setLoading] = useState(false);
   const refId = useRef(null);
+  const refDomain = useRef(null);
 
   const isDarkTheme = useMemo(
     () => props.theme === "primary__theme",
@@ -67,10 +80,12 @@ const IPChecker = (props) => {
 
   const getIpData = async (ip) => {
     setLoading(true);
+    const searchUrl = !ip ? extAPIURL : extIPFilledUrl(ip);
+    console.log("🚀 ~ getIpData ~ searchUrl:", searchUrl);
     try {
       const res = await getApiResponse(
         null,
-        !ip ? extAPIURL : extIPFilledUrl(ip),
+        searchUrl,
         "GET",
         null,
         false,
@@ -80,6 +95,8 @@ const IPChecker = (props) => {
       setApiData(res);
       setIpinput(res && res.ip);
       setLoading(false);
+      setDomainName("");
+      setDomainDataStatus(false);
       !ip && setInitialIP(res.ip);
     } catch (error) {
       console.error("error");
@@ -90,6 +107,42 @@ const IPChecker = (props) => {
   const copyIp = () => {
     copyToClipboardMethod(refId);
   };
+
+  const copyDomain = () => {
+    copyToClipboardMethod(refDomain);
+  };
+
+  const getDataByDomain = async () => {
+    let domain = domainName.replace(/(^\w+:|^)\/\//, "");
+    domain = domain.split("/")[0];
+    const domainSearchURL = extDomainAPIURL(domain);
+    try {
+      const res = await getApiResponse(
+        null,
+        domainSearchURL,
+        "GET",
+        null,
+        false,
+        false,
+        false
+      );
+      if (!res || (res && !res?.ip)) {
+        setDomainDataStatus(true);
+        return;
+      }
+      setDomainDataStatus(false);
+      setApiData(res);
+      setIpinput(res && res.ip);
+      setLoading(false);
+    } catch (error) {
+      console.error("error");
+      setLoading(false);
+    }
+  };
+
+  // useEffect(() => {
+  //   getDataByDomain()
+  // }, [domainName]);
 
   useEffect(() => {
     getIpData();
@@ -110,7 +163,7 @@ const IPChecker = (props) => {
 
         <meta
           name="keywords"
-          content="IP geolocation checker, IP address location, find IP address, IP geolocation, locate IP address, IP lookup, IP geolocation tool, LockBoxApp IP checker"
+          content="IP geolocation checker, IP address location, find IP address, IP geolocation, locate IP address, IP lookup, IP geolocation tool, LockBoxApp IP checker, IP by domain"
         />
       </Head>
 
@@ -138,86 +191,183 @@ const IPChecker = (props) => {
               >
                 {!isLoading && ipData && Object.keys(ipData).length > 0 ? (
                   <>
-                    <div className="ip__section mb2">
-                      <h2
-                        className={`mt0 ${styles.ipBlock} ${
-                          mobileDevice
-                            ? ipNotValid
+                    <div className="ip__section mb2 flex__grid --column justify-between">
+                      <div>
+                        {/*SECTION: DOMAIN FORM */}
+                        <div className="mb2">
+                          <div
+                            className={`${styles.ipBlock} flex__grid align-center mb2 --small-gap`}
+                          >
+                            <Image
+                              className={`${
+                                isDarkTheme ? "--img-filter-invert" : ""
+                              } ml0.5`}
+                              src={domainIcon}
+                              alt="Your domain"
+                              height={30}
+                              width={30}
+                            />
+                            <form
+                              className="w-100"
+                              name={`domainSearching`}
+                              onSubmit={(e) => {
+                                e.preventDefault();
+                                getDataByDomain();
+                              }}
+                            >
+                              <input
+                                className={`--no_style-input --color-base flex-1`}
+                                ref={refDomain}
+                                type="text"
+                                value={domainName}
+                                onInput={(e) => setDomainName(e.target.value)}
+                                onChange={() => getDataByDomain()}
+                                placeholder="Get data by domain"
+                              />
+                            </form>
+                            <div className="flex__grid items-center --small-gap">
+                              <CopyBtnElement
+                                mobileDevice={mobileDevice}
+                                isDarkTheme={isDarkTheme}
+                                copyIcon={copyIcon}
+                                copyAction={copyDomain}
+                              />
+                              <button
+                                disabled={!domainName}
+                                className="--no-style-btn"
+                                onClick={getDataByDomain}
+                              >
+                                <Image
+                                  className={`${
+                                    isDarkTheme ? "--img-filter-invert" : ""
+                                  } cursor-pointer-screen`}
+                                  src={searchIcon}
+                                  height={24}
+                                  width={24}
+                                  alt="search"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                          {/* {domainName && (
+                            <button
+                              disabled={!domainName}
+                              className="generator__content--btn --secondary-btn mb1 lato-regular"
+                              onClick={getDataByDomain}
+                            >
+                              SEARCH BY DOMAIN
+                            </button>
+                          )} */}
+                        </div>
+                        {/*SECTION: IP FORM */}
+                        <div
+                          className={`mt0 ${styles.ipBlock} ${
+                            mobileDevice
+                              ? ipNotValid
+                                ? "mb0"
+                                : "mb2"
+                              : ipNotValid
                               ? "mb0"
                               : "mb2"
-                            : ipNotValid
-                            ? "mb0"
-                            : "mb2"
-                        } center flex__grid justify-between align-center`}
-                      >
-                        <div className="flex__grid align-center">
-                          {initialIP === ipInput && (
-                            <img
-                              src={isDarkTheme ? primaryIPIcon : lightIPIcon}
-                              alt="Your IP"
-                              height={30}
-                            />
-                          )}
-                        </div>
-                        <div className="flex__grid">
-                          <form
-                            style={{
-                              maxWidth: mobileDevice ? "220px" : "unset",
-                            }}
-                            name={`ipSearching`}
-                            onSubmit={(e) => {
-                              e.preventDefault();
-                              searchIp();
-                            }}
-                          >
-                            <input
-                              className={`--no_style-input ${
-                                initialIP === ipInput
-                                  ? "--color-primary"
-                                  : "--color-base"
-                              }`}
-                              ref={refId}
-                              type="text"
-                              value={ipInput}
-                              onInput={(e) => setIpAddress(e.target.value)}
-                            />
-                          </form>
-                        </div>
-                        <div
-                          className={`inline-block mr0.5 ${
-                            mobileDevice ? "" : "cursor-pointer-screen"
-                          } `}
-                          onClick={copyIp}
+                          } center flex__grid align-center --small-gap`}
                         >
-                          <img
-                            className={`align-middle ${
-                              isDarkTheme ? "" : "--img-filter-invert"
-                            }`}
-                            style={{ width: "auto", height: "26px" }}
-                            src={copyIcon}
-                          />
-                        </div>
-                      </h2>
-                      {/*SECTION: INVALID IP MESSAGE */}
-                      {ipNotValid && (
-                        <p className="flex__grid justify-end my1">
-                          <span className="--color-accent">
-                            IP address is not valid
-                          </span>
-                        </p>
-                      )}
-                      <div>
-                        {ipInput && (
-                          <button
-                            disabled={ipNotValid}
-                            className="generator__content--btn mb1 lato-regular"
-                            onClick={searchIp}
+                          <div
+                            className="flex__grid align-center"
+                            id="findInitialIp"
+                            onClick={() => getIpData()}
                           >
-                            SEARCH IP
-                          </button>
-                        )}
-                      </div>
+                            {initialIP === ipInput ? (
+                              <Image
+                                className="ml0.5 cursor-pointer-screen"
+                                src={isDarkTheme ? primaryIPIcon : lightIPIcon}
+                                alt="Your IP"
+                                height={30}
+                                width={30}
+                              />
+                            ) : (
+                              <Image
+                                className={`${
+                                  isDarkTheme ? "--img-filter-invert" : ""
+                                } ml0.5 cursor-pointer-screen`}
+                                src={defaultIPIcon}
+                                alt="Your IP"
+                                width={30}
+                                height={30}
+                              />
+                            )}
+                          </div>
+                          <Tooltip
+                            anchorSelect="#findInitialIp"
+                            content="Go to current IP"
+                            place="bottom"
+                          />
+                          <div className="flex__grid flex-1">
+                            <form
+                              name={`ipSearching`}
+                              onSubmit={(e) => {
+                                e.preventDefault();
+                                searchIp();
+                              }}
+                            >
+                              <input
+                                className={`--no_style-input flex-1 ${
+                                  initialIP === ipInput
+                                    ? "--color-primary"
+                                    : "--color-base"
+                                }`}
+                                ref={refId}
+                                type="text"
+                                value={ipInput}
+                                onInput={(e) => setIpAddress(e.target.value)}
+                              />
+                            </form>
+                          </div>
 
+                          <div className="flex__grid items-center --small-gap">
+                            <CopyBtnElement
+                              mobileDevice={mobileDevice}
+                              isDarkTheme={isDarkTheme}
+                              copyIcon={copyIcon}
+                              copyAction={copyIp}
+                            />
+
+                            <button
+                              className="--no-style-btn"
+                              onClick={() => searchIp()}
+                            >
+                              <Image
+                                className={`${
+                                  isDarkTheme ? "--img-filter-invert" : ""
+                                } cursor-pointer-screen`}
+                                src={searchIcon}
+                                height={24}
+                                width={24}
+                                alt="search"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                        {/*SECTION: INVALID IP MESSAGE */}
+                        {(ipNotValid || domainDataValid) && (
+                          <p className="flex__grid justify-end my1">
+                            <span className="--color-accent">
+                              {ipNotValid ? "IP address" : "Domain name "} is
+                              not valid
+                            </span>
+                          </p>
+                        )}
+                        {/* <div>
+                          {ipInput && (
+                            <button
+                              disabled={ipNotValid}
+                              className="generator__content--btn mb1 lato-regular"
+                              onClick={searchIp}
+                            >
+                              SEARCH IP
+                            </button>
+                          )}
+                        </div> */}
+                      </div>
                       <MapWorldElement
                         size={mobileDevice ? "responsive" : "md"}
                         value={ipInput}
@@ -225,6 +375,7 @@ const IPChecker = (props) => {
                         ipLocation={ipData}
                       />
                     </div>
+
                     <div className="ip_data__block">
                       <ul
                         className={`list-reset ${

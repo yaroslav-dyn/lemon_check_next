@@ -85,7 +85,7 @@ const AboutPage = () => {
               </div>
             </aside>
 
-            {isMobile && <hr className="block --base-divider my4" />}
+            {isMobile && <hr className="block --base-divider x2 my3" />}
 
             {/* FAQ Content */}
             <article className="md-col-8">
@@ -195,16 +195,30 @@ const AboutPage = () => {
                 </p>
 
                 <p>
-                  <b>Manual IP Lookup</b>: If you'd like to check the geolocation of a
-                  different IP address, simply type it into the input field and
-                  click Search IP. The page will then display geolocation
-                  information for the IP address you entered.
+                  <b>Manual IP Lookup</b>: If you'd like to check the
+                  geolocation of a different IP address, simply type it into the
+                  input field and click Search IP. The page will then display
+                  geolocation information for the IP address you entered.
                 </p>
 
                 <p>
-                  <b>Real-Time Information</b>: The results are fetched in real-time
-                  from{" "}
-                  <Link className="--default-link" href={`https://ipwhois.io/terms`} target="_blank">
+                 <b> Domain Name Lookup: </b>
+                  You can also use the tool to look up
+                  geolocation information based on a domain name. Enter a domain
+                  (e.g., example.com) in the input field, and the tool will
+                  resolve the domain to its associated IP address and fetch its
+                  geolocation data. Simply click the Search icon after typing in
+                  the domain.
+                </p>
+
+                <p>
+                  <b>Real-Time Information</b>: The results are fetched in
+                  real-time from{" "}
+                  <Link
+                    className="--default-link"
+                    href={`https://ipwhois.io/terms`}
+                    target="_blank"
+                  >
                     ipwhois.io
                   </Link>
                   , so you can get up-to-date location data instantly.

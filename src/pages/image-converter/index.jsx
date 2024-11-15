@@ -7,6 +7,7 @@ import styles from "@/styles/ImageConverter.module.css";
 import { copyToClipboardMethod, base64ToImage } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
 import UISwitcher from "@/components/ui.switcher";
+import { isMobile } from "react-device-detect";
 
 const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
@@ -165,9 +166,10 @@ const Imageconverter = (props) => {
                 !mobileDevice ? "--base-gap" : ""
               } justify-center`}
             >
-              {/* {mobileDevice && (
-                <hr className="--base-divider x2 --bg-primary w-100 my1" />
-              )} */}
+              {mobileDevice && (
+                <hr className="--base-divider x2 --bg-accent w-100 my1" />
+              )}
+              {isMobile && <br />}
               <div>
                 <button
                   onClick={() => {
@@ -218,9 +220,7 @@ const Imageconverter = (props) => {
                   </div>
                 )}
               </div>
-              {mobileDevice && (
-                <hr className="--base-divider x2 --bg-primary w-100 my1" />
-              )}
+              {isMobile && <br />}
               <div
                 className={`${
                   mobileDevice

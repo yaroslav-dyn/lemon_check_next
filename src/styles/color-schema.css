@@ -4,6 +4,7 @@
   --link-color: #E94E3D;
   --link-color-active: #fff;
   --theme-footer-background: #000;
+  --theme-primary-accent: #7C160D;
 }
 
 
@@ -107,6 +108,10 @@
 .light__theme .generator__content--btn:hover,
 .light__theme .action__btn:hover {
   box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.light__theme .top__header {
+    border-bottom: 2px solid var(--theme-primary-accent)
 }
 
 /* .primary__theme {

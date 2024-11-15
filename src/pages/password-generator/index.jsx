@@ -2,23 +2,28 @@ import Head from "next/head";
 import React, { useState, useEffect, useRef } from "react";
 import { copyToClipboardMethod } from "@/services/base.services";
 import useDeviceType from "@/services/useDeviceType";
+import { useSnackbar } from "notistack";
+import CONSTANTS from "@/services/constants";
 
 const PasswordGenerator = () => {
   const [passwordLength, setPasswordLength] = useState(12);
+  const [passwordLengthInput, setPasswordLengthInput] = useState(12);
   const [hasSpecialCharacters, setSpecialCharacters] = useState(true);
   const [hasDigits, setDigitsCharacters] = useState(true);
   const [password, setPassword] = useState("");
   const areaElement = useRef();
+  const { enqueueSnackbar } = useSnackbar();
 
   const mobileDevice = useDeviceType();
 
   useEffect(() => {
     generateCode();
-  }, []);
+  }, [passwordLength, hasDigits, hasSpecialCharacters]);
 
   const getPasswordLength = (e) => {
-    const currentLength = e.target.value ? e.target.value : passwordLength;
+    const currentLength = e.target.value;
     setPasswordLength(currentLength);
+    setPasswordLengthInput(currentLength);
   };
 
   const setSpecialCharactersBox = (status) => 
@@ -52,7 +57,7 @@ const PasswordGenerator = () => {
 
   const copyToClipBoard = () => {
     copyToClipboardMethod(areaElement);
-    //alert('Copy to clipboard')
+    enqueueSnackbar("copied to clipboard", CONSTANTS.defualtSnakeConfig);
   };
 
   const getLabelColor = () => {
@@ -104,6 +109,7 @@ const PasswordGenerator = () => {
                 id="passwordContent"
                 ref={areaElement}
                 onClick={copyToClipBoard}
+                readOnly
               ></textarea>
             </section>
             <div className="">
@@ -126,8 +132,8 @@ const PasswordGenerator = () => {
                     <input
                       className="bace_input"
                       id="passwordLength"
-                      value={passwordLength}
-                      type="text"
+                      value={passwordLengthInput}
+                      type="number"
                       onChange={getPasswordLength}
                     />
 
@@ -147,9 +153,7 @@ const PasswordGenerator = () => {
                       />
                       <label htmlFor="digitCharacters"></label>
                     </div>
-                    <label htmlFor="digitCharacters">
-                      Use digitals
-                    </label>
+                    <label htmlFor="digitCharacters">Use digitals</label>
                   </div>
                   <br />
                   <div className="flex__grid align-center justify-between">
@@ -168,8 +172,9 @@ const PasswordGenerator = () => {
                   </div>
                 </form>
               </section>
-              <br />
+
               <div className="en_generate_controls">
+                <hr className="--base-divider x2 --bg-accent mb2" />
                 <button
                   id="btn"
                   className="generator__content--btn --small-margin"
@@ -177,8 +182,6 @@ const PasswordGenerator = () => {
                 >
                   Generate password
                 </button>
-
-                <hr className="--base-divider --bg-primary mb2" />
 
                 <button
                   id="btn"
