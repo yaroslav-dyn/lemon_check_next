@@ -454,12 +454,12 @@ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25);
   padding: 0 1.875rem;
   padding-top: var(--header-height);
   min-height: calc(100vh - 3px);
- 
-}
-
-.mobile__view .main_content {
   padding-bottom: 124px;
 }
+
+/* .mobile__view .main_content {
+  padding-bottom: 124px;
+} */
 
 .content__gaps {
   padding: 0 1.875rem;

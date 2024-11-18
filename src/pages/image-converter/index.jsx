@@ -140,7 +140,7 @@ const Imageconverter = (props) => {
                   Image <span className="--color-primary"> Converter </span>
                 </h1>
                 <div className="slogan__text mb1 mt1" data-centered-text>
-                  Convert images seamlessly:{" "}
+                  Convert images seamlessly: {mobileDevice && <br />}
                   <span className="--color-primary">encode</span> or{" "}
                   <span className="--color-primary">decode</span> with a click
                 </div>
