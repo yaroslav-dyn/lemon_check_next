@@ -5,8 +5,8 @@ const InputFileElement = ({
   title = "UPLOAD",
   accept = "*",
   mobileDevice,
-  containerClasses,
-  labelClasses,
+  containerClasses="",
+  labelClasses="",
   slug
 }) => {
   return (

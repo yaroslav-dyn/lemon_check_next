@@ -106,3 +106,8 @@
   }
 }
 
+/* Watermark  */
+
+.canvasContainer {
+  overflow: auto;
+}

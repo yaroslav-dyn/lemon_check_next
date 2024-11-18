@@ -270,6 +270,56 @@ const Imageconverter = (props) => {
                   </div>
                 )}
               </div>
+              {isMobile && <br />}
+              <div
+                className={`${
+                  mobileDevice
+                    ? "flex__grid align-center justify-center --extra_small-gap"
+                    : ""
+                }`}
+              >
+                <button
+                  onClick={() => {
+                    setConvertType("data");
+                    router.push("/image-converter/watermark");
+                  }}
+                  className={`action__btn --bg-accent --uppercase w-100  
+                    ${
+                      mobileDevice
+                        ? styles.convertTypeBageMobile
+                        : styles.convertTypeBage
+                    }`}
+                >
+                  <div
+                    className={`${
+                      mobileDevice
+                        ? "flex__grid align-center justify-center --extra_small-gap"
+                        : ""
+                    }`}
+                  >
+                    {mobileDevice && (
+                      <Image src={dataTypeBageIcon} width={24} height={24} />
+                    )}
+                    <span> Watermarks </span>
+                  </div>
+                </button>
+                {!mobileDevice && (
+                  <div
+                    className={`flex__grid align-center --extra_small-gap ${styles.converterInfoBlockTwo}`}
+                  >
+                    <Image
+                      className={`${isDarkTheme ? "" : "--img-filter-invert"}`}
+                      src={dataTypeBageIcon}
+                      width={38}
+                      height={38}
+                      alt="data type"
+                    />
+                    <p className="left">
+                      Add watermarks <br /> to images
+                    </p>
+                  </div>
+                )}
+              </div>
               {/* {mobileDevice && (
                 <hr className="--base-divider x2 --bg-primary w-100 my1" />
               )} */}
