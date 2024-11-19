@@ -4,11 +4,12 @@ import useDeviceType from "@/services/useDeviceType";
 import InputFileElement from "@/components/elements/input_file.element";
 import styles from "@/styles/ImageConverter.module.css";
 import CheckboxElement from "@/components/elements/checkbox.element";
-import {calculatePositionByPosition} from "@/pages/image-converter/watermark/watermarksLogic"
+import { calculatePositionByPosition } from "@/pages/image-converter/watermark/watermarksLogic";
 
 const ImageWatermarkPage = () => {
   const mobileDevice = useDeviceType();
   const canvasRef = useRef(null);
+  const canvasContainer = useRef(null);
   const [watermakText, setWatermarkText] = useState("lockboxapp.com");
   const [uploadedImage, setImage] = useState(null);
   const [positionObject, setPositionObject] = useState(null);
@@ -17,11 +18,12 @@ const ImageWatermarkPage = () => {
     opacity: "0.8",
     fontSize: "14",
   });
-  let imageName = ''
+  let imageName = "";
 
   useEffect(() => {
     if (uploadedImage) {
       generateWaterMarks();
+      canvasContainer && (canvasContainer.current.style.maxHeight = "600px");
     }
   }, [uploadedImage]);
 
@@ -30,8 +32,9 @@ const ImageWatermarkPage = () => {
     if (file) {
       const reader = new FileReader();
       imageName = file?.name;
-      console.log("🚀 ~ uplaodImage ~ imageName:", imageName)
-      reader.onload = (event) => setImage(event.target.result);
+      reader.onload = (event) => {
+        setImage(event.target.result);
+      };
       reader.readAsDataURL(file);
     }
   };
@@ -41,7 +44,7 @@ const ImageWatermarkPage = () => {
     const ctx = canvas.getContext("2d");
     const img = new Image();
     const { color, opacity, fontSize } = settingsObject;
-    const calculatedFontSize = fontSize || 30;
+    let calculatedFontSize = fontSize || 16;
 
     img.src = uploadedImage;
     img.onload = async () => {
@@ -51,8 +54,11 @@ const ImageWatermarkPage = () => {
       ctx.font = `${fontSize}px sans-serif`;
       ctx.fillStyle = color;
       ctx.globalAlpha = parseFloat(opacity) || 0.8;
-     const textWidth = ctx.measureText(watermakText).width;
+      const textWidth = ctx.measureText(watermakText).width;
 
+      // if (img.width > 2000) {
+      //   calculatedFontSize = 32;
+      // }
       if (!positionObject) return;
 
       for (let side in positionObject) {
@@ -78,7 +84,7 @@ const ImageWatermarkPage = () => {
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
-  }
+  };
 
   const setPositionMark = (pos) => {
     setPositionObject(pos);
@@ -88,6 +94,13 @@ const ImageWatermarkPage = () => {
     const updatedSettigns = { ...settingsObject };
     updatedSettigns[settings.type] = settings.value;
     setSettingsObject(updatedSettigns);
+  };
+
+  const handleZoom = (e) => {
+    const zoomLevel = e.target.value;
+    const canvas = canvasRef && canvasRef.current;
+    canvas.style.transform = `scale(${zoomLevel})`;
+    canvas.style.transformOrigin = "0 0";
   };
 
   return (
@@ -148,17 +161,37 @@ const ImageWatermarkPage = () => {
                 <br />
 
                 {/*SECTION: Canvas */}
-                <div className={styles.canvasContainer}>
-                  <canvas className="limit_img" ref={canvasRef} />
+                <div>
+                  <label className="mb2 block" htmlFor="zoom">
+                    Zoom level:
+                  </label>
+                  <div className="flex__grid --small-gap">
+                    <span> 0.1</span>
+                    <input
+                      className="generator__input no-x-paddings"
+                      id="zoom"
+                      type="range"
+                      min="0.1"
+                      max="1.5"
+                      step="0.1"
+                      defaultValue="1"
+                      onChange={handleZoom}
+                    />
+                    <span> 1.5</span>
+                  </div>
+                  <div className="flex__grid justify-center my2">
+                    <button
+                      id="btn"
+                      className="action__btn --bg-primary mb2"
+                      onClick={() => generateWaterMarks()}
+                    >
+                      Apply Watermarks
+                    </button>
+                  </div>
                 </div>
-                <div className="flex__grid justify-center my2">
-                  <button
-                    id="btn"
-                    className="action__btn --bg-primary mb2"
-                    onClick={() => generateWaterMarks()}
-                  >
-                    Apply Watermarks
-                  </button>
+
+                <div ref={canvasContainer} className={styles.canvasContainer}>
+                  <canvas className="limit_img" ref={canvasRef} />
                 </div>
               </div>
             )}
@@ -168,7 +201,7 @@ const ImageWatermarkPage = () => {
                 <InputFileElement
                   handleFileLoad={uplaodImage}
                   slug="watermark"
-                  accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+                  accept="image/png, image/jpeg, image/jpg, image/gif, image/webp;capture=camera"
                   labelClasses="center"
                   title="Upload image"
                 />
@@ -183,9 +216,10 @@ const ImageWatermarkPage = () => {
                   <InputFileElement
                     handleFileLoad={uplaodImage}
                     slug="watermark"
-                    accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+                    accept="image/png, image/jpeg, image/jpg, image/gif, image/web;capture=camera"
                     title="Upload new image"
                     labelClasses={`--secondary-btn center`}
+                    insure
                   />
 
                   <button
@@ -210,6 +244,7 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
   const [leftTop, setleftTop] = useState(true);
   const [rightTop, setRightTop] = useState(true);
   const [centerTop, setCenterTop] = useState(true);
+  const [centerCenter, setCenterCenter] = useState(true);
 
   const [leftBottom, setleftBottom] = useState(true);
   const [rightBottom, setRightBottom] = useState(true);
@@ -223,8 +258,17 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
       leftBottom,
       rightBottom,
       centerBottom,
+      centerCenter,
     });
-  }, [leftTop, rightTop, centerTop, leftBottom, rightBottom, centerBottom]);
+  }, [
+    leftTop,
+    rightTop,
+    centerTop,
+    leftBottom,
+    rightBottom,
+    centerBottom,
+    centerCenter,
+  ]);
 
   return (
     <div className="controls_panel">
@@ -273,6 +317,13 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
           label={`Right-bottom`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
+        <CheckboxElement
+          defaultValue={true}
+          idElement={`centerCenter`}
+          onCheck={setCenterCenter}
+          label={`Center-center`}
+          containerClasses={`flex__grid --small-gap align-center`}
+        />
       </div>
 
       <div className="flex__grid justify-between --small-gap align-center my2">
@@ -315,7 +366,7 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
             id="mark_font_size"
             type="number"
             min={1}
-            max={40}
+            max={200}
             step={1}
             placeholder="Font size"
             defaultValue={16}

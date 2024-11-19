@@ -129,3 +129,8 @@ export function debounce(func, delay) {
     timeout = setTimeout(() => func.apply(this, args), delay);
   };
 }
+
+export function insureAction(action, message) {
+  const allow = confirm(`${message}`);
+  return allow && action;
+}

@@ -1,4 +1,6 @@
 
+import {insureAction} from "@/services/base.services"
+
 const InputFileElement = ({
   handleFileLoad,
   inputRef,
@@ -7,7 +9,8 @@ const InputFileElement = ({
   mobileDevice,
   containerClasses="",
   labelClasses="",
-  slug
+  slug,
+  insure=false
 }) => {
   return (
     <div className={containerClasses}>
@@ -16,10 +19,17 @@ const InputFileElement = ({
         className="inputClasses"
         hidden={true}
         type="file"
-        onChange={handleFileLoad}
+        onChange={(e) =>
+          insure
+            ? insureAction(handleFileLoad(e), "Old image will be deleted, continue ?")
+            : handleFileLoad(e)
+        }
         accept={accept}
       />
-      <label className={`action__btn ${labelClasses}`} htmlFor={`fileInput_${slug}`}>
+      <label
+        className={`action__btn ${labelClasses}`}
+        htmlFor={`fileInput_${slug}`}
+      >
         {title}
       </label>
     </div>
