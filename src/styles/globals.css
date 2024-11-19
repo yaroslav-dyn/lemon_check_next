@@ -172,11 +172,13 @@ a:active {
   background-size: 100%;
 } */
 
-.bace_input {
+.base_input {
   padding: 8px 12px;
   border-radius: 6px;
   border: none;
+  width: auto;
 }
+
 
 .base_img {
   width: 100%;

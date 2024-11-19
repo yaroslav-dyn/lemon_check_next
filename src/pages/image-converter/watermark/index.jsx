@@ -4,13 +4,20 @@ import useDeviceType from "@/services/useDeviceType";
 import InputFileElement from "@/components/elements/input_file.element";
 import styles from "@/styles/ImageConverter.module.css";
 import CheckboxElement from "@/components/elements/checkbox.element";
+import {calculatePositionByPosition} from "@/pages/image-converter/watermark/watermarksLogic"
 
 const ImageWatermarkPage = () => {
   const mobileDevice = useDeviceType();
   const canvasRef = useRef(null);
-  const [watermakText, setWatermarkText] = useState("Test it text!");
+  const [watermakText, setWatermarkText] = useState("lockboxapp.com");
   const [uploadedImage, setImage] = useState(null);
   const [positionObject, setPositionObject] = useState(null);
+  const [settingsObject, setSettingsObject] = useState({
+    color: "#000000",
+    opacity: "0.8",
+    fontSize: "14",
+  });
+  let imageName = ''
 
   useEffect(() => {
     if (uploadedImage) {
@@ -19,72 +26,32 @@ const ImageWatermarkPage = () => {
   }, [uploadedImage]);
 
   const uplaodImage = (e) => {
-    console.log("img", e.target.value);
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
+      imageName = file?.name;
+      console.log("🚀 ~ uplaodImage ~ imageName:", imageName)
       reader.onload = (event) => setImage(event.target.result);
       reader.readAsDataURL(file);
     }
   };
 
-  const calculatePositionByPosition = async (image, position, fontSize) => {
-    const wmLengthFactor = watermakText && watermakText.length;
-    let sideFactor = {};
-
-    switch (position) {
-      case "leftTop":
-        sideFactor = { xPosition: 10, yPosition: fontSize };
-        break;
-      case "centerTop":
-        sideFactor = {
-          xPosition: image.width / 2 - wmLengthFactor,
-          yPosition: fontSize,
-        };
-        break;
-      case "rightTop":
-        sideFactor = {
-          xPosition:
-            image.width - (wmLengthFactor + (wmLengthFactor + fontSize)),
-          yPosition: fontSize,
-        };
-        break;
-      case "leftBottom":
-        sideFactor = { xPosition: 10, yPosition: image.height - fontSize };
-        break;
-      case "centerBottom":
-        sideFactor = {
-          xPosition: image.width / 2 - wmLengthFactor,
-          yPosition: image.height - fontSize,
-        };
-        break;
-      case "rightBottom":
-        sideFactor = {
-          xPosition:
-            image.width - (wmLengthFactor + (wmLengthFactor + fontSize)),
-          yPosition: image.height - fontSize,
-        };
-        break;
-    }
-    return sideFactor;
-  };
-
-
-  const generateWaterMarks = (fontSize) => {
+  const generateWaterMarks = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const img = new Image();
-
+    const { color, opacity, fontSize } = settingsObject;
     const calculatedFontSize = fontSize || 30;
-    const wmLengthFactor = watermakText && watermakText.length;
 
     img.src = uploadedImage;
     img.onload = async () => {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
-      ctx.font = `${calculatedFontSize}px inherit`;
-      ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+      ctx.font = `${fontSize}px sans-serif`;
+      ctx.fillStyle = color;
+      ctx.globalAlpha = parseFloat(opacity) || 0.8;
+     const textWidth = ctx.measureText(watermakText).width;
 
       if (!positionObject) return;
 
@@ -93,18 +60,34 @@ const ImageWatermarkPage = () => {
           const { xPosition, yPosition } = await calculatePositionByPosition(
             img,
             side,
-            calculatedFontSize
+            parseInt(calculatedFontSize),
+            textWidth
           );
-          console.log("calc pos", xPosition, yPosition, positionObject);
-          
           ctx.fillText(watermakText, xPosition, yPosition);
         }
       }
     };
   };
 
+  const saveImage = () => {
+    const fileName = imageName || `img_${Date.now()}_watermarks.jpg`;
+    const imageUrl = canvasRef && canvasRef.current.toDataURL("image/png");
+    const downloadLink = document.createElement("a");
+    downloadLink.href = imageUrl;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
   const setPositionMark = (pos) => {
     setPositionObject(pos);
+  };
+
+  const setSettings = (settings) => {
+    const updatedSettigns = { ...settingsObject };
+    updatedSettigns[settings.type] = settings.value;
+    setSettingsObject(updatedSettigns);
   };
 
   return (
@@ -129,91 +112,93 @@ const ImageWatermarkPage = () => {
           </div>
         </div>
 
-        {/*SECTION: Canvas and congtrols*/}
+        {/*SECTION: Canvas and controls */}
         <section className={"container__limit --x-small"}>
           {/*SECTION: Uploaded image */}
-          {uploadedImage && (
-            <div>
-              {/* <img
+          <form
+            name="wtermarks_form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              generateWaterMarks();
+            }}
+          >
+            {uploadedImage && (
+              <div>
+                {/* <img
                 className="limit_img mb2"
                 src={uploadedImage}
                 alt="uploaded image"
               /> */}
 
-              <textarea
-                defaultValue={watermakText}
-                name="watermark-content"
-                className="generator__content--area"
-                id="watermarkContent"
-                placeholder="Enter watermark text"
-                onChange={(e) => setWatermarkText(e.target.value)}
-              />
-              <br />
-              <ControlsPanel onChangePoistion={setPositionMark} />
+                <textarea
+                  defaultValue={watermakText}
+                  name="watermark-content"
+                  className="generator__content--area"
+                  id="watermarkContent"
+                  placeholder="Enter watermark text"
+                  onChange={(e) => setWatermarkText(e.target.value)}
+                />
+                <br />
+                {/*SECTION: CONTROL PANEL ELEMENT  */}
+                <ControlsPanel
+                  onChangePoistion={setPositionMark}
+                  onChangeSettings={setSettings}
+                />
 
-              <br />
+                <br />
 
-              {/*SECTION: Canvas */}
-              <div className={styles.canvasContainer}>
-                <canvas className="limit_img" ref={canvasRef}></canvas>
+                {/*SECTION: Canvas */}
+                <div className={styles.canvasContainer}>
+                  <canvas className="limit_img" ref={canvasRef} />
+                </div>
+                <div className="flex__grid justify-center my2">
+                  <button
+                    id="btn"
+                    className="action__btn --bg-primary mb2"
+                    onClick={() => generateWaterMarks()}
+                  >
+                    Apply Watermarks
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {!uploadedImage && (
-            <div className="flex__grid justify-center">
-              <InputFileElement
-                handleFileLoad={uplaodImage}
-                slug="watermark"
-                accept=""
-                labelClasses="center"
-                title="Upload image"
-              />
-            </div>
-          )}
-
-          {uploadedImage && (
-            <section className="container_limit no-x-paddings">
-              <hr className="--base-divider 2x --bg-primary mb2 mt-2.4" />
-
-              <div className="flex__grid justify-between flex-1 ">
+            {!uploadedImage && (
+              <div className="flex__grid justify-center">
                 <InputFileElement
                   handleFileLoad={uplaodImage}
                   slug="watermark"
                   accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+                  labelClasses="center"
                   title="Upload image"
-                  labelClasses={`--secondary-btn center`}
                 />
-
-                <button
-                  id="btn"
-                  className="action__btn mb2"
-                  onClick={() => generateWaterMarks()}
-                >
-                  Apply Watermark
-                </button>
               </div>
-            </section>
-          )}
+            )}
+            {/*SECTION: BUTTONS */}
+            {uploadedImage && (
+              <section className="container_limit no-x-paddings">
+                <hr className="--base-divider 2x --bg-primary mb2 mt-2.4" />
 
-          {/* <div className="py2 container__limit --x-small no-x-paddings">
-            <div className="flex__grid justify-between">
-              <InputFileElement
-                handleFileLoad={uplaodImage}
-                slug="watermark"
-                accept=""
-              />
-            </div>
-            {/* <button
-              id="btn"
-              className="generator__content--btn --small-margin --secondary-btn"
-              onClick={() => copyToClipBoard()}
-            >
-              Copy
-            </button>
-          </div> */}
+                <div className="flex__grid justify-between flex-1 align-start">
+                  <InputFileElement
+                    handleFileLoad={uplaodImage}
+                    slug="watermark"
+                    accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+                    title="Upload new image"
+                    labelClasses={`--secondary-btn center`}
+                  />
 
-          {/* <canvas className="limit_img" ref={canvasRef}></canvas> */}
+                  <button
+                    id="btn"
+                    className="action__btn --bg-accent mb2"
+                    onClick={() => saveImage()}
+                  >
+                    Save image
+                  </button>
+                </div>
+              </section>
+            )}
+          </form>
         </section>
       </main>
     </>
@@ -221,14 +206,14 @@ const ImageWatermarkPage = () => {
 }; //
 export default ImageWatermarkPage;
 
-const ControlsPanel = ({ onChangePoistion }) => {
-  const [leftTop, setleftTop] = useState(false);
-  const [rightTop, setRightTop] = useState(false);
-  const [centerTop, setCenterTop] = useState(false);
+const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
+  const [leftTop, setleftTop] = useState(true);
+  const [rightTop, setRightTop] = useState(true);
+  const [centerTop, setCenterTop] = useState(true);
 
-    const [leftBottom, setleftBottom] = useState(false);
-    const [rightBottom, setRightBottom] = useState(false);
-    const [centerBottom, setCenterBottom] = useState(false);
+  const [leftBottom, setleftBottom] = useState(true);
+  const [rightBottom, setRightBottom] = useState(true);
+  const [centerBottom, setCenterBottom] = useState(true);
 
   useEffect(() => {
     onChangePoistion({
@@ -243,20 +228,24 @@ const ControlsPanel = ({ onChangePoistion }) => {
 
   return (
     <div className="controls_panel">
+      {/*NOTE: Positions */}
       <div className={styles.positionPanel}>
         <CheckboxElement
+          defaultValue={true}
           idElement={`leftTop`}
           onCheck={setleftTop}
           label={`Left-top`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
         <CheckboxElement
+          defaultValue={true}
           idElement={`center-top`}
           onCheck={setCenterTop}
           label={`Center-top`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
         <CheckboxElement
+          defaultValue={true}
           idElement={`right-Top`}
           onCheck={setRightTop}
           label={`Right-top`}
@@ -264,23 +253,75 @@ const ControlsPanel = ({ onChangePoistion }) => {
         />
 
         <CheckboxElement
+          defaultValue={true}
           idElement={`leftBottom`}
           onCheck={setleftBottom}
           label={`Left-bottom`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
         <CheckboxElement
+          defaultValue={true}
           idElement={`centerBottom`}
           onCheck={setCenterBottom}
           label={`Center-bottom`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
         <CheckboxElement
+          defaultValue={true}
           idElement={`right-bottom`}
           onCheck={setRightBottom}
           label={`Right-bottom`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
+      </div>
+
+      <div className="flex__grid justify-between --small-gap align-center my2">
+        {/*!SECTION: Color */}
+        <div className="flex__grid align-center --small-gap">
+          <input
+            onChange={(val) =>
+              onChangeSettings({ type: "color", value: val.target.value })
+            }
+            id="mark_color"
+            type="color"
+            placeholder="Choose a color"
+          />
+          <label htmlFor="mark_color">Color</label>
+        </div>
+        {/*!SECTION: Opacity */}
+        <div className="flex__grid align-center --small-gap">
+          <input
+            id="mark_opacity"
+            className="base_input"
+            onChange={(val) =>
+              onChangeSettings({ type: "opacity", value: val.target.value })
+            }
+            min={0.1}
+            max={1}
+            step={0.1}
+            type="number"
+            placeholder="opacity"
+            defaultValue={0.8}
+          />
+          <label htmlFor="mark_opacity">Opacity</label>
+        </div>
+        {/*!SECTION: Font size */}
+        <div className="flex__grid align-center --small-gap">
+          <input
+            onChange={(val) =>
+              onChangeSettings({ type: "fontSize", value: val.target.value })
+            }
+            className="base_input"
+            id="mark_font_size"
+            type="number"
+            min={1}
+            max={40}
+            step={1}
+            placeholder="Font size"
+            defaultValue={16}
+          />
+          <label htmlFor="mark_font_size">Font size</label>
+        </div>
       </div>
     </div>
   );

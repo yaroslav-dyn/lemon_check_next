@@ -8,12 +8,12 @@ const CheckboxElement = ({
   containerClasses,
   labelClasses,
   inputClasses,
-  accept="image/png, image/jpeg, image/jpg, image/gif, image/webp",
+  defaultValue=false
 }) => {
-  const [inputModle, setInputModle] = useState(false);
+  const [inputMode, setInputMode] = useState(defaultValue);
 
   const updateModel = (e) => {
-    setInputModle(e);
+    setInputMode(e);
     onCheck(e);
   };
 
@@ -24,9 +24,8 @@ const CheckboxElement = ({
           id={idElement}
           className={inputClasses}
           type="checkbox"
-          checked={inputModle}
+          checked={inputMode}
           onChange={(e) => updateModel(e.target.checked)}
-          accept={accept}
         />
         <label className={labelClasses} htmlFor={idElement}></label>
       </div>
