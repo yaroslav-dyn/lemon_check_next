@@ -8,7 +8,7 @@ import CheckboxElement from "@/components/elements/checkbox.element";
 const ImageWatermarkPage = () => {
   const mobileDevice = useDeviceType();
   const canvasRef = useRef(null);
-  const [watermakText, setWatermarkText] = useState("");
+  const [watermakText, setWatermarkText] = useState("Test it text!");
   const [uploadedImage, setImage] = useState(null);
   const [positionObject, setPositionObject] = useState(null);
 
@@ -28,13 +28,47 @@ const ImageWatermarkPage = () => {
     }
   };
 
-  const calculatePositionByPosition = () => {
-    positionObject
-    return {
-      x: '',
-      y: ''
+  const calculatePositionByPosition = async (image, position, fontSize) => {
+    const wmLengthFactor = watermakText && watermakText.length;
+    let sideFactor = {};
+
+    switch (position) {
+      case "leftTop":
+        sideFactor = { xPosition: 10, yPosition: fontSize };
+        break;
+      case "centerTop":
+        sideFactor = {
+          xPosition: image.width / 2 - wmLengthFactor,
+          yPosition: fontSize,
+        };
+        break;
+      case "rightTop":
+        sideFactor = {
+          xPosition:
+            image.width - (wmLengthFactor + (wmLengthFactor + fontSize)),
+          yPosition: fontSize,
+        };
+        break;
+      case "leftBottom":
+        sideFactor = { xPosition: 10, yPosition: image.height - fontSize };
+        break;
+      case "centerBottom":
+        sideFactor = {
+          xPosition: image.width / 2 - wmLengthFactor,
+          yPosition: image.height - fontSize,
+        };
+        break;
+      case "rightBottom":
+        sideFactor = {
+          xPosition:
+            image.width - (wmLengthFactor + (wmLengthFactor + fontSize)),
+          yPosition: image.height - fontSize,
+        };
+        break;
     }
-  }
+    return sideFactor;
+  };
+
 
   const generateWaterMarks = (fontSize) => {
     const canvas = canvasRef.current;
@@ -45,22 +79,27 @@ const ImageWatermarkPage = () => {
     const wmLengthFactor = watermakText && watermakText.length;
 
     img.src = uploadedImage;
-    img.onload = () => {
+    img.onload = async () => {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
       ctx.font = `${calculatedFontSize}px inherit`;
       ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
 
-      console.log("🚀 ~ generateWaterMarks ~ img:", img.width, img.height);
+      if (!positionObject) return;
 
-      const { xPosition, yPosition} = calculatePositionByPosition()
-
-      ctx.fillText(
-        watermakText,
-         wmLengthFactor,
-        img.height - wmLengthFactor
-      );
+      for (let side in positionObject) {
+        if (positionObject[side]) {
+          const { xPosition, yPosition } = await calculatePositionByPosition(
+            img,
+            side,
+            calculatedFontSize
+          );
+          console.log("calc pos", xPosition, yPosition, positionObject);
+          
+          ctx.fillText(watermakText, xPosition, yPosition);
+        }
+      }
     };
   };
 
@@ -135,7 +174,7 @@ const ImageWatermarkPage = () => {
 
           {uploadedImage && (
             <section className="container_limit no-x-paddings">
-              <hr className="--base-divider 2x --bg-primary mb2" />
+              <hr className="--base-divider 2x --bg-primary mb2 mt-2.4" />
 
               <div className="flex__grid justify-between flex-1 ">
                 <InputFileElement
@@ -143,7 +182,7 @@ const ImageWatermarkPage = () => {
                   slug="watermark"
                   accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
                   title="Upload image"
-                  labelClasses={`--secondary-btn`}
+                  labelClasses={`--secondary-btn center`}
                 />
 
                 <button
@@ -187,30 +226,60 @@ const ControlsPanel = ({ onChangePoistion }) => {
   const [rightTop, setRightTop] = useState(false);
   const [centerTop, setCenterTop] = useState(false);
 
+    const [leftBottom, setleftBottom] = useState(false);
+    const [rightBottom, setRightBottom] = useState(false);
+    const [centerBottom, setCenterBottom] = useState(false);
+
   useEffect(() => {
-    onChangePoistion({ leftTop, rightTop, centerTop });
-  }, [leftTop, rightTop, centerTop]);
+    onChangePoistion({
+      leftTop,
+      rightTop,
+      centerTop,
+      leftBottom,
+      rightBottom,
+      centerBottom,
+    });
+  }, [leftTop, rightTop, centerTop, leftBottom, rightBottom, centerBottom]);
 
   return (
     <div className="controls_panel">
-      <div className="flex__grid --small-gap align-center justify-between">
+      <div className={styles.positionPanel}>
         <CheckboxElement
           idElement={`leftTop`}
           onCheck={setleftTop}
           label={`Left-top`}
-          containerClasses={`flex__grid justify-between --small-gap align-center`}
+          containerClasses={`flex__grid --small-gap align-center`}
         />
         <CheckboxElement
-          idElement={`center`}
+          idElement={`center-top`}
           onCheck={setCenterTop}
-          label={`Center`}
-          containerClasses={`flex__grid justify-between --small-gap align-center`}
+          label={`Center-top`}
+          containerClasses={`flex__grid --small-gap align-center`}
         />
         <CheckboxElement
           idElement={`right-Top`}
           onCheck={setRightTop}
           label={`Right-top`}
-          containerClasses={`flex__grid justify-between --small-gap align-center`}
+          containerClasses={`flex__grid --small-gap align-center`}
+        />
+
+        <CheckboxElement
+          idElement={`leftBottom`}
+          onCheck={setleftBottom}
+          label={`Left-bottom`}
+          containerClasses={`flex__grid --small-gap align-center`}
+        />
+        <CheckboxElement
+          idElement={`centerBottom`}
+          onCheck={setCenterBottom}
+          label={`Center-bottom`}
+          containerClasses={`flex__grid --small-gap align-center`}
+        />
+        <CheckboxElement
+          idElement={`right-bottom`}
+          onCheck={setRightBottom}
+          label={`Right-bottom`}
+          containerClasses={`flex__grid --small-gap align-center`}
         />
       </div>
     </div>
