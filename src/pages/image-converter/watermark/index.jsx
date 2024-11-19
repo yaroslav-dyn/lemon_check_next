@@ -18,7 +18,7 @@ const ImageWatermarkPage = () => {
     opacity: "0.8",
     fontSize: "14",
   });
-  let imageName = "";
+  const [imageName, setImageName] = useState('');
 
   useEffect(() => {
     if (uploadedImage) {
@@ -31,7 +31,7 @@ const ImageWatermarkPage = () => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      imageName = file?.name;
+      setImageName(file?.name);
       reader.onload = (event) => {
         setImage(event.target.result);
       };
@@ -76,7 +76,7 @@ const ImageWatermarkPage = () => {
   };
 
   const saveImage = () => {
-    const fileName = imageName || `img_${Date.now()}_watermarks.jpg`;
+    const fileName = 'w_marks__' + imageName || `img_${Date.now()}_watermarks.jpg`;
     const imageUrl = canvasRef && canvasRef.current.toDataURL("image/png");
     const downloadLink = document.createElement("a");
     downloadLink.href = imageUrl;

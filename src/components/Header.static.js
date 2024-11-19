@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BottomBar from "@/components/bottom_bar.static";
@@ -54,6 +54,15 @@ export const BottomBarlinks = [
     icon: "/assets/img/icons8-image-refresh-48.png",
   },
   {
+    title: "watermark",
+    url: "/image-converter/watermark",
+    alias: "WM",
+    isActive: false,
+    icon: "/assets/icons/easy-watermark-svgrepo-com.svg",
+    hideMain: true
+  },
+
+  {
     title: "QR generator",
     url: "/qr-generator",
     alias: "QR",
@@ -61,6 +70,8 @@ export const BottomBarlinks = [
     icon: "/assets/img/icons8-qrcode-64.png",
   },
 ];
+
+
 
 const infoIcon = "/assets/icons/icons8-info-48-white.png";
 const FaqIcon = "/assets/icons/icons8-faq-48.png";
@@ -73,6 +84,11 @@ export default function AppHeader({ changeSchema }) {
   const pathname = usePathname();
   const scrollPosition = useScrollPosition();
   const topHeaderElement = useRef(null);
+
+
+  const filteredLinks = useMemo(
+    () => BottomBarlinks.filter((bl) => bl && !bl.hideMain)
+  );
 
   const onClikNavItem = (alias) => {
     BottomBarlinks.forEach((itm) =>
@@ -141,8 +157,8 @@ export default function AppHeader({ changeSchema }) {
 
           {!isMobile && !tabletScreen ? (
             <div className="main__nav__links">
-              {BottomBarlinks &&
-                BottomBarlinks.map((navLink) => (
+              {filteredLinks &&
+                filteredLinks.map((navLink) => (
                   <div
                     className={`nav__item ${isMobile ? "mobile" : "desktop"} ${
                       navLink.isActive ? "active" : ""

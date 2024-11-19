@@ -13,6 +13,7 @@ const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
 const imgTypeBageIcon = "/assets/icons/icons8-image-file-48.png";
 const dataTypeBageIcon = "/assets/icons/icons8-64-bit-50.png";
+const dataTypeMarkIcon = "/assets/icons/easy-watermark-svgrepo-com.svg";
 
 const Imageconverter = (props) => {
   const [imageBase64, setImageBase64] = useState("");
@@ -298,7 +299,7 @@ const Imageconverter = (props) => {
                     }`}
                   >
                     {mobileDevice && (
-                      <Image src={dataTypeBageIcon} width={24} height={24} />
+                      <Image src={dataTypeMarkIcon} width={24} height={24} />
                     )}
                     <span> Watermarks </span>
                   </div>
@@ -309,7 +310,7 @@ const Imageconverter = (props) => {
                   >
                     <Image
                       className={`${isDarkTheme ? "" : "--img-filter-invert"}`}
-                      src={dataTypeBageIcon}
+                      src={dataTypeMarkIcon}
                       width={38}
                       height={38}
                       alt="data type"
