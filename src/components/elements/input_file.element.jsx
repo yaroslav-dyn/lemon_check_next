@@ -1,5 +1,4 @@
-
-import {insureAction} from "@/services/base.services"
+import { insureAction } from "@/services/base.services";
 
 const InputFileElement = ({
   handleFileLoad,
@@ -7,10 +6,10 @@ const InputFileElement = ({
   title = "UPLOAD",
   accept = "*",
   mobileDevice,
-  containerClasses="",
-  labelClasses="",
+  containerClasses = "",
+  labelClasses = "",
   slug,
-  insure=false
+  insure = false,
 }) => {
   return (
     <div className={containerClasses}>
@@ -19,11 +18,15 @@ const InputFileElement = ({
         className="inputClasses"
         hidden={true}
         type="file"
-        onChange={(e) =>
-          insure
-            ? insureAction(handleFileLoad(e), "Old image will be deleted, continue ?")
-            : handleFileLoad(e)
-        }
+        onClick={(e) => {
+          if (insure) {
+            const allow = confirm(`${"Old image will be deleted, continue ?"}`);
+            !allow && e.preventDefault();
+          } else {
+           return true
+          }
+        }}
+        onChange={ handleFileLoad}
         accept={accept}
       />
       <label

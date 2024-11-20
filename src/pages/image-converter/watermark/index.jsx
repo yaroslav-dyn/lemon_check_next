@@ -4,7 +4,7 @@ import useDeviceType from "@/services/useDeviceType";
 import InputFileElement from "@/components/elements/input_file.element";
 import styles from "@/styles/ImageConverter.module.css";
 import CheckboxElement from "@/components/elements/checkbox.element";
-import { calculatePositionByPosition } from "@/pages/image-converter/watermark/watermarksLogic";
+import { calculatePositionByPosition } from "@/services/watermarksLogic";
 
 const ImageWatermarkPage = () => {
   const mobileDevice = useDeviceType();
@@ -17,8 +17,9 @@ const ImageWatermarkPage = () => {
     color: "#000000",
     opacity: "0.8",
     fontSize: "14",
+    markGaps: "10",
   });
-  const [imageName, setImageName] = useState('');
+  const [imageName, setImageName] = useState("");
 
   useEffect(() => {
     if (uploadedImage) {
@@ -26,6 +27,11 @@ const ImageWatermarkPage = () => {
       canvasContainer && (canvasContainer.current.style.maxHeight = "600px");
     }
   }, [uploadedImage]);
+
+  useEffect(() => {
+    if (!canvasRef || (canvasRef && !canvasRef.current)) return;
+    generateWaterMarks();
+  }, [positionObject, settingsObject]);
 
   const uplaodImage = (e) => {
     const file = e.target.files[0];
@@ -43,7 +49,7 @@ const ImageWatermarkPage = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const img = new Image();
-    const { color, opacity, fontSize } = settingsObject;
+    const { color, opacity, fontSize, markGaps } = settingsObject;
     let calculatedFontSize = fontSize || 16;
 
     img.src = uploadedImage;
@@ -67,7 +73,8 @@ const ImageWatermarkPage = () => {
             img,
             side,
             parseInt(calculatedFontSize),
-            textWidth
+            textWidth,
+            markGaps
           );
           ctx.fillText(watermakText, xPosition, yPosition);
         }
@@ -76,7 +83,8 @@ const ImageWatermarkPage = () => {
   };
 
   const saveImage = () => {
-    const fileName = 'w_marks__' + imageName || `img_${Date.now()}_watermarks.jpg`;
+    const fileName =
+      "w_marks__" + imageName || `img_${Date.now()}_watermarks.jpg`;
     const imageUrl = canvasRef && canvasRef.current.toDataURL("image/png");
     const downloadLink = document.createElement("a");
     downloadLink.href = imageUrl;
@@ -120,7 +128,7 @@ const ImageWatermarkPage = () => {
             </h1>
             <div className="slogan__text mb1 mt1" data-centered-text>
               <span className="--color-primary">Protect</span> and personalize
-              your images effortlessly
+              your <span className="--color-primary">images</span> effortlessly
             </div>
           </div>
         </div>
@@ -162,7 +170,7 @@ const ImageWatermarkPage = () => {
 
                 {/*SECTION: Canvas */}
                 <div>
-                  <label className="mb2 block" htmlFor="zoom">
+                  <label className="mb1 block" htmlFor="zoom">
                     Zoom level:
                   </label>
                   <div className="flex__grid --small-gap">
@@ -179,20 +187,21 @@ const ImageWatermarkPage = () => {
                     />
                     <span> 1.5</span>
                   </div>
-                  <div className="flex__grid justify-center my2">
-                    <button
-                      id="btn"
-                      className="action__btn --bg-primary mb2"
-                      onClick={() => generateWaterMarks()}
-                    >
-                      Apply Watermarks
-                    </button>
-                  </div>
                 </div>
 
                 <div ref={canvasContainer} className={styles.canvasContainer}>
                   <canvas className="limit_img" ref={canvasRef} />
                 </div>
+                {/* TODO: Deprecated: changes applied automatically */}
+                {/* <div className="flex__grid justify-end my2">
+                  <button
+                    id="btn"
+                    className="action__btn --bg-primary mb2"
+                    onClick={() => generateWaterMarks()}
+                  >
+                    Apply Watermarks
+                  </button>
+                </div> */}
               </div>
             )}
 
@@ -327,51 +336,71 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
       </div>
 
       <div className="flex__grid justify-between --small-gap align-center my2">
-        {/*!SECTION: Color */}
-        <div className="flex__grid align-center --small-gap">
-          <input
-            onChange={(val) =>
-              onChangeSettings({ type: "color", value: val.target.value })
-            }
-            id="mark_color"
-            type="color"
-            placeholder="Choose a color"
-          />
-          <label htmlFor="mark_color">Color</label>
+        <div className="flex__grid --column --base-gap">
+          {/*!SECTION: Color */}
+          <div className="flex__grid align-center --small-gap">
+            <input
+              onChange={(val) =>
+                onChangeSettings({ type: "color", value: val.target.value })
+              }
+              id="mark_color"
+              type="color"
+              placeholder="Choose a color"
+            />
+            <label htmlFor="mark_color">Color</label>
+          </div>
+          {/*!SECTION: Opacity */}
+          <div className="flex__grid align-center --small-gap">
+            <input
+              id="mark_opacity"
+              className="base_input"
+              onChange={(val) =>
+                onChangeSettings({ type: "opacity", value: val.target.value })
+              }
+              min={0.1}
+              max={1}
+              step={0.1}
+              type="number"
+              placeholder="opacity"
+              defaultValue={0.8}
+            />
+            <label htmlFor="mark_opacity">Opacity</label>
+          </div>
         </div>
-        {/*!SECTION: Opacity */}
-        <div className="flex__grid align-center --small-gap">
-          <input
-            id="mark_opacity"
-            className="base_input"
-            onChange={(val) =>
-              onChangeSettings({ type: "opacity", value: val.target.value })
-            }
-            min={0.1}
-            max={1}
-            step={0.1}
-            type="number"
-            placeholder="opacity"
-            defaultValue={0.8}
-          />
-          <label htmlFor="mark_opacity">Opacity</label>
-        </div>
-        {/*!SECTION: Font size */}
-        <div className="flex__grid align-center --small-gap">
-          <input
-            onChange={(val) =>
-              onChangeSettings({ type: "fontSize", value: val.target.value })
-            }
-            className="base_input"
-            id="mark_font_size"
-            type="number"
-            min={1}
-            max={200}
-            step={1}
-            placeholder="Font size"
-            defaultValue={16}
-          />
-          <label htmlFor="mark_font_size">Font size</label>
+        <div className="flex__grid --column --base-gap">
+          {/*!SECTION: Font size */}
+          <div className="flex__grid align-center --small-gap">
+            <input
+              onChange={(val) =>
+                onChangeSettings({ type: "fontSize", value: val.target.value })
+              }
+              className="base_input"
+              id="mark_font_size"
+              type="number"
+              min={1}
+              max={200}
+              step={1}
+              placeholder="Font size"
+              defaultValue={16}
+            />
+            <label htmlFor="mark_font_size">Font size</label>
+          </div>
+          <div className="flex__grid align-center --small-gap">
+            <input
+              onChange={(val) =>
+                onChangeSettings({ type: "markGaps", value: val.target.value })
+              }
+              className="base_input"
+              id="mark_gups"
+              type="number"
+              min={-100}
+              max={100}
+              step={1}
+              placeholder="Gaps from borders"
+              defaultValue={10}
+            />
+            <label htmlFor="mark_font_size">Gap from borders</label>
+          </div>
         </div>
       </div>
     </div>

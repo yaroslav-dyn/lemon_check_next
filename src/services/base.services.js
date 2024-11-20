@@ -130,7 +130,13 @@ export function debounce(func, delay) {
   };
 }
 
-export function insureAction(action, message) {
-  const allow = confirm(`${message}`);
-  return allow && action;
+export function insureAction(action, message,insure) {
+    const allow = confirm(`${message}`);
+  if (insure && allow)
+    return () => {
+      action();
+    }; 
+
+  if (!allow) return false
 }
+

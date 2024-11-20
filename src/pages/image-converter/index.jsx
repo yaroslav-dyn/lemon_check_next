@@ -163,14 +163,14 @@ const Imageconverter = (props) => {
         {!rootConvertType && (
           <section className={"container__limit gap-x-3"}>
             <div
-              className={`flex__grid ${mobileDevice ? "--column" : ""} ${
-                !mobileDevice ? "--base-gap" : ""
-              } justify-center`}
+              className={`flex__grid ${
+                mobileDevice ? "--column --base-gap" : ""
+              } ${!mobileDevice ? "--base-gap" : ""} justify-center`}
             >
               {mobileDevice && (
                 <hr className="--base-divider x2 --bg-accent w-100 my1" />
               )}
-              {isMobile && <br />}
+
               <div>
                 <button
                   onClick={() => {
@@ -221,7 +221,6 @@ const Imageconverter = (props) => {
                   </div>
                 )}
               </div>
-              {isMobile && <br />}
               <div
                 className={`${
                   mobileDevice
@@ -249,7 +248,12 @@ const Imageconverter = (props) => {
                     }`}
                   >
                     {mobileDevice && (
-                      <Image src={dataTypeBageIcon} width={24} height={24} />
+                      <Image
+                        src={dataTypeBageIcon}
+                        width={24}
+                        height={24}
+                        alt="data type"
+                      />
                     )}
                     <span> base64 to image </span>
                   </div>
@@ -271,7 +275,7 @@ const Imageconverter = (props) => {
                   </div>
                 )}
               </div>
-              {isMobile && <br />}
+
               <div
                 className={`${
                   mobileDevice
@@ -299,7 +303,12 @@ const Imageconverter = (props) => {
                     }`}
                   >
                     {mobileDevice && (
-                      <Image src={dataTypeMarkIcon} width={24} height={24} />
+                      <Image
+                        src={dataTypeMarkIcon}
+                        width={24}
+                        height={24}
+                        alt="watermarks"
+                      />
                     )}
                     <span> Watermarks </span>
                   </div>

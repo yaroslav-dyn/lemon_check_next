@@ -3,11 +3,12 @@
     image,
     position,
     fontSize,
-    textWidth
+    textWidth,
+    gaps=10
   ) => {
     const wmLengthFactor = textWidth;
     let sideFactor = {};
-    const defaultGaps = 10;
+    const defaultGaps = parseInt(gaps) || 10;
 
     switch (position) {
       case "leftTop":
@@ -31,25 +32,25 @@
       case "centerCenter":
         sideFactor = {
           xPosition: image.width / 2 - wmLengthFactor / 2,
-          yPosition: image.height / 2 - (fontSize / 2),
+          yPosition: image.height / 2 - defaultGaps / 2,
         };
         break;
       case "leftBottom":
         sideFactor = {
           xPosition: defaultGaps,
-          yPosition: image.height - (fontSize),
+          yPosition: image.height - defaultGaps,
         };
         break;
       case "centerBottom":
         sideFactor = {
-          xPosition: image.width / 2 - wmLengthFactor / 2 - defaultGaps,
-          yPosition: image.height - (fontSize),
+          xPosition: image.width / 2 - wmLengthFactor / 2,
+          yPosition: image.height - defaultGaps,
         };
         break;
       case "rightBottom":
         sideFactor = {
           xPosition: image.width - wmLengthFactor - defaultGaps,
-          yPosition: image.height - (fontSize),
+          yPosition: image.height - defaultGaps,
         };
         break;
     }
