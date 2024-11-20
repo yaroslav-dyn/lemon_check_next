@@ -10,6 +10,7 @@ const ImageWatermarkPage = () => {
   const mobileDevice = useDeviceType();
   const canvasRef = useRef(null);
   const canvasContainer = useRef(null);
+  const zoomInputRef = useRef(null);
   const [watermakText, setWatermarkText] = useState("lockboxapp.com");
   const [uploadedImage, setImage] = useState(null);
   const [positionObject, setPositionObject] = useState(null);
@@ -20,6 +21,7 @@ const ImageWatermarkPage = () => {
     markGaps: "10",
   });
   const [imageName, setImageName] = useState("");
+  const [zoomLevelState, setZoomLevelState] = useState("1");
 
   useEffect(() => {
     if (uploadedImage) {
@@ -31,7 +33,7 @@ const ImageWatermarkPage = () => {
   useEffect(() => {
     if (!canvasRef || (canvasRef && !canvasRef.current)) return;
     generateWaterMarks();
-  }, [positionObject, settingsObject]);
+  }, [positionObject, settingsObject, watermakText]);
 
   const uplaodImage = (e) => {
     const file = e.target.files[0];
@@ -82,6 +84,17 @@ const ImageWatermarkPage = () => {
     };
   };
 
+  const getLimits = (param) => {
+    const zoomElement = zoomInputRef && zoomInputRef.current;
+    if (!zoomElement) return;
+    switch (param) {
+      case "MIN":
+        return zoomElement.min;
+      case "MAX":
+        return zoomElement.max;
+    }
+  };
+
   const saveImage = () => {
     const fileName =
       "w_marks__" + imageName || `img_${Date.now()}_watermarks.jpg`;
@@ -106,6 +119,7 @@ const ImageWatermarkPage = () => {
 
   const handleZoom = (e) => {
     const zoomLevel = e.target.value;
+    setZoomLevelState(zoomLevel);
     const canvas = canvasRef && canvasRef.current;
     canvas.style.transform = `scale(${zoomLevel})`;
     canvas.style.transformOrigin = "0 0";
@@ -134,7 +148,9 @@ const ImageWatermarkPage = () => {
         </div>
 
         {/*SECTION: Canvas and controls */}
-        <section className={"container__limit --x-small"}>
+        <section
+          className={`${mobileDevice ? "" : "container__limit"}`}
+        >
           {/*SECTION: Uploaded image */}
           <form
             name="wtermarks_form"
@@ -144,51 +160,54 @@ const ImageWatermarkPage = () => {
             }}
           >
             {uploadedImage && (
-              <div>
+              <>
                 {/* <img
                 className="limit_img mb2"
                 src={uploadedImage}
                 alt="uploaded image"
               /> */}
 
-                <textarea
-                  defaultValue={watermakText}
-                  name="watermark-content"
-                  className="generator__content--area"
-                  id="watermarkContent"
-                  placeholder="Enter watermark text"
-                  onChange={(e) => setWatermarkText(e.target.value)}
-                />
-                <br />
-                {/*SECTION: CONTROL PANEL ELEMENT  */}
-                <ControlsPanel
-                  onChangePoistion={setPositionMark}
-                  onChangeSettings={setSettings}
-                />
+                <div className={`${mobileDevice ? "" : ""}`}>
+                  <textarea
+                    defaultValue={watermakText}
+                    name="watermark-content"
+                    className="generator__content--area"
+                    id="watermarkContent"
+                    placeholder="Enter watermark text"
+                    onChange={(e) => setWatermarkText(e.target.value)}
+                  />
+                  <br />
+                  {/*SECTION: CONTROL PANEL ELEMENT  */}
+                  <ControlsPanel
+                    onChangePoistion={setPositionMark}
+                    onChangeSettings={setSettings}
+                    mobileDevice={mobileDevice}
+                  />
 
-                <br />
+                  <br />
 
-                {/*SECTION: Canvas */}
-                <div>
-                  <label className="mb1 block" htmlFor="zoom">
-                    Zoom level:
-                  </label>
-                  <div className="flex__grid --small-gap">
-                    <span> 0.1</span>
-                    <input
-                      className="generator__input no-x-paddings"
-                      id="zoom"
-                      type="range"
-                      min="0.1"
-                      max="1.5"
-                      step="0.1"
-                      defaultValue="1"
-                      onChange={handleZoom}
-                    />
-                    <span> 1.5</span>
+                  {/*SECTION: Canvas */}
+                  <div className="mb2">
+                    <label className="mb1 block" htmlFor="zoom">
+                      Zoom level: <span>{zoomLevelState}</span>
+                    </label>
+                    <div className="flex__grid --small-gap">
+                      <span> {getLimits("MIN")}</span>
+                      <input
+                        ref={zoomInputRef}
+                        className="generator__input no-x-paddings"
+                        id="zoom"
+                        type="range"
+                        min="0.1"
+                        max="2"
+                        step="0.1"
+                        value={zoomLevelState}
+                        onChange={handleZoom}
+                      />
+                      <span> {getLimits("MAX")}</span>
+                    </div>
                   </div>
                 </div>
-
                 <div ref={canvasContainer} className={styles.canvasContainer}>
                   <canvas className="limit_img" ref={canvasRef} />
                 </div>
@@ -202,7 +221,7 @@ const ImageWatermarkPage = () => {
                     Apply Watermarks
                   </button>
                 </div> */}
-              </div>
+              </>
             )}
 
             {!uploadedImage && (
@@ -216,6 +235,7 @@ const ImageWatermarkPage = () => {
                 />
               </div>
             )}
+
             {/*SECTION: BUTTONS */}
             {uploadedImage && (
               <section className="container_limit no-x-paddings">
@@ -249,15 +269,18 @@ const ImageWatermarkPage = () => {
 }; //
 export default ImageWatermarkPage;
 
-const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
+const ControlsPanel = ({ onChangePoistion, onChangeSettings, mobileDevice }) => {
   const [leftTop, setleftTop] = useState(true);
   const [rightTop, setRightTop] = useState(true);
   const [centerTop, setCenterTop] = useState(true);
   const [centerCenter, setCenterCenter] = useState(true);
-
   const [leftBottom, setleftBottom] = useState(true);
   const [rightBottom, setRightBottom] = useState(true);
   const [centerBottom, setCenterBottom] = useState(true);
+
+  const [opacity, setOpacity] = useState(0.8);
+  const [fontSize, setFontSize] = useState(16);
+  const [gap, setGap] = useState(10);
 
   useEffect(() => {
     onChangePoistion({
@@ -280,7 +303,11 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
   ]);
 
   return (
-    <div className="controls_panel">
+    <div
+      className={`controls_panel flex__grid --big-gap ${
+        mobileDevice ? "--column" : " "
+      }`}
+    >
       {/*NOTE: Positions */}
       <div className={styles.positionPanel}>
         <CheckboxElement
@@ -333,47 +360,65 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
           label={`Center-center`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
+        {/*!SECTION: Color */}
+        <div className="flex__grid align-center --small-gap">
+          <input
+            onChange={(val) =>
+              onChangeSettings({ type: "color", value: val.target.value })
+            }
+            id="mark_color"
+            type="color"
+            placeholder="Choose a color"
+          />
+          <label htmlFor="mark_color">Color</label>
+        </div>
       </div>
 
-      <div className="flex__grid justify-between --small-gap align-center my2">
+      <div className="flex__grid --column justify-between --small-gap my flex-1">
         <div className="flex__grid --column --base-gap">
-          {/*!SECTION: Color */}
-          <div className="flex__grid align-center --small-gap">
-            <input
-              onChange={(val) =>
-                onChangeSettings({ type: "color", value: val.target.value })
-              }
-              id="mark_color"
-              type="color"
-              placeholder="Choose a color"
-            />
-            <label htmlFor="mark_color">Color</label>
-          </div>
           {/*!SECTION: Opacity */}
           <div className="flex__grid align-center --small-gap">
             <input
               id="mark_opacity"
               className="base_input"
-              onChange={(val) =>
-                onChangeSettings({ type: "opacity", value: val.target.value })
-              }
+              onChange={(val) => {
+                setOpacity(val.target.value);
+                onChangeSettings({ type: "opacity", value: val.target.value });
+              }}
               min={0.1}
               max={1}
               step={0.1}
               type="number"
               placeholder="opacity"
-              defaultValue={0.8}
+              value={opacity}
             />
-            <label htmlFor="mark_opacity">Opacity</label>
+            <input
+              id="mark_opacity"
+              className="generator__input no-x-paddings"
+              onChange={(val) => {
+                setOpacity(val.target.value);
+                onChangeSettings({ type: "opacity", value: val.target.value });
+              }}
+              min={0.1}
+              max={1}
+              step={0.1}
+              type="range"
+              placeholder="opacity"
+              value={opacity}
+            />
+            <label className="col-4" htmlFor="mark_opacity">
+              Opacity
+            </label>
           </div>
         </div>
         <div className="flex__grid --column --base-gap">
           {/*!SECTION: Font size */}
           <div className="flex__grid align-center --small-gap">
             <input
-              onChange={(val) =>
-                onChangeSettings({ type: "fontSize", value: val.target.value })
-              }
+              onChange={(val) => {
+                setFontSize(val.target.value);
+                onChangeSettings({ type: "fontSize", value: val.target.value });
+              }}
               className="base_input"
               id="mark_font_size"
               type="number"
@@ -381,15 +426,35 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
               max={200}
               step={1}
               placeholder="Font size"
-              defaultValue={16}
+              value={fontSize}
             />
-            <label htmlFor="mark_font_size">Font size</label>
-          </div>
-          <div className="flex__grid align-center --small-gap">
             <input
-              onChange={(val) =>
-                onChangeSettings({ type: "markGaps", value: val.target.value })
-              }
+              onChange={(val) => {
+                setFontSize(val.target.value);
+                onChangeSettings({
+                  type: "fontSize",
+                  value: val.target.value,
+                });
+              }}
+              className="generator__input no-x-paddings"
+              id="mark_font_size"
+              type="range"
+              min={1}
+              max={200}
+              step={1}
+              placeholder="Font size"
+              value={fontSize}
+            />
+            <label className="col-4" htmlFor="mark_font_size">
+              Font size
+            </label>
+          </div>
+          <div className="flex__grid  align-center --small-gap">
+            <input
+              onChange={(val) => {
+                setGap(val.target.value);
+                onChangeSettings({ type: "markGaps", value: val.target.value });
+              }}
               className="base_input"
               id="mark_gups"
               type="number"
@@ -397,9 +462,25 @@ const ControlsPanel = ({ onChangePoistion, onChangeSettings }) => {
               max={100}
               step={1}
               placeholder="Gaps from borders"
-              defaultValue={10}
+              value={gap}
             />
-            <label htmlFor="mark_font_size">Gap from borders</label>
+            <input
+              className="generator__input no-x-paddings"
+              onChange={(val) => {
+                setGap(val.target.value);
+                onChangeSettings({ type: "markGaps", value: val.target.value });
+              }}
+              id="mark_gups"
+              type="range"
+              min={-100}
+              max={100}
+              step={1}
+              placeholder="Gaps from borders"
+              value={gap}
+            />
+            <label className="col-4" htmlFor="mark_font_size">
+              Gap from borders
+            </label>
           </div>
         </div>
       </div>

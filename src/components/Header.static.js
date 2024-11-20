@@ -54,7 +54,7 @@ export const BottomBarlinks = [
     icon: "/assets/img/icons8-image-refresh-48.png",
   },
   {
-    title: "watermark",
+    title: "Watermark",
     url: "/image-converter/watermark",
     alias: "WM",
     isActive: false,
