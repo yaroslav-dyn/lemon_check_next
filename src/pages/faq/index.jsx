@@ -29,6 +29,12 @@ const faqContent = [
     id: "ip-checker",
     url: "#ip-checker",
   },
+  {
+    title: "How can I add watermarks to my images?",
+    content: "",
+    id: "watermarks",
+    url: "#watermarks",
+  },
 ];
 
 const onFitemClick = (e) => {
@@ -202,13 +208,12 @@ const AboutPage = () => {
                 </p>
 
                 <p>
-                 <b> Domain Name Lookup: </b>
-                  You can also use the tool to look up
-                  geolocation information based on a domain name. Enter a domain
-                  (e.g., example.com) in the input field, and the tool will
-                  resolve the domain to its associated IP address and fetch its
-                  geolocation data. Simply click the Search icon after typing in
-                  the domain.
+                  <b> Domain Name Lookup: </b>
+                  You can also use the tool to look up geolocation information
+                  based on a domain name. Enter a domain (e.g., example.com) in
+                  the input field, and the tool will resolve the domain to its
+                  associated IP address and fetch its geolocation data. Simply
+                  click the Search icon after typing in the domain.
                 </p>
 
                 <p>
@@ -223,6 +228,76 @@ const AboutPage = () => {
                   </Link>
                   , so you can get up-to-date location data instantly.
                 </p>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="watermarks" className="content-text">
+                <h3 className="--color-primary">
+                  How can I add watermarks to my images?
+                </h3>
+
+                <ul className="list-reset">
+                  <li className="mb2">
+                    <strong>1. Upload Your Image:</strong>
+                    <div>
+                      Click Upload New Image and choose the image you want to
+                      watermark. <br />
+                      The uploaded image will appear in the preview area.
+                    </div>
+                  </li>
+                  <li className="mb2">
+                    <strong>2. Customize Your Watermark (Live Updates):</strong>
+                    <ul className="list-reset">
+                      <li>
+                        Enter Text: Type your desired watermark text in the
+                        input field.
+                      </li>
+                      <li>
+                        Positioning: Choose from pre-set locations (e.g.,
+                        top-left, bottom-right, etc.) for your watermark.
+                      </li>
+                      <li>
+                        <strong>Style Adjustments:</strong>
+                        <ul className="list-reset">
+                          <li>
+                            <div>
+                              Adjust opacity, font size, gaps, and color to suit
+                              your image.
+                            </div>
+                          </li>
+                          <li>
+                            <div>
+                              Every change is applied instantly, so you can see
+                              the results live.
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="mb2">
+                    <strong>3. Preview with Zoom</strong>:
+                    <div>
+                      Use the Zoom Slider to scale the preview for better
+                      placement visualization. This feature is for preview
+                      purposes only and will not change the final output's
+                      dimensions.
+                    </div>
+                  </li>
+                  <li>
+                    <strong> 4. Save the Image</strong>:
+                    <div>
+                      Once you're happy with the watermark's appearance, click
+                      Save Image to download the finalized image with the
+                      watermark embedded.
+                    </div>
+                  </li>
+                </ul>
               </section>
             </article>
           </div>

@@ -563,7 +563,8 @@ const InstructionModule = ({
   </div>
 );
 
-const InstructionTooltip = ({ children }) => (
+//TODO:
+export const InstructionTooltip = ({ children }) => (
   <div className={styles.instructionWindow} data-left-text>
     <ul className={styles.instrustionList}>
       <li>{children}</li>
