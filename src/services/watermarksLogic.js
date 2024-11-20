@@ -29,9 +29,21 @@
           yPosition: defaultGaps + fontSize,
         };
         break;
+      case "centerLeft":
+        sideFactor = {
+          xPosition: defaultGaps,
+          yPosition: image.height / 2 - defaultGaps / 2,
+        };
+        break;
       case "centerCenter":
         sideFactor = {
           xPosition: image.width / 2 - wmLengthFactor / 2,
+          yPosition: image.height / 2 - defaultGaps / 2,
+        };
+        break;
+      case "centerRight":
+        sideFactor = {
+          xPosition: image.width - wmLengthFactor - defaultGaps,
           yPosition: image.height / 2 - defaultGaps / 2,
         };
         break;

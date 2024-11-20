@@ -7,7 +7,9 @@ export const ControlsPanel = ({ onChangePoistion, onChangeSettings, mobileDevice
   const [leftTop, setleftTop] = useState(true);
   const [rightTop, setRightTop] = useState(true);
   const [centerTop, setCenterTop] = useState(true);
+  const [centerLeft, setCenterLeft] = useState(true);
   const [centerCenter, setCenterCenter] = useState(true);
+  const [centerRight, setCenterRight] = useState(true);
   const [leftBottom, setleftBottom] = useState(true);
   const [rightBottom, setRightBottom] = useState(true);
   const [centerBottom, setCenterBottom] = useState(true);
@@ -25,7 +27,9 @@ export const ControlsPanel = ({ onChangePoistion, onChangeSettings, mobileDevice
       leftBottom,
       rightBottom,
       centerBottom,
+      centerLeft,
       centerCenter,
+      centerRight,
     });
     setTableteScreen(window.innerWidth <= 1180 && window.innerWidth >= 768);
   }, [
@@ -35,7 +39,9 @@ export const ControlsPanel = ({ onChangePoistion, onChangeSettings, mobileDevice
     leftBottom,
     rightBottom,
     centerBottom,
+    centerLeft,
     centerCenter,
+    centerRight,
   ]);
 
   return (
@@ -70,11 +76,36 @@ export const ControlsPanel = ({ onChangePoistion, onChangeSettings, mobileDevice
 
         <CheckboxElement
           defaultValue={true}
+          idElement={`centerLeft`}
+          onCheck={setCenterLeft}
+          label={`Center-left`}
+          containerClasses={`flex__grid --small-gap align-center`}
+        />
+
+        <CheckboxElement
+          defaultValue={true}
+          idElement={`centerCenter`}
+          onCheck={setCenterCenter}
+          label={`Center-center`}
+          containerClasses={`flex__grid --small-gap align-center`}
+        />
+
+        <CheckboxElement
+          defaultValue={true}
+          idElement={`centerRight`}
+          onCheck={setCenterRight}
+          label={`Center-Right`}
+          containerClasses={`flex__grid --small-gap align-center`}
+        />
+
+        <CheckboxElement
+          defaultValue={true}
           idElement={`leftBottom`}
           onCheck={setleftBottom}
           label={`Left-bottom`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
+
         <CheckboxElement
           defaultValue={true}
           idElement={`centerBottom`}
@@ -87,13 +118,6 @@ export const ControlsPanel = ({ onChangePoistion, onChangeSettings, mobileDevice
           idElement={`right-bottom`}
           onCheck={setRightBottom}
           label={`Right-bottom`}
-          containerClasses={`flex__grid --small-gap align-center`}
-        />
-        <CheckboxElement
-          defaultValue={true}
-          idElement={`centerCenter`}
-          onCheck={setCenterCenter}
-          label={`Center-center`}
           containerClasses={`flex__grid --small-gap align-center`}
         />
         {/*!SECTION: Color */}

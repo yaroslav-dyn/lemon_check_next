@@ -6,7 +6,7 @@ export const InstructionNote = ({ mobileDevice=false , isDarkTheme=false, title=
   const [tooltipState, setTooltipState] = useState(false);
   return (
     <div className="">
-      <h2
+      <h3
         className={`inline-block flex__grid justify-left items-center ${
           tooltipState ? "open__tooltip --color-primary" : ""
         } ${!mobileDevice ? "cursor-pointer-screen" : ""}`}
@@ -27,7 +27,7 @@ export const InstructionNote = ({ mobileDevice=false , isDarkTheme=false, title=
           />
         </div>
         <span className="lato-thin">{title}</span>
-      </h2>
+      </h3>
       {tooltipState && (
         <div className="absolute">
           <InstructionTooltip>

@@ -1,11 +1,16 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import Head from "next/head";
+import ImageNext from "next/image";
+import Link from "next/link";
 import useDeviceType from "@/services/useDeviceType";
 import InputFileElement from "@/components/elements/input_file.element";
 import styles from "@/styles/ImageConverter.module.css";
 import { calculatePositionByPosition } from "@/services/watermarksLogic";
 import { ControlsPanel } from "@/pages/image-converter/watermark/parts/controls-panel";
 import { InstructionNote } from "@/pages/image-converter/watermark/parts/instruction-note";
+
+const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
+const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
 
 const ImageWatermarkPage = (props) => {
   const mobileDevice = useDeviceType();
@@ -140,10 +145,31 @@ const ImageWatermarkPage = (props) => {
       </Head>
       {/* SECTION: CONVERTER MAIN HEADING */}
       <main className="main_content converter_content">
-        <div className={`main__heading ${mobileDevice ? "--small-bm" : ""}`}>
+        <div
+          className={`main__heading ${
+            mobileDevice ? "--small-bm" : "--small-bm"
+          }`}
+        >
           <div data-centered-text>
-            <h1 className="h1_heading">
-              Add<span className="--color-primary"> Watermarks </span>
+            <h1 className="h1_heading flex__grid justify-center --small-gap">
+              <div className="">
+                <Link
+                  href={"/image-converter"}
+                  className={`align-middle ${
+                    mobileDevice ? "" : "cursor-pointer-screen"
+                  } `}
+                >
+                  <ImageNext
+                    src={isDarkTheme ? backIconLight : backIconDark}
+                    alt="back"
+                    width={44}
+                    height={44}
+                  />
+                </Link>
+              </div>
+              <div>
+                Add<span className="--color-primary"> Watermarks </span>
+              </div>
               {/* <br /> to Your Images */}
             </h1>
             <div className="slogan__text mb1 mt1" data-centered-text>
