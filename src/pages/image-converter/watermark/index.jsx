@@ -140,8 +140,14 @@ const ImageWatermarkPage = (props) => {
     <>
       <Head>
         <title>LockBoxApp | Watermarks - add Watermarks Tools</title>
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
+        <meta
+          name="description"
+          content="Enhance your images with LockBoxApp’s Watermarks Editor. Add custom text watermarks to protect your content, personalize visuals, and maintain brand identity. Adjust positions, opacity, color, and font size dynamically with our easy-to-use browser-based tool. No downloads required!"
+        />
+        <meta
+          name="keywords"
+          content="Add watermark to image online, Watermark editor, Custom watermarks for images, Online image watermark tool, Free watermark generator, Protect images with watermarks, Dynamic watermarking tool, Image editor with watermark, Personalize images online, Add text watermark to photos"
+        />
       </Head>
       {/* SECTION: CONVERTER MAIN HEADING */}
       <main className="main_content converter_content">
@@ -268,7 +274,9 @@ const ImageWatermarkPage = (props) => {
                   title="Upload image"
                 />
                 <br />
-                <Link className="--default-link" href={`/faq#watermarks`}>How to Get Started</Link>
+                <Link className="--default-link" href={`/faq#watermarks`}>
+                  How to Get Started
+                </Link>
               </div>
             )}
 
