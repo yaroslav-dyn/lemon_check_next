@@ -3,7 +3,7 @@ import styles from "@/styles/ImageConverter.module.css";
 import CheckboxElement from "@/components/elements/checkbox.element";
 //NOTE: Controls panel Watermarks editor
 
-export const ControlsPanel = ({ onChangePoistion, onChangeSettings, mobileDevice }) => {
+export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice }) => {
   const [leftTop, setleftTop] = useState(true);
   const [rightTop, setRightTop] = useState(true);
   const [centerTop, setCenterTop] = useState(true);
@@ -20,7 +20,7 @@ export const ControlsPanel = ({ onChangePoistion, onChangeSettings, mobileDevice
   const [tabletScreen, setTableteScreen] = useState(false);
 
   useEffect(() => {
-    onChangePoistion({
+    onChangePosition({
       leftTop,
       rightTop,
       centerTop,

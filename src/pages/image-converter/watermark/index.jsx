@@ -6,8 +6,8 @@ import useDeviceType from "@/services/useDeviceType";
 import InputFileElement from "@/components/elements/input_file.element";
 import styles from "@/styles/ImageConverter.module.css";
 import { calculatePositionByPosition } from "@/services/watermarksLogic";
-import { ControlsPanel } from "@/pages/image-converter/watermark/parts/controls-panel";
-import { InstructionNote } from "@/pages/image-converter/watermark/parts/instruction-note";
+import { ControlsPanel } from "@/components/parts/controls-panel";
+import { InstructionNote } from "@/components/parts/instruction-note";
 
 const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
@@ -201,14 +201,13 @@ const ImageWatermarkPage = (props) => {
                     defaultValue={watermakText}
                     name="watermark-content"
                     className="generator__content--area"
-                    id="watermarkContent"
                     placeholder="Enter watermark text"
                     onChange={(e) => setWatermarkText(e.target.value)}
                   />
                   <br />
                   {/*SECTION: CONTROL PANEL ELEMENT  */}
                   <ControlsPanel
-                    onChangePoistion={setPositionMark}
+                    onChangePosition={setPositionMark}
                     onChangeSettings={setSettings}
                     mobileDevice={mobileDevice}
                   />
