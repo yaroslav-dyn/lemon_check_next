@@ -267,6 +267,8 @@ const ImageWatermarkPage = (props) => {
                   labelClasses="center"
                   title="Upload image"
                 />
+                <br />
+                <Link className="--default-link" href={`/faq#watermarks`}>How to Get Started</Link>
               </div>
             )}
 

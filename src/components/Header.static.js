@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import useDeviceType from "@/services/useDeviceType";
 import useScrollPosition from "@/services/useScrollPosition";
 import SchemaSelectorElement from "@/components/elements/scema_selector.element";
+import {Tooltip} from "react-tooltip";
+
 
 const newLogo = "/assets/img/logos/lc_dally_logo@3x.png";
 
@@ -187,11 +189,13 @@ export default function AppHeader({ changeSchema }) {
               !isMobile ? "--small-gap" : "--extra_small-gap"
             }`}
           >
-            <SchemaSelectorElement onChangeTheme={changeSchema} />
-
+            <div id="color-schema_anchor">
+              <SchemaSelectorElement onChangeTheme={changeSchema} />
+            </div>
             <div>
               <div className="flex__grid --extra_small-x-gap">
                 <Link
+                  id="about_anchor"
                   href="/about"
                   className={`instruction_info_icon colored 
                     ${!isMobile ? "mr1" : "mr0.5"}
@@ -200,6 +204,7 @@ export default function AppHeader({ changeSchema }) {
                   <img src={infoIcon} width={40} />
                 </Link>
                 <Link
+                  id="faq_anchor"
                   href="/faq"
                   className={`instruction_info_icon colored ${
                     !isMobile ? "mr1" : "mr0.5"
@@ -208,6 +213,7 @@ export default function AppHeader({ changeSchema }) {
                   <img src={FaqIcon} width={40} />
                 </Link>
                 <Link
+                  id="news_anchor"
                   href="/news"
                   className={`instruction_info_icon colored ${
                     pathname === "/news" ? "active" : ""
@@ -215,6 +221,26 @@ export default function AppHeader({ changeSchema }) {
                 >
                   <img src={newsIcon} width={40} />
                 </Link>
+                <Tooltip
+                  anchorSelect="#news_anchor"
+                  content="News & Updates"
+                  place="bottom-start"
+                />
+                <Tooltip
+                  anchorSelect="#faq_anchor"
+                  content="FAQ"
+                  place="bottom-start"
+                />
+                <Tooltip
+                  anchorSelect="#about_anchor"
+                  content="About"
+                  place="bottom-start"
+                />
+                <Tooltip
+                  anchorSelect="#color-schema_anchor"
+                  content="Switch color modes"
+                  place="bottom-start"
+                />
               </div>
             </div>
           </div>

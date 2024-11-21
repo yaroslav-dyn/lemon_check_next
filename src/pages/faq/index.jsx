@@ -35,6 +35,25 @@ const faqContent = [
     id: "watermarks",
     url: "#watermarks",
   },
+
+  {
+    title: "Where are my images processed?",
+    content: "",
+    id: "watermarks_where_processed",
+    url: "#watermarks_where_processed",
+  },
+  {
+    title: "What happens to my image after adding a watermark?",
+    content: "",
+    id: "watermarks_happens",
+    url: "#watermarks_happens",
+  },
+  {
+    title: "Can I use copyrighted images?",
+    content: "",
+    id: "watermarks_copyright",
+    url: "#watermarks_copyright",
+  },
 ];
 
 const onFitemClick = (e) => {
@@ -298,6 +317,55 @@ const AboutPage = () => {
                     </div>
                   </li>
                 </ul>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="watermarks_where_processed" className="content-text">
+                <h3 className="--color-primary">
+                  Where are my images processed?
+                </h3>
+                <p>
+                  All images uploaded for watermarking are processed directly in
+                  your browser. LockBoxApp does not store or share your images.
+                </p>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="watermarks_happens" className="content-text">
+                <h3 className="--color-primary">
+                  What happens to my image after adding a watermark?
+                </h3>
+                <p>
+                  Your image remains on your device. You can save the edited
+                  version locally, and no copy of the image is saved by
+                  LockBoxApp.
+                </p>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="watermarks_copyright" className="content-text">
+                <h3 className="--color-primary">
+                  Can I use copyrighted images?
+                </h3>
+                <p>
+                  You are responsible for ensuring you have the rights to upload
+                  and modify any image used with this tool.
+                </p>
               </section>
             </article>
           </div>
