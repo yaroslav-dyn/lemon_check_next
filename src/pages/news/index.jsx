@@ -43,6 +43,110 @@ const NewsPage = () => {
 
           <article className="content-text">
             <h2 className="mb0">
+              November 21, 2024 – 🎉 New Feature Announcement: <br />
+              <span className="--color-primary">
+                {" "}
+                <Link
+                  href={"/image-converter/watermark"}
+                  className="--default-link"
+                >
+                  Watermarks Editor
+                </Link>{" "}
+              </span>{" "}
+              Now Live! 🚀
+            </h2>
+            <p>
+              We're thrilled to announce the launch of our{" "}
+              <Link
+                href={"/image-converter/watermark"}
+                className="--default-link"
+              >
+                Watermarks Editor!
+              </Link>{" "}
+              and personalize your images effortlessly, right in your browser.
+              Whether you're securing your work from unauthorized use or simply
+              adding a touch of customization, the{" "}
+              <Link
+                href={"/image-converter/watermark"}
+                className="--default-link"
+              >
+                Watermarks Editor
+              </Link>{" "}
+              offers a seamless, intuitive experience.
+            </p>
+            <strong className="--color-prmary">Key Features:</strong>
+            <ol>
+              <li>
+                <b className="--color-base">Live Customization</b>
+                <p>
+                  Instantly see changes applied to your image as you adjust
+                  settings for text, position, color, opacity, and font size.
+                </p>
+              </li>
+              <li>
+                <b className="--color-base">Flexible Positioning</b>
+                <p>
+                  Choose from predefined locations like top-left, center-center,
+                  or bottom-right to position your watermark with precision.
+                </p>
+              </li>
+              <li>
+                <b className="--color-base"> Zoom Preview</b>
+                <p>
+                  Use the zoom slider to preview your image at different scales.
+                  This is especially handy for larger images.
+                </p>
+              </li>
+              <li>
+                <b className="--color-base"> On-the-Go Adjustments</b>
+                <p>
+                  No need to hit “Apply”! Your changes update dynamically as you
+                  adjust any setting.
+                </p>
+              </li>
+              <li>
+                <b className="--color-base"> One-Click Download</b>
+                <p>
+                  Save your watermarked image with a single click after
+                  perfecting your design.
+                </p>
+              </li>
+            </ol>
+            <strong>
+              Why Use the{" "}
+              <Link
+                href={"/image-converter/watermark"}
+                className="--default-link"
+              >
+                Watermarks Editor?
+              </Link>{" "}
+            </strong>
+            <p>
+              Adding watermarks is an essential step to: Protect your content
+              from unauthorized use or copying. Maintain brand identity by
+              displaying your logo or text on shared images. Customize images
+              for personal or business use.
+            </p>
+            <strong>
+              {" "}
+              How to Get <span className="--color-primary">Started</span>{" "}
+            </strong>
+            <br />
+            Head over to our Image Watermarking Tool and upload your image to
+            try it out. Whether you're adding a small logo or bold text, our
+            editor makes the process fast and fun! Let us know what you think
+            and share your feedback! 💡 Your suggestions help us improve and
+            bring even more value to{" "}
+            <Link href={"/"} className="--default-link --color-primary">
+              LockBoxApp
+            </Link>
+            .
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
               November 5, 2024 – New Feature: Securely{" "}
               <span className="--color-primary">Store Encrypted Passwords</span>{" "}
               on Your Device
@@ -56,13 +160,13 @@ const NewsPage = () => {
               making it easy to retrieve them anytime.
             </p>
             <p>
-              <strong>Please note</strong>: that this feature uses experimental local storage
-              (IndexedDB) and is designed to support users needing quick access
-              to securely stored data on their own devices. However, as this
-              storage is experimental, we recommend continuing to use external
-              password recovery or management systems for critical passwords.
-              LockBoxApp cannot guarantee recovery of lost data due to
-              limitations of local storage.
+              <strong>Please note</strong>: that this feature uses experimental
+              local storage (IndexedDB) and is designed to support users needing
+              quick access to securely stored data on their own devices.
+              However, as this storage is experimental, we recommend continuing
+              to use external password recovery or management systems for
+              critical passwords. LockBoxApp cannot guarantee recovery of lost
+              data due to limitations of local storage.
             </p>
           </article>
 

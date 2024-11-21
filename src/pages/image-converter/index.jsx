@@ -13,6 +13,7 @@ const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
 const imgTypeBageIcon = "/assets/icons/icons8-image-file-48.png";
 const dataTypeBageIcon = "/assets/icons/icons8-64-bit-50.png";
+const dataTypeMarkIcon = "/assets/icons/easy-watermark-svgrepo-com.svg";
 
 const Imageconverter = (props) => {
   const [imageBase64, setImageBase64] = useState("");
@@ -140,7 +141,7 @@ const Imageconverter = (props) => {
                   Image <span className="--color-primary"> Converter </span>
                 </h1>
                 <div className="slogan__text mb1 mt1" data-centered-text>
-                  Convert images seamlessly:{" "}
+                  Convert images seamlessly: {mobileDevice && <br />}
                   <span className="--color-primary">encode</span> or{" "}
                   <span className="--color-primary">decode</span> with a click
                 </div>
@@ -162,14 +163,14 @@ const Imageconverter = (props) => {
         {!rootConvertType && (
           <section className={"container__limit gap-x-3"}>
             <div
-              className={`flex__grid ${mobileDevice ? "--column" : ""} ${
-                !mobileDevice ? "--base-gap" : ""
-              } justify-center`}
+              className={`flex__grid ${
+                mobileDevice ? "--column --base-gap" : ""
+              } ${!mobileDevice ? "--base-gap" : ""} justify-center`}
             >
               {mobileDevice && (
                 <hr className="--base-divider x2 --bg-accent w-100 my1" />
               )}
-              {isMobile && <br />}
+
               <div>
                 <button
                   onClick={() => {
@@ -220,7 +221,6 @@ const Imageconverter = (props) => {
                   </div>
                 )}
               </div>
-              {isMobile && <br />}
               <div
                 className={`${
                   mobileDevice
@@ -248,7 +248,12 @@ const Imageconverter = (props) => {
                     }`}
                   >
                     {mobileDevice && (
-                      <Image src={dataTypeBageIcon} width={24} height={24} />
+                      <Image
+                        src={dataTypeBageIcon}
+                        width={24}
+                        height={24}
+                        alt="data type"
+                      />
                     )}
                     <span> base64 to image </span>
                   </div>
@@ -266,6 +271,61 @@ const Imageconverter = (props) => {
                     />
                     <p className="left">
                       Decode base64 strings <br /> back to images
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div
+                className={`${
+                  mobileDevice
+                    ? "flex__grid align-center justify-center --extra_small-gap"
+                    : ""
+                }`}
+              >
+                <button
+                  onClick={() => {
+                    setConvertType("data");
+                    router.push("/image-converter/watermark");
+                  }}
+                  className={`action__btn --bg-accent --uppercase w-100  
+                    ${
+                      mobileDevice
+                        ? styles.convertTypeBageMobile
+                        : styles.convertTypeBage
+                    }`}
+                >
+                  <div
+                    className={`${
+                      mobileDevice
+                        ? "flex__grid align-center justify-center --extra_small-gap"
+                        : ""
+                    }`}
+                  >
+                    {mobileDevice && (
+                      <Image
+                        src={dataTypeMarkIcon}
+                        width={24}
+                        height={24}
+                        alt="watermarks"
+                      />
+                    )}
+                    <span> Watermarks </span>
+                  </div>
+                </button>
+                {!mobileDevice && (
+                  <div
+                    className={`flex__grid align-center --extra_small-gap ${styles.converterInfoBlockTwo}`}
+                  >
+                    <Image
+                      className={`${isDarkTheme ? "" : "--img-filter-invert"}`}
+                      src={dataTypeMarkIcon}
+                      width={38}
+                      height={38}
+                      alt="data type"
+                    />
+                    <p className="left">
+                      Add watermarks <br /> to images
                     </p>
                   </div>
                 )}

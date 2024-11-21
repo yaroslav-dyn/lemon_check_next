@@ -38,7 +38,7 @@ const Security = () => {
             <ul className="list-reset">
               <li>
                 <p>
-                  1.<strong> No Password Storage</strong> LockBoxApp does not
+                  1.<strong> No Password Storage</strong>: LockBoxApp does not
                   store any passwords or sensitive information. All password
                   generation and encryption occur directly on your device,
                   meaning no data is transmitted to our servers. This ensures
@@ -56,7 +56,7 @@ const Security = () => {
                 </p>
               </li>
               <li>
-                3.<strong> Local Storage</strong> for Encrypted Passwords Our
+                3.<strong> Local Storage for Encrypted Passwords</strong>: Our
                 Encrypted Password Storage feature allows users to optionally
                 save encrypted passwords with aliases directly on their device
                 using IndexedDB. This data remains on your device, and
@@ -67,26 +67,35 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  4. Data Protection Since LockBoxApp currently does not save
-                  any data, there is no risk of data breaches or unauthorized
-                  access to your passwords. All processing is done on the client
-                  side, ensuring your data stays secure on your own device.
+                  4. <strong>Image Processing</strong>: All image operations,
+                  including watermarking, are processed locally in your browser.
+                  No data is transmitted to or stored on our servers.
                 </p>
               </li>
               <li>
                 <p>
-                  5. Future Security Features We are committed to continually
-                  improving security as we introduce new features. In the
-                  future, we plan to offer an optional feature to save encrypted
-                  passwords and aliases locally on your device using IndexedDB,
-                  a secure, browser-based storage solution. Even then, all data
-                  will remain encrypted and stored locally, ensuring that your
-                  sensitive information never leaves your device.
+                  5.<strong> Data Protection</strong>: Since LockBoxApp
+                  currently does not save any data, there is no risk of data
+                  breaches or unauthorized access to your passwords. All
+                  processing is done on the client side, ensuring your data
+                  stays secure on your own device.
                 </p>
               </li>
               <li>
                 <p>
-                  6. <strong>HTTPS Encryption </strong>Our entire platform
+                  6. <strong>Future Security</strong>: We are committed to
+                  continually improving security as we introduce new features.
+                  In the future, we plan to offer an optional feature to save
+                  encrypted passwords and aliases locally on your device using
+                  IndexedDB, a secure, browser-based storage solution. Even
+                  then, all data will remain encrypted and stored locally,
+                  ensuring that your sensitive information never leaves your
+                  device.
+                </p>
+              </li>
+              <li>
+                <p>
+                  7. <strong>HTTPS Encryption </strong>Our entire platform
                   operates over a secure HTTPS connection. This encryption
                   ensures that any communication between your browser and our
                   service is safe from interception.
@@ -94,7 +103,7 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  7. User Responsibility We encourage users to follow best
+                  8. <strong>User Responsibility</strong>: We encourage users to follow best
                   practices, such as: <br />
                   Keeping your secret phrases confidential. Regularly updating
                   your passwords. Using a strong and unique password for each of
@@ -103,7 +112,7 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  8.{" "}
+                  9.{" "}
                   <Link className="--default-link" href={`/`} target="_blank">
                     LockBoxApp
                   </Link>{" "}
@@ -122,7 +131,7 @@ const Security = () => {
               </li>
               <li>
                 <p>
-                  9. Transparency{" "}
+                  10. Transparency{" "}
                   <Link className="--default-link" href={`/`} target="_blank">
                     LockBoxApp
                   </Link>{" "}

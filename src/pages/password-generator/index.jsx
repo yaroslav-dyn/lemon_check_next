@@ -16,6 +16,23 @@ const PasswordGenerator = () => {
 
   const mobileDevice = useDeviceType();
 
+    const generateCode = () => {
+      let generatePassword = "";
+      const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const digits = "1234567890";
+      const specialCharactersSymbols = "!@#$%^&*?";
+      const characters = hasSpecialCharacters
+        ? `${alphabet}${hasDigits ? digits : ""}${specialCharactersSymbols}`
+        : `${alphabet}${hasDigits ? digits : ""}`;
+
+      for (var i = 0; i < passwordLength; i++) {
+        generatePassword += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+      }
+      setPassword(generatePassword);
+    };
+
   useEffect(() => {
     generateCode();
   }, [passwordLength, hasDigits, hasSpecialCharacters]);
@@ -32,23 +49,7 @@ const PasswordGenerator = () => {
   const setDigitsBox = (status) => 
     setDigitsCharacters(status.target.checked);
 
-  const generateCode = () => {
-    let generatePassword = "";
-    const alphabet =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const digits = "1234567890";
-    const specialCharactersSymbols = "!@#$%^&*?";  
-    const characters = hasSpecialCharacters
-      ? `${alphabet}${hasDigits ? digits : ""}${specialCharactersSymbols}`
-      : `${alphabet}${hasDigits ? digits : ""}`;
 
-    for (var i = 0; i < passwordLength; i++) {
-      generatePassword += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-    }
-    setPassword(generatePassword);
-  };
 
   const generateFromForm = (e) => {
     e.preventDefault();
@@ -130,7 +131,7 @@ const PasswordGenerator = () => {
                   </div>
                   <div className="flex__grid justify-between align-center gap-x-6">
                     <input
-                      className="bace_input"
+                      className="base_input"
                       id="passwordLength"
                       value={passwordLengthInput}
                       type="number"

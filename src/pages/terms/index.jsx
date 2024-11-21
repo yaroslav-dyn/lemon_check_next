@@ -15,7 +15,7 @@ const Terms = () => {
 
       <div className="main_content">
         <main className="container__limit">
-          <h5 className="underline">Last Updated: october 17, 2024</h5>
+          <h5 className="underline">Last Updated: November 21, 2024</h5>
           <div className="main__heading --small-bm">
             <h1 className="h1_heading pb1 lato-bold" data-centered-text>
               Terms of <span className="--color-primary">Service </span>
@@ -250,13 +250,21 @@ const Terms = () => {
               </li>
               <li>
                 <p>
-                  7. Changes will be communicated on this page, and continued
+                  7. Users are responsible for ensuring they have the legal right
+                  to upload and modify images. LockBoxApp assumes no liability
+                  for any misuse or copyright infringements related to this
+                  feature.
+                </p>
+              </li>
+              <li>
+                <p>
+                  8. Changes will be communicated on this page, and continued
                   use of the service implies acceptance.
                 </p>
               </li>
               <li>
                 <p>
-                  8. Contact Us For any questions regarding these Terms of
+                  9. Contact Us For any questions regarding these Terms of
                   Service, please contact us at: <br />
                   Email:{" "}
                   <ContactEmail

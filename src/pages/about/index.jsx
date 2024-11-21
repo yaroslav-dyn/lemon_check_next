@@ -194,8 +194,8 @@ const AboutPage = () => {
                   target="_blank"
                 >
                   {" "}
-                  <span className="--color-primary"> Password Generator,</span>
-                </Link>{" "}
+                  <span className="--color-primary"> Password Generator</span>
+                </Link>,{" "}
                 <Link
                   href={`/crypto-password`}
                   className="--default-link bold"
@@ -213,21 +213,20 @@ const AboutPage = () => {
                     Image to Base64 Converter
                   </span>
                 </Link>
+                ,{" "}  
+                <Link
+                  href={"/image-converter/watermark"}
+                  className="--default-link bold"
+                >
+                  <span className="--color-base">Watermarks Editor</span>
+                </Link>
                 ,{" "}
                 <Link
                   href={`/allias-generator`}
                   className="--default-link bold"
                   target="_blank"
                 >
-                  <span className="--color-base">Alias Generator, </span>
-                </Link>
-                and{" "}
-                <Link
-                  href={`/qr-generator`}
-                  className="--default-link bold"
-                  target="_blank"
-                >
-                  <span className="--color-primary">QR Code Generator</span>
+                  <span className="--color-primary">Alias Generator</span>
                 </Link>
                 ,{" "}
                 <Link
@@ -236,6 +235,14 @@ const AboutPage = () => {
                   target="_blank"
                 >
                   <span className="--color-base">IP Checker</span>
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href={`/qr-generator`}
+                  className="--default-link bold"
+                  target="_blank"
+                >
+                  <span className="--color-primary">QR Code Generator</span>
                 </Link>
                 , we offer everything you need to strengthen your online
                 security and simplify your digital tasks.
