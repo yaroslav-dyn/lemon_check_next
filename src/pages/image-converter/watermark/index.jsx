@@ -8,7 +8,7 @@ import styles from "@/styles/ImageConverter.module.css";
 import { calculateTextPlaceByPosition, calculateImageWatermarkPosition } from "@/services/watermarksLogic";
 import { ControlsPanel } from "@/components/parts/controls-panel";
 import { InstructionNote } from "@/components/parts/instruction-note";
-import { isMobile } from "react-device-detect";
+import { isMobile, mobileModel } from "react-device-detect";
 import IconElement from "@/components/elements/icons.element";
 import IconsElement from "@/components/elements/icons.element";
 import { Tooltip } from "react-tooltip";
@@ -266,7 +266,7 @@ const ImageWatermarkPage = (props) => {
           >
             {/* SECTION: LEFT PANEL */}
             {uploadedImage && (
-              <div className={`${tabletDevice ? 'mt2' : 'flex__grid justify-between align-baseline gap-x-6 mt3'}`}>
+              <div className={`${ (tabletDevice || mobileDevice) ? 'mt2' : 'flex__grid justify-between align-baseline gap-x-6 mt3'}`}>
 
                 <div className={`${mobileDevice ? "" : "flex-1 "}`}>
 
