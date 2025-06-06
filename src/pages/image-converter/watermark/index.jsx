@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import Head from "next/head";
 import ImageNext from "next/image";
 import Link from "next/link";
-import useDeviceType from "@/services/useDeviceType";
+import useDeviceType, { useTabletType } from "@/services/useDeviceType";
 import InputFileElement from "@/components/elements/input_file.element";
 import styles from "@/styles/ImageConverter.module.css";
 import { calculateTextPlaceByPosition, calculateImageWatermarkPosition } from "@/services/watermarksLogic";
@@ -18,6 +18,7 @@ const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
 
 const ImageWatermarkPage = (props) => {
   const mobileDevice = useDeviceType();
+  const tabletDevice = useTabletType();
   const canvasRef = useRef(null);
   const canvasContainer = useRef(null);
   const zoomInputRef = useRef(null);
@@ -120,7 +121,6 @@ const ImageWatermarkPage = (props) => {
 
           // Apply opacity to image watermark
           ctx.globalAlpha = parseFloat(opacity) || 0.8;
-          console.log("🚀 ~ img.onload= ~ parseFloat(opacity) || 0.8:", parseFloat(opacity) || 0.8)
 
           for (let side in positionObject) {
             if (positionObject[side]) {
@@ -266,7 +266,7 @@ const ImageWatermarkPage = (props) => {
           >
             {/* SECTION: LEFT PANEL */}
             {uploadedImage && (
-              <div className={`${mobileDevice ? 'mt2' : 'flex__grid justify-between align-baseline gap-x-6 mt3'}`}>
+              <div className={`${tabletDevice ? 'mt2' : 'flex__grid justify-between align-baseline gap-x-6 mt3'}`}>
 
                 <div className={`${mobileDevice ? "" : "flex-1 "}`}>
 
@@ -339,9 +339,9 @@ const ImageWatermarkPage = (props) => {
                     </section>
                   )}
                 </div>
-
+               
+                {/* SECTION: Canvas */}
                 <div>
-                  {/* SECTION: Canvas */}
                   <div className="mb2">
                     <label className="mb1 flex items-center gap-x-3" htmlFor="zoom">
                       <span>Zoom level: <span>{zoomLevelState}</span></span>

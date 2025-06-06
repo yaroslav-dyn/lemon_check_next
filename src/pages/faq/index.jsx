@@ -273,11 +273,10 @@ const AboutPage = () => {
                     <strong>2. Customize Your Watermark (Live Updates):</strong>
                     <ul className="list-reset">
                       <li>
-                        Enter Text: Type your desired watermark text in the
-                        input field.
+                        <strong>Choose Watermark Type:</strong> You can either enter text in the input field or upload an image to use as a watermark.
                       </li>
                       <li>
-                        Positioning: Choose from pre-set locations (e.g.,
+                        <strong>Positioning:</strong> Choose from pre-set locations (e.g.,
                         top-left, bottom-right, etc.) for your watermark.
                       </li>
                       <li>
@@ -285,8 +284,17 @@ const AboutPage = () => {
                         <ul className="list-reset">
                           <li>
                             <div>
-                              Adjust opacity, font size, gaps, and color to suit
-                              your image.
+                              Adjust opacity and gap from borders for both text and image watermarks.
+                            </div>
+                          </li>
+                           <li>
+                            <div>
+                              For text watermarks, customize color and font size.
+                            </div>
+                          </li>
+                           <li>
+                            <div>
+                              For image watermarks, adjust the image size.
                             </div>
                           </li>
                           <li>
@@ -300,12 +308,10 @@ const AboutPage = () => {
                     </ul>
                   </li>
                   <li className="mb2">
-                    <strong>3. Preview with Zoom</strong>:
+                    <strong>3. Preview Your Watermark</strong>:
                     <div>
-                      Use the Zoom Slider to scale the preview for better
-                      placement visualization. This feature is for preview
-                      purposes only and will not change the final output's
-                      dimensions.
+                      Use the <em>Zoom Slider</em> to scale the preview for better
+                      placement visualization. Click the <em>Preview</em> button to see the watermarked image in a full-screen view.
                     </div>
                   </li>
                   <li>
