@@ -5,7 +5,7 @@ import Link from "next/link";
 import useDeviceType from "@/services/useDeviceType";
 import InputFileElement from "@/components/elements/input_file.element";
 import styles from "@/styles/ImageConverter.module.css";
-import { calculatePositionByPosition } from "@/services/watermarksLogic";
+import { calculateTextPlaceByPosition, calculateImageWatermarkPosition } from "@/services/watermarksLogic";
 import { ControlsPanel } from "@/components/parts/controls-panel";
 import { InstructionNote } from "@/components/parts/instruction-note";
 
@@ -25,26 +25,23 @@ const ImageWatermarkPage = (props) => {
     opacity: "0.8",
     fontSize: "16",
     markGaps: "10",
+    imageSize: '48'
   });
   const [imageName, setImageName] = useState("");
   const [zoomLevelState, setZoomLevelState] = useState("1");
+  const [watermarkImageFile, setWatermarkImageFile] = useState(null);
+  const [watermarkImageUrl, setWatermarkImageUrl] = useState(null);
 
   const isDarkTheme = useMemo(
     () => props.theme === "primary__theme",
     [props.theme]
   );
 
-  useEffect(() => {
-    if (uploadedImage) {
-      generateWaterMarks();
-      canvasContainer && (canvasContainer.current.style.maxHeight = "600px");
-    }
-  }, [uploadedImage]);
 
   useEffect(() => {
     if (!canvasRef || (canvasRef && !canvasRef.current)) return;
     generateWaterMarks();
-  }, [positionObject, settingsObject, watermakText]);
+  }, [positionObject, settingsObject, watermakText, watermarkImageUrl]);
 
   const uplaodImage = (e) => {
     const file = e.target.files[0];
@@ -58,11 +55,23 @@ const ImageWatermarkPage = (props) => {
     }
   };
 
+  const uploadWatermarkImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      setWatermarkImageFile(file);
+      reader.onload = (event) => {
+        setWatermarkImageUrl(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const generateWaterMarks = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const img = new Image();
-    const { color, opacity, fontSize, markGaps } = settingsObject;
+    const { color, opacity, fontSize, markGaps, imageSize } = settingsObject;
     let calculatedFontSize = fontSize || 16;
 
     img.src = uploadedImage;
@@ -70,27 +79,54 @@ const ImageWatermarkPage = (props) => {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
-      ctx.font = `${fontSize}px sans-serif`;
-      ctx.fillStyle = color;
-      ctx.globalAlpha = parseFloat(opacity) || 0.8;
-      const textWidth = ctx.measureText(watermakText).width;
 
-      // if (img.width > 2000) {
-      //   calculatedFontSize = 32;
-      // }
-      if (!positionObject) return;
+      // Draw text watermark
+      if (watermakText && positionObject) {
+        ctx.font = `${fontSize}px sans-serif`;
+        ctx.fillStyle = color;
+        ctx.globalAlpha = parseFloat(opacity) || 0.8;
+        const textWidth = ctx.measureText(watermakText).width;
 
-      for (let side in positionObject) {
-        if (positionObject[side]) {
-          const { xPosition, yPosition } = await calculatePositionByPosition(
-            img,
-            side,
-            parseInt(calculatedFontSize),
-            textWidth,
-            markGaps
-          );
-          ctx.fillText(watermakText, xPosition, yPosition);
+        for (let side in positionObject) {
+          if (positionObject[side]) {
+            const { xPosition, yPosition } = await calculateTextPlaceByPosition(
+              img,
+              side,
+              parseInt(calculatedFontSize),
+              textWidth,
+              markGaps
+            );
+            ctx.fillText(watermakText, xPosition, yPosition);
+          }
         }
+      }
+
+      // Draw image watermark
+      if (watermarkImageUrl && positionObject) {
+        const watermarkImg = new Image();
+        watermarkImg.src = watermarkImageUrl;
+        watermarkImg.onload = () => {
+          // Calculate proportional height based on original dimensions and new width (imageSize)
+          const { naturalWidth: originalWidth, naturalHeight: originalHeight } = watermarkImg;
+          const newHeight = (originalHeight / originalWidth) * imageSize;
+
+          // Apply opacity to image watermark
+          ctx.globalAlpha = parseFloat(opacity) || 0.8;
+
+          for (let side in positionObject) {
+            if (positionObject[side]) {
+              const { xPosition, yPosition } = calculateImageWatermarkPosition(
+                img,
+                side,
+                imageSize, // Use the new width
+                newHeight, // Use the calculated proportional height
+                markGaps,
+              );
+              // Draw the image with the new width and calculated height
+              ctx.drawImage(watermarkImg, xPosition, yPosition, imageSize, newHeight);
+            }
+          }
+        };
       }
     };
   };
@@ -152,18 +188,16 @@ const ImageWatermarkPage = (props) => {
       {/* SECTION: CONVERTER MAIN HEADING */}
       <main className="main_content converter_content">
         <div
-          className={`main__heading ${
-            mobileDevice ? "--small-bm" : "--small-bm"
-          }`}
+          className={`main__heading ${mobileDevice ? "--x-small-bm " : "--x-small-bm"
+            }`}
         >
           <div data-centered-text>
             <h1 className="h1_heading flex__grid justify-center --small-gap">
               <div className="">
                 <Link
                   href={"/image-converter"}
-                  className={`align-middle ${
-                    mobileDevice ? "" : "cursor-pointer-screen"
-                  } `}
+                  className={`align-middle ${mobileDevice ? "" : "cursor-pointer-screen"
+                    } `}
                 >
                   <ImageNext
                     src={isDarkTheme ? backIconLight : backIconDark}
@@ -187,6 +221,31 @@ const ImageWatermarkPage = (props) => {
 
         {/*SECTION: Canvas and controls */}
         <section className={`${mobileDevice ? "" : "container__limit"}`}>
+
+          {!uploadedImage && (
+            <div className="flex__grid --column justify-center align-center">
+              <div>
+                <InstructionNote
+                  isDarkTheme={isDarkTheme}
+                  mobileDevice={mobileDevice}
+                  title="Upload an image and follow instruction"
+                />
+              </div>
+              <br />
+              <InputFileElement
+                handleFileLoad={uplaodImage}
+                slug="watermark"
+                accept="image/png, image/jpeg, image/jpg, image/gif, image/webp;capture=camera"
+                labelClasses="center"
+                title="Upload image"
+              />
+              <br />
+              <Link className="--default-link" href={`/faq#watermarks`}>
+                How to Get Started
+              </Link>
+            </div>
+          )}
+
           {/*SECTION: Uploaded image */}
           <form
             name="wtermarks_form"
@@ -195,6 +254,7 @@ const ImageWatermarkPage = (props) => {
               generateWaterMarks();
             }}
           >
+
             {uploadedImage && (
               <>
                 <div className={`${mobileDevice ? "" : ""}`}>
@@ -211,11 +271,23 @@ const ImageWatermarkPage = (props) => {
                     onChange={(e) => setWatermarkText(e.target.value)}
                   />
                   <br />
+                  <label className="block mb2" htmlFor="watermarkImage">
+                    Upload watermark image (optional)
+                  </label>
+                  <InputFileElement
+                    handleFileLoad={uploadWatermarkImage}
+                    slug="watermark-image"
+                    accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+                    labelClasses="center"
+                    title="Upload Image Watermark"
+                  />
+                  <br />
                   {/*SECTION: CONTROL PANEL ELEMENT  */}
                   <ControlsPanel
                     onChangePosition={setPositionMark}
                     onChangeSettings={setSettings}
                     mobileDevice={mobileDevice}
+                    isImageUploaded={!!watermarkImageFile}
                   />
                   <br />
                   {/*SECTION: Canvas */}
@@ -243,41 +315,7 @@ const ImageWatermarkPage = (props) => {
                 <div ref={canvasContainer} className={styles.canvasContainer}>
                   <canvas className="" ref={canvasRef} />
                 </div>
-                {/* TODO: Deprecated: changes applied automatically */}
-                {/* <div className="flex__grid justify-end my2">
-                  <button
-                    id="btn"
-                    className="action__btn --bg-primary mb2"
-                    onClick={() => generateWaterMarks()}
-                  >
-                    Apply Watermarks
-                  </button>
-                </div> */}
               </>
-            )}
-
-            {!uploadedImage && (
-              <div className="flex__grid --column justify-center align-center">
-                <div>
-                  <InstructionNote
-                    isDarkTheme={isDarkTheme}
-                    mobileDevice={mobileDevice}
-                    title="Upload an image and follow instruction"
-                  />
-                </div>
-                <br />
-                <InputFileElement
-                  handleFileLoad={uplaodImage}
-                  slug="watermark"
-                  accept="image/png, image/jpeg, image/jpg, image/gif, image/webp;capture=camera"
-                  labelClasses="center"
-                  title="Upload image"
-                />
-                <br />
-                <Link className="--default-link" href={`/faq#watermarks`}>
-                  How to Get Started
-                </Link>
-              </div>
             )}
 
             {/*SECTION: BUTTONS */}

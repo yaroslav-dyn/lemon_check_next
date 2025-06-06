@@ -16,26 +16,28 @@ const PasswordGenerator = () => {
 
   const mobileDevice = useDeviceType();
 
-    const generateCode = () => {
-      let generatePassword = "";
-      const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      const digits = "1234567890";
-      const specialCharactersSymbols = "!@#$%^&*?";
-      const characters = hasSpecialCharacters
-        ? `${alphabet}${hasDigits ? digits : ""}${specialCharactersSymbols}`
-        : `${alphabet}${hasDigits ? digits : ""}`;
-
-      for (var i = 0; i < passwordLength; i++) {
-        generatePassword += characters.charAt(
-          Math.floor(Math.random() * characters.length)
-        );
-      }
-      setPassword(generatePassword);
-    };
 
   useEffect(() => {
     generateCode();
   }, [passwordLength, hasDigits, hasSpecialCharacters]);
+
+  const generateCode = () => {
+    let generatePassword = "";
+    const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const digits = "1234567890";
+    const specialCharactersSymbols = "!@#$%^&*?";
+    const characters = hasSpecialCharacters
+      ? `${alphabet}${hasDigits ? digits : ""}${specialCharactersSymbols}`
+      : `${alphabet}${hasDigits ? digits : ""}`;
+
+    for (var i = 0; i < passwordLength; i++) {
+      generatePassword += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    setPassword(generatePassword);
+  };
+
 
   const getPasswordLength = (e) => {
     const currentLength = e.target.value;

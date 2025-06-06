@@ -3,7 +3,7 @@ import styles from "@/styles/ImageConverter.module.css";
 import CheckboxElement from "@/components/elements/checkbox.element";
 //NOTE: Controls panel Watermarks editor
 
-export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice }) => {
+export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice, isImageUploaded }) => {
   const [leftTop, setleftTop] = useState(true);
   const [rightTop, setRightTop] = useState(true);
   const [centerTop, setCenterTop] = useState(true);
@@ -18,6 +18,7 @@ export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice
   const [fontSize, setFontSize] = useState(16);
   const [gap, setGap] = useState(10);
   const [tabletScreen, setTableteScreen] = useState(false);
+  const [watermarkImageSize, setWatermarkImageSize] = useState(128);
 
   useEffect(() => {
     onChangePosition({
@@ -46,9 +47,8 @@ export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice
 
   return (
     <div
-      className={`controls_panel flex__grid --big-gap ${
-        mobileDevice && !tabletScreen ? "--column" : " "
-      }`}
+      className={`controls_panel flex__grid --big-gap ${mobileDevice && !tabletScreen ? "--column" : " "
+        }`}
     >
       {/*NOTE: Positions */}
       <div className={styles.positionPanel}>
@@ -177,13 +177,13 @@ export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice
             <input
               onChange={(val) => {
                 setFontSize(val.target.value);
-                onChangeSettings({ type: "fontSize", value: val.target.value });
+                onChangeSettings({ type: "fontSize", value: watermarkImageSize });
               }}
               className="base_input"
               id="mark_font_size"
               type="number"
               min={1}
-              max={200}
+              max={300}
               step={1}
               placeholder="Font size"
               value={fontSize}
@@ -200,7 +200,7 @@ export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice
               id="mark_font_size"
               type="range"
               min={1}
-              max={200}
+              max={300}
               step={1}
               placeholder="Font size"
               value={fontSize}
@@ -218,8 +218,8 @@ export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice
               className="base_input"
               id="mark_gups"
               type="number"
-              min={-100}
-              max={100}
+              min={-200}
+              max={200}
               step={1}
               placeholder="Gaps from borders"
               value={gap}
@@ -232,8 +232,8 @@ export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice
               }}
               id="mark_gups"
               type="range"
-              min={-100}
-              max={100}
+              min={-200}
+              max={200}
               step={1}
               placeholder="Gaps from borders"
               value={gap}
@@ -242,6 +242,45 @@ export const ControlsPanel = ({ onChangePosition, onChangeSettings, mobileDevice
               Gap from borders
             </label>
           </div>
+
+
+          {/* SECTION Image size */}
+          {isImageUploaded && (
+            <div className="flex__grid  align-center --small-gap">
+              <input
+                onChange={(val) => {
+                  setWatermarkImageSize(val.target.value);
+                  onChangeSettings({ type: "imageSize", value: val.target.value });
+                }}
+                className="base_input"
+                id="mark_image_size"
+                type="number"
+                min={-200}
+                max={200}
+                step={1}
+                placeholder="Set watermark image size"
+                value={watermarkImageSize}
+              />
+              <input
+                className="generator__input no-x-paddings"
+                onChange={(val) => {
+                  setWatermarkImageSize(val.target.value);
+                  onChangeSettings({ type: "imageSize", value: val.target.value });
+                }}
+                id="mark_image_size_range"
+                type="range"
+                min={8}
+                max={1000}
+                step={1}
+                placeholder="Set watermark image size"
+                value={watermarkImageSize}
+              />
+              <label className="col-4" htmlFor="mark_image_size">
+                Watermark image size
+              </label>
+
+            </div>
+          )}
         </div>
       </div>
     </div>
