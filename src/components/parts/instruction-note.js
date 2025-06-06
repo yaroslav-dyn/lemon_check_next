@@ -32,7 +32,7 @@ export const InstructionNote = ({ mobileDevice=false , isDarkTheme=false, title=
         <div className="absolute">
           <InstructionTooltip>
             <>
-              <div class="instructions">
+              <div className="instructions">
                 <ol>
                   <li>
                     <strong>Upload Your Image:</strong> Click{" "}
@@ -42,8 +42,10 @@ export const InstructionNote = ({ mobileDevice=false , isDarkTheme=false, title=
                   <li>
                     <strong>Customize Your Watermark:</strong>
                     <ul>
-                      <li>Enter text in the input field.</li>
-                      <li>Select position, color, opacity, and font size.</li>
+                      <li>Enter text in the input field or upload an image watermark.</li>
+                      <li>Select position, opacity, and gap from borders.</li>
+                      <li>For text watermarks, customize color and font size.</li>
+                      <li>For image watermarks, adjust the image size.</li>
                     </ul>
                     Changes are applied instantly as you adjust settings.
                   </li>
