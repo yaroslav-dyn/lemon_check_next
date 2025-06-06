@@ -8,6 +8,7 @@ import styles from "@/styles/ImageConverter.module.css";
 import { calculateTextPlaceByPosition, calculateImageWatermarkPosition } from "@/services/watermarksLogic";
 import { ControlsPanel } from "@/components/parts/controls-panel";
 import { InstructionNote } from "@/components/parts/instruction-note";
+import { isMobile } from "react-device-detect";
 
 const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
@@ -71,7 +72,7 @@ const ImageWatermarkPage = (props) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const img = new Image();
-    const { color, opacity, fontSize, markGaps, imageSize } = settingsObject;
+    const { color, opacity, fontSize, markGaps, imageSize, imageMarkGaps } = settingsObject;
     let calculatedFontSize = fontSize || 16;
 
     img.src = uploadedImage;
@@ -100,7 +101,6 @@ const ImageWatermarkPage = (props) => {
           }
         }
       }
-
       // Draw image watermark
       if (watermarkImageUrl && positionObject) {
         const watermarkImg = new Image();
@@ -112,15 +112,16 @@ const ImageWatermarkPage = (props) => {
 
           // Apply opacity to image watermark
           ctx.globalAlpha = parseFloat(opacity) || 0.8;
+          console.log("🚀 ~ img.onload= ~ parseFloat(opacity) || 0.8:", parseFloat(opacity) || 0.8)
 
           for (let side in positionObject) {
             if (positionObject[side]) {
               const { xPosition, yPosition } = calculateImageWatermarkPosition(
                 img,
                 side,
-                imageSize, // Use the new width
-                newHeight, // Use the calculated proportional height
-                markGaps,
+                imageSize, 
+                newHeight, 
+                imageMarkGaps
               );
               // Draw the image with the new width and calculated height
               ctx.drawImage(watermarkImg, xPosition, yPosition, imageSize, newHeight);
@@ -128,6 +129,7 @@ const ImageWatermarkPage = (props) => {
           }
         };
       }
+
     };
   };
 
@@ -220,7 +222,7 @@ const ImageWatermarkPage = (props) => {
         </div>
 
         {/*SECTION: Canvas and controls */}
-        <section className={`${mobileDevice ? "" : "container__limit"}`}>
+        <section className={``}>
 
           {!uploadedImage && (
             <div className="flex__grid --column justify-center align-center">
@@ -254,33 +256,43 @@ const ImageWatermarkPage = (props) => {
               generateWaterMarks();
             }}
           >
-
+            {/* SECTION: LEFT PANEL */}
             {uploadedImage && (
-              <>
-                <div className={`${mobileDevice ? "" : ""}`}>
-                  <label className="block mb2" htmlFor="watermakText">
-                    Type your desired watermark text
-                  </label>
-                  <textarea
-                    id="watermakText"
-                    rows={1}
-                    defaultValue={watermakText}
-                    name="watermark-content"
-                    className="generator__content--area"
-                    placeholder="Enter watermark text"
-                    onChange={(e) => setWatermarkText(e.target.value)}
-                  />
-                  <br />
-                  <label className="block mb2" htmlFor="watermarkImage">
-                    Upload watermark image (optional)
-                  </label>
-                  <InputFileElement
-                    handleFileLoad={uploadWatermarkImage}
-                    slug="watermark-image"
-                    accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
-                    labelClasses="center"
-                    title="Upload Image Watermark"
-                  />
+              <div className={`${mobileDevice ? 'mt2' : 'flex__grid justify-between align-baseline gap-x-6 mt3'}`}>
+
+                <div className={`${mobileDevice ? "" : "flex-1 "}`}>
+
+                  <div className={`flex__grid gap-x-3 ${mobileDevice ? '--column' : 'flex__grid gap-x-3'}`} >
+                    <div>
+                      <label className="block mb2" htmlFor="watermakText">
+                        Type your desired watermark text
+                      </label>
+                      <textarea
+                        id="watermakText"
+                        rows={1}
+                        defaultValue={watermakText}
+                        name="watermark-content"
+                        className="generator__content--area"
+                        placeholder="Enter watermark text"
+                        onChange={(e) => setWatermarkText(e.target.value)}
+                      />
+                    </div>
+
+
+                    <div>
+                      <label className="block mb2" htmlFor="watermarkImage">
+                        Upload watermark image (optional)
+                      </label>
+                      <InputFileElement
+                        handleFileLoad={uploadWatermarkImage}
+                        slug="watermark-image"
+                        accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+                        labelClasses="center"
+                        title="Upload Image Watermark"
+                      />
+                    </div>
+                  </div>
+
                   <br />
                   {/*SECTION: CONTROL PANEL ELEMENT  */}
                   <ControlsPanel
@@ -288,9 +300,41 @@ const ImageWatermarkPage = (props) => {
                     onChangeSettings={setSettings}
                     mobileDevice={mobileDevice}
                     isImageUploaded={!!watermarkImageFile}
+                    isTextFilled={!!watermakText}
                   />
                   <br />
-                  {/*SECTION: Canvas */}
+                  {/*SECTION: BUTTONS */}
+                  {uploadedImage && (
+                    <section className="container_limit no-x-paddings">
+
+                      {/* <hr className="--base-divider  --bg-accent mb2 mt-2.4" /> */}
+
+                      <div className={`flex__grid flex-1 align-start ${isMobile ? 'gap-x-3' : 'gap-x-6'}`}>
+
+                        <InputFileElement
+                          handleFileLoad={uplaodImage}
+                          slug="watermark"
+                          accept="image/png, image/jpeg, image/jpg, image/gif, image/web;capture=camera"
+                          title={isMobile ? 'New image' : 'Upload new image'}
+                          labelClasses={`--secondary-btn center`}
+                          insure
+                        />
+
+                        <button
+                          id="btn"
+                          className="action__btn --bg-accent mb2"
+                          onClick={() => saveImage()}
+                        >
+                          Save image
+                        </button>
+
+                      </div>
+                    </section>
+                  )}
+                </div>
+
+                <div>
+                  {/* SECTION: Canvas */}
                   <div className="mb2">
                     <label className="mb1 block" htmlFor="zoom">
                       Zoom level: <span>{zoomLevelState}</span>
@@ -311,38 +355,17 @@ const ImageWatermarkPage = (props) => {
                       <span> {getLimits("MAX")}</span>
                     </div>
                   </div>
+                  <div 
+                    ref={canvasContainer} 
+                    className={`${styles.canvasContainer} ${styles.halfWidth}`}>
+                    <canvas className="" ref={canvasRef} />
+                  </div>
                 </div>
-                <div ref={canvasContainer} className={styles.canvasContainer}>
-                  <canvas className="" ref={canvasRef} />
-                </div>
-              </>
+
+              </div>
             )}
 
-            {/*SECTION: BUTTONS */}
-            {uploadedImage && (
-              <section className="container_limit no-x-paddings">
-                <hr className="--base-divider 2x --bg-primary mb2 mt-2.4" />
 
-                <div className="flex__grid justify-between flex-1 align-start">
-                  <InputFileElement
-                    handleFileLoad={uplaodImage}
-                    slug="watermark"
-                    accept="image/png, image/jpeg, image/jpg, image/gif, image/web;capture=camera"
-                    title="Upload new image"
-                    labelClasses={`--secondary-btn center`}
-                    insure
-                  />
-
-                  <button
-                    id="btn"
-                    className="action__btn --bg-accent mb2"
-                    onClick={() => saveImage()}
-                  >
-                    Save image
-                  </button>
-                </div>
-              </section>
-            )}
           </form>
         </section>
       </main>

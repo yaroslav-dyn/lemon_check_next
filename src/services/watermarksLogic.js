@@ -70,14 +70,14 @@
   };
 
   export const calculateImageWatermarkPosition = (
-    image,
-    position,
-    watermarkWidth,
-    watermarkHeight,
-    gaps = 10
-  ) => {
-    let sideFactor = {};
-    const defaultGaps = parseInt(gaps) || 10;
+      image,
+      position,
+      watermarkWidth,
+      watermarkHeight,
+      imageGaps = 10 // Changed parameter name
+    ) => {
+      let sideFactor = {};
+      const defaultGaps = parseInt(imageGaps) || 10; // Changed variable name
 
     switch (position) {
       case "leftTop":

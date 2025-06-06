@@ -90,12 +90,6 @@
 }
 
 
-@media (max-width: 997px) {
-  .resultBlock {
-    flex-direction: column;
-    align-items: center;
-  }
-}
 
 @keyframes showWithDelay {
   0% {
@@ -109,7 +103,12 @@
 /* Watermark  */
 
 .canvasContainer {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.halfWidth {
+  max-width: 50vw;
 }
 
 
@@ -119,4 +118,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+@media (max-width: 997px) {
+  .resultBlock {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .halfWidth {
+    max-width: unset;
+  }
 }
