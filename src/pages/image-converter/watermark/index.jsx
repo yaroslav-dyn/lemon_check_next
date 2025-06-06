@@ -9,6 +9,9 @@ import { calculateTextPlaceByPosition, calculateImageWatermarkPosition } from "@
 import { ControlsPanel } from "@/components/parts/controls-panel";
 import { InstructionNote } from "@/components/parts/instruction-note";
 import { isMobile } from "react-device-detect";
+import IconElement from "@/components/elements/icons.element";
+import IconsElement from "@/components/elements/icons.element";
+import { Tooltip } from "react-tooltip";
 
 const backIconLight = "/assets/icons/icons8-logout-rounded-left-48.png";
 const backIconDark = "/assets/icons/icons8-logout-rounded-left-48-dark.png";
@@ -32,6 +35,11 @@ const ImageWatermarkPage = (props) => {
   const [zoomLevelState, setZoomLevelState] = useState("1");
   const [watermarkImageFile, setWatermarkImageFile] = useState(null);
   const [watermarkImageUrl, setWatermarkImageUrl] = useState(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false); // State for preview modal
+
+  const togglePreview = () => { // Function to toggle preview modal
+    setIsPreviewOpen(!isPreviewOpen);
+  };
 
   const isDarkTheme = useMemo(
     () => props.theme === "primary__theme",
@@ -278,7 +286,6 @@ const ImageWatermarkPage = (props) => {
                       />
                     </div>
 
-
                     <div>
                       <label className="block mb2" htmlFor="watermarkImage">
                         Upload watermark image (optional)
@@ -336,8 +343,14 @@ const ImageWatermarkPage = (props) => {
                 <div>
                   {/* SECTION: Canvas */}
                   <div className="mb2">
-                    <label className="mb1 block" htmlFor="zoom">
-                      Zoom level: <span>{zoomLevelState}</span>
+                    <label className="mb1 flex items-center gap-x-3" htmlFor="zoom">
+                      <span>Zoom level: <span>{zoomLevelState}</span></span>
+                      <IconsElement
+                        custom="findInitialIp"
+                        classes="cursor-pointer-screen"
+                        color={isDarkTheme ? '#fff' : '#000'}
+                        name={'fullscreen'}
+                        emitClick={togglePreview} />
                     </label>
                     <div className="flex__grid --small-gap">
                       <span> {getLimits("MIN")}</span>
@@ -361,14 +374,40 @@ const ImageWatermarkPage = (props) => {
                     <canvas className="" ref={canvasRef} />
                   </div>
                 </div>
-
               </div>
             )}
-
 
           </form>
         </section>
       </main>
+
+      {/*SECTION: Full-screen preview modal */}
+      {isPreviewOpen && (
+        <div className={styles.previewModalOverlay}>
+          <div className={styles.previewModalContent}>
+            <div className={styles.previewModalClose}>    
+               <IconElement 
+                classes="cursor-pointer-screen" 
+                color={'#E94E3D'} 
+                name='close' 
+                emitClick={togglePreview} />
+            </div>
+
+            {/* Display the canvas content - will need to render the canvas or an image from it */}
+            {/* For simplicity, let's render an image generated from the canvas */}
+            {uploadedImage && (
+              <img src={canvasRef.current.toDataURL()} alt="Watermarked Preview" className={styles.previewImage} />
+            )}
+          </div>
+        </div>
+      )}
+
+      <Tooltip
+        anchorSelect="#findInitialIp"
+        content="Preivew image"
+        place="top"
+      />
+
     </>
   );
 }; //
