@@ -43,6 +43,58 @@ const NewsPage = () => {
 
           <article className="content-text">
             <h2 className="mb0">
+              June 6, 2025 – ✨ Exciting Update: Image Watermark & Preview Features Added!
+            </h2>
+            <p>
+              We're excited to announce significant enhancements to our Watermarks Editor! You can now use images as watermarks, in addition to text. This update brings more flexibility and customization options to protect and personalize your images.
+            </p>
+            <strong className="--color-prmary">What's New:</strong>
+            <ul className="list-reset">
+              <li>
+                <b className="--color-base">Image Watermarks:</b> Upload your own image to use as a watermark.
+              </li>
+              <li>
+                <b className="--color-base">New Controls:</b> Easily adjust the size and gap from borders specifically for image watermarks.
+              </li>
+              <li>
+                <b className="--color-base">Full-Screen Preview:</b> Get a better look at your watermarked image with the new full-screen preview functionality.
+              </li>
+            </ul>
+            <p>
+              These new features are designed to give you more control and better visualization when adding watermarks. Head over to the <Link href={"/image-converter/watermark"} className="--default-link">Watermarks Editor</Link> to try them out!
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
+              June 6, 2025 – ✨ Exciting Update: Image Watermark & Preview Features Added!
+            </h2>
+            <p>
+              We're excited to announce significant enhancements to our Watermarks Editor! You can now use images as watermarks, in addition to text. This update brings more flexibility and customization options to protect and personalize your images.
+            </p>
+            <strong className="--color-prmary">What's New:</strong>
+            <ul className="list-reset">
+              <li>
+                <b className="--color-base">Image Watermarks:</b> Upload your own image to use as a watermark.
+              </li>
+              <li>
+                <b className="--color-base">New Controls:</b> Easily adjust the size and gap from borders specifically for image watermarks.
+              </li>
+              <li>
+                <b className="--color-base">Full-Screen Preview:</b> Get a better look at your watermarked image with the new full-screen preview functionality.
+              </li>
+            </ul>
+            <p>
+              These new features are designed to give you more control and better visualization when adding watermarks. Head over to the <Link href={"/image-converter/watermark"} className="--default-link">Watermarks Editor</Link> to try them out!
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
               November 21, 2024 – 🎉 New Feature Announcement: <br />
               <span className="--color-primary">
                 {" "}
