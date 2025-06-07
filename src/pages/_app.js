@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import AppHeader from "@/components/Header.static";
 import Footer from "@/components/footer.static";
 import useDeviceType from "@/services/useDeviceType";
@@ -8,13 +8,18 @@ import "@/styles/color-schema.css";
 import "@/styles/elements.css";
 import "@/styles/bottom_bar.css";
 import "basscss/css/basscss.min.css";
+import "@/styles/landing.css"
 import { isTablet } from "react-device-detect";
 import { SnackbarProvider } from "notistack";
+import { usePathname } from 'next/navigation'
 
 export default function App({ Component, pageProps }) {
   const appContainerRef = useRef(null);
   const isMobile = useDeviceType();
   const [theme, setTheme] = useState("light__theme");
+  const path = usePathname()
+
+  const isLanding = useMemo(() => path === '/landing' || path === '/', [path]);
 
   function setColorschema(theme) {
     setTheme(theme);
@@ -34,15 +39,18 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <div
-        className={`${isMobile ? "mobile__view" : ""} ${
-          isTablet ? "tablet__view" : ""
-        } `}
+        className={`${isMobile ? "mobile__view" : ""} ${isTablet ? "tablet__view" : ""
+          } `}
       >
         <SnackbarProvider>
           <div id="appContainer" className={`app__container ${theme}`}>
-            <AppHeader changeSchema={setColorschema} />
+            {!isLanding &&
+              <AppHeader changeSchema={setColorschema} />
+            }
             <Component {...pageProps} theme={theme} />
-            <Footer />
+            {!isLanding &&
+              <Footer />
+            }
           </div>
         </SnackbarProvider>
       </div>

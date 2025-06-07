@@ -13,13 +13,13 @@ const newLogo = "/assets/img/logos/lc_dally_logo@3x.png";
 
 
 export const BottomBarlinks = [
-  {
-    title: "Home",
-    url: "/",
-    alias: "H",
-    isActive: false,
-    icon: "/assets/img/icons8-home-48.png",
-  },
+  // {
+  //   title: "Home",
+  //   url: "/",
+  //   alias: "H",
+  //   isActive: false,
+  //   icon: "/assets/img/icons8-home-48.png",
+  // },
   {
     title: "Password generator",
     url: "/password-generator",
