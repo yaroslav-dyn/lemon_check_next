@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from "react";
 import { isMobile, isTablet } from "react-device-detect";
 
@@ -20,7 +21,7 @@ export const useTabletType = () => {
     if (isTablet) {
       setTabletDevice(true)
     }
-  }, [isTablet]);
+  }, []);
   return tabletDevice;
 }
 

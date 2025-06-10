@@ -1,10 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import ContactEmail from "@/components/elements/contact_email.element";
-import useDeviceType from "@/services/useDeviceType";
+import useDeviceType, { useTabletType } from "@/services/useDeviceType";
 
 const Landing = () => {
   const isMobile = useDeviceType();
+  const tabletDevice = useTabletType();
+
   return (
     <main className="bg-white landing-page-container">
 
@@ -33,38 +35,43 @@ const Landing = () => {
           </div>
 
           <div className="flex flex-wrap">
-            <div className="col-12 sm-col-12 md-col-3 px2 mb3">
-              <div className="feature-card">
+
+            <div className={`${tabletDevice ? 'col-6' : 'col-12 sm-col-12 md-col-3'} px2 mb3`}>
+              <Link href='/password-generator' className="feature-card cursor-pointer-screen block">
                 <div data-centered-text>
                   <div className="feature-icon mb2">💡</div>
                 </div>
                 <h3 className="feature-title mb2">Secure Password Generator</h3>
-
                 <p className="feature-description">Create strong, unique passwords for every account with ease.</p>
-              </div>
+                <p className="feature-card__action --default-link">Start using</p>
+              </Link>
             </div>
-            <div className="col-12 sm-col-12 md-col-3 px2 mb3">
-              <div className="feature-card">
+            <div className={`${tabletDevice ? 'col-6' : 'col-12 sm-col-12 md-col-3'} px2 mb3`}>
+              <Link href='/crypto-password' className="feature-card cursor-pointer-screen block">
                 <div data-centered-text><div className="feature-icon mb2">🔒</div></div>
                 <h3 className="feature-title mb2">Password Encryption</h3>
                 <p className="feature-description">Add an extra layer of security by encrypting your passwords.</p>
-              </div>
+                <p className="feature-card__action --default-link">Start using</p>
+              </Link>
             </div>
-            <div className="col-12 sm-col-12 md-col-3 px2 mb3">
-              <div className="feature-card">
-                <div data-centered-text>               
+            <div className={`${tabletDevice ? 'col-6' : 'col-12 sm-col-12 md-col-3'} px2 mb3`}>
+              <Link href='/image-converter' className="feature-card cursor-pointer-screen block">
+                <div data-centered-text>
                 <div className="feature-icon mb2">🛠️</div></div>
                 <h3 className="feature-title mb2">Digital Utilities</h3>
                 <p className="feature-description">Convert images to Base64, generate QR codes, and more.</p>
-              </div>
+                <p className="feature-card__action --default-link">Start using</p>
+              </Link>
             </div>
-            <div className="col-12 sm-col-12 md-col-3 px2 mb3">
-              <div className="feature-card">
+            <div className={`${tabletDevice ? 'col-6' : 'col-12 sm-col-12 md-col-3'} px2 mb3`}>
+              <Link href='/image-converter/watermark' className="feature-card cursor-pointer-screen block">
                 <div data-centered-text><div className="feature-icon mb2">🖼️</div></div>
                 <h3 className="feature-title mb2">Image Watermark Editor</h3>
                 <p className="feature-description">Protect and personalize your images with custom watermarks.</p>
-              </div>
+                <p className="feature-card__action --default-link">Start using</p>
+              </Link>
             </div>
+
           </div>
         </div>
       </section>
@@ -150,7 +157,7 @@ const Landing = () => {
               />
             </p>
             <div className="center mb4 mt4">
-              <Link href="/password-generator" className="btn btn-primary btn-modern btn-big">Start using</Link>
+              <Link href="/about" className="btn btn-primary btn-modern btn-big">Start using</Link>
             </div>
 
           </div>

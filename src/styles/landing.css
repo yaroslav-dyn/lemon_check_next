@@ -231,6 +231,8 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  outline: none;
 }
 
 .feature-card::before {
@@ -254,6 +256,27 @@
   box-shadow: var(--shadow-2xl);
   border-color: rgba(99, 102, 241, 0.2);
 }
+.feature-card__action {
+  opacity: 0;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.feature-card:hover .feature-card__action {
+  opacity: 1;
+  transition-property: opacity;
+  transition-delay: 0.15s;
+  transition-duration: 0.4s;
+  color: var(--primary-hover);
+
+}
+
+.feature-card:hover .feature-card__action:after {
+  width: 100%;
+}
+
 
 .feature-icon {
   font-size: 3rem;
