@@ -47,10 +47,10 @@ const Landing = () => {
               </Link>
             </div>
             <div className={`${tabletDevice ? 'col-6' : 'col-12 sm-col-12 md-col-3'} px2 mb3`}>
-              <Link href='/crypto-password' className="feature-card cursor-pointer-screen block">
-                <div data-centered-text><div className="feature-icon mb2">🔒</div></div>
-                <h3 className="feature-title mb2">Password Encryption</h3>
-                <p className="feature-description">Add an extra layer of security by encrypting your passwords.</p>
+              <Link href='/ip-checker' className="feature-card cursor-pointer-screen block">
+                <div data-centered-text><div className="feature-icon mb2">📍</div></div>
+                <h3 className="feature-title mb2">IP Geolocation Checker</h3>
+                <p className="feature-description">Easily find the physical location of any IP address with our IP Geolocation Checker. Get details like country, city, latitude, longitude, and more. Completely free and fast.</p>
                 <p className="feature-card__action --default-link">Start using</p>
               </Link>
             </div>

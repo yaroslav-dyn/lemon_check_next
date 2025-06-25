@@ -170,7 +170,7 @@ const IPChecker = (props) => {
       <div className={`${styles.ipCheckerPage} ip_checker__page`}>
         <main className="main_content ">
           <div
-            className={`main__heading ${mobileDevice ? "pb0" : "--small-bm"}`}
+            className={`main__heading ${mobileDevice ? "pb0" : "--x-small-bm"}`}
           >
             <h1 className="h1_heading" data-centered-text>
               <span className="--color-primary">IP</span>{" "}
@@ -216,7 +216,7 @@ const IPChecker = (props) => {
                               }}
                             >
                               <input
-                                className={`--no_style-input --color-base flex-1`}
+                                className={`--no_style-input --color-base flex-1 py2`}
                                 ref={refDomain}
                                 type="text"
                                 value={domainName}
@@ -225,7 +225,7 @@ const IPChecker = (props) => {
                                 placeholder="Get data by domain"
                               />
                             </form>
-                            <div className="flex__grid items-center --small-gap">
+                              <div className="flex__grid items-center --small-gap pr1">
                               <CopyBtnElement
                                 mobileDevice={mobileDevice}
                                 isDarkTheme={isDarkTheme}
@@ -272,7 +272,7 @@ const IPChecker = (props) => {
                           } center flex__grid align-center --small-gap`}
                         >
                           <div
-                            className="flex__grid align-center"
+                              className="flex__grid align-center"
                             id="findInitialIp"
                             onClick={() => getIpData()}
                           >
@@ -301,7 +301,7 @@ const IPChecker = (props) => {
                             content="Go to current IP"
                             place="bottom"
                           />
-                          <div className="flex__grid flex-1">
+                            <div className="flex__grid flex-1">
                             <form
                               name={`ipSearching`}
                               onSubmit={(e) => {
@@ -310,7 +310,7 @@ const IPChecker = (props) => {
                               }}
                             >
                               <input
-                                className={`--no_style-input flex-1 ${
+                                  className={`--no_style-input flex-1 py2 ${
                                   initialIP === ipInput
                                     ? "--color-primary"
                                     : "--color-base"
@@ -323,7 +323,7 @@ const IPChecker = (props) => {
                             </form>
                           </div>
 
-                          <div className="flex__grid items-center --small-gap">
+                          <div className="flex__grid items-center --small-gap pr1">
                             <CopyBtnElement
                               mobileDevice={mobileDevice}
                               isDarkTheme={isDarkTheme}
@@ -432,31 +432,31 @@ export default IPChecker;
 //TODO: Temporary solution (add dynamic line with calculating count)
 const MarqueeElement = ({ mobileDevice }) => {
   return (
-    <div className={`marquee-container ${mobileDevice ? "mb2" : "mb4"}`}>
-      <h2 className="marquee__line --uppercase">
+    <div className={`marquee-container ${mobileDevice ? "mb2" : "mb3"}`}>
+      <h2 className={`marquee__line --uppercase ${mobileDevice ? 'h5' : 'h4'}`}>
         <span className="--color-primary">Check Your IP</span>
-        <span className="--color-base">&#10070;</span>
+        <span className="--color-base">&#9679;</span>
         <span>Know Your Timezone</span>
-        <span>&#10070;</span>
+        <span>&#9679;</span>
         <span className="--color-primary">Guess Latitude/Longitude</span>
-        <span>&#10070;</span>
+        <span>&#9679;</span>
         <span className="--color-base">Explore Your Location</span>
-        <span>&#10070;</span>
+        <span>&#9679;</span>
         <span className="--color-primary">Verify ISP Details</span>
-        <span>&#10070;</span>
+        <span>&#9679;</span>
         <span className="--color-base">Identify Your Region</span>
-        <span className="--color-base">&#10070;</span>
+        <span className="--color-base">&#9679;</span>
 
         <span className="--color-primary">Check Your IP</span>
-        <span className="--color-base">&#10070;</span>
+        <span className="--color-base">&#9679;</span>
         <span>Know Your Timezone</span>
-        <span>&#10070;</span>
+        <span>&#9679;</span>
         <span className="--color-primary">Guess Latitude/Longitude</span>
-        <span>&#10070;</span>
+        <span>&#9679;</span>
         <span className="--color-base">Explore Your Location</span>
-        <span>&#10070;</span>
+        <span>&#9679;</span>
         <span className="--color-primary">Verify ISP Details</span>
-        <span>&#10070;</span>
+        <span>&#9679;</span>
         <span className="--color-base">Identify Your Region</span>
       </h2>
     </div>
