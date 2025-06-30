@@ -54,6 +54,7 @@ const ImageWatermarkPage = (props) => {
   }, [positionObject, settingsObject, watermakText, watermarkImageUrl]);
 
   const uplaodImage = (e) => {
+    setImage(null);
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();

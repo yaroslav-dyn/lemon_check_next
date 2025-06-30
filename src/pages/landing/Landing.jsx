@@ -50,7 +50,10 @@ const Landing = () => {
               <Link href='/ip-checker' className="feature-card cursor-pointer-screen block">
                 <div data-centered-text><div className="feature-icon mb2">📍</div></div>
                 <h3 className="feature-title mb2">IP Geolocation Checker</h3>
-                <p className="feature-description">Easily find the physical location of any IP address with our IP Geolocation Checker. Get details like country, city, latitude, longitude, and more. Completely free and fast.</p>
+                <p className="feature-description">
+                  Easily find the physical location of any IP address with our IP Geolocation Checker. 
+                  {/* Get details like country, city, latitude, longitude, and more. Completely free and fast. */}
+                  </p>
                 <p className="feature-card__action --default-link">Start using</p>
               </Link>
             </div>
