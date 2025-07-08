@@ -43,6 +43,29 @@ const NewsPage = () => {
 
           <article className="content-text">
             <h2 className="mb0">
+              July 8, 2025 – ✨ QR Generator Enhanced: Size and Color Options Added!
+            </h2>
+            <p>
+              We've updated our QR Code Generator page to give you more control over your QR codes! You can now easily adjust the size and color of the generated QR codes directly on the page.
+            </p>
+            <strong className="--color-prmary">What's New:</strong>
+            <ul className="list-reset">
+              <li>
+                <b className="--color-base">Custom Size:</b> Choose the perfect size for your QR code.
+              </li>
+              <li>
+                <b className="--color-base">Custom Color:</b> Select a color for your QR code to match your branding or preference.
+              </li>
+            </ul>
+            <p>
+              Head over to the <Link href={"/qr-generator"} className="--default-link">QR Code Generator</Link> page to try out these new features!
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
               June 6, 2025 – ✨ Exciting Update: Image Watermark & Preview Features Added!
             </h2>
             <p>
