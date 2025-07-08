@@ -15,6 +15,7 @@ const isMobile = useDeviceType();
         <title>
           LockBoxApp | Home - Strong Password Generator & Encryption Tools
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <Landing  />
