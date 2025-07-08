@@ -513,6 +513,10 @@ a:active {
   align-items: center;
 }
 
+.flex__grid.align-baseline {
+  align-items: baseline;
+}
+
 .flex__grid.align-end {
   align-items: end;
 }
@@ -925,4 +929,9 @@ a:active {
 
 .top-11 {
   top: 11rem;
+}
+
+.overflow-block {
+  overflow-x: auto;
+  max-width: 100%;
 }

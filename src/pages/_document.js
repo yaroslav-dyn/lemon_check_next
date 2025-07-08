@@ -7,8 +7,7 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>LockBoxApp - Strong Password Generator & Encryption Tools</title>
+
         <meta
           name="description"
           content="LockBoxApp offers a secure password generator, encryption tools, image-to-base64 conversion, QR code generation, and more. Stay secure online with ease."
@@ -24,7 +23,7 @@ export default function Document() {
         <link rel="manifest" href="/manifest.json" />
 
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1265222607784542"
-          crossorigin="anonymous"></script>
+          crossOrigin="anonymous"></script>
 
       </Head>
       <body>

@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import QRCodeCanvas from "qrcode.react";
+import {QRCodeCanvas} from "qrcode.react";
 import useDeviceType from "@/services/useDeviceType";
 
 const QrCodeGenerator = () => {
+  const isMobile = useDeviceType();
   const [qrCodeString, setQrCodeString] = useState("");
   const [qrContent, setQrqrContent] = useState(null);
+  const [qrSize, setQrSize] = useState(isMobile ? "80" : "220");
+  const [qrBgColor, setQrBgColor] = useState('#ffffff');
+  
   const [withLabel, setwithLabel] = useState(null);
-  const isMobile = useDeviceType();
+
   //const refCanvas = useRef(null);
+
+  useEffect(() => {
+    isMobile ? setQrSize("80") : setQrSize("220");
+  }, [isMobile]);
 
   const setQrString = (str) => {
     setQrCodeString(str.target.value);
@@ -30,6 +38,12 @@ const QrCodeGenerator = () => {
         console.log("error qr convert", error);
       }
   };
+
+  const changeQrCanvasSize = (e) => {
+    setQrSize(e.target.value);
+    setQrqrContent(null);
+    generateQrCode(e);
+  }
 
   const saveQrToImage = () => {
     var canvas = document.getElementById("refCanvas");
@@ -99,14 +113,50 @@ const QrCodeGenerator = () => {
 
               <br />
 
+              <div className="flex__grid align-baseline --base-gap">
+
+                <div className="flex__grid align-center --small-gap">
+                  <label htmlFor="mark_color">Color</label>
+                  <input
+                    defaultValue={qrBgColor}
+                    onChange={(val) =>
+                      setQrBgColor(val.target.value)
+                    }
+                    id="mark_color"
+                    type="color"
+                    placeholder="Choose a color"
+                  />
+                </div>
+
+                <div className="flex__grid --small-gap">
+                  <label htmlFor="qrSize">Size </label>
+
+                  <input
+                    className="generator__input no-x-paddings"
+                    id="qrSize"
+                    type="range"
+                    min="10"
+                    max="400"
+                    step="1"
+                    value={qrSize}
+                    onChange={changeQrCanvasSize}
+                  />
+                  <span>{qrSize}</span>
+                </div>
+
+              </div>
+
+              <br />
+
               {qrContent && (
-                <QRCodeCanvas
-                  id="refCanvas"
-                  marginSize={1}
-                  value={qrContent}
-                  size={isMobile ? "80" : "220"}
-                  bgColor="#f2e302"
-                />
+                <div className="overflow-block">
+                  <QRCodeCanvas
+                    id="refCanvas"
+                    value={qrContent}
+                    size={qrSize}
+                    bgColor={qrBgColor}
+                  />
+                </div>
               )}
               {withLabel && <i>qrContent</i>}
 

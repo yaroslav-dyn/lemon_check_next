@@ -47,7 +47,6 @@ const ImageWatermarkPage = (props) => {
     [props.theme]
   );
 
-
   useEffect(() => {
     if (!canvasRef || (canvasRef && !canvasRef.current)) return;
     generateWaterMarks();
