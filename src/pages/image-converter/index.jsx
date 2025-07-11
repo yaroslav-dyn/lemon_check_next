@@ -377,7 +377,7 @@ const Imageconverter = (props) => {
                 (mobileDevice
                   ? "flex__grid --column"
                   : convertedFromData
-                  ? "flex__grid justify-between align-baseline"
+                  ? "flex__grid justify-between"
                   : "")
               } --base-gap`}
             >
