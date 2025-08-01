@@ -199,11 +199,11 @@ a:active {
 .company_logo {
   display: flex;
   align-items: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 24px;
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
+  /* padding-right: 24px; */
   text-decoration: none;
-  max-width: 76px;
+  max-width: 74px;
   transition: all 0.2s ease-in;
 }
 
