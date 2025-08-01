@@ -724,11 +724,11 @@ a:active {
   border: none;
   padding: 12px 18px;
   border-radius: 6px;
-  background-color: limegreen;
+  background-color: var(--theme-primary-accent);
   color: #fff;
   text-shadow: 0 0 1px #f8f8f8;
   font-size: 1.125rem;
-  border-bottom: 1px solid limegreen;
+  border-bottom: 1px solid inherit;
   outline: none;
   min-width: 170px;
   box-sizing: border-box;
