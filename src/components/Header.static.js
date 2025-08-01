@@ -150,8 +150,8 @@ export default function AppHeader({ changeSchema }) {
                 className="base_img"
                 src={newLogo}
                 alt="LockBoxApp"
-                width="64"
-                height="64"
+                width="74"
+                height="74"
               />
               {/* <h2 className="brand__logo"><span>Lemon</span>Check</h2> */}
             </Link>
