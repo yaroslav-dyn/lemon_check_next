@@ -11,7 +11,6 @@ const [currentColorTheme, setCurrentTheme] = useState("auto__theme");
 useEffect(() => {
   const themeFromStorage = localStorage.getItem("lb_current__theme");
   setCurrentTheme(themeFromStorage);
-  console.log("ct", themeFromStorage);
 }, [currentColorTheme]);
 
   return (

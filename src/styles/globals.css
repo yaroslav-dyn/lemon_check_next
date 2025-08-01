@@ -254,7 +254,7 @@ a:active {
 }
 
 
-.brand__logo {
+/* .brand__logo {
   color: #f2e302;
   margin: 1.2rem;
   text-shadow: 0 0 1px limegreen;
@@ -264,7 +264,7 @@ a:active {
 .brand__logo span {
   color: limegreen;
   text-shadow: 0 0 2px #f2e302;
-}
+} */
 
 .generator__content {
   /* background-image: url(./assets/img/lemon_nut.PNG); */
@@ -308,11 +308,15 @@ a:active {
   padding: 12px 18px;
   margin-bottom: 30px;
   border-radius: 6px;
-  background-color: limegreen;
+  background-color: var(--theme-primary-accent);
+  transition: left 0.5s;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(0);
+  backdrop-filter: blur(10px);
   color: #fff;
   text-shadow: 0 0 1px #f8f8f8;
   font-size: 1.125rem;
-  border-bottom: 1px solid limegreen;
+  /* border-bottom: 1px solid limegreen; */
   outline: none;
   cursor: pointer;
 }
@@ -365,8 +369,8 @@ a:active {
   z-index: 50;
   top: 0;
   min-height: 80px;
-  background-color: lightgreen;
-  border-bottom: 1px solid limegreen;
+  background-color: var(--theme-primary-background);
+  border-bottom: 1px solid transparent;
   padding-left: 1.875rem;
   padding-right: 1.875rem;
   transition: all 0.2s ease-in;

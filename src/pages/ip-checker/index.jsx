@@ -371,7 +371,7 @@ const IPChecker = (props) => {
                       <MapWorldElement
                         size={mobileDevice ? "responsive" : "md"}
                         value={ipInput}
-                        color={isDarkTheme ? "#E94E3D" : "limegreen"}
+                        color={isDarkTheme ? "#E94E3D" : "#6366f1"}
                         ipLocation={ipData}
                       />
                     </div>
