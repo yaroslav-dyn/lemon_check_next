@@ -40,14 +40,14 @@ const Imageconverter = (props) => {
     {
       label: "Like data",
       value: "data",
-      selectedBackgroundColor: !isDarkTheme ? "limegreen" : "#E94E3D",
+      selectedBackgroundColor: !isDarkTheme ? "#4f46e5" : "#E94E3D",
       fontColor: !isDarkTheme ? "#000" : "#fff",
       selectedFontColor: "#fff",
     },
     {
       label: "Like image",
       value: "image",
-      selectedBackgroundColor: !isDarkTheme ? "limegreen" : "#E94E3D",
+      selectedBackgroundColor: !isDarkTheme ? "#4f46e5" : "#E94E3D",
       fontColor: !isDarkTheme ? "#000" : "#fff",
       selectedFontColor: "#fff",
     },
@@ -102,6 +102,7 @@ const Imageconverter = (props) => {
     setConvertedFromData("");
     setBase64invalidState(false);
     setConvertType(type);
+    setSelectedTypeIdex(0)
     router.replace("/image-converter");
   };
 
@@ -377,7 +378,7 @@ const Imageconverter = (props) => {
                 (mobileDevice
                   ? "flex__grid --column"
                   : convertedFromData
-                  ? "flex__grid justify-between align-baseline"
+                  ? "flex__grid justify-between"
                   : "")
               } --base-gap`}
             >

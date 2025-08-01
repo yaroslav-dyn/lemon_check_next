@@ -106,6 +106,7 @@ const QrCodeGenerator = () => {
                     type="text"
                     value={qrCodeString}
                     onInput={setQrString}
+                    onChange={generateQrCode}
                     onBlur={generateQrCode}
                   ></textarea>
                 </div>

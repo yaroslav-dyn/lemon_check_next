@@ -105,7 +105,6 @@ function replaceBase64ByType(str) {
 
 export function base64ToImage(base64String, filename) {
   const base64Data = replaceBase64ByType(base64String);
-    console.log("string to convert", base64Data);
   if (!base64Data) {
     console.error("Not valid");
     return;

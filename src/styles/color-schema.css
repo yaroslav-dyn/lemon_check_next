@@ -5,6 +5,15 @@
   --link-color-active: #fff;
   --theme-footer-background: #000;
   --theme-primary-accent: #7C160D;
+
+  --color-primary: #E94E3D;
+  --color-accent: #7C160D;
+  --color-base: #fff;
+
+  --theme-primary-background: #000;
+  --theme-primary-text: #fff;
+  --theme-footer-background: #000;
+  --gradient-primary: linear-gradient(135deg, #E94E3D 0%, #7C160D 100%);
 }
 
 
@@ -21,13 +30,14 @@
 
 .primary__theme .generator__content--btn,
 .primary__theme .action__btn {
-  background-color: var(--theme-primary-accent);
+  background-image: var(--gradient-primary);
   color: var(--theme-primary-text);
   border: none;
 }
 
-.primary__theme .--secondary-btn, .primary__theme .generator__content--btn.--secondary-btn {
-  background-color: #6a6565;
+.primary__theme .--secondary-btn,
+.primary__theme .generator__content--btn.--secondary-btn {
+  background: #6a6565;
 }
 
 .primary__theme .generator__content--btn:hover,
@@ -40,14 +50,16 @@
   opacity: 0.7;
 }
 
-.main__nav__links a.nav__item__link, .main__nav__links a.nav__item__link:hover {
+.main__nav__links a.nav__item__link,
+.main__nav__links a.nav__item__link:hover {
+  padding-bottom: 2px;
   color: var(--theme-primary-text);
 }
 
 .primary__theme .main__nav__links a:hover,
 .primary__theme .nav__item.desktop.active a {
   opacity: 0.95;
-  box-shadow: 0 2px 0 var(--theme-primary-accent), 0 -2px 0 var(--theme-primary-accent);
+  box-shadow: 0 2px 0 var(--theme-primary-accent);
 }
 
 .primary__theme .main__heading {
@@ -63,43 +75,75 @@
 /* SECTION: Light THEME */
 
 .light__theme {
-  --color-primary: limegreen;
-  --color-accent: darkgreen;
+  --color-primary: #6366f1;
+  --color-accent: #4f46e5;
   --color-base: #000;
 
-  --theme-primary-background: #fff;
-  --theme-primary-text: #000;
-  --theme-primary-accent: darkgreen;
-  --theme-footer-background: #fff;
-
-  --link-color: #444;
-  --link-color-active: limegreen;
+  --theme-primary-accent: #4f46e5;
+  --theme-primary-background: #ffffff;
+  --theme-primary-text: #222222;
+  --theme-footer-background: #764ba2;
+  --default-page-bg: #fff;
+  --link-color: #333;
+  --link-color-active: var(--primary-hover);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-dark: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
 }
 
-
-.light__theme .footer  {
+.light__theme .footer {
   /* background-color: var(--theme-footer-background); */
-  background-color: var(--default-page-bg);
+  background: var(--gradient-dark);
+  position: relative;
+  color: var(--theme-primary-text);
+  border: none;
+}
+
+.light__theme .generator__content--area {
+  background-color: #f6f6f6;
+}
+
+.light__theme .footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .light__theme a {
   color: var(--link-color);
-} 
+}
+
 .light__theme a:hover {
   color: var(--link-color-active);
+}
+
+.light__theme .main__nav__links a.nav__item__link,
+.light__theme .main__nav__links a.nav__item__link:hover {
+  color: #fff;
+}
+
+.light__theme .main__nav__links .nav__item__link .nav__item-icon--img {
+  filter: invert(1);
 }
 
 .light__theme .main__nav__links a:hover,
 .light__theme .nav__item.desktop.active a {
   opacity: 0.95;
-  box-shadow: 0 2px 0 var(--theme-primary-accent), 0 -2px 0 var(--theme-primary-accent);
+  box-shadow: 0 2px 0 var(--theme-primary-accent);
 }
 
 .light__theme .password__label__normal {
   color: inherit;
 }
 
-.light__theme .generator__content--btn.--secondary-btn, .light__theme .--secondary-btn {
+.light__theme .generator__content--btn.--secondary-btn,
+.light__theme .--secondary-btn {
   background-color: #444;
   box-shadow: none;
   border: none;
@@ -111,7 +155,26 @@
 }
 
 .light__theme .top__header {
-    border-bottom: 2px solid var(--theme-primary-accent)
+  border-bottom: none;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  color: var(--theme-primary-text);
+}
+
+.light__theme .action__btn {
+  background-color: var(--theme-primary-accent);
+}
+
+.light__theme .footer__nav__heading {
+  color: #fff;
+}
+
+.light__theme .footer__nav a {
+  color: #fff;
+  opacity: 0.8;
+}
+
+.light__theme .footer small {
+  color: var(--color-primary)
 }
 
 /* .primary__theme {

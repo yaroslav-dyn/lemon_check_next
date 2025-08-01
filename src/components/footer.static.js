@@ -15,7 +15,7 @@ export default function Footer() {
     <footer className="footer flex__grid --column justify-between">
       <div
         className={`footer__nav__panel gap-x-3 flex__grid justify-between ${
-          isMobile ? "mb4" : "mb4"
+          isMobile ? "mb2" : "mb2"
         }`}
       >
         <div className="base-1/2">

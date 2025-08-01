@@ -43,22 +43,28 @@ const NewsPage = () => {
 
           <article className="content-text">
             <h2 className="mb0">
-              July 8, 2025 – ✨ QR Generator Enhanced: Size and Color Options Added!
+              August 1, 2025 – 🎨 Light Color Theme Update & Redesign!
             </h2>
             <p>
-              We've updated our QR Code Generator page to give you more control over your QR codes! You can now easily adjust the size and color of the generated QR codes directly on the page.
+              We are excited to announce a fresh update to LockBoxApp with a brand new light color theme! This redesign brings a brighter, cleaner, and more modern look to the entire app, enhancing readability and user experience.
             </p>
             <strong className="--color-prmary">What's New:</strong>
             <ul className="list-reset">
               <li>
-                <b className="--color-base">Custom Size:</b> Choose the perfect size for your QR code.
+                <b className="--color-base">Light Theme Colors:</b> Enjoy a crisp white background with soft accent colors for a pleasant visual experience.
               </li>
               <li>
-                <b className="--color-base">Custom Color:</b> Select a color for your QR code to match your branding or preference.
+                <b className="--color-base">Header Background:</b> The header now features a vibrant gradient background inspired by the landing page's hero section.
+              </li>
+              <li>
+                <b className="--color-base">Consistent Typography:</b> All text and UI elements have been updated to match the landing page's typography and color scheme for a cohesive look.
+              </li>
+              <li>
+                <b className="--color-base">Footer Styling:</b> The footer background and text colors have been adjusted to blend seamlessly with the light theme.
               </li>
             </ul>
             <p>
-              Head over to the <Link href={"/qr-generator"} className="--default-link">QR Code Generator</Link> page to try out these new features!
+              Explore the updated design across all pages, including the password generator and landing page. We hope you enjoy the new look and feel!
             </p>
           </article>
 

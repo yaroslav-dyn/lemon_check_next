@@ -22,7 +22,7 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
         />
       ),
       value: "light__theme",
-      selectedBackgroundColor: "limegreen",
+      selectedBackgroundColor: "#4f46e5",
       selectedFontColor: "#fff",
     },
     {
@@ -93,7 +93,7 @@ const SchemaSelectorElement = ({ onChangeTheme }) => {
         forcedSelectedIndex={options.findIndex(
           (opt) => opt.value === currentTheme
         )}
-        backgroundColor={"transparen"}
+        backgroundColor={"transparent"}
         fontColor={"#fff"}
         selectedFontColor={"#fff"}
       ></SwitchSelector>
