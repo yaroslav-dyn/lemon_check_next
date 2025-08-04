@@ -51,7 +51,7 @@ const NewsPage = () => {
             <strong className="--color-prmary">What's New:</strong>
             <ul className="list-reset">
               <li>
-                <b className="--color-base">Multiple Formatting Options:</b> Convert case, trim spaces, remove extra line breaks, and more.
+                <b className="--color-base">Multiple Formatting Options:</b> Trim spaces, remove extra line breaks, and more.
               </li>
               <li>
                 <b className="--color-base">Real-Time Preview:</b> See your formatted text instantly as you make changes.
