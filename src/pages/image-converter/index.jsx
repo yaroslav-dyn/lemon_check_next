@@ -120,8 +120,7 @@ const Imageconverter = (props) => {
     <>
       <Head>
         <title>
-          LockBoxApp | Image converter - Strong Password Generator & Encryption
-          Tools
+          LockBoxApp | Image Operations
         </title>
         <meta
           name="description"
@@ -139,7 +138,7 @@ const Imageconverter = (props) => {
             {!rootConvertType ? (
               <div data-centered-text>
                 <h1 className="h1_heading">
-                  Image <span className="--color-primary"> Converter </span>
+                  Image <span className="--color-primary"> Operations </span>
                 </h1>
                 <div className="slogan__text mb1 mt1" data-centered-text>
                   Convert images seamlessly: {mobileDevice && <br />}

@@ -16,7 +16,6 @@ const PasswordGenerator = () => {
 
   const mobileDevice = useDeviceType();
 
-
   useEffect(() => {
     generateCode();
   }, [passwordLength, hasDigits, hasSpecialCharacters]);
@@ -98,6 +97,9 @@ const PasswordGenerator = () => {
             <h1 className="h1_heading">
               Generate <span className="--color-primary">strong</span> password
             </h1>
+            <p className='slogan__text mb0'>
+              Generate <span className="--color-primary">strong</span>, secure, and <span className="--color-primary">unique</span> passwords with ease.
+            </p>
           </div>
           <div
             className={`container__limit --x-small ${
@@ -115,6 +117,7 @@ const PasswordGenerator = () => {
                 readOnly
               ></textarea>
             </section>
+            
             <div className="">
               <section className="generator__content__settings">
                 <form
@@ -177,9 +180,9 @@ const PasswordGenerator = () => {
               </section>
 
               <div className="en_generate_controls">
-                <hr className="--base-divider x2 --bg-accent mb2" />
+                {/* <hr className="--base-divider x2 --bg-accent mb2" /> */}
                 <button
-                  id="btn"
+                  id="generate_btn"
                   className="generator__content--btn --small-margin"
                   onClick={() => generateCode()}
                 >
@@ -187,7 +190,7 @@ const PasswordGenerator = () => {
                 </button>
 
                 <button
-                  id="btn"
+                  id="copy_btn"
                   className="generator__content--btn --secondary-btn"
                   onClick={() => copyToClipBoard()}
                 >

@@ -40,6 +40,7 @@
   color: #fff !important;
 }
 
+
 .nav__item > span {
   color: var(--color-primary);
 }
@@ -47,6 +48,10 @@
 
 .nav__item.active .nav__item-text {
   transform: scale(1);
+}
+
+.mobile__view .nav__item.active .nav__item-icon--img {
+ border-radius: 50%;
 }
 
 .nav__item-link {
@@ -76,7 +81,7 @@
   max-width: 40px;
   max-height: 40px;
   display: block;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 
 .nav__item-icon--img.--desktop {

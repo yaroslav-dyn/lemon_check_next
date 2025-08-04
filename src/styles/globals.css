@@ -361,6 +361,11 @@ a:active {
   min-width: 100%;
 }
 
+.generator__content--btn.auto_width {
+  min-width: unset;
+  width: auto;
+}
+
 
 /* SECTION Header */
 .top__header {
@@ -507,6 +512,10 @@ a:active {
 
 .flex__grid.--column {
   flex-direction: column;
+}
+
+.flex__grid.--row {
+  flex-direction: row;
 }
 
 .flex__grid.--column-reverse {
