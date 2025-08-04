@@ -62,7 +62,7 @@ const Landing = () => {
                 <div data-centered-text>
                 <div className="feature-icon mb2">🛠️</div></div>
                 <h3 className="feature-title mb2">Digital Utilities</h3>
-                <p className="feature-description">Convert images to Base64, generate QR codes, and more.</p>
+                <p className="feature-description">Convert images to Base64, generate QR codes, text format and more.</p>
                 <p className="feature-card__action --default-link">Start using</p>
               </Link>
             </div>
