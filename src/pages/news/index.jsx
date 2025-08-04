@@ -43,6 +43,32 @@ const NewsPage = () => {
 
           <article className="content-text">
             <h2 className="mb0">
+              August 4, 2025 – 📝 New Feature: Text Formatter!
+            </h2>
+            <p>
+              We're excited to introduce our new Text Formatter page, designed to help you quickly and easily format your text! This tool provides a variety of options to clean up, transform, and standardize your text content for better readability and presentation.
+            </p>
+            <strong className="--color-prmary">What's New:</strong>
+            <ul className="list-reset">
+              <li>
+                <b className="--color-base">Multiple Formatting Options:</b> Convert case, trim spaces, remove extra line breaks, and more.
+              </li>
+              <li>
+                <b className="--color-base">Real-Time Preview:</b> See your formatted text instantly as you make changes.
+              </li>
+              <li>
+                <b className="--color-base">Easy Copy & Export:</b> Copy your formatted text with one click or export it for use elsewhere.
+              </li>
+            </ul>
+            <p>
+              Visit the <Link href={"/text-formatter"} className="--default-link">Text Formatter</Link> page now to try out these new features and enhance your text editing workflow!
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
               August 1, 2025 – 🎨 Light Color Theme Update & Redesign!
             </h2>
             <p>
@@ -69,7 +95,7 @@ const NewsPage = () => {
           </article>
 
           <hr className="--base-divider x2 --bg-primary mt2 mb2" />
-          
+
           <article className="content-text">
             <h2 className="mb0">
               July 8, 2025 – ✨ QR Generator Enhanced: Size and Color Options Added!

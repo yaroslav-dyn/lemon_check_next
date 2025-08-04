@@ -71,9 +71,7 @@
 }
 
 
-
 /* SECTION: Light THEME */
-
 .light__theme {
   --color-primary: #6366f1;
   --color-accent: #4f46e5;
@@ -84,8 +82,8 @@
   --theme-primary-text: #222222;
   --theme-footer-background: #764ba2;
   --default-page-bg: #fff;
-  --link-color: #333;
-  --link-color-active: var(--primary-hover);
+  --link-color: #6366f1;
+  --link-color-active: #4f46e5;
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-dark: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
 }
