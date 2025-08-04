@@ -47,6 +47,7 @@ export const BottomBarlinks = [
     alias: "AG",
     isActive: false,
     icon: "/assets/img/icons8-name-48.png",
+    hideMain: true
   },
   {
     title: "Image operations",
@@ -63,7 +64,14 @@ export const BottomBarlinks = [
     icon: "/assets/icons/easy-watermark-svgrepo-com.svg",
     hideMain: true
   },
-
+  {
+    title: "Text",
+    url: "/text-formatter",
+    alias: "TF",
+    isActive: false,
+    icon: "/assets/img/basic-text-format.svg",
+    hideMain: false
+  },
   {
     title: "QR generator",
     url: "/qr-generator",
@@ -72,7 +80,6 @@ export const BottomBarlinks = [
     icon: "/assets/img/icons8-qrcode-64.png",
   },
 ];
-
 
 
 const infoIcon = "/assets/icons/icons8-info-48-white.png";
