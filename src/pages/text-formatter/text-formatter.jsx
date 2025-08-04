@@ -70,7 +70,8 @@ const TextFormatter = () => {
             name='original_text_area'
             className={`generator__content--area ${mobileDevice ? 'mb2' : 'mb4'}`}
             value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
+            onChange={(e) => (setInputText(e.target.value), formatText())}
+            onBlur={formatText}
             placeholder="Paste your text here..."
           />
 
