@@ -46,6 +46,11 @@
       <priority>0.8</priority>
    </url>
    <url>
+      <loc>https://lockboxapp.com/text-formatter</loc>
+      <lastmod>2025-08-04</lastmod>
+      <priority>0.8</priority>
+   </url>
+   <url>
       <loc>https://lockboxapp.com/faq</loc>
       <lastmod>2025-06-07</lastmod>
       <priority>0.6</priority>
