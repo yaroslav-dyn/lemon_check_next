@@ -21,9 +21,10 @@ const defaultIPIcon = "/assets/icons/icons8-ip-48.png";
 const domainIcon = "/assets/icons/domain-registration-website-svgrepo-com.svg";
 const searchIcon = "/assets/icons/find-location-symbolic.svg";
 
-const extAPIURL = "https://ipwhois.app/json/";
+// Use an internal Next.js API proxy to avoid browser CORS restrictions.
+const extAPIURL = "/api/ipwhois";
 const copyIcon = "/assets/icons/icons8-clipboard-64.png";
-const extIPFilledUrl = (ip) => extAPIURL + "/" + ip;
+const extIPFilledUrl = (ip) => `${extAPIURL}/${encodeURIComponent(ip)}`;
 const ipExcludedFields = [
   "success",
   "country_neighbours",
@@ -32,7 +33,7 @@ const ipExcludedFields = [
   "currency_plural",
 ];
 
-const extDomainAPIURL = (domain) => extAPIURL + "/" + domain;
+const extDomainAPIURL = (domain) => `${extAPIURL}/${encodeURIComponent(domain)}`;
 
 const IPChecker = (props) => {
   const mobileDevice = useDeviceType();
@@ -59,6 +60,7 @@ const IPChecker = (props) => {
   const ipDataMaped = useMemo(() => {
     const mData =
       ipData && Object.entries(ipData).map((key) => ({ [key[0]]: key[1] }));
+      if(!mData) return [];
     return mData.filter(
       (ipF) => ipF && !ipExcludedFields.includes(safeKeyFromArray(ipF).shift())
     );
@@ -412,7 +414,7 @@ const IPChecker = (props) => {
                 ) : (
                   <>
                     {!isLoading && (
-                      <h2 className="mb0 center --color-base">
+                      <h2 className="mb0 center --color-base flex-1">
                         Data is not available, sorry
                       </h2>
                     )}
