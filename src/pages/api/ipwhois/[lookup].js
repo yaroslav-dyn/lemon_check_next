@@ -1,5 +1,7 @@
 const IPWHOIS_BASE_URL = "https://ipwhois.app/json/";
 
+export const runtime = "edge";
+
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
 
