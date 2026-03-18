@@ -77,6 +77,7 @@ const AliasGenerator = () => {
             </section>
 
             <div className="py2">
+              <hr className="--base-divider 2x --bg-primary mb2" />
               <button
                 id="btn"
                 className="generator__content--btn mb2"
@@ -84,7 +85,7 @@ const AliasGenerator = () => {
               >
                 Generate alias
               </button>
-              <hr className="--base-divider --bg-primary mb2" />
+
               <button
                 id="btn"
                 className="generator__content--btn --small-margin --secondary-btn"

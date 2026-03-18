@@ -40,6 +40,279 @@ const NewsPage = () => {
               !
             </div>
           </div>
+
+          <article className="content-text">
+            <h2 className="mb0">
+              August 4, 2025 – 📝 New Feature: Text Formatter!
+            </h2>
+            <p>
+              We're excited to introduce our new Text Formatter page, designed to help you quickly and easily format your text! This tool provides a variety of options to clean up, transform, and standardize your text content for better readability and presentation.
+            </p>
+            <strong className="--color-prmary">What's New:</strong>
+            <ul className="list-reset">
+              <li>
+                <b className="--color-base">Multiple Formatting Options:</b> Trim spaces, remove extra line breaks, and more.
+              </li>
+              <li>
+                <b className="--color-base">Real-Time Preview:</b> See your formatted text instantly as you make changes.
+              </li>
+              <li>
+                <b className="--color-base">Easy Copy & Export:</b> Copy your formatted text with one click or export it for use elsewhere.
+              </li>
+            </ul>
+            <p>
+              Visit the <Link href={"/text-formatter"} className="--default-link">Text Formatter</Link> page now to try out these new features and enhance your text editing workflow!
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
+              August 1, 2025 – 🎨 Light Color Theme Update & Redesign!
+            </h2>
+            <p>
+              We are excited to announce a fresh update to LockBoxApp with a brand new light color theme! This redesign brings a brighter, cleaner, and more modern look to the entire app, enhancing readability and user experience.
+            </p>
+            <strong className="--color-prmary">What's New:</strong>
+            <ul className="list-reset">
+              <li>
+                <b className="--color-base">Light Theme Colors:</b> Enjoy a crisp white background with soft accent colors for a pleasant visual experience.
+              </li>
+              <li>
+                <b className="--color-base">Header Background:</b> The header now features a vibrant gradient background inspired by the landing page's hero section.
+              </li>
+              <li>
+                <b className="--color-base">Consistent Typography:</b> All text and UI elements have been updated to match the landing page's typography and color scheme for a cohesive look.
+              </li>
+              <li>
+                <b className="--color-base">Footer Styling:</b> The footer background and text colors have been adjusted to blend seamlessly with the light theme.
+              </li>
+            </ul>
+            <p>
+              Explore the updated design across all pages, including the password generator and landing page. We hope you enjoy the new look and feel!
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
+              July 8, 2025 – ✨ QR Generator Enhanced: Size and Color Options Added!
+            </h2>
+            <p>
+              We've updated our QR Code Generator page to give you more control over your QR codes! You can now easily adjust the size and color of the generated QR codes directly on the page.
+            </p>
+            <strong className="--color-prmary">What's New:</strong>
+            <ul className="list-reset">
+              <li>
+                <b className="--color-base">Custom Size:</b> Choose the perfect size for your QR code.
+              </li>
+              <li>
+                <b className="--color-base">Custom Color:</b> Select a color for your QR code to match your branding or preference.
+              </li>
+            </ul>
+            <p>
+              Head over to the <Link href={"/qr-generator"} className="--default-link">QR Code Generator</Link> page to try out these new features!
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
+              June 6, 2025 – ✨ Exciting Update: Image Watermark & Preview Features Added!
+            </h2>
+            <p>
+              We're excited to announce significant enhancements to our Watermarks Editor! You can now use images as watermarks, in addition to text. This update brings more flexibility and customization options to protect and personalize your images.
+            </p>
+            <strong className="--color-prmary">What's New:</strong>
+            <ul className="list-reset">
+              <li>
+                <b className="--color-base">Image Watermarks:</b> Upload your own image to use as a watermark.
+              </li>
+              <li>
+                <b className="--color-base">New Controls:</b> Easily adjust the size and gap from borders specifically for image watermarks.
+              </li>
+              <li>
+                <b className="--color-base">Full-Screen Preview:</b> Get a better look at your watermarked image with the new full-screen preview functionality.
+              </li>
+            </ul>
+            <p>
+              These new features are designed to give you more control and better visualization when adding watermarks. Head over to the <Link href={"/image-converter/watermark"} className="--default-link">Watermarks Editor</Link> to try them out!
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
+              November 21, 2024 – 🎉 New Feature Announcement: <br />
+              <span className="--color-primary">
+                {" "}
+                <Link
+                  href={"/image-converter/watermark"}
+                  className="--default-link"
+                >
+                  Watermarks Editor
+                </Link>{" "}
+              </span>{" "}
+              Now Live! 🚀
+            </h2>
+            <p>
+              We're thrilled to announce the launch of our{" "}
+              <Link
+                href={"/image-converter/watermark"}
+                className="--default-link"
+              >
+                Watermarks Editor!
+              </Link>{" "}
+              and personalize your images effortlessly, right in your browser.
+              Whether you're securing your work from unauthorized use or simply
+              adding a touch of customization, the{" "}
+              <Link
+                href={"/image-converter/watermark"}
+                className="--default-link"
+              >
+                Watermarks Editor
+              </Link>{" "}
+              offers a seamless, intuitive experience.
+            </p>
+            <strong className="--color-prmary">Key Features:</strong>
+            <ol>
+              <li>
+                <b className="--color-base">Live Customization</b>
+                <p>
+                  Instantly see changes applied to your image as you adjust
+                  settings for text, position, color, opacity, and font size.
+                </p>
+              </li>
+              <li>
+                <b className="--color-base">Flexible Positioning</b>
+                <p>
+                  Choose from predefined locations like top-left, center-center,
+                  or bottom-right to position your watermark with precision.
+                </p>
+              </li>
+              <li>
+                <b className="--color-base"> Zoom Preview</b>
+                <p>
+                  Use the zoom slider to preview your image at different scales.
+                  This is especially handy for larger images.
+                </p>
+              </li>
+              <li>
+                <b className="--color-base"> On-the-Go Adjustments</b>
+                <p>
+                  No need to hit “Apply”! Your changes update dynamically as you
+                  adjust any setting.
+                </p>
+              </li>
+              <li>
+                <b className="--color-base"> One-Click Download</b>
+                <p>
+                  Save your watermarked image with a single click after
+                  perfecting your design.
+                </p>
+              </li>
+            </ol>
+            <strong>
+              Why Use the{" "}
+              <Link
+                href={"/image-converter/watermark"}
+                className="--default-link"
+              >
+                Watermarks Editor?
+              </Link>{" "}
+            </strong>
+            <p>
+              Adding watermarks is an essential step to: Protect your content
+              from unauthorized use or copying. Maintain brand identity by
+              displaying your logo or text on shared images. Customize images
+              for personal or business use.
+            </p>
+            <strong>
+              {" "}
+              How to Get <span className="--color-primary">Started</span>{" "}
+            </strong>
+            <br />
+            Head over to our Image Watermarking Tool and upload your image to
+            try it out. Whether you're adding a small logo or bold text, our
+            editor makes the process fast and fun! Let us know what you think
+            and share your feedback! 💡 Your suggestions help us improve and
+            bring even more value to{" "}
+            <Link href={"/"} className="--default-link --color-primary">
+              LockBoxApp
+            </Link>
+            .
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
+              November 5, 2024 – New Feature: Securely{" "}
+              <span className="--color-primary">Store Encrypted Passwords</span>{" "}
+              on Your Device
+            </h2>
+            <p>
+              We’re excited to announce a new addition to LockBoxApp’s
+              functionality—users can now save encrypted passwords with an alias
+              on their device, enhancing accessibility while maintaining
+              security. With this feature, you can encrypt your passwords and
+              store them locally within your device’s storage (IndexedDB),
+              making it easy to retrieve them anytime.
+            </p>
+            <p>
+              <strong>Please note</strong>: that this feature uses experimental
+              local storage (IndexedDB) and is designed to support users needing
+              quick access to securely stored data on their own devices.
+              However, as this storage is experimental, we recommend continuing
+              to use external password recovery or management systems for
+              critical passwords. LockBoxApp cannot guarantee recovery of lost
+              data due to limitations of local storage.
+            </p>
+          </article>
+
+          <hr className="--base-divider x2 --bg-primary mt2 mb2" />
+
+          <article className="content-text">
+            <h2 className="mb0">
+              🎉 October 29, 2024 – Update: Enhanced{" "}
+              <span className="--color-primary">Image Converter</span>{" "}
+            </h2>
+            <p>
+              Now Supports both: data and image Format! We’ve added a new
+              capability to our Image Converter feature. Alongside converting
+              between standard base64 and image formats, the converter now
+              seamlessly handles images in{" "}
+              <span className="--color-primary">base64 data</span> and like
+              image: <br />
+              <code className="--color-primary">
+                {"<img src='data:image/png;base64,....' />"}
+              </code>
+              .
+            </p>
+            <strong className="--color-base"> What’s New:</strong>
+            <p>
+              Automatic Data URI Detection: Paste a data URI (starting with
+              data:image/...;base64,) directly into the converter, and it will
+              handle the cleanup automatically. Flexible Conversion: The
+              converter now removes any extra HTML elements or characters (like
+              /&gt;) for a smooth experience.
+            </p>
+            <strong className="--color-base"> How It Works:</strong>
+            <p>
+              Image to Base64: Upload any image, and it will be converted to a
+              base64 string ready for embedding or use. Base64 to Image: Paste
+              your base64 string, whether it’s standalone or embedded in a data
+              URI, and convert it back to a downloadable image file. We’re
+              always looking for ways to make the LockBox tools more
+              user-friendly and versatile. Give it a try on our Image Converter
+              page, and let us know what you think!
+            </p>
+          </article>
+
           <article className="content-text">
             <h2 className="mb0">
               October 24, 2024 – New Feature:{" "}
@@ -165,10 +438,10 @@ const NewsPage = () => {
                 <strong> Advanced File/Image Converter</strong>: Expanding the
                 image converter with more file formats and advanced features.
               </li>
-              <li>
+              {/* <li>
                 <strong>IP Geolocation Checker</strong>: Check the geolocation
                 of an IP address with ease.
-              </li>
+              </li> */}
               <li>
                 <strong>Save Encrypted Passwords & Aliases</strong>: We’ll soon
                 offer the ability to securely save encrypted passwords and

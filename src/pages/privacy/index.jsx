@@ -15,7 +15,7 @@ const Privacy = () => {
 
       <div className="main_content">
         <main className="container__limit">
-          <h5 className="underline">Last Updated: october 22, 2024</h5>
+          <h5 className="underline">Last Updated: November 21, 2024</h5>
           <div className="main__heading --small-bm">
             <h1 className="h1_heading pb1 lato-bold" data-centered-text>
               Privacy <span className="--color-primary">Policy</span>
@@ -58,6 +58,17 @@ const Privacy = () => {
                     information. All sensitive operations happen within your
                     device's environment and are not transmitted to our servers.
                   </li>
+                  <li>
+                    <strong>Local Storage for Passwords</strong>: We offer an
+                    optional encrypted password storage feature, allowing users
+                    to save encrypted passwords with aliases on their device.
+                    This data is stored in IndexedDB within your browser,
+                    meaning it remains on your device and is not accessible to
+                    LockBoxApp or any third party. Please note that IndexedDB is
+                    an experimental storage feature and may be subject to
+                    limitations or data loss due to browser cache clearing or
+                    other device issues.
+                  </li>
                 </ul>
               </li>
               <li>
@@ -92,6 +103,12 @@ const Privacy = () => {
                   <li>
                     Passwords and secret phrases are processed locally on your
                     device to ensure that no one, including us, can access them.
+                  </li>
+                  <li>
+                    The optional encrypted password storage remains on your
+                    device in the IndexedDB database. Since this storage is
+                    experimental, users should use it with caution and maintain
+                    external backups of essential data.
                   </li>
                   <li>
                     Any communications you initiate with us (via email or other
@@ -136,7 +153,18 @@ const Privacy = () => {
                 </p>
               </li>
               <li>
-                <h2>6. Your Consent</h2>
+                <h2>6. Image Features</h2>
+                <p>
+                  <strong>Image Processing</strong>: The watermarking and
+                  converter features process all uploaded images locally within
+                  your browser. This means that no images are uploaded, stored
+                  or transferred to our servers at any point during the process.
+                  All operations take place entirely on your device, ensuring
+                  complete privacy and security of your data.
+                </p>
+              </li>
+              <li>
+                <h2>7. Your Consent</h2>
                 <p>
                   By using our services, you agree to this Privacy Policy. If we
                   make any significant changes to our Privacy Policy, we will
@@ -144,7 +172,7 @@ const Privacy = () => {
                 </p>
               </li>
               <li>
-                <h2>7. Contact Us</h2>
+                <h2>8. Contact Us</h2>
                 <p>
                   If you have any questions or concerns about our Privacy Policy
                   or how your data is handled, please contact us at:

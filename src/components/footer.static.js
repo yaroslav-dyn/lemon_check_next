@@ -6,11 +6,16 @@ import ContactEmail from "@/components/elements/contact_email.element";
 export default function Footer() {
   const isMobile = useDeviceType();
 
+  const getCurrentYear = () => {
+    const date = new Date();
+    return date.getFullYear();
+  }
+
   return (
     <footer className="footer flex__grid --column justify-between">
       <div
         className={`footer__nav__panel gap-x-3 flex__grid justify-between ${
-          isMobile ? "mb4" : "mb4"
+          isMobile ? "mb2" : "mb2"
         }`}
       >
         <div className="base-1/2">
@@ -82,7 +87,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex__grid justify-center">
-        <small className="--color-primary">©2024 LockBoxApp </small>
+        <small className="--color-primary">©{getCurrentYear()} LockBoxApp </small>
       </div>
     </footer>
   );

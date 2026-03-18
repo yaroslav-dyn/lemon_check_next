@@ -1,9 +1,11 @@
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { BottomBarlinks } from "@/components/Header.static";
 
-
 export default function BottomBar() {
+  const filteredLinks = useMemo(() =>
+    BottomBarlinks.filter((bl) => bl && !bl.hideMain)
+  );
 
   const onClikNavItem = (alias) => {
     BottomBarlinks.forEach((itm) =>
@@ -11,13 +13,12 @@ export default function BottomBar() {
     );
   };
 
-
   return (
     <div className="bottom_bar">
       <div className="nav-box">
         <ul className="nav-container">
-          {BottomBarlinks &&
-            BottomBarlinks.map((navLink) => (
+          {filteredLinks &&
+            filteredLinks.map((navLink) => (
               <li
                 onClick={() => onClikNavItem(navLink.alias)}
                 className={`nav__item ${navLink.isActive ? "active" : ""}`}

@@ -29,6 +29,31 @@ const faqContent = [
     id: "ip-checker",
     url: "#ip-checker",
   },
+  {
+    title: "How can I add watermarks to my images?",
+    content: "",
+    id: "watermarks",
+    url: "#watermarks",
+  },
+
+  {
+    title: "Where are my images processed?",
+    content: "",
+    id: "watermarks_where_processed",
+    url: "#watermarks_where_processed",
+  },
+  {
+    title: "What happens to my image after adding a watermark?",
+    content: "",
+    id: "watermarks_happens",
+    url: "#watermarks_happens",
+  },
+  {
+    title: "Can I use copyrighted images?",
+    content: "",
+    id: "watermarks_copyright",
+    url: "#watermarks_copyright",
+  },
 ];
 
 const onFitemClick = (e) => {
@@ -85,7 +110,7 @@ const AboutPage = () => {
               </div>
             </aside>
 
-            {isMobile && <hr className="block --base-divider my4" />}
+            {isMobile && <hr className="block --base-divider x2 my3" />}
 
             {/* FAQ Content */}
             <article className="md-col-8">
@@ -195,19 +220,157 @@ const AboutPage = () => {
                 </p>
 
                 <p>
-                  <b>Manual IP Lookup</b>: If you'd like to check the geolocation of a
-                  different IP address, simply type it into the input field and
-                  click Search IP. The page will then display geolocation
-                  information for the IP address you entered.
+                  <b>Manual IP Lookup</b>: If you'd like to check the
+                  geolocation of a different IP address, simply type it into the
+                  input field and click Search IP. The page will then display
+                  geolocation information for the IP address you entered.
                 </p>
 
                 <p>
-                  <b>Real-Time Information</b>: The results are fetched in real-time
-                  from{" "}
-                  <Link className="--default-link" href={`https://ipwhois.io/terms`} target="_blank">
+                  <b> Domain Name Lookup: </b>
+                  You can also use the tool to look up geolocation information
+                  based on a domain name. Enter a domain (e.g., example.com) in
+                  the input field, and the tool will resolve the domain to its
+                  associated IP address and fetch its geolocation data. Simply
+                  click the Search icon after typing in the domain.
+                </p>
+
+                <p>
+                  <b>Real-Time Information</b>: The results are fetched in
+                  real-time from{" "}
+                  <Link
+                    className="--default-link"
+                    href={`https://ipwhois.io/terms`}
+                    target="_blank"
+                  >
                     ipwhois.io
                   </Link>
                   , so you can get up-to-date location data instantly.
+                </p>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="watermarks" className="content-text">
+                <h3 className="--color-primary">
+                  How can I add watermarks to my images?
+                </h3>
+
+                <ul className="list-reset">
+                  <li className="mb2">
+                    <strong>1. Upload Your Image:</strong>
+                    <div>
+                      Click Upload New Image and choose the image you want to
+                      watermark. <br />
+                      The uploaded image will appear in the preview area.
+                    </div>
+                  </li>
+                  <li className="mb2">
+                    <strong>2. Customize Your Watermark (Live Updates):</strong>
+                    <ul className="list-reset">
+                      <li>
+                        <strong>Choose Watermark Type:</strong> You can either enter text in the input field or upload an image to use as a watermark.
+                      </li>
+                      <li>
+                        <strong>Positioning:</strong> Choose from pre-set locations (e.g.,
+                        top-left, bottom-right, etc.) for your watermark.
+                      </li>
+                      <li>
+                        <strong>Style Adjustments:</strong>
+                        <ul className="list-reset">
+                          <li>
+                            <div>
+                              Adjust opacity and gap from borders for both text and image watermarks.
+                            </div>
+                          </li>
+                           <li>
+                            <div>
+                              For text watermarks, customize color and font size.
+                            </div>
+                          </li>
+                           <li>
+                            <div>
+                              For image watermarks, adjust the image size.
+                            </div>
+                          </li>
+                          <li>
+                            <div>
+                              Every change is applied instantly, so you can see
+                              the results live.
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="mb2">
+                    <strong>3. Preview Your Watermark</strong>:
+                    <div>
+                      Use the <em>Zoom Slider</em> to scale the preview for better
+                      placement visualization. Click the <em>Preview</em> button to see the watermarked image in a full-screen view.
+                    </div>
+                  </li>
+                  <li>
+                    <strong> 4. Save the Image</strong>:
+                    <div>
+                      Once you're happy with the watermark's appearance, click
+                      Save Image to download the finalized image with the
+                      watermark embedded.
+                    </div>
+                  </li>
+                </ul>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="watermarks_where_processed" className="content-text">
+                <h3 className="--color-primary">
+                  Where are my images processed?
+                </h3>
+                <p>
+                  All images uploaded for watermarking are processed directly in
+                  your browser. LockBoxApp does not store or share your images.
+                </p>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="watermarks_happens" className="content-text">
+                <h3 className="--color-primary">
+                  What happens to my image after adding a watermark?
+                </h3>
+                <p>
+                  Your image remains on your device. You can save the edited
+                  version locally, and no copy of the image is saved by
+                  LockBoxApp.
+                </p>
+              </section>
+
+              <hr
+                className={`${
+                  isMobile ? "my2" : "my4"
+                } block --bg-primary --base-divider`}
+              />
+
+              <section id="watermarks_copyright" className="content-text">
+                <h3 className="--color-primary">
+                  Can I use copyrighted images?
+                </h3>
+                <p>
+                  You are responsible for ensuring you have the rights to upload
+                  and modify any image used with this tool.
                 </p>
               </section>
             </article>
