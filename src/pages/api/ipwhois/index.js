@@ -1,9 +1,8 @@
 const IPWHOIS_BASE_URL = "https://ipwhois.app/json/";
 
-export default async function handler(req, res) {
-  // Prevent any potential caching of IP lookup results.
-  res.setHeader("Cache-Control", "no-store");
+export const runtime = "edge";
 
+export default async function handler() {
   try {
     const response = await fetch(IPWHOIS_BASE_URL, {
       method: "GET",
@@ -12,17 +11,26 @@ export default async function handler(req, res) {
       },
     });
 
-    const contentType = response.headers.get("content-type") || "";
-    const data = contentType.includes("application/json")
-      ? await response.json()
-      : await response.text();
-
-    res.status(response.status).json(data);
-  } catch (error) {
-    res.status(500).json({
-      error: "ipwhois proxy failed",
-      message: error?.message || "Unknown error",
+    const responseBody = await response.text();
+    return new Response(responseBody, {
+      status: response.status,
+      headers: {
+        "content-type":
+          response.headers.get("content-type") || "application/json",
+        "cache-control": "no-store",
+      },
     });
+  } catch (error) {
+    return Response.json(
+      {
+        error: "ipwhois proxy failed",
+        message: error?.message || "Unknown error",
+      },
+      {
+        status: 500,
+        headers: { "cache-control": "no-store" },
+      }
+    );
   }
 }
 
