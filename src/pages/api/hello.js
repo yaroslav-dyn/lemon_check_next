@@ -2,6 +2,6 @@
 
 export const runtime = "edge";
 
-export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+export default function handler() {
+  return Response.json({ name: "John Doe" });
 }

@@ -2,23 +2,19 @@ const IPWHOIS_BASE_URL = "https://ipwhois.app/json/";
 
 export const runtime = "edge";
 
-export default async function handler(req, res) {
-  res.setHeader("Cache-Control", "no-store");
-
-  if (req.method === "OPTIONS") {
-    // Not expected for simple GET requests, but harmless if sent.
-    res.status(200).end();
-    return;
-  }
-
+export default async function handler(req) {
   try {
-    const lookupParam = req.query.lookup;
-    const lookup =
-      Array.isArray(lookupParam) ? lookupParam[0] : lookupParam;
+    const pathname = new URL(req.url).pathname;
+    const lookup = decodeURIComponent(pathname.split("/").pop() || "");
 
     if (!lookup) {
-      res.status(400).json({ error: "Missing lookup" });
-      return;
+      return Response.json(
+        { error: "Missing lookup" },
+        {
+          status: 400,
+          headers: { "cache-control": "no-store" },
+        }
+      );
     }
 
     const targetUrl = `${IPWHOIS_BASE_URL}${lookup}`;
@@ -30,17 +26,26 @@ export default async function handler(req, res) {
       },
     });
 
-    const contentType = response.headers.get("content-type") || "";
-    const data = contentType.includes("application/json")
-      ? await response.json()
-      : await response.text();
-
-    res.status(response.status).json(data);
-  } catch (error) {
-    res.status(500).json({
-      error: "ipwhois proxy failed",
-      message: error?.message || "Unknown error",
+    const responseBody = await response.text();
+    return new Response(responseBody, {
+      status: response.status,
+      headers: {
+        "content-type":
+          response.headers.get("content-type") || "application/json",
+        "cache-control": "no-store",
+      },
     });
+  } catch (error) {
+    return Response.json(
+      {
+        error: "ipwhois proxy failed",
+        message: error?.message || "Unknown error",
+      },
+      {
+        status: 500,
+        headers: { "cache-control": "no-store" },
+      }
+    );
   }
 }
 
